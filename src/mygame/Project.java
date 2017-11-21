@@ -69,16 +69,16 @@ public class Project extends SimpleApplication {
 
         
          // Load a model from test_data (OgreXML + material + texture)
-        Spatial aircraft = assetManager.loadModel("Models/boeing757.j3o");
-        Material mat_aircraft = new Material(
-            assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        Spatial aircraft = assetManager.loadModel("Models/3d-model.j3o");
+        //Material mat_aircraft = new Material(
+            //assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
          
-        mat_aircraft.setTexture("ColorMap",
-            assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
+       //mat_aircraft.setTexture("ColorMap",
+            //assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
         
-       //mat_aircraft.setColor("Color", ColorRGBA.Red);
-        
-        aircraft.setMaterial(mat_aircraft);
+
+
+        //aircraft.setMaterial(mat_aircraft);
         //aircraft.scale(0.5f, 0.5f, 0.5f);
         aircraft.rotate(0f, 1f, 0.0f);
         aircraft.setLocalTranslation(-100f, 0f, 50f);
@@ -120,7 +120,7 @@ public class Project extends SimpleApplication {
         
         // You must add a light to make the model visible
         DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
+        sun.setDirection(new Vector3f(0.1f, 0.7f, 1.0f));
         rootNode.addLight(sun);
     }
     

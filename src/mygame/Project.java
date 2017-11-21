@@ -77,14 +77,14 @@ public class Project extends SimpleApplication {
 
         
         // Load a model from test_data (OgreXML + material + texture)
-        Spatial aircraft = assetManager.loadModel("Models/3d-model.j3o");
+        Spatial aircraft = assetManager.loadModel("Models/boeing757.j3o");
         Material mat_aircraft = new Material(
             assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
          
         mat_aircraft.setTexture("ColorMap",
             assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
         
-       mat_aircraft.setColor("Color", new ColorRGBA(1,1,0,0.5f));
+       mat_aircraft.setColor("Color", ColorRGBA.Red);
         
         aircraft.setMaterial(mat_aircraft);
         
@@ -92,11 +92,27 @@ public class Project extends SimpleApplication {
         //aircraft.scale(0.5f, 0.5f, 0.5f);
         aircraft.rotate(0f, 1f, 0.0f);
         aircraft.setLocalTranslation(-350f, -0f, 50f);
-        aircraft.scale(0.5f, 0.5f, 0.5f);
+        aircraft.scale(0.3f, 0.3f, 0.3f);
         
         rootNode.attachChild(aircraft);
         
-        /** 1. Create terrain material and load four textures into it. */
+        
+        loadTerrain();
+        
+        // You must add a light to make the model visible
+        DirectionalLight sun = new DirectionalLight();
+        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
+        rootNode.addLight(sun);
+    }
+    
+    
+    
+    /* helper to load terrain */
+    
+    
+    public void loadTerrain(){
+    
+    /** 1. Create terrain material and load four textures into it. */
         Material mat_terrain = new Material(assetManager,
             "Common/MatDefs/Terrain/Terrain.j3md");
 
@@ -126,11 +142,13 @@ public class Project extends SimpleApplication {
         mat_terrain.setFloat("Tex3Scale", 128f);
           
             /** 2. Create the height map */
-        AbstractHeightMap heightmap = null;
+        /*     
+       AbstractHeightMap heightmap = null;
         Texture heightMapImage = assetManager.loadTexture(
                 "Textures/Terrain/splat/mountains512.png");
         heightmap = new ImageBasedHeightMap(heightMapImage.getImage());
         heightmap.load();
+        */
 
         /** 3. We have prepared material and heightmap.
          * Now we create the actual terrain:
@@ -141,7 +159,7 @@ public class Project extends SimpleApplication {
          * 3.5) We supply the prepared heightmap itself.
          */
         int patchSize = 65;
-        terrain = new TerrainQuad("my terrain", patchSize, 513, heightmap.getHeightMap());
+        terrain = new TerrainQuad("my terrain", patchSize, 513, null);
 
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
@@ -152,11 +170,6 @@ public class Project extends SimpleApplication {
         /** 5. The LOD (level of detail) depends on were the camera is: */
         TerrainLodControl control = new TerrainLodControl(terrain, getCamera());
         terrain.addControl(control);
-        
-        
-        // You must add a light to make the model visible
-        DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
-        rootNode.addLight(sun);
+    
     }
 }

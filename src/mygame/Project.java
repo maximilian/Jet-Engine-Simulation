@@ -10,6 +10,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Dome;
+import com.jme3.scene.shape.Sphere;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.terrain.heightmap.AbstractHeightMap;
@@ -39,7 +41,7 @@ public class Project extends SimpleApplication {
         flyCam.setMoveSpeed(250);
         
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
-        
+
         
         // need this in any game involving physics
         BulletAppState bulletAppState = new BulletAppState();
@@ -65,6 +67,39 @@ public class Project extends SimpleApplication {
         wall.setLocalTranslation(2.0f,-2.5f,0.0f);
         rootNode.attachChild(wall);
 
+        
+         // Load a model from test_data (OgreXML + material + texture)
+        Spatial aircraft = assetManager.loadModel("Models/boeing757.j3o");
+        Material mat_aircraft = new Material(
+            assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+         
+        mat_aircraft.setTexture("ColorMap",
+            assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
+        
+       //mat_aircraft.setColor("Color", ColorRGBA.Red);
+        
+        aircraft.setMaterial(mat_aircraft);
+        //aircraft.scale(0.5f, 0.5f, 0.5f);
+        aircraft.rotate(0f, 1f, 0.0f);
+        aircraft.setLocalTranslation(-100f, 0f, 50f);
+        aircraft.scale(0.3f, 0.3f, 0.3f);
+        
+        rootNode.attachChild(aircraft);
+        
+        
+        Sphere sphere = new Sphere(60, 60, 15f);
+        Geometry engineArea = new Geometry("BOOM!", sphere);
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        area_mat.setColor("Color", ColorRGBA.Red);
+        engineArea.setMaterial(area_mat);
+        engineArea.setLocalTranslation(-25f, 15f, 40f);
+        engineArea.rotate(1f, 0.6f, 0f);
+        
+        rootNode.attachChild(engineArea);
+        
+        
+        
         // Display a line of text with a default font
         guiNode.detachAllChildren();
         guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
@@ -76,28 +111,12 @@ public class Project extends SimpleApplication {
         
 
         
-        // Load a model from test_data (OgreXML + material + texture)
-        Spatial aircraft = assetManager.loadModel("Models/boeing757.j3o");
-        Material mat_aircraft = new Material(
-            assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-         
-        mat_aircraft.setTexture("ColorMap",
-            assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
-        
-       mat_aircraft.setColor("Color", ColorRGBA.Red);
-        
-        aircraft.setMaterial(mat_aircraft);
-        
-        
-        //aircraft.scale(0.5f, 0.5f, 0.5f);
-        aircraft.rotate(0f, 1f, 0.0f);
-        aircraft.setLocalTranslation(-350f, -0f, 50f);
-        aircraft.scale(0.3f, 0.3f, 0.3f);
-        
-        rootNode.attachChild(aircraft);
-        
+       
         
         loadTerrain();
+        
+        
+        
         
         // You must add a light to make the model visible
         DirectionalLight sun = new DirectionalLight();

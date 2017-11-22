@@ -87,16 +87,19 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(aircraft);
         
         
-        Sphere sphere = new Sphere(60, 60, 15f);
+        
+        Dome sphere = new Dome(new Vector3f(-30, 20, 20), 100, 30, 30, false);
+        
         Geometry engineArea = new Geometry("BOOM!", sphere);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", ColorRGBA.Red);
         engineArea.setMaterial(area_mat);
-        engineArea.setLocalTranslation(-25f, 15f, 40f);
-        engineArea.rotate(1f, 0.6f, 0f);
+       // engineArea.setLocalTranslation(-25f, 20f, 40f);
+       engineArea.rotate(1.5f, 0.8f, 0f);
         
         rootNode.attachChild(engineArea);
+        
         
         
         
@@ -108,15 +111,10 @@ public class Project extends SimpleApplication {
         helloText.setText("Hello Max");
         helloText.setLocalTranslation(300, helloText.getLineHeight(), 0);
         guiNode.attachChild(helloText);
-        
 
-        
+        loadTerrain();     
        
-        
-        loadTerrain();
-        
-        
-        
+        calculateArea(2000, 160, 100);
         
         // You must add a light to make the model visible
         DirectionalLight sun = new DirectionalLight();
@@ -127,8 +125,6 @@ public class Project extends SimpleApplication {
     
     
     /* helper to load terrain */
-    
-    
     public void loadTerrain(){
     
     /** 1. Create terrain material and load four textures into it. */
@@ -190,5 +186,41 @@ public class Project extends SimpleApplication {
         TerrainLodControl control = new TerrainLodControl(terrain, getCamera());
         terrain.addControl(control);
     
+    }
+    boolean receivingLittle = false;
+    boolean receivingMuch = false;
+    boolean receivingCorrect = false;
+    public void calculateArea(double altitude, double speed, double engineSetting){
+        double engineFlowRate = 332; // kg/s - needs to be corrected
+        double engineDiameter = (float) 1.6; // m
+        
+        double engineArea = Math.PI * (Math.pow(engineDiameter, 2));
+        
+        double speedMetres = 0.514444444 * speed; // convert from knots to metres
+        
+        // method here required to calculate corrected density and speed
+        
+        double airDensity = 1.15;
+        
+        double engineNeeds = engineFlowRate / airDensity;
+        double engineReceives = engineArea * speedMetres;
+        
+        
+        if (engineNeeds > engineReceives){
+            receivingLittle = true;
+        } else if(engineNeeds < engineReceives){
+            receivingMuch = true;
+        } else {
+            receivingCorrect = true;
+        }
+        
+        double engineAreaRequired = engineNeeds / speedMetres;
+        
+        double engineDiameterRequired = 2 * Math.sqrt((engineAreaRequired / Math.PI));
+        
+        
+        
+        
+        System.out.println(engineDiameterRequired);   
     }
 }

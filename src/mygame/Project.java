@@ -8,9 +8,11 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Dome;
+import com.jme3.scene.shape.Line;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
@@ -64,41 +66,52 @@ public class Project extends SimpleApplication {
         mat_brick.setTexture("ColorMap",
             assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
         wall.setMaterial(mat_brick);
-        wall.setLocalTranslation(2.0f,-2.5f,0.0f);
+        wall.setLocalTranslation(10f,0f, 0f);
         rootNode.attachChild(wall);
 
         
          // Load a model from test_data (OgreXML + material + texture)
         Spatial aircraft = assetManager.loadModel("Models/3d-model.j3o");
-        //Material mat_aircraft = new Material(
-            //assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-         
-       //mat_aircraft.setTexture("ColorMap",
-            //assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
-        
 
 
         //aircraft.setMaterial(mat_aircraft);
         //aircraft.scale(0.5f, 0.5f, 0.5f);
-        aircraft.rotate(0f, 1f, 0.0f);
-        aircraft.setLocalTranslation(-100f, 0f, 50f);
+        aircraft.rotate(0f, 0f, 0.0f);
+        aircraft.setLocalTranslation(0f, 0f, 0f);
         aircraft.scale(0.3f, 0.3f, 0.3f);
+     
+        
         
         rootNode.attachChild(aircraft);
         
         
+        axisLines();
+   
         
-        Dome sphere = new Dome(new Vector3f(-30, 20, 20), 100, 30, 30, false);
-        
-        Geometry engineArea = new Geometry("BOOM!", sphere);
+        Dome sphere = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, 35, false);
+        Geometry rightEngineArea = new Geometry("Right Engine", sphere);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", ColorRGBA.Red);
-        engineArea.setMaterial(area_mat);
-       // engineArea.setLocalTranslation(-25f, 20f, 40f);
-       engineArea.rotate(1.5f, 0.8f, 0f);
         
-        rootNode.attachChild(engineArea);
+        rightEngineArea.setMaterial(area_mat);
+
+        rightEngineArea.rotate(1.6f, 0, 0);
+        
+        
+        Dome leftEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, 35, false);
+        Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
+        
+        Material leftAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        leftAreaMat.setColor("Color", ColorRGBA.Blue);
+        
+        leftEngineArea.setMaterial(leftAreaMat);
+
+        leftEngineArea.rotate(1.6f, 0, 0);
+        
+        
+        rootNode.attachChild(leftEngineArea);
+        rootNode.attachChild(rightEngineArea);
         
         
         
@@ -118,8 +131,23 @@ public class Project extends SimpleApplication {
         
         // You must add a light to make the model visible
         DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(0.1f, 0.7f, 1.0f));
+        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
         rootNode.addLight(sun);
+        
+        
+        /*Node node = (Node) aircraft;
+           
+        Geometry geo;
+        
+        geo = (Geometry) node.getChild("3d-model-geom-8");
+        
+       
+        
+        geo.rotate(0f, 1f, 0.0f);
+        geo.setLocalTranslation(-100f, 0f, 50f);
+        geo.scale(0.3f, 0.3f, 0.3f);
+  
+        */
     }
     
     
@@ -187,6 +215,41 @@ public class Project extends SimpleApplication {
         terrain.addControl(control);
     
     }
+    
+    public void axisLines(){
+             Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
+        Geometry xaxisline = new Geometry("BOOM!", xaxis);
+        
+        Line yaxis = new Line(Vector3f.ZERO, new Vector3f(0, 400f, 0));
+        Geometry yaxisline = new Geometry("BOOM!", yaxis);
+        
+        Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
+        Geometry zaxisline = new Geometry("BOOM!", zaxis);
+        
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        area_mat.setColor("Color", ColorRGBA.Red);
+        
+
+         Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        yarea_mat.setColor("Color", ColorRGBA.Green);
+        
+        Material zarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        zarea_mat.setColor("Color", ColorRGBA.Blue);
+                
+
+        
+        xaxisline.setMaterial(area_mat);
+        yaxisline.setMaterial(yarea_mat);
+        zaxisline.setMaterial(zarea_mat);
+        
+        rootNode.attachChild(xaxisline);
+        rootNode.attachChild(yaxisline);
+        rootNode.attachChild(zaxisline);
+        
+        
+    }
+    
     boolean receivingLittle = false;
     boolean receivingMuch = false;
     boolean receivingCorrect = false;

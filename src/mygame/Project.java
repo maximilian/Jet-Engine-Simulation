@@ -4,6 +4,7 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.font.BitmapText;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
@@ -85,7 +86,10 @@ public class Project extends SimpleApplication {
         Geometry rightEngineArea = new Geometry("Right Engine", sphere);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", ColorRGBA.Red);
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
+        
+        //transparent hemisphere
+        area_mat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         
         rightEngineArea.setMaterial(area_mat);
         rightEngineArea.rotate(1.6f, 0, 0);
@@ -96,7 +100,10 @@ public class Project extends SimpleApplication {
         Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
         
         Material leftAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        leftAreaMat.setColor("Color", ColorRGBA.Blue);
+        leftAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
+        
+        // transparent hemisphere
+        leftAreaMat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         
         leftEngineArea.setMaterial(leftAreaMat);
         leftEngineArea.rotate(1.6f, 0, 0);

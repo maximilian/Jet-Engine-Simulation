@@ -1,4 +1,3 @@
-package jme3test.helloworld;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
@@ -8,16 +7,11 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Dome;
 import com.jme3.scene.shape.Line;
-import com.jme3.scene.shape.Sphere;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
-import com.jme3.terrain.heightmap.AbstractHeightMap;
-import com.jme3.terrain.heightmap.ImageBasedHeightMap;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.WrapMode;
 
@@ -47,10 +41,10 @@ public class Project extends SimpleApplication {
         
         // need this in any game involving physics
         BulletAppState bulletAppState = new BulletAppState();
-    stateManager.attach(bulletAppState);
+        stateManager.attach(bulletAppState);
     
-    
-        Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
+        // wall and teapot for testing purposes
+        /*Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
         Material mat_default = new Material(
             assetManager, "Common/MatDefs/Misc/ShowNormals.j3md");
         teapot.setMaterial(mat_default);
@@ -68,54 +62,48 @@ public class Project extends SimpleApplication {
         wall.setMaterial(mat_brick);
         wall.setLocalTranslation(10f,0f, 0f);
         rootNode.attachChild(wall);
-
+        */
         
          // Load a model from test_data (OgreXML + material + texture)
         Spatial aircraft = assetManager.loadModel("Models/3d-model.j3o");
 
-
+        System.out.println(aircraft.getWorldBound());
+        
         //aircraft.setMaterial(mat_aircraft);
         //aircraft.scale(0.5f, 0.5f, 0.5f);
         aircraft.rotate(0f, 0f, 0.0f);
         aircraft.setLocalTranslation(0f, 0f, 0f);
         aircraft.scale(0.3f, 0.3f, 0.3f);
      
-        
-        
         rootNode.attachChild(aircraft);
-        
         
         axisLines();
    
+        float engineRadius = calculateArea(2000, 5, 100);
         
-        Dome sphere = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, 35, false);
+        Dome sphere = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
         Geometry rightEngineArea = new Geometry("Right Engine", sphere);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", ColorRGBA.Red);
         
         rightEngineArea.setMaterial(area_mat);
-
         rightEngineArea.rotate(1.6f, 0, 0);
         
         
-        Dome leftEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, 35, false);
+        
+        Dome leftEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
         Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
         
         Material leftAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         leftAreaMat.setColor("Color", ColorRGBA.Blue);
         
         leftEngineArea.setMaterial(leftAreaMat);
-
         leftEngineArea.rotate(1.6f, 0, 0);
-        
         
         rootNode.attachChild(leftEngineArea);
         rootNode.attachChild(rightEngineArea);
-        
-        
-        
-        
+
         // Display a line of text with a default font
         guiNode.detachAllChildren();
         guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
@@ -126,23 +114,17 @@ public class Project extends SimpleApplication {
         guiNode.attachChild(helloText);
 
         loadTerrain();     
-       
-        calculateArea(2000, 160, 100);
-        
+
         // You must add a light to make the model visible
         DirectionalLight sun = new DirectionalLight();
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
         rootNode.addLight(sun);
         
-        
         /*Node node = (Node) aircraft;
-           
+       
         Geometry geo;
         
         geo = (Geometry) node.getChild("3d-model-geom-8");
-        
-       
-        
         geo.rotate(0f, 1f, 0.0f);
         geo.setLocalTranslation(-100f, 0f, 50f);
         geo.scale(0.3f, 0.3f, 0.3f);
@@ -225,20 +207,16 @@ public class Project extends SimpleApplication {
         
         Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
         Geometry zaxisline = new Geometry("BOOM!", zaxis);
-        
-        
+                
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", ColorRGBA.Red);
         
-
          Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         yarea_mat.setColor("Color", ColorRGBA.Green);
         
         Material zarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         zarea_mat.setColor("Color", ColorRGBA.Blue);
-                
-
-        
+              
         xaxisline.setMaterial(area_mat);
         yaxisline.setMaterial(yarea_mat);
         zaxisline.setMaterial(zarea_mat);
@@ -253,20 +231,20 @@ public class Project extends SimpleApplication {
     boolean receivingLittle = false;
     boolean receivingMuch = false;
     boolean receivingCorrect = false;
-    public void calculateArea(double altitude, double speed, double engineSetting){
-        double engineFlowRate = 332; // kg/s - needs to be corrected
-        double engineDiameter = (float) 1.6; // m
+    public float calculateArea(double altitude, double speed, double engineSetting){
+        float engineFlowRate = 332; // kg/s - needs to be corrected
+        float engineDiameter = (float) 1.6; // m
         
-        double engineArea = Math.PI * (Math.pow(engineDiameter, 2));
+        float engineArea = (float) (Math.PI * (Math.pow(engineDiameter, 2)));
         
-        double speedMetres = 0.514444444 * speed; // convert from knots to metres
+        float speedMetres = (float) (0.514444444 * speed); // convert from knots to metres
         
         // method here required to calculate corrected density and speed
         
-        double airDensity = 1.15;
+        float airDensity = (float) 1.15;
         
-        double engineNeeds = engineFlowRate / airDensity;
-        double engineReceives = engineArea * speedMetres;
+        float engineNeeds = engineFlowRate / airDensity;
+        float engineReceives = engineArea * speedMetres;
         
         
         if (engineNeeds > engineReceives){
@@ -277,13 +255,13 @@ public class Project extends SimpleApplication {
             receivingCorrect = true;
         }
         
-        double engineAreaRequired = engineNeeds / speedMetres;
+        float engineAreaRequired = engineNeeds / speedMetres;
         
-        double engineDiameterRequired = 2 * Math.sqrt((engineAreaRequired / Math.PI));
+        float engineRadiusRequired = (float) Math.sqrt((engineAreaRequired / Math.PI));
         
+        float correctScale = (float) (engineRadiusRequired * 12.1943);
         
-        
-        
-        System.out.println(engineDiameterRequired);   
+        System.out.println("Radius = " + engineRadiusRequired );
+       return correctScale;   
     }
 }

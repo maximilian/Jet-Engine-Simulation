@@ -239,8 +239,8 @@ public class Project extends SimpleApplication {
     boolean receivingMuch = false;
     boolean receivingCorrect = false;
     public float calculateArea(double altitude, double speed, double engineSetting){
-        float engineFlowRate = 332; // kg/s - needs to be corrected
-        float engineDiameter = (float) 1.6; // m
+        float engineFlowRate = (float) 548.85; // kg/s - needs to be corrected
+        float engineDiameter = (float) 2.154; // m
         
         float engineArea = (float) (Math.PI * (Math.pow(engineDiameter, 2)));
         

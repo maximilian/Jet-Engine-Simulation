@@ -94,8 +94,6 @@ public class Project extends SimpleApplication {
         rightEngineArea.setMaterial(area_mat);
         rightEngineArea.rotate(1.6f, 0, 0);
         
-        
-        
         Dome leftEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
         Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
         
@@ -270,5 +268,26 @@ public class Project extends SimpleApplication {
         
         System.out.println("Radius = " + engineRadiusRequired );
        return correctScale;   
+    }
+    
+    public float getCorrectedTemperature(float altitude){
+        float meters = (float) (3.2808 * altitude);
+        float correctedKelvin = (float) (288.15 - 0.0065*(meters));
+        
+        return correctedKelvin;
+    }
+    
+    public float getCorrectedPressure(float correctedTemperature){
+       
+        float correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
+        
+        return correctedPressure;
+    }
+    
+    public float getCorrectedDensity(float correctedTemperature, float correctedPressure){
+     
+        float correctedDensity = (correctedPressure/(287*correctedPressure));
+        
+        return correctedDensity;
     }
 }

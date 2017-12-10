@@ -80,7 +80,7 @@ public class Project extends SimpleApplication {
         
         axisLines();
    
-        float engineRadius = calculateArea(2000, 5, 100);
+        float engineRadius = calculateArea(0, 200, 100);
         
         Dome sphere = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
         Geometry rightEngineArea = new Geometry("Right Engine", sphere);
@@ -125,10 +125,8 @@ public class Project extends SimpleApplication {
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
         rootNode.addLight(sun);
         
-        /*Node node = (Node) aircraft;
-       
+        /*Node node = (Node) aircraft;      
         Geometry geo;
-        
         geo = (Geometry) node.getChild("3d-model-geom-8");
         geo.rotate(0f, 1f, 0.0f);
         geo.setLocalTranslation(-100f, 0f, 50f);
@@ -236,18 +234,21 @@ public class Project extends SimpleApplication {
     boolean receivingLittle = false;
     boolean receivingMuch = false;
     boolean receivingCorrect = false;
-    public float calculateArea(double altitude, double speed, double engineSetting){
-        float engineFlowRate = (float) 548.85; // kg/s - needs to be corrected
+    public float calculateArea(float altitude, float speed, float engineSetting){
+        float engineFlowRate = getCorrectedMassFlow(altitude, (float) 548.85); // kg/s - needs to be corrected
+        
         float engineDiameter = (float) 2.154; // m
         
         float engineArea = (float) (Math.PI * (Math.pow(engineDiameter, 2)));
         
         float speedMetres = (float) (0.514444444 * speed); // convert from knots to metres
         
-        // method here required to calculate corrected density and speed
+       
+        System.out.println("corrected mass flow: " + engineFlowRate);
         
-        float airDensity = (float) 1.15;
+        float airDensity = getCorrectedDensity(altitude);
         
+        System.out.println("corrected density: " + airDensity);
         float engineNeeds = engineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
         
@@ -271,7 +272,8 @@ public class Project extends SimpleApplication {
     }
     
     public float getCorrectedTemperature(float altitude){
-        float meters = (float) (3.2808 * altitude);
+        float meters = (float) (altitude / 3.2808);
+        System.out.println("meters:" + meters);
         float correctedKelvin = (float) (288.15 - 0.0065*(meters));
         
         return correctedKelvin;
@@ -284,10 +286,26 @@ public class Project extends SimpleApplication {
         return correctedPressure;
     }
     
-    public float getCorrectedDensity(float correctedTemperature, float correctedPressure){
-     
-        float correctedDensity = (correctedPressure/(287*correctedPressure));
+    public float getCorrectedDensity(float altitude){
+        
+        float correctedTemperature = getCorrectedTemperature(altitude);
+        float correctedPressure = getCorrectedPressure(correctedTemperature);
+        
+        
+        float correctedDensity = (correctedPressure/(287*correctedTemperature));
         
         return correctedDensity;
+    }
+    
+    public float getCorrectedMassFlow(float altitude, float massFlow){
+        float correctedTemperature = getCorrectedTemperature(altitude);
+        float correctedPressure = getCorrectedPressure(correctedTemperature);
+        
+        float theta = (float) (correctedTemperature/288.15);
+        float delta = (float) (correctedPressure/101325);
+        
+        float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
+            
+        return correctedFlow;
     }
 }

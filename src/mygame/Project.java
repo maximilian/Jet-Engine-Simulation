@@ -234,6 +234,17 @@ public class Project extends SimpleApplication {
     boolean receivingLittle = false;
     boolean receivingMuch = false;
     boolean receivingCorrect = false;
+    
+     /*
+     * Returns the radius of the area around the engine
+     *
+     * @param altitude, in feet, of the aircraft
+     * @param speed, in knots, of the aircraft
+     * @param engine setting, in percentage, of the aircraft engine
+     * @return the radius, in correct jME scale, of the area around the engine
+    */
+    
+    
     public float calculateArea(float altitude, float speed, float engineSetting){
         float engineFlowRate = getCorrectedMassFlow(altitude, (float) 548.85); // kg/s - needs to be corrected
         
@@ -271,6 +282,14 @@ public class Project extends SimpleApplication {
        return correctScale;   
     }
     
+    /*
+     * Returns the corrected temperature which can then be used to calculate
+     * the corrected pressure and corrected density
+     *
+     * @param altitude, in feet, of the aircraft
+     * @return the corrected temperature, in Kelvin
+    */
+    
     public float getCorrectedTemperature(float altitude){
         float meters = (float) (altitude / 3.2808);
         System.out.println("meters:" + meters);
@@ -279,12 +298,27 @@ public class Project extends SimpleApplication {
         return correctedKelvin;
     }
     
+    /*
+     * Returns the corrected pressure which can then be used to calculate
+     * the corrected density, and therefore the corrected air mass flow
+     *
+     * @param the correct temperature, in Kelvin
+     * @return the corrected pressure, in Pascals
+    */
+    
     public float getCorrectedPressure(float correctedTemperature){
        
         float correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
         
         return correctedPressure;
     }
+    
+    /*
+     * Returns the corrected density which can then be used to calculate
+     *
+     * @param the altitude, in feet
+     * @return the corrected density, in kg/m^3
+    */
     
     public float getCorrectedDensity(float altitude){
         
@@ -296,6 +330,15 @@ public class Project extends SimpleApplication {
         
         return correctedDensity;
     }
+    
+    /*
+     * Returns the corrected engine mass flow
+     *
+     * @param the altitude, in feet
+     * @param the mass flow, in feet
+     * @return the corrected density, in kg/m^3
+    */
+    
     
     public float getCorrectedMassFlow(float altitude, float massFlow){
         float correctedTemperature = getCorrectedTemperature(altitude);

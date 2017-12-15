@@ -85,9 +85,14 @@ public class Project extends SimpleApplication {
         
         axisLines();
    
-        float engineRadius = calculateArea(0, 200, 100);
+        float engineRadius = calculateArea(2000, 160, 100);
         
-        Dome leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
+        Dome leftEngine;
+        if(receivingLittle){
+            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
+        } else{
+            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 2, 30, engineRadius, false);
+        }
         Geometry rightEngineArea = new Geometry("Right Engine", leftEngine);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -252,7 +257,9 @@ public class Project extends SimpleApplication {
         
         float engineDiameter = (float) 2.154; // m
         
-        float engineArea = (float) (Math.PI * (Math.pow(engineDiameter, 2)));
+        
+        float engineRadius = engineDiameter / 2;
+        float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         
         float speedMetres = (float) (0.514444444 * speed); // convert from knots to metres
         
@@ -265,14 +272,18 @@ public class Project extends SimpleApplication {
         float engineNeeds = engineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
         
-        
-        if (engineNeeds > engineReceives){
+
+        if (engineReceives < engineNeeds){
             receivingLittle = true;
-        } else if(engineNeeds < engineReceives){
+            System.out.println("too little");
+        } else if(engineReceives > engineNeeds){
             receivingMuch = true;
+            System.out.println("too much");
         } else {
             receivingCorrect = true;
+            System.out.println("perfect");
         }
+        
         
         float engineAreaRequired = engineNeeds / speedMetres;
         

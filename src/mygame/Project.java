@@ -24,6 +24,11 @@ import com.jme3.texture.Texture.WrapMode;
  * moving the mouse and pressing the WASD keys. */
 public class Project extends SimpleApplication {
     private TerrainQuad terrain;
+        
+    boolean receivingLittle = false;
+    boolean receivingMuch = false;
+    boolean receivingCorrect = false;
+    
     
     public static void main(String[] args){
         Project app = new Project();
@@ -82,8 +87,8 @@ public class Project extends SimpleApplication {
    
         float engineRadius = calculateArea(0, 200, 100);
         
-        Dome sphere = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
-        Geometry rightEngineArea = new Geometry("Right Engine", sphere);
+        Dome leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
+        Geometry rightEngineArea = new Geometry("Right Engine", leftEngine);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
@@ -94,8 +99,8 @@ public class Project extends SimpleApplication {
         rightEngineArea.setMaterial(area_mat);
         rightEngineArea.rotate(1.6f, 0, 0);
         
-        Dome leftEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
-        Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
+        Dome rightEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
+        Geometry leftEngineArea = new Geometry("Left Engine", rightEngine);
         
         Material leftAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         leftAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
@@ -230,10 +235,7 @@ public class Project extends SimpleApplication {
         
         
     }
-    
-    boolean receivingLittle = false;
-    boolean receivingMuch = false;
-    boolean receivingCorrect = false;
+
     
      /*
      * Returns the radius of the area around the engine

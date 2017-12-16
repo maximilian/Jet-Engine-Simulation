@@ -49,7 +49,7 @@ public class Project extends SimpleApplication {
         MyControlScreen startScreen = new MyControlScreen();
         stateManager.attach(startScreen);
         
-        nifty.fromXml("Interface/screen.xml", "start");
+        nifty.fromXml("Interface/screen.xml", "start", new MyControlScreen());
 
         // attach the Nifty display to the gui view port as a processor
         guiViewPort.addProcessor(niftyDisplay);

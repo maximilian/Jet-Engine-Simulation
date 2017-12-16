@@ -10,18 +10,16 @@
       </panel>
 
       <panel backgroundColor="#88f8" id="panel_bottom" height="25%" width="100%" align="center" childLayout="horizontal" >
-        <panel id="panel_bottom_left" height="50%" width="50%" valign="center" childLayout="center">
+        <panel id="panel_bottom_left" height="50%" width="70%" valign="center" childLayout="center">
            <control name="button" label="Quit" id="QuitButton" align="center" valign="center" visibleToMouse="true">
                 <interact onClick="quitGame()"/>
             </control>
         </panel>
-        <panel id="panel_camera" backgroundImage="Interface/airplane.jpg" height="100%" width="50%" valign="center" childLayout="horizontal">
-            <panel id="panel_white_space" height="100%" width="20%" align="center" childLayout="center">
-            
-            </panel>
+        <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="30%" valign="center" childLayout="horizontal">
+          
             
             <panel id="panel_front_camera" height="100%" width="40%" align="center" childLayout="center">
-                <control name="button" label="Front" id="StartButton" align="center" valign="center" visibleToMouse="true">
+                <control name="button" width="50px" label="" backgroundColor="#666f" id="StartButton" align="center" valign="center" visibleToMouse="true">
                     <interact onClick="frontView()"/>
                 </control>
             </panel>
@@ -44,6 +42,9 @@
                         <interact onClick="leftEngineView()"/>
                     </control>
               </panel>
+            </panel>
+              <panel id="panel_white_space" height="100%" width="20%" align="center" childLayout="center">
+            
             </panel>
         </panel>
       </panel>

@@ -15,7 +15,7 @@
                 <interact onClick="quitGame()"/>
             </control>
         </panel>
-        <panel id="panel_camera" height="100%" width="50%" valign="center" childLayout="horizontal">
+        <panel id="panel_camera" backgroundImage="Interface/airplane.jpg" height="100%" width="50%" valign="center" childLayout="horizontal">
             <panel id="panel_white_space" height="100%" width="20%" align="center" childLayout="center">
             
             </panel>
@@ -26,6 +26,7 @@
                 </control>
             </panel>
             <panel id="panel_rest_camera" height="100%" width="40%" align="center" childLayout="vertical">
+
               <panel id="camera_panel_top" height="33.33%" width="100%" childLayout="center">
                 <control name="button" label="Right Engine" id="TopCamButton" visibleToMouse="true">
                     <interact onClick="rightEngineView()"/>

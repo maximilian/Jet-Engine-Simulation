@@ -10,6 +10,8 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.input.FlyByCamera;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import de.lessvoid.nifty.Nifty;
@@ -67,9 +69,19 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         
     }
     
-    public void startGame() {
+    public void frontView() {
         System.out.println("front view pls");
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
+       
+     }
+    
+    public void aboveView() {
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
+        flyCam.setRotation(rotation);
+        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f, 79.266045f ) );
+       
+        System.out.println(flyCam.getRotation());
        
      }
     public void quitGame() {

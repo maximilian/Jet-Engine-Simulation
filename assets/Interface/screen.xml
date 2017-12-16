@@ -22,7 +22,7 @@
             
             <panel id="panel_front_camera" height="100%" width="40%" align="center" childLayout="center">
                 <control name="button" label="Front" id="StartButton" align="center" valign="center" visibleToMouse="true">
-                    <interact onClick="startGame()"/>
+                    <interact onClick="frontView()"/>
                 </control>
             </panel>
             <panel id="panel_rest_camera" height="100%" width="40%" align="center" childLayout="vertical">
@@ -30,7 +30,9 @@
                 <control name="button" label="Right Engine" id="TopCamButton" visibleToMouse="true"></control>
               </panel>
               <panel id="camera_panel_mid" height="33.33%" width="100%" childLayout="center">
-                    <control name="button" label="Above" id="MidCamButton" visibleToMouse="true"></control>
+                    <control name="button" label="Above" id="MidCamButton" visibleToMouse="true">
+                        <interact onClick="aboveView()"/>
+                    </control>
               </panel>
               
               <panel id="camera_panel_bot" height="33.33%" width="100%" childLayout="center">

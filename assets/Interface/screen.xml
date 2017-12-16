@@ -36,7 +36,9 @@
               </panel>
               
               <panel id="camera_panel_bot" height="33.33%" width="100%" childLayout="center">
-                    <control name="button" label="Left Engine" id="BotCamButton" visibleToMouse="true"></control>
+                    <control name="button" label="Left Engine" id="LeftEngineCamButton" visibleToMouse="true">
+                        <interact onClick="leftEngineView()"/>
+                    </control>
               </panel>
             </panel>
         </panel>

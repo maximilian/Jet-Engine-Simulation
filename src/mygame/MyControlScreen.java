@@ -70,12 +70,9 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     }
     
     public void frontView() {
-        System.out.println("front view pls");
-        
          Quaternion rotation = new Quaternion();
-        // rotate 90 degrees around x axis
+        // rotate 170 degrees around y axis
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
-        
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
        
@@ -87,10 +84,29 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f, 79.266045f ) );
-       
-        System.out.println(flyCam.getRotation());
-       
      }
+    
+    public void rightEngineView() {
+        Quaternion rotation = new Quaternion();
+        // rotate 90 degrees around x axis
+        rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
+        flyCam.setRotation(rotation);
+        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f, 79.266045f ) );
+     }
+    
+    public void leftEngineView() {
+        
+        Quaternion rotation = new Quaternion();
+        // rotate 5/4*pi around y axis
+        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
+        
+        flyCam.setRotation(rotation);
+        
+        flyCam.setLocation( new Vector3f(205.10385f, 29.250921f, 250.21242f));
+        System.out.println(flyCam.getRotation());
+     }
+    
+    
     public void quitGame() {
         System.out.println("quit pls");
         app.stop();

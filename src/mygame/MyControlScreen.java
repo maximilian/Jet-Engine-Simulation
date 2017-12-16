@@ -71,12 +71,19 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     
     public void frontView() {
         System.out.println("front view pls");
+        
+         Quaternion rotation = new Quaternion();
+        // rotate 90 degrees around x axis
+        rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
+        
+        flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
        
      }
     
     public void aboveView() {
         Quaternion rotation = new Quaternion();
+        // rotate 90 degrees around x axis
         rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f, 79.266045f ) );

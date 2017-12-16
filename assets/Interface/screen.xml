@@ -27,7 +27,10 @@
             </panel>
             <panel id="panel_rest_camera" height="100%" width="40%" align="center" childLayout="vertical">
               <panel id="camera_panel_top" height="33.33%" width="100%" childLayout="center">
-                <control name="button" label="Right Engine" id="TopCamButton" visibleToMouse="true"></control>
+                <control name="button" label="Right Engine" id="TopCamButton" visibleToMouse="true">
+                    <interact onClick="rightEngineView()"/>
+                    
+                </control>
               </panel>
               <panel id="camera_panel_mid" height="33.33%" width="100%" childLayout="center">
                     <control name="button" label="Above" id="MidCamButton" visibleToMouse="true">

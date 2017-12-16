@@ -98,7 +98,7 @@ public class Project extends SimpleApplication {
         
         axisLines();
    
-        float engineRadius = calculateArea(2000, 160, 100);
+        float engineRadius = calculateArea(2000, 140, 100);
         
         Dome leftEngine;
         if(receivingLittle){

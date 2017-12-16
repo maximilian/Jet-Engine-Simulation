@@ -88,10 +88,13 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     
     public void rightEngineView() {
         Quaternion rotation = new Quaternion();
-        // rotate 90 degrees around x axis
-        rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
+        // rotate 5/4*pi around y axis
+        rotation.fromAngleAxis((float) (FastMath.PI * 0.75), new Vector3f(0,1,0) );
+        
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f, 79.266045f ) );
+        
+        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f, 249.49205f));
+        System.out.println(flyCam.getLocation());
      }
     
     public void leftEngineView() {
@@ -102,8 +105,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         
         flyCam.setRotation(rotation);
         
-        flyCam.setLocation( new Vector3f(205.10385f, 29.250921f, 250.21242f));
-        System.out.println(flyCam.getRotation());
+        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f, 249.49205f));
      }
     
     

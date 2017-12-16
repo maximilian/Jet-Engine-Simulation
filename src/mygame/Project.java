@@ -55,12 +55,9 @@ public class Project extends SimpleApplication {
         guiViewPort.addProcessor(niftyDisplay);
         flyCam.setMoveSpeed(250);
         flyCam.setDragToRotate(true);
-        
-        
-        
+
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
-        
         // need this in any game involving physics
         BulletAppState bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);

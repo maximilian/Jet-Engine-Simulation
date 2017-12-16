@@ -15,26 +15,28 @@
                 <interact onClick="quitGame()"/>
             </control>
         </panel>
-        <panel backgroundColor="red" id="panel_bottom_right" height="100%" width="50%" valign="center" childLayout="center">
-          <panel id="panel_bottom_right_left" height="50%" width="50%" align="left" childLayout="center">
-            <control name="button" label="Front" id="StartButton" align="center" valign="center" visibleToMouse="true">
-              <interact onClick="startGame()"/>
-            </control>
-           
-          </panel>
-          <panel id="panel_bottom_right_right" height="100%" width="50%" align="right" childLayout="vertical">
+        <panel id="panel_camera" height="100%" width="50%" valign="center" childLayout="horizontal">
+            <panel id="panel_white_space" height="100%" width="20%" align="center" childLayout="center">
+            
+            </panel>
+            
+            <panel id="panel_front_camera" height="100%" width="40%" align="center" childLayout="center">
+                <control name="button" label="Front" id="StartButton" align="center" valign="center" visibleToMouse="true">
+                    <interact onClick="startGame()"/>
+                </control>
+            </panel>
+            <panel id="panel_rest_camera" height="100%" width="40%" align="center" childLayout="vertical">
               <panel id="camera_panel_top" height="33.33%" width="100%" childLayout="center">
-                <control name="button" label="Top" id="TopCamButton" visibleToMouse="true"></control>
+                <control name="button" label="Right Engine" id="TopCamButton" visibleToMouse="true"></control>
               </panel>
-              <panel id="camera_panel_mid" height="33.33%" width="100%"childLayout="center">
-                    <control name="button" label="Mid" id="MidCamButton" visibleToMouse="true"></control>
+              <panel id="camera_panel_mid" height="33.33%" width="100%" childLayout="center">
+                    <control name="button" label="Above" id="MidCamButton" visibleToMouse="true"></control>
               </panel>
               
               <panel id="camera_panel_bot" height="33.33%" width="100%" childLayout="center">
-                    <control name="button" label="Bot" id="BotCamButton" visibleToMouse="true"></control>
+                    <control name="button" label="Left Engine" id="BotCamButton" visibleToMouse="true"></control>
               </panel>
-            
-          </panel>
+            </panel>
         </panel>
       </panel>
     </layer>

@@ -26,7 +26,9 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        this.app = (SimpleApplication) app;
+        
+        this.app=(SimpleApplication) app;
+
         //TODO: initialize your AppState, e.g. attach spatials to rootNode
         //this is called on the OpenGL thread after the AppState has been attached
     }

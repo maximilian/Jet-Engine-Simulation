@@ -7,6 +7,7 @@ import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Dome;
@@ -15,6 +16,8 @@ import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.WrapMode;
+import de.lessvoid.nifty.Nifty;
+import mygame.MyControlScreen;
 
 
 
@@ -39,8 +42,21 @@ public class Project extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
+        Nifty nifty = niftyDisplay.getNifty();
+        /** Read your XML and initialize your custom ScreenController */
         
+        MyControlScreen startScreen = new MyControlScreen();
+        stateManager.attach(startScreen);
+        
+        nifty.fromXml("Interface/screen.xml", "start");
+
+        // attach the Nifty display to the gui view port as a processor
+        guiViewPort.addProcessor(niftyDisplay);
         flyCam.setMoveSpeed(250);
+        flyCam.setDragToRotate(true);
+        
+        
         
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 

@@ -42,6 +42,9 @@ public class Project extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        setDisplayFps(false);
+
+        setDisplayStatView(false);
         NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
         /** Read your XML and initialize your custom ScreenController */

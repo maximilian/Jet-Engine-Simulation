@@ -18,9 +18,9 @@
         <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="30%" valign="center" childLayout="horizontal">
           
             
-            <panel id="panel_front_camera" height="100%" width="40%" align="center" childLayout="center">
-                <panel id="front_temp_button" label="Front" width="50%" valign="center" align="center" childLayout="center" visibleToMouse="true">
-                    <control name="label" text="Front" color="#000" />
+            <panel id="panel_front_camera" margin="0px,0px,0px,5px" height="100%" width="40%" align="center" childLayout="horizontal">
+                <panel id="front_temp_button"  label="Front" width="70%" height="50%" valign="center" align="center" childLayout="center" visibleToMouse="true">
+                    <control name="label" valign="top" text="Front" color="#000" />
                     <interact onClick="frontView()"/>
                     
                     <effect>

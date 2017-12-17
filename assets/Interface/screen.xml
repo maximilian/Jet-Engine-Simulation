@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+  <useStyles filename="nifty-default-styles.xml" />
+  <useControls filename="nifty-default-controls.xml" />
+  <screen id="start" controller="mygame.MyControlScreen">
+    <layer id="background" childLayout="center">
+    </layer>
+    <layer id="foreground" childLayout="vertical">
+      <panel id="panel_top" height="75%" width="100%" align="center" childLayout="center">
+      </panel>
+
+      <panel backgroundColor="#88f8" id="panel_bottom" height="25%" width="100%" align="center" childLayout="horizontal" >
+        <panel id="panel_bottom_left" height="50%" width="70%" valign="center" childLayout="center">
+           <control name="button" label="Quit" id="QuitButton" align="center" valign="center" visibleToMouse="true">
+                <interact onClick="quitGame()"/>
+            </control>
+        </panel>
+        <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="30%" valign="center" childLayout="horizontal">
+          
+            
+            <panel id="panel_front_camera" margin="0px,0px,0px,5px" height="100%" width="30%" align="center" childLayout="horizontal">
+                <panel id="front_button" focusable="true" backgroundColor="#0f09" width="100%" height="60%" valign="center" align="center" childLayout="center" visibleToMouse="true">
+                    <control name="label" valign="top" text="Front" color="#000" />
+                    <interact onClick="frontView()"/>
+
+                    <effect>
+                        <onFocus name="border" border="3px,0px,3px,3px" color="#0f0" timeType="infinite" />
+                        <onActive name="border" border="1px,0px,1px,1px" color="#0f0" timeType="infinite"/>
+                        <onHover name="border" border="3px,0px,3px,3px" color="#0f0" timeType="infinite"/>
+                    </effect>
+      
+                </panel>
+            </panel>
+            <panel id="panel_rest_camera" height="100%" width="50%" align="center" childLayout="vertical">
+                <panel id="right_engine_button" focusable="true" backgroundColor="#00f9" width="100%" height="31.33%" valign="center" align="center" childLayout="center" visibleToMouse="true">
+                    <control name="label" valign="center" text="Right Engine" color="#000" />
+                    <interact onClick="rightEngineView()"/>
+
+                    <effect>
+                        <onFocus name="border" border="3px,3px,3px,3px" color="#00f" timeType="infinite" />
+                        <onActive name="border" border="1px,1px,1px,1px" color="#00f" timeType="infinite"/>
+                        <onHover name="border" border="3px,3px,3px,3px" color="#00f" timeType="infinite"/>
+                    </effect>
+
+                </panel>
+                <!--
+                <panel id="camera_panel_top" height="33.33%" width="100%" childLayout="center">
+                    <control name="button" label="Right Engine" id="TopCamButton" visibleToMouse="true">
+                        <interact onClick="rightEngineView()"/>
+
+                    </control>
+                </panel>-->
+                <panel id="panel_white_space" height="3%" width="20%" align="center" childLayout="center">
+            
+            </panel>
+                <panel id="above_button" focusable="true" backgroundColor="#ff09" width="100%" height="31.33%" valign="center" align="center" childLayout="center" visibleToMouse="true">
+                    <control name="label" valign="center" text="Above" color="#000" />
+                    <interact onClick="aboveView()"/>
+
+                    <effect>
+                        <onFocus name="border" border="3px,3px,3px,3px" color="#ff0" timeType="infinite" />
+                        <onActive name="border" border="1px,1px,1px,1px" color="#ff0" timeType="infinite"/>
+                        <onHover name="border" border="3px,3px,3px,3px" color="#ff0" timeType="infinite"/>
+                    </effect>
+
+                </panel>              
+                
+              <!--<panel id="camera_panel_mid" height="33.33%" width="100%" childLayout="center">
+                    <control name="button" label="Above" id="MidCamButton" visibleToMouse="true">
+                        <interact onClick="aboveView()"/>
+                    </control>
+              </panel>-->
+<panel id="panel_white_space" height="3%" width="20%" align="center" childLayout="center">
+            
+            </panel>
+                <panel id="left_engine_button" focusable="true" backgroundColor="#f009" width="100%" height="31.33%" valign="center" align="center" childLayout="center" visibleToMouse="true">
+                    <control name="label" valign="center" text="Left Engine" color="#000" />
+                    <interact onClick="leftEngineView()"/>
+
+                    <effect>
+                        <onFocus name="border" border="3px,3px,3px,3px" color="#f00" timeType="infinite" />
+                        <onActive name="border" border="1px,1px,1px,1px" color="#f00" timeType="infinite"/>
+                        <onHover name="border" border="3px,3px,3px,3px" color="#f00" timeType="infinite"/>
+                    </effect>
+
+                </panel>             
+              
+              <!--
+              <panel id="camera_panel_bot" height="33.33%" width="100%" childLayout="center">
+                    <control name="button" label="Left Engine" id="LeftEngineCamButton" visibleToMouse="true">
+                        <interact onClick="leftEngineView()"/>
+                    </control>
+              </panel>-->
+            </panel>
+              <panel id="panel_white_space" height="100%" width="20%" align="center" childLayout="center">
+            
+            </panel>
+        </panel>
+      </panel>
+    </layer>
+  </screen>
+  
+</nifty>

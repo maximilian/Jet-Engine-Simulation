@@ -19,15 +19,16 @@
           
             
             <panel id="panel_front_camera" margin="0px,0px,0px,5px" height="100%" width="40%" align="center" childLayout="horizontal">
-                <panel id="front_temp_button"  label="Front" width="70%" height="50%" valign="center" align="center" childLayout="center" visibleToMouse="true">
+                <panel id="front_temp_button" focusable="true" backgroundColor="#f004" abel="Front" width="70%" height="50%" valign="center" align="center" childLayout="center" visibleToMouse="true">
                     <control name="label" valign="top" text="Front" color="#000" />
                     <interact onClick="frontView()"/>
-                    
+
                     <effect>
+                        <onFocus name="border" border="3px,3px,3px,3px" color="#000" timeType="infinite" />
                         <onActive name="border" border="1px,1px,1px,1px" color="#000" timeType="infinite"/>
                         <onHover name="border" border="3px,3px,3px,3px" color="#000" timeType="infinite"/>
                     </effect>
-                    
+      
                 </panel>
                 <!--
                 <control name="button" width="50px" label=""  id="StartButton" align="center" valign="center" visibleToMouse="true">

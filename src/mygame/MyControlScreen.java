@@ -14,6 +14,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 
@@ -75,6 +76,13 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
        
+        
+        Screen screen = nifty.getCurrentScreen();
+        
+        TextField field = screen.findNiftyControl("altitudeField", TextField.class);
+        String fieldText = field.getRealText();
+        
+        System.out.println(fieldText);
      }
     
     public void aboveView() {

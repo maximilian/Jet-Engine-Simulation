@@ -42,7 +42,6 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     
     @Override
     public void update(float tpf) {
-        
         //TODO: implement behavior during runtime
     }
     
@@ -55,7 +54,6 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     }
     @Override
     public void bind(Nifty nifty, Screen screen) {
-    //throw new UnsupportedOperationException("Not supported yet.");
         this.nifty = nifty;
         this.screen = screen;
     }

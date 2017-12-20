@@ -13,7 +13,10 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.TextField;
+import de.lessvoid.nifty.screen.Screen;
 import mygame.Project;
 import mygame.gui.MyControlScreen;
 
@@ -46,7 +49,7 @@ public class GuiAppState extends AbstractAppState {
         
         /** Read your XML and initialize your custom ScreenController */
         controlScreen = new MyControlScreen(this);
-        stateManager.attach(controlScreen);
+        
         
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
@@ -101,8 +104,18 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+altitude, 249.49205f));
      }
     
-    public void setVariables(int altitude){
-        this.altitude = altitude;
+    public void submitVariables(){
+        
+        Screen screen = nifty.getCurrentScreen();
+
+        TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);        
+        String altitudeString = altitudeField.getRealText();
+        altitude = Integer.parseInt(altitudeString);
+        
+         Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
+        
+        aircraft.setLocalTranslation(0, altitude, 0);
+        System.out.println(altitude);
     }
     
     

@@ -23,7 +23,7 @@ import mygame.states.GuiAppState;
  * 
  * @author max
  */
-public class MyControlScreen extends AbstractAppState implements ScreenController {
+public class MyControlScreen implements ScreenController {
     Nifty nifty;
     Screen screen;
     private GuiAppState gui;
@@ -35,39 +35,20 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     }
     
     @Override
-    public void initialize(AppStateManager stateManager, Application app) {
-        super.initialize(stateManager, app);
-        
-        this.app=(Project) app;
-    }
-    
-    @Override
-    public void update(float tpf) {
-        //TODO: implement behavior during runtime
-    }
-    
-    @Override
-    public void cleanup() {
-        super.cleanup();
-        //TODO: clean up what you initialized in the initialize method,
-        //e.g. remove all spatials from rootNode
-        //this is called on the OpenGL thread after the AppState has been detached
-    }
-    @Override
     public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
+        
     }
 
     @Override
     public void onStartScreen() {
-        
+
     }
 
     @Override
     public void onEndScreen() {
         
     }
+  
     
     public void frontView() {
         gui.frontView();
@@ -87,17 +68,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
      }
     
     public void submit(){
-        screen = nifty.getCurrentScreen();
-
-        TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);        
-        String altitudeString = altitudeField.getRealText();
-        altitude = Integer.parseInt(altitudeString);
-        
-         Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
-        
-        aircraft.setLocalTranslation(0, altitude, 0);
-        
-        gui.setVariables((int) altitude);
+        gui.submitVariables();
     }
     
 
@@ -107,4 +78,6 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         System.out.println("quit pls");
         app.stop();
     }
+
+
 }

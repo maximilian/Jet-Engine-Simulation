@@ -2,29 +2,14 @@ package mygame;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
-import com.jme3.font.BitmapText;
-import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Dome;
 import com.jme3.scene.shape.Line;
-import com.jme3.terrain.geomipmap.TerrainLodControl;
-import com.jme3.terrain.geomipmap.TerrainQuad;
-import com.jme3.texture.Texture;
-import com.jme3.texture.Texture.WrapMode;
 import de.lessvoid.nifty.Nifty;
 
-
-
-
-/** Sample 1 - how to get started with the most simple JME 3 application.
- * Display a blue 3D cube and view from all sides by
- * moving the mouse and pressing the WASD keys. */
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
      
@@ -36,7 +21,6 @@ public class Project extends SimpleApplication {
     public void simpleInitApp() {
         
         axisLines();
-        
         
         setDisplayFps(false);
         setDisplayStatView(false);
@@ -55,16 +39,13 @@ public class Project extends SimpleApplication {
         nifty.fromXml("Interface/screen.xml", "start", startScreen);
         // attach the Nifty display to the gui view port as a processor
         guiViewPort.addProcessor(niftyDisplay);
-
+        
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
         // need this in any game involving physics
         BulletAppState bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);
-    
-        // wall and teapot for testing purposes
-        Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
-        rootNode.attachChild(teapot);     
+      
         rootNode.attachChild(loader.getAircraft());
 
         float engineRadius = calculateArea(2000, 140, 100);

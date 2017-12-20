@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mygame.states;
+package mygame.gui;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -12,6 +12,7 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
 import mygame.Project;
 import mygame.Project;
+import mygame.states.MyControlScreen;
 
 /**
  * Handles general GUI of the app.

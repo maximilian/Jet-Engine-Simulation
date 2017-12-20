@@ -8,17 +8,19 @@ package mygame;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Spatial;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Texture;
 
 /**
- *
+ * Class used to manage al the different resources/models.
+ * 
  * @author max
  */
 public class ResourceLoader {
     private TerrainQuad terrain;
-    
+    private Spatial aircraft;
     
     private AssetManager assetManager;
     private Camera terrainLodCamera;
@@ -26,6 +28,15 @@ public class ResourceLoader {
     public ResourceLoader(AssetManager assetManager, Camera terrainLodCamera) {
         this.assetManager = assetManager;
         this.terrainLodCamera = terrainLodCamera;
+    }
+    
+    public Spatial getAircraft(){
+        if(aircraft == null) {
+            initAircraft();
+        }
+        
+        return aircraft;
+    
     }
     
     public TerrainQuad getTerrain(){
@@ -36,7 +47,14 @@ public class ResourceLoader {
     
     }
     
-    /* helper to load terrain */
+    public void initAircraft(){
+         // Load a model from test_data (OgreXML + material + texture)
+        aircraft = assetManager.loadModel("Models/3d-model.j3o");
+
+        aircraft.setLocalTranslation(0f, 0f, 0f);
+        aircraft.scale(0.3f, 0.3f, 0.3f); 
+    }
+    
     public void initTerrain(){
     
     /** 1. Create terrain material and load four textures into it. */

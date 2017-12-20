@@ -26,20 +26,18 @@ import de.lessvoid.nifty.Nifty;
  * Display a blue 3D cube and view from all sides by
  * moving the mouse and pressing the WASD keys. */
 public class Project extends SimpleApplication {
-    private TerrainQuad terrain;
-    
     private ResourceLoader loader;
-    
-    
-    
+     
     boolean receivingLittle = false;
     boolean receivingMuch = false;
     boolean receivingCorrect = false;
 
-
-
     @Override
     public void simpleInitApp() {
+        
+        axisLines();
+        
+        
         setDisplayFps(false);
         setDisplayStatView(false);
         
@@ -49,21 +47,14 @@ public class Project extends SimpleApplication {
         loader = new ResourceLoader(assetManager, cam);
         rootNode.attachChild(loader.getTerrain());
          
-        
-
-        
         NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
         /** Read your XML and initialize your custom ScreenController */
         MyControlScreen startScreen = new MyControlScreen();
         stateManager.attach(startScreen);
-        
         nifty.fromXml("Interface/screen.xml", "start", startScreen);
-
         // attach the Nifty display to the gui view port as a processor
         guiViewPort.addProcessor(niftyDisplay);
-        
-       
 
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
@@ -73,24 +64,9 @@ public class Project extends SimpleApplication {
     
         // wall and teapot for testing purposes
         Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
-        rootNode.attachChild(teapot);
+        rootNode.attachChild(teapot);     
+        rootNode.attachChild(loader.getAircraft());
 
-        
-         // Load a model from test_data (OgreXML + material + texture)
-        Spatial aircraft = assetManager.loadModel("Models/3d-model.j3o");
-
-        System.out.println(aircraft.getWorldBound());
-        
-        //aircraft.setMaterial(mat_aircraft);
-        //aircraft.scale(0.5f, 0.5f, 0.5f);
-        aircraft.rotate(0f, 0f, 0.0f);
-        aircraft.setLocalTranslation(0f, 0f, 0f);
-        aircraft.scale(0.3f, 0.3f, 0.3f);
-     
-        rootNode.attachChild(aircraft);
-        
-        axisLines();
-   
         float engineRadius = calculateArea(2000, 140, 100);
         
         Dome leftEngine;

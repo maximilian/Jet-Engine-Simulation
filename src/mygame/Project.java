@@ -1,5 +1,6 @@
 package mygame;
 
+import mygame.states.GuiAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.material.Material;
@@ -30,10 +31,8 @@ public class Project extends SimpleApplication {
         loader = new ResourceLoader(assetManager, cam);
         rootNode.attachChild(loader.getTerrain());
          
-        
         gui = new GuiAppState();
         stateManager.attach(gui);
-        
         
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
@@ -201,8 +200,8 @@ public class Project extends SimpleApplication {
         return correctedFlow;
     }
     
-    public boolean getEngineState(){
+    public ResourceLoader getResourceLoader(){
         
-        return true;
+        return loader;
     }
 }

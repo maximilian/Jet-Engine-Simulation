@@ -5,17 +5,10 @@
  */
 package mygame.gui;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AbstractAppState;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.renderer.Camera;
-import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import mygame.Project;
-import mygame.ResourceLoader;
 import mygame.states.GuiAppState;
 
 /**

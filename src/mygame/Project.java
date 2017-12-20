@@ -36,8 +36,9 @@ public class Project extends SimpleApplication {
     public static void main(String[] args){
         Project app = new Project();
         app.setShowSettings(false);
-
+        
         app.start(); // start the game
+        
     }
 
     @Override
@@ -45,10 +46,10 @@ public class Project extends SimpleApplication {
         setDisplayFps(false);
 
         setDisplayStatView(false);
+      
         NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
         /** Read your XML and initialize your custom ScreenController */
-        
         MyControlScreen startScreen = new MyControlScreen();
         stateManager.attach(startScreen);
         
@@ -56,6 +57,7 @@ public class Project extends SimpleApplication {
 
         // attach the Nifty display to the gui view port as a processor
         guiViewPort.addProcessor(niftyDisplay);
+        
         flyCam.setMoveSpeed(250);
         flyCam.setDragToRotate(true);
 
@@ -66,8 +68,9 @@ public class Project extends SimpleApplication {
         stateManager.attach(bulletAppState);
     
         // wall and teapot for testing purposes
-        /*Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
-        Material mat_default = new Material(
+        Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
+        rootNode.attachChild(teapot);
+        /*Material mat_default = new Material(
             assetManager, "Common/MatDefs/Misc/ShowNormals.j3md");
         teapot.setMaterial(mat_default);
 
@@ -379,5 +382,10 @@ public class Project extends SimpleApplication {
         float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
             
         return correctedFlow;
+    }
+    
+    public boolean getEngineState(){
+        
+        return true;
     }
 }

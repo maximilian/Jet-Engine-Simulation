@@ -70,37 +70,10 @@ public class Project extends SimpleApplication {
         
         float engineRadius = calculateArea(2000, 140, 100);
         
-        Dome leftEngine;
-        if(receivingLittle){
-            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
-        } else{
-            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 2, 30, engineRadius, false);
-        }
-        Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
+        rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false));       
+        rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false));
         
-        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
         
-        //transparent hemisphere
-        area_mat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
-        
-        leftEngineArea.setMaterial(area_mat);
-        leftEngineArea.rotate(1.6f, 0, 0);
-        
-        Dome rightEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
-        Geometry rightEngineArea = new Geometry("Right Engine", rightEngine);
-        
-        Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        rightEngineAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
-        
-        // transparent hemisphere
-        rightEngineAreaMat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
-        
-        rightEngineArea.setMaterial(rightEngineAreaMat);
-        rightEngineArea.rotate(1.6f, 0, 0);
-        
-        rootNode.attachChild(leftEngineArea);
-        rootNode.attachChild(rightEngineArea);
 
         // Display a line of text with a default font
         guiNode.detachAllChildren();

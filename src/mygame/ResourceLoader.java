@@ -7,8 +7,13 @@ package mygame;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Dome;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Texture;
@@ -21,6 +26,8 @@ import com.jme3.texture.Texture;
 public class ResourceLoader {
     private TerrainQuad terrain;
     private Spatial aircraft;
+    private Spatial leftEngineArea;
+    private Spatial rightEngineArea;
     
     private AssetManager assetManager;
     private Camera terrainLodCamera;
@@ -47,6 +54,24 @@ public class ResourceLoader {
     
     }
     
+    public Spatial getLeftEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton){
+        if (leftEngineArea == null || submitButton){
+            initLeftEngineArea(engineRadius, receivingLittle);       
+        }
+        
+        return leftEngineArea;
+    
+    }
+    
+    public Spatial getRightEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton){
+        if (rightEngineArea == null || submitButton){
+            initRightEngineArea(engineRadius, receivingLittle);    
+        }
+        
+        return rightEngineArea;
+    
+    }
+    
     public void initAircraft(){
          // Load a model from test_data (OgreXML + material + texture)
         aircraft = assetManager.loadModel("Models/3d-model.j3o");
@@ -54,12 +79,38 @@ public class ResourceLoader {
         aircraft.scale(0.3f, 0.3f, 0.3f); 
     }
     
-    public void initRightEngineArea(){
-    
+    public void initRightEngineArea(float engineRadius, boolean receivingLittle){
+        Dome rightEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
+        
+        rightEngineArea = new Geometry("Right Engine", rightEngine);
+        
+        Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        rightEngineAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
+        
+        // transparent hemisphere
+        rightEngineAreaMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        
+        rightEngineArea.setMaterial(rightEngineAreaMat);
+        rightEngineArea.rotate(1.6f, 0, 0);
     }
     
-    public void initLeftEngineArea(){
-    
+    public void initLeftEngineArea(float engineRadius, boolean receivingLittle){
+        Dome leftEngine;
+        if(receivingLittle){
+            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
+        } else{
+            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 2, 30, engineRadius, false);
+        }
+        leftEngineArea = new Geometry("Left Engine", leftEngine);
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
+        
+        //transparent hemisphere
+        area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        
+        leftEngineArea.setMaterial(area_mat);
+        leftEngineArea.rotate(1.6f, 0, 0);
     }
     
     public void initTerrain(){

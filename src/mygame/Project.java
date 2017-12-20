@@ -1,3 +1,4 @@
+package mygame;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
@@ -17,7 +18,6 @@ import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.WrapMode;
 import de.lessvoid.nifty.Nifty;
-import mygame.MyControlScreen;
 
 
 
@@ -31,15 +31,8 @@ public class Project extends SimpleApplication {
     boolean receivingLittle = false;
     boolean receivingMuch = false;
     boolean receivingCorrect = false;
-    
-    
-    public static void main(String[] args){
-        Project app = new Project();
-        app.setShowSettings(false);
-        
-        app.start(); // start the game
-        
-    }
+
+
 
     @Override
     public void simpleInitApp() {
@@ -70,24 +63,7 @@ public class Project extends SimpleApplication {
         // wall and teapot for testing purposes
         Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
         rootNode.attachChild(teapot);
-        /*Material mat_default = new Material(
-            assetManager, "Common/MatDefs/Misc/ShowNormals.j3md");
-        teapot.setMaterial(mat_default);
 
-        rootNode.attachChild(teapot);
-
-        // Create a wall with a simple texture from test_data
-        Box box = new Box(2.5f,2.5f,1.0f);
-        Spatial wall = new Geometry("Box", box );
-        
-        Material mat_brick = new Material(
-            assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat_brick.setTexture("ColorMap",
-            assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
-        wall.setMaterial(mat_brick);
-        wall.setLocalTranslation(10f,0f, 0f);
-        rootNode.attachChild(wall);
-        */
         
          // Load a model from test_data (OgreXML + material + texture)
         Spatial aircraft = assetManager.loadModel("Models/3d-model.j3o");

@@ -33,14 +33,14 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     Nifty nifty;
     Screen screen;
     
-    private SimpleApplication app;
+    private Project app;
     private Camera flyCam;
    
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         
-        this.app=(SimpleApplication) app;
+        this.app=(Project) app;
         this.flyCam = this.app.getCamera();
         
         //TODO: initialize your AppState, e.g. attach spatials to rootNode
@@ -83,42 +83,10 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
-        axisLines();
+        
+        moveAircraft();
      }
-    
-    public void axisLines(){
-        
-        Node testy = this.app.getRootNode();
-        
-        AssetManager assetManager = app.getAssetManager();
-             Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
-        Geometry xaxisline = new Geometry("BOOM!", xaxis);
-        
-        Line yaxis = new Line(Vector3f.ZERO, new Vector3f(0, 400f, 0));
-        Geometry yaxisline = new Geometry("BOOM!", yaxis);
-        
-        Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
-        Geometry zaxisline = new Geometry("BOOM!", zaxis);
-                
-        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", ColorRGBA.Green);
-        
-         Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        yarea_mat.setColor("Color", ColorRGBA.Green);
-        
-        Material zarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        zarea_mat.setColor("Color", ColorRGBA.Green);
-              
-        xaxisline.setMaterial(area_mat);
-        yaxisline.setMaterial(yarea_mat);
-        zaxisline.setMaterial(zarea_mat);
-        
-        testy.attachChild(xaxisline);
-        testy.attachChild(yaxisline);
-        testy.attachChild(zaxisline);
-        
-        
-    }
+
     
     public void aboveView() {
         Quaternion rotation = new Quaternion();

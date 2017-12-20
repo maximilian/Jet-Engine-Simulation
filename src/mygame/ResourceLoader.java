@@ -66,18 +66,14 @@ public class ResourceLoader {
         if (leftEngineArea == null || submitButton){
             initLeftEngineArea(engineRadius, receivingLittle);       
         }
-        
         return leftEngineArea;
-    
     }
     
     public Spatial getRightEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton){
         if (rightEngineArea == null || submitButton){
             initRightEngineArea(engineRadius, receivingLittle);    
         }
-        
         return rightEngineArea;
-    
     }
     
     public void initAircraft(){

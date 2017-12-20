@@ -5,13 +5,12 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Line;
-import de.lessvoid.nifty.Nifty;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
+    private GuiAppState gui;
      
     boolean receivingLittle = false;
     boolean receivingMuch = false;
@@ -31,14 +30,10 @@ public class Project extends SimpleApplication {
         loader = new ResourceLoader(assetManager, cam);
         rootNode.attachChild(loader.getTerrain());
          
-        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
-        Nifty nifty = niftyDisplay.getNifty();
-        /** Read your XML and initialize your custom ScreenController */
-        MyControlScreen startScreen = new MyControlScreen();
-        stateManager.attach(startScreen);
-        nifty.fromXml("Interface/screen.xml", "start", startScreen);
-        // attach the Nifty display to the gui view port as a processor
-        guiViewPort.addProcessor(niftyDisplay);
+        
+        gui = new GuiAppState();
+        stateManager.attach(gui);
+        
         
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
@@ -94,13 +89,10 @@ public class Project extends SimpleApplication {
      * @param engine setting, in percentage, of the aircraft engine
      * @return the radius, in correct jME scale, of the area around the engine
     */
-    
-    
     public float calculateArea(float altitude, float speed, float engineSetting){
         float engineFlowRate = getCorrectedMassFlow(altitude, (float) 548.85); // kg/s - needs to be corrected
         
         float engineDiameter = (float) 2.154; // m
-        
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));

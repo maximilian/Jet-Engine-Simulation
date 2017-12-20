@@ -19,7 +19,8 @@ import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 
 /**
- *
+ * Manages the main GUI
+ * 
  * @author max
  */
 public class MyControlScreen extends AbstractAppState implements ScreenController {
@@ -28,6 +29,9 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     
     private Project app;
     private Camera flyCam;
+
+            
+    private float altitude;
    
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -73,7 +77,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         // rotate 170 degrees around y axis
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
+        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+altitude, 337.568f ) );
         
         moveAircraft();
      }
@@ -84,7 +88,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         // rotate 90 degrees around x axis
         rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f, 79.266045f ) );
+        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f+altitude, 79.266045f ) );
        
      }
     
@@ -95,8 +99,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         
         flyCam.setRotation(rotation);
         
-        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f, 249.49205f));
-        System.out.println(flyCam.getLocation());
+        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f+altitude, 249.49205f));
      }
     
     public void leftEngineView() {
@@ -107,28 +110,27 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         
         flyCam.setRotation(rotation);
         
-        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f, 249.49205f));
+        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+altitude, 249.49205f));
      }
     
     public void submit(){
     
-        System.out.println("working");
+        moveAircraft();
     }
     
     
     public void moveAircraft(){
-        Screen screen = nifty.getCurrentScreen();
+        screen = nifty.getCurrentScreen();
+        
         TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);
         
-        String altitude = altitudeField.getRealText();
-        int alt = Integer.parseInt(altitude);
-        System.out.println(altitude);
+        String altitudeString = altitudeField.getRealText();
+        altitude = Integer.parseInt(altitudeString);
+        
         
         Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
         
-        aircraft.setLocalTranslation(0, alt, 0);
-
-        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f + alt, 337.568f ) );
+        aircraft.setLocalTranslation(0, altitude, 0);
     
     }
     

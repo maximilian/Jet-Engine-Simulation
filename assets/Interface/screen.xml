@@ -15,7 +15,11 @@
                 <control name="label" text="Altitude" valign="center" />
                 <control name="textfield" text="2000" width="100px" id="altitudeField" align="center" valign="center" />
             </panel>
-            
+            <panel id="submitButton" height="33.33%" width="100%" childLayout="horizontal">
+                <control name="button" label="Submit" id="submitButton" align="center" valign="center">
+                    <interact onClick="submit()"/>
+                </control>
+            </panel>
         </panel>
         <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="30%" valign="center" childLayout="horizontal">
           

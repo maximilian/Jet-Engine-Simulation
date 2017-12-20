@@ -49,7 +49,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
     
     @Override
     public void update(float tpf) {
-        moveAircraft();
+        
         //TODO: implement behavior during runtime
     }
     
@@ -83,13 +83,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f, 337.568f ) );
-       
-        
-        
         axisLines();
-        
-        
-        
      }
     
     public void axisLines(){
@@ -157,6 +151,11 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         flyCam.setLocation( new Vector3f(233.71786f, 29.250921f, 249.49205f));
      }
     
+    public void submit(){
+    
+        System.out.println("working");
+    }
+    
     
     public void moveAircraft(){
         Screen screen = nifty.getCurrentScreen();
@@ -169,9 +168,7 @@ public class MyControlScreen extends AbstractAppState implements ScreenControlle
         Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
         
         aircraft.setLocalTranslation(0, alt, 0);
-        
-        
-        
+
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f + alt, 337.568f ) );
     
     }

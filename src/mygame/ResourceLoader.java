@@ -6,6 +6,7 @@
 package mygame;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
@@ -24,6 +25,7 @@ import com.jme3.texture.Texture;
  * @author max
  */
 public class ResourceLoader {
+    private DirectionalLight sun;
     private TerrainQuad terrain;
     private Spatial aircraft;
     private Spatial leftEngineArea;
@@ -37,21 +39,27 @@ public class ResourceLoader {
         this.terrainLodCamera = terrainLodCamera;
     }
     
-    public Spatial getAircraft(){
-        if(aircraft == null) {
-            initAircraft();
+    public DirectionalLight getSun(){
+        if(sun == null){
+            initSun();
         }
-        
-        return aircraft;
-    
+        return sun;
     }
     
+        
     public TerrainQuad getTerrain(){
         if(terrain == null){
             initTerrain();
         }
         return terrain;
+    }
     
+    
+    public Spatial getAircraft(){
+        if(aircraft == null) {
+            initAircraft();
+        } 
+        return aircraft;
     }
     
     public Spatial getLeftEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton){
@@ -173,9 +181,11 @@ public class ResourceLoader {
         /** 5. The LOD (level of detail) depends on were the camera is: */
         TerrainLodControl control = new TerrainLodControl(terrain, terrainLodCamera);
         terrain.addControl(control);
-        
-       
+    }
     
+    public void initSun(){
+        sun = new DirectionalLight();
+        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
     }
     
     

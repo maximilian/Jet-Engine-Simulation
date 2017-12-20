@@ -67,38 +67,13 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(teapot);     
         rootNode.attachChild(loader.getAircraft());
 
-        
         float engineRadius = calculateArea(2000, 140, 100);
         
         rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false));       
         rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false));
-        
-        
-
-        // Display a line of text with a default font
-        guiNode.detachAllChildren();
-        guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
-        BitmapText helloText = new BitmapText(guiFont, false);
-        helloText.setSize(guiFont.getCharSet().getRenderedSize());
-        helloText.setText("Hello Max");
-        helloText.setLocalTranslation(300, helloText.getLineHeight(), 0);
-        guiNode.attachChild(helloText);
-
        
-
-        // You must add a light to make the model visible
-        DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
-        rootNode.addLight(sun);
-        
-        /*Node node = (Node) aircraft;      
-        Geometry geo;
-        geo = (Geometry) node.getChild("3d-model-geom-8");
-        geo.rotate(0f, 1f, 0.0f);
-        geo.setLocalTranslation(-100f, 0f, 50f);
-        geo.scale(0.3f, 0.3f, 0.3f);
-  
-        */
+        // You must add a light to make the model visible 
+        rootNode.addLight(loader.getSun());
     }
     
     public void axisLines(){

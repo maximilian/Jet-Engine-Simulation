@@ -67,6 +67,7 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(teapot);     
         rootNode.attachChild(loader.getAircraft());
 
+        
         float engineRadius = calculateArea(2000, 140, 100);
         
         Dome leftEngine;
@@ -75,7 +76,7 @@ public class Project extends SimpleApplication {
         } else{
             leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 2, 30, engineRadius, false);
         }
-        Geometry rightEngineArea = new Geometry("Right Engine", leftEngine);
+        Geometry leftEngineArea = new Geometry("Left Engine", leftEngine);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
@@ -83,20 +84,20 @@ public class Project extends SimpleApplication {
         //transparent hemisphere
         area_mat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         
-        rightEngineArea.setMaterial(area_mat);
-        rightEngineArea.rotate(1.6f, 0, 0);
+        leftEngineArea.setMaterial(area_mat);
+        leftEngineArea.rotate(1.6f, 0, 0);
         
         Dome rightEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
-        Geometry leftEngineArea = new Geometry("Left Engine", rightEngine);
+        Geometry rightEngineArea = new Geometry("Right Engine", rightEngine);
         
-        Material leftAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        leftAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
+        Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        rightEngineAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
         
         // transparent hemisphere
-        leftAreaMat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
+        rightEngineAreaMat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         
-        leftEngineArea.setMaterial(leftAreaMat);
-        leftEngineArea.rotate(1.6f, 0, 0);
+        rightEngineArea.setMaterial(rightEngineAreaMat);
+        rightEngineArea.rotate(1.6f, 0, 0);
         
         rootNode.attachChild(leftEngineArea);
         rootNode.attachChild(rightEngineArea);

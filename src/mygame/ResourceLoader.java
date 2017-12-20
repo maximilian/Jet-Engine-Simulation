@@ -51,8 +51,15 @@ public class ResourceLoader {
          // Load a model from test_data (OgreXML + material + texture)
         aircraft = assetManager.loadModel("Models/3d-model.j3o");
 
-        aircraft.setLocalTranslation(0f, 0f, 0f);
         aircraft.scale(0.3f, 0.3f, 0.3f); 
+    }
+    
+    public void initRightEngineArea(){
+    
+    }
+    
+    public void initLeftEngineArea(){
+    
     }
     
     public void initTerrain(){

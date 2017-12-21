@@ -68,6 +68,8 @@ public class MyControlScreen implements ScreenController {
         String altitudeString = altitudeField.getRealText();
         int fieldAltitude = Integer.parseInt(altitudeString);
         
+       
+        
         gui.setAltitude(fieldAltitude);
         
         gui.submitAircraftVariables();      

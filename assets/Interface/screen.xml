@@ -15,6 +15,11 @@
                 <control name="label" text="Altitude" valign="center" />
                 <control name="textfield" text="2000" width="100px" id="altitudeField" align="center" valign="center" />
             </panel>
+            
+            <panel id="speedTextField" height="33.33%" width="100%" childLayout="horizontal">
+                <control name="label" text="Speed" valign="center" />
+                <control name="textfield" text="160" width="100px" id="speedField" align="center" valign="center" />
+            </panel>
             <panel id="submitButton" height="33.33%" width="100%" childLayout="horizontal">
                 <control name="button" label="Submit" id="submitButton" align="center" valign="center">
                     <interact onClick="submit()"/>

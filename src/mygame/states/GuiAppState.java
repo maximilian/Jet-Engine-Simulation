@@ -31,6 +31,7 @@ public class GuiAppState extends AbstractAppState {
     
     private Project app;
     private EngineArea engineArea;
+    private Aircraft aircraft;
     
     private NiftyJmeDisplay niftyDisplay;
     private Nifty nifty;
@@ -51,6 +52,7 @@ public class GuiAppState extends AbstractAppState {
         this.flyCam = this.app.getCamera();
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
+        this.aircraft = this.app.getAircraft();
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
@@ -117,9 +119,6 @@ public class GuiAppState extends AbstractAppState {
     
     public void submitAircraftVariables(){
         
-        
-        
-        Aircraft aircraft = app.getAircraft();
         aircraft.setAltitude(altitude);
         aircraft.setSpeed(160);
         aircraft.setEngineSetting(100);
@@ -127,6 +126,13 @@ public class GuiAppState extends AbstractAppState {
         Spatial aircraftSpatial = aircraft.getSpatial();
         aircraftSpatial.setLocalTranslation(0, altitude, 0);
         
+        updateEngineArea();
+        
+        frontView();
+    }
+
+    
+    public void updateEngineArea(){
         this.engineArea = new EngineArea(aircraft);
         
         float area = engineArea.calculateArea();
@@ -138,12 +144,9 @@ public class GuiAppState extends AbstractAppState {
         
         rootNode.attachChild(rightEngine);
         rootNode.attachChild(leftEngine);
-        
-        frontView();
-        
-        System.out.println(altitude);
     }
     
+        
     public void setAltitude(int fieldAltitude){
         this.altitude = fieldAltitude;
     }

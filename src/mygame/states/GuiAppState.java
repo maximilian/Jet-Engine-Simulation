@@ -128,7 +128,8 @@ public class GuiAppState extends AbstractAppState {
         
         updateEngineArea();
         
-        frontView();
+        // updates the flycams altitude. Todo: disable submit if nothing was changed
+        flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitude,0)));
     }
 
     

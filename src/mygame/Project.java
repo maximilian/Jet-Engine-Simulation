@@ -42,7 +42,7 @@ public class Project extends SimpleApplication {
       
         rootNode.attachChild(loader.getAircraft());
 
-        float engineRadius = calculateArea(2000, 550, 100);
+        float engineRadius = calculateArea(2000, 120, 100);
         
         rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false, 0));       
         rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false, 0));

@@ -87,9 +87,6 @@ public class ResourceLoader {
     
     public void initRightEngineArea(float engineRadius, boolean receivingLittle, int altitude){
         Dome rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
-        
-        
-
         rightEngineArea = new Geometry("Right Engine", rightEngine);
         
         Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -97,11 +94,9 @@ public class ResourceLoader {
         
         // transparent hemisphere
         rightEngineAreaMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-  
-        
-                System.out.println("vector3f is"+rightEngineArea.getLocalTranslation());
+
         rightEngineArea.setMaterial(rightEngineAreaMat);
-        //rightEngineArea.rotate(1.6f, 0, 0);
+
         Quaternion rotation = new Quaternion();
         rotation.fromAngleAxis((float) (FastMath.PI/2), new Vector3f(1,0,0) );
         
@@ -112,9 +107,9 @@ public class ResourceLoader {
     public void initLeftEngineArea(float engineRadius, boolean receivingLittle, int altitude){
         Dome leftEngine;
         if(receivingLittle){
-            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f-altitude), 100, 30, engineRadius, false);
+            leftEngine = new Dome(new Vector3f(49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
         } else{
-            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 2, 30, engineRadius, false);
+            leftEngine = new Dome(new Vector3f(49f, 51f,-15.5f-altitude), 2, 30, engineRadius, false);
         }
         leftEngineArea = new Geometry("Left Engine", leftEngine);
         
@@ -125,7 +120,10 @@ public class ResourceLoader {
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         
         leftEngineArea.setMaterial(area_mat);
-        leftEngineArea.rotate(1.6f, 0, 0);
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis((float) (FastMath.PI/2), new Vector3f(1,0,0) );
+        
+        leftEngineArea.rotate(rotation);
     }
     
     public void initTerrain(){

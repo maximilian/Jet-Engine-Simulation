@@ -122,7 +122,7 @@ public class GuiAppState extends AbstractAppState {
         
         aircraft.setLocalTranslation(0, altitude, 0);
         
-        float engineArea = app.calculateArea(altitude, 160, 100);
+        float engineArea = app.calculateArea(altitude, 20, 100);
         Spatial leftEngine = loader.getLeftEngineArea(engineArea, true, true, altitude);
         Spatial rightEngine = loader.getRightEngineArea(engineArea, true, true, altitude);
         

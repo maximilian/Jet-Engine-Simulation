@@ -29,6 +29,7 @@ public class EngineArea {
     
     private float altitude;
     private float speed;
+    private float engineSetting;
     
     private boolean receivingLittle;
     private boolean receivingMuch;
@@ -44,12 +45,31 @@ public class EngineArea {
 
     }
     
+    /*
+     * @param altitude, in feet, of the aircraft
+     * @return 
+    */
+    
     public void setAltitude(float altitude){
         this.altitude = altitude;
     }
     
+    /*
+     * @param speed, in knots, of the aircraft
+     * @return 
+    */
+    
     public void setSpeed(float speed){
         this.speed = speed;
+    }
+    
+    /*
+     * @param engine setting, in percentage, of the aircraft engine
+     * @return 
+    */
+    
+    public void setEngineSetting(float engineSetting){
+        this.engineSetting = engineSetting;
     }
     
     /*
@@ -60,7 +80,7 @@ public class EngineArea {
      * @param engine setting, in percentage, of the aircraft engine
      * @return the radius, in correct jME scale, of the area around the engine
     */
-    public float calculateArea(float engineSetting){
+    public float calculateArea(){
         float correctedEngineFlowRate = getCorrectedMassFlow(altitude, engineFlowRate); 
         
         float engineRadius = engineDiameter / 2;
@@ -83,8 +103,7 @@ public class EngineArea {
             receivingCorrect = true;
             System.out.println("perfect");
         }
-        
-        
+
         float engineAreaRequired = engineNeeds / speedMetres;
         
         float engineRadiusRequired = (float) Math.sqrt((engineAreaRequired / Math.PI));

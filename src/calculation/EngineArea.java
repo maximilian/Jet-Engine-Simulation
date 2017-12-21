@@ -20,13 +20,15 @@ public class EngineArea {
     
     // Diameter of the engine fan blades, meters
     private final float engineDiameter;
-    // Air mass flow rate through the engine
+    // Air mass flow rate through the engine, kg/s
     private final float engineFlowRate;
     
     private float correctedDensity;
     private float correctedPressure;
+    private float correctedTemperature;
     
     private float altitude;
+    private float speed;
     
     private boolean receivingLittle;
     private boolean receivingMuch;
@@ -38,6 +40,16 @@ public class EngineArea {
         this.pressure = (float) 101325;
         
         this.engineDiameter = (float) 2.154;
+        this.engineFlowRate = (float) 548.85;
+
+    }
+    
+    public void setAltitude(float altitude){
+        this.altitude = altitude;
+    }
+    
+    public void setSpeed(float speed){
+        this.speed = speed;
     }
     
     /*
@@ -48,8 +60,8 @@ public class EngineArea {
      * @param engine setting, in percentage, of the aircraft engine
      * @return the radius, in correct jME scale, of the area around the engine
     */
-    public float calculateArea(float altitude, float speed, float engineSetting){
-        float engineFlowRate = getCorrectedMassFlow(altitude, (float) 548.85); // kg/s - needs to be corrected
+    public float calculateArea(float engineSetting){
+        float correctedEngineFlowRate = getCorrectedMassFlow(altitude, engineFlowRate); 
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
@@ -58,7 +70,7 @@ public class EngineArea {
    
         float airDensity = getCorrectedDensity(altitude);
         
-        float engineNeeds = engineFlowRate / airDensity;
+        float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
         
         if (engineReceives < engineNeeds){
@@ -109,7 +121,7 @@ public class EngineArea {
     
     public float getCorrectedPressure(float correctedTemperature){
        
-        float correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
+        correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
         
         return correctedPressure;
     }
@@ -123,11 +135,11 @@ public class EngineArea {
     
     public float getCorrectedDensity(float altitude){
         
-        float correctedTemperature = getCorrectedTemperature(altitude);
-        float correctedPressure = getCorrectedPressure(correctedTemperature);
+        correctedTemperature = getCorrectedTemperature(altitude);
+        correctedPressure = getCorrectedPressure(correctedTemperature);
         
         
-        float correctedDensity = (correctedPressure/(287*correctedTemperature));
+        correctedDensity = (correctedPressure/(287*correctedTemperature));
         
         return correctedDensity;
     }
@@ -142,8 +154,8 @@ public class EngineArea {
     
     
     public float getCorrectedMassFlow(float altitude, float massFlow){
-        float correctedTemperature = getCorrectedTemperature(altitude);
-        float correctedPressure = getCorrectedPressure(correctedTemperature);
+        correctedTemperature = getCorrectedTemperature(altitude);
+        correctedPressure = getCorrectedPressure(correctedTemperature);
         
         float theta = (float) (correctedTemperature/288.15);
         float delta = (float) (correctedPressure/101325);

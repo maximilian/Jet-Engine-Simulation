@@ -68,9 +68,12 @@ public class MyControlScreen implements ScreenController {
         String altitudeString = altitudeField.getRealText();
         int fieldAltitude = Integer.parseInt(altitudeString);
         
-       
+        TextField speedField = screen.findNiftyControl("speedField", TextField.class);  
+        String speedString = speedField.getRealText();
+        int fieldSpeed = Integer.parseInt(speedString);
         
         gui.setAltitude(fieldAltitude);
+        
         
         gui.submitAircraftVariables();      
     }

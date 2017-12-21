@@ -117,10 +117,10 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+altitude, 249.49205f));
      }
     
-    public void submitAircraftVariables(){
+    public void submitAircraftVariables(int speed){
         
         aircraft.setAltitude(altitude);
-        aircraft.setSpeed(160);
+        aircraft.setSpeed(speed);
         aircraft.setEngineSetting(100);
         
         Spatial aircraftSpatial = aircraft.getSpatial();
@@ -150,6 +150,7 @@ public class GuiAppState extends AbstractAppState {
     public void setAltitude(int fieldAltitude){
         this.altitude = fieldAltitude;
     }
+
     
     
 }

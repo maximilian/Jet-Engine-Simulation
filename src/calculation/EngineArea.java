@@ -50,7 +50,7 @@ public class EngineArea {
      * @return 
     */
     
-    public void setAltitude(float altitude){
+    public void setAircraftAltitude(float altitude){
         this.altitude = altitude;
     }
     
@@ -59,7 +59,7 @@ public class EngineArea {
      * @return 
     */
     
-    public void setSpeed(float speed){
+    public void setAircraftSpeed(float speed){
         this.speed = speed;
     }
     
@@ -68,7 +68,7 @@ public class EngineArea {
      * @return 
     */
     
-    public void setEngineSetting(float engineSetting){
+    public void setAircraftEngineSetting(float engineSetting){
         this.engineSetting = engineSetting;
     }
     

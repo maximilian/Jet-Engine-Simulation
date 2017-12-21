@@ -5,6 +5,7 @@
  */
 package mygame.states;
 
+import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
@@ -30,6 +31,7 @@ import mygame.gui.MyControlScreen;
 public class GuiAppState extends AbstractAppState {
     
     private Project app;
+    private EngineArea engineArea;
     
     private NiftyJmeDisplay niftyDisplay;
     private Nifty nifty;
@@ -56,11 +58,12 @@ public class GuiAppState extends AbstractAppState {
         /** Read your XML and initialize your custom ScreenController */
         controlScreen = new MyControlScreen(this);
         
+        
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
         
-        
+        this.engineArea = new EngineArea();
     }
     
     @Override
@@ -113,7 +116,6 @@ public class GuiAppState extends AbstractAppState {
     public void submitVariables(){
         
         Screen screen = nifty.getCurrentScreen();
-
         TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);        
         String altitudeString = altitudeField.getRealText();
         altitude = Integer.parseInt(altitudeString);
@@ -122,9 +124,13 @@ public class GuiAppState extends AbstractAppState {
         
         aircraft.setLocalTranslation(0, altitude, 0);
         
-        float engineArea = app.calculateArea(altitude, 20, 100);
-        Spatial leftEngine = loader.getLeftEngineArea(engineArea, true, true, altitude);
-        Spatial rightEngine = loader.getRightEngineArea(engineArea, true, true, altitude);
+        
+        engineArea.setAircraftAltitude(altitude);
+        engineArea.setAircraftSpeed(160);
+        
+        float area = engineArea.calculateArea();
+        Spatial leftEngine = loader.getLeftEngineArea(area, true, true, altitude);
+        Spatial rightEngine = loader.getRightEngineArea(area, true, true, altitude);
         
         rootNode.detachChildNamed("Right Engine");
         rootNode.detachChildNamed("Left Engine");

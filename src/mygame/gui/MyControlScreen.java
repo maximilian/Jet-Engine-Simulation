@@ -62,6 +62,8 @@ public class MyControlScreen implements ScreenController {
     
     public void submit(){
         gui.submitVariables();
+        
+        
     }
     
 

@@ -1,86 +1,38 @@
-package mygame;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package calculation;
 
-import mygame.states.GuiAppState;
-import com.jme3.app.SimpleApplication;
-import com.jme3.bullet.BulletAppState;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Line;
-
-public class Project extends SimpleApplication {
-    private ResourceLoader loader;
-    private GuiAppState gui;
-     
-    boolean receivingLittle = false;
-    boolean receivingMuch = false;
-    boolean receivingCorrect = false;
-
-    @Override
-    public void simpleInitApp() {
-        
-        axisLines();
-        
-        setDisplayFps(false);
-        setDisplayStatView(false);
-        
-        flyCam.setMoveSpeed(250);
-        flyCam.setDragToRotate(true);
-        
-        loader = new ResourceLoader(assetManager, cam);
-        rootNode.attachChild(loader.getTerrain());
-         
-        gui = new GuiAppState();
-        stateManager.attach(gui);
-        
-        viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
-
-        // need this in any game involving physics
-        BulletAppState bulletAppState = new BulletAppState();
-        stateManager.attach(bulletAppState);
-      
-        rootNode.attachChild(loader.getAircraft());
-
-        float engineRadius = calculateArea(2000, 120, 100);
-        
-        rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false, 0));       
-        rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false, 0));
-       
-        // You must add a light to make the model visible 
-        rootNode.addLight(loader.getSun());
-    }
+/**
+ *
+ * @author max
+ */
+public class EngineArea {
+    // International Standard Atmosphere variables
+    private final float temperature;
+    private final float pressure;
     
-    public void axisLines(){
-             Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
-        Geometry xaxisline = new Geometry("BOOM!", xaxis);
-        
-        Line yaxis = new Line(Vector3f.ZERO, new Vector3f(0, 400f, 0));
-        Geometry yaxisline = new Geometry("BOOM!", yaxis);
-        
-        Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
-        Geometry zaxisline = new Geometry("BOOM!", zaxis);
-                
-        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", ColorRGBA.Red);
-        
-         Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        yarea_mat.setColor("Color", ColorRGBA.Green);
-        
-        Material zarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        zarea_mat.setColor("Color", ColorRGBA.Blue);
-              
-        xaxisline.setMaterial(area_mat);
-        yaxisline.setMaterial(yarea_mat);
-        zaxisline.setMaterial(zarea_mat);
-        
-        rootNode.attachChild(xaxisline);
-        rootNode.attachChild(yaxisline);
-        rootNode.attachChild(zaxisline);   
-    }
-
     
-     /*
+    private float correctedDensity;
+    private float correctedPressure;
+    
+    private float altitude;
+    
+    private boolean receivingLittle;
+    private boolean receivingMuch;
+    private boolean receivingCorrect;
+    
+    
+    public EngineArea(){
+        this.temperature = (float) 288.15;
+        this.pressure = (float) 101325;
+        
+        
+    
+    }
+    /*
      * Returns the radius of the area around the engine
      *
      * @param altitude, in feet, of the aircraft
@@ -125,7 +77,7 @@ public class Project extends SimpleApplication {
        return correctScale;   
     }
     
-    /*
+     /*
      * Returns the corrected temperature which can then be used to calculate
      * the corrected pressure and corrected density
      *
@@ -195,8 +147,4 @@ public class Project extends SimpleApplication {
         return correctedFlow;
     }
     
-    public ResourceLoader getResourceLoader(){
-        
-        return loader;
-    }
 }

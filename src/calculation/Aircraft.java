@@ -16,7 +16,11 @@ public class Aircraft {
     private int speed;
     private int engineSetting;
     
-    private Spatial aircraftObject;
+    private Spatial aircraft;
+    
+    public Aircraft(Spatial aircraft){
+        this.aircraft = aircraft;
+    }
     
     
     public int getSpeed(){
@@ -41,5 +45,9 @@ public class Aircraft {
     
     public void setEngineSetting(int engineSetting){
         this.engineSetting = engineSetting;
+    }
+    
+    public Spatial getSpatial(){
+        return this.aircraft;
     }
 }

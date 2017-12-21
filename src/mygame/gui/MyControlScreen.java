@@ -6,6 +6,7 @@
 package mygame.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import mygame.Project;
@@ -29,7 +30,8 @@ public class MyControlScreen implements ScreenController {
     
     @Override
     public void bind(Nifty nifty, Screen screen) {
-        
+        this.nifty = nifty;
+        this.screen = screen;
     }
 
     @Override
@@ -61,11 +63,19 @@ public class MyControlScreen implements ScreenController {
      }
     
     public void submit(){
+        
+        TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);  
+        String altitudeString = altitudeField.getRealText();
+        int fieldAltitude = Integer.parseInt(altitudeString);
+        
+        gui.setAltitude(fieldAltitude);
+        
         gui.submitVariables();
         
         
     }
     
+   
 
     
     

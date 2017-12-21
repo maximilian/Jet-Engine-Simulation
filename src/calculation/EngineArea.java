@@ -27,16 +27,16 @@ public class EngineArea {
     private float correctedPressure;
     private float correctedTemperature;
     
-    private float altitude;
-    private float speed;
-    private float engineSetting;
+    private Aircraft aircraft;
     
     private boolean receivingLittle;
     private boolean receivingMuch;
     private boolean receivingCorrect;
     
     
-    public EngineArea(){
+    public EngineArea(Aircraft aircraft){
+        this.aircraft = aircraft;
+        
         this.temperature = (float) 288.15;
         this.pressure = (float) 101325;
         
@@ -45,32 +45,6 @@ public class EngineArea {
 
     }
     
-    /*
-     * @param altitude, in feet, of the aircraft
-     * @return 
-    */
-    
-    public void setAircraftAltitude(float altitude){
-        this.altitude = altitude;
-    }
-    
-    /*
-     * @param speed, in knots, of the aircraft
-     * @return 
-    */
-    
-    public void setAircraftSpeed(float speed){
-        this.speed = speed;
-    }
-    
-    /*
-     * @param engine setting, in percentage, of the aircraft engine
-     * @return 
-    */
-    
-    public void setAircraftEngineSetting(float engineSetting){
-        this.engineSetting = engineSetting;
-    }
     
     /*
      * Returns the radius of the area around the engine
@@ -81,14 +55,14 @@ public class EngineArea {
      * @return the radius, in correct jME scale, of the area around the engine
     */
     public float calculateArea(){
-        float correctedEngineFlowRate = getCorrectedMassFlow(altitude, engineFlowRate); 
+        float correctedEngineFlowRate = getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate); 
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         
-        float speedMetres = (float) (0.514444444 * speed); // convert from knots to metres
+        float speedMetres = (float) (0.514444444 * aircraft.getSpeed()); // convert from knots to metres
    
-        float airDensity = getCorrectedDensity(altitude);
+        float airDensity = getCorrectedDensity(aircraft.getAltitude());
         
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;

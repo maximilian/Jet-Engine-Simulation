@@ -1,5 +1,6 @@
 package mygame;
 
+import calculation.Aircraft;
 import mygame.states.GuiAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
@@ -7,11 +8,14 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Line;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
     private GuiAppState gui;
+    
+    private Aircraft aircraftObject;
      
     boolean receivingLittle = false;
     boolean receivingMuch = false;
@@ -41,6 +45,9 @@ public class Project extends SimpleApplication {
         stateManager.attach(bulletAppState);
       
         rootNode.attachChild(loader.getAircraft());
+        aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
+        
+        
 
         float engineRadius = calculateArea(2000, 120, 100);
         
@@ -198,5 +205,10 @@ public class Project extends SimpleApplication {
     public ResourceLoader getResourceLoader(){
         
         return loader;
+    }
+    
+    public Aircraft getAircraft(){
+        
+        return aircraftObject;
     }
 }

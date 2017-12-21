@@ -5,6 +5,7 @@
  */
 package mygame.states;
 
+import calculation.Aircraft;
 import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -63,7 +64,7 @@ public class GuiAppState extends AbstractAppState {
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
         
-        this.engineArea = new EngineArea();
+        
     }
     
     @Override
@@ -115,18 +116,17 @@ public class GuiAppState extends AbstractAppState {
     
     public void submitVariables(){
         
-        Screen screen = nifty.getCurrentScreen();
-        TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);        
-        String altitudeString = altitudeField.getRealText();
-        altitude = Integer.parseInt(altitudeString);
-        
-        Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
-        
-        aircraft.setLocalTranslation(0, altitude, 0);
         
         
-        engineArea.setAircraftAltitude(altitude);
-        engineArea.setAircraftSpeed(160);
+        Aircraft aircraft = app.getAircraft();
+        aircraft.setAltitude(altitude);
+        aircraft.setSpeed(160);
+        aircraft.setEngineSetting(100);
+        
+        Spatial aircraftSpatial = aircraft.getSpatial();
+        aircraftSpatial.setLocalTranslation(0, altitude, 0);
+        
+        this.engineArea = new EngineArea(aircraft);
         
         float area = engineArea.calculateArea();
         Spatial leftEngine = loader.getLeftEngineArea(area, true, true, altitude);
@@ -140,6 +140,10 @@ public class GuiAppState extends AbstractAppState {
         
         aboveView();
         System.out.println(altitude);
+    }
+    
+    public void setAltitude(int fieldAltitude){
+        this.altitude = fieldAltitude;
     }
     
     

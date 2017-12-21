@@ -10,6 +10,8 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
@@ -62,16 +64,16 @@ public class ResourceLoader {
         return aircraft;
     }
     
-    public Spatial getLeftEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton){
+    public Spatial getLeftEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton, int altitude){
         if (leftEngineArea == null || submitButton){
-            initLeftEngineArea(engineRadius, receivingLittle);       
+            initLeftEngineArea(engineRadius, receivingLittle, altitude);       
         }
         return leftEngineArea;
     }
     
-    public Spatial getRightEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton){
+    public Spatial getRightEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton, int altitude){
         if (rightEngineArea == null || submitButton){
-            initRightEngineArea(engineRadius, receivingLittle);    
+            initRightEngineArea(engineRadius, receivingLittle, altitude);    
         }
         return rightEngineArea;
     }
@@ -83,9 +85,11 @@ public class ResourceLoader {
         aircraft.scale(0.3f, 0.3f, 0.3f); 
     }
     
-    public void initRightEngineArea(float engineRadius, boolean receivingLittle){
-        Dome rightEngine = new Dome(new Vector3f(-49f, 50f,-16.5f), 100, 30, engineRadius, false);
+    public void initRightEngineArea(float engineRadius, boolean receivingLittle, int altitude){
+        Dome rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
         
+        
+
         rightEngineArea = new Geometry("Right Engine", rightEngine);
         
         Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -93,15 +97,22 @@ public class ResourceLoader {
         
         // transparent hemisphere
         rightEngineAreaMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+  
         
+                System.out.println("vector3f is"+rightEngineArea.getLocalTranslation());
         rightEngineArea.setMaterial(rightEngineAreaMat);
-        rightEngineArea.rotate(1.6f, 0, 0);
+        //rightEngineArea.rotate(1.6f, 0, 0);
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis((float) (FastMath.PI/2), new Vector3f(1,0,0) );
+        
+        rightEngineArea.rotate(rotation);
+        
     }
     
-    public void initLeftEngineArea(float engineRadius, boolean receivingLittle){
+    public void initLeftEngineArea(float engineRadius, boolean receivingLittle, int altitude){
         Dome leftEngine;
         if(receivingLittle){
-            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 100, 30, engineRadius, false);
+            leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f-altitude), 100, 30, engineRadius, false);
         } else{
             leftEngine = new Dome(new Vector3f(49f, 50f,-16.5f), 2, 30, engineRadius, false);
         }

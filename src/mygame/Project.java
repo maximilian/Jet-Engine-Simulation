@@ -42,10 +42,10 @@ public class Project extends SimpleApplication {
       
         rootNode.attachChild(loader.getAircraft());
 
-        float engineRadius = calculateArea(2000, 140, 100);
+        float engineRadius = calculateArea(2000, 550, 100);
         
-        rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false));       
-        rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false));
+        rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false, 0));       
+        rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false, 0));
        
         // You must add a light to make the model visible 
         rootNode.addLight(loader.getSun());

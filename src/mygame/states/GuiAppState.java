@@ -13,11 +13,13 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import mygame.Project;
+import mygame.ResourceLoader;
 import mygame.gui.MyControlScreen;
 
 /**
@@ -34,6 +36,8 @@ public class GuiAppState extends AbstractAppState {
     
     private MyControlScreen controlScreen;
     private Camera flyCam;
+    private ResourceLoader loader;
+    private Node rootNode;
     
     private int altitude;
     
@@ -43,13 +47,14 @@ public class GuiAppState extends AbstractAppState {
         
         this.app = (Project) app;
         this.flyCam = this.app.getCamera();
+        this.loader = this.app.getResourceLoader();
+        this.rootNode = this.app.getRootNode();
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
         
         /** Read your XML and initialize your custom ScreenController */
         controlScreen = new MyControlScreen(this);
-        
         
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
@@ -61,6 +66,7 @@ public class GuiAppState extends AbstractAppState {
     @Override
     public void update(float tpf) {
         //TODO: implement behavior during runtime
+        
     }
     
     @Override
@@ -112,9 +118,21 @@ public class GuiAppState extends AbstractAppState {
         String altitudeString = altitudeField.getRealText();
         altitude = Integer.parseInt(altitudeString);
         
-         Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
+        Spatial aircraft = this.app.getRootNode().getChild("3d-model-objnode");
         
         aircraft.setLocalTranslation(0, altitude, 0);
+        
+        float engineArea = app.calculateArea(altitude, 160, 100);
+        Spatial leftEngine = loader.getLeftEngineArea(engineArea, true, true, altitude);
+        Spatial rightEngine = loader.getRightEngineArea(engineArea, true, true, altitude);
+        
+        rootNode.detachChildNamed("Right Engine");
+        rootNode.detachChildNamed("Left Engine");
+        
+        rootNode.attachChild(rightEngine);
+        rootNode.attachChild(leftEngine);
+        
+        aboveView();
         System.out.println(altitude);
     }
     

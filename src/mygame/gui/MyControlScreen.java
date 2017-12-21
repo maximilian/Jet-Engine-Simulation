@@ -12,7 +12,7 @@ import mygame.Project;
 import mygame.states.GuiAppState;
 
 /**
- * Manages the main GUI
+ * Communicates with the Gui app state.
  * 
  * @author max
  */

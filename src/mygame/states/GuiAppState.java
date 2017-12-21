@@ -18,8 +18,6 @@ import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.TextField;
-import de.lessvoid.nifty.screen.Screen;
 import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.gui.MyControlScreen;
@@ -43,6 +41,7 @@ public class GuiAppState extends AbstractAppState {
     private Node rootNode;
     
     private int altitude;
+    
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -82,11 +81,13 @@ public class GuiAppState extends AbstractAppState {
     }
 
     public void frontView() {
+        
          Quaternion rotation = new Quaternion();
         // rotate 170 degrees around y axis
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+altitude, 337.568f ) );
+
      }
 
     
@@ -114,7 +115,7 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+altitude, 249.49205f));
      }
     
-    public void submitVariables(){
+    public void submitAircraftVariables(){
         
         
         
@@ -129,8 +130,8 @@ public class GuiAppState extends AbstractAppState {
         this.engineArea = new EngineArea(aircraft);
         
         float area = engineArea.calculateArea();
-        Spatial leftEngine = loader.getLeftEngineArea(area, true, true, altitude);
-        Spatial rightEngine = loader.getRightEngineArea(area, true, true, altitude);
+        Spatial leftEngine = loader.getLeftEngineArea(area, engineArea.getReceivingLittle(), true, altitude);
+        Spatial rightEngine = loader.getRightEngineArea(area, engineArea.getReceivingLittle(), true, altitude);
         
         rootNode.detachChildNamed("Right Engine");
         rootNode.detachChildNamed("Left Engine");
@@ -138,7 +139,8 @@ public class GuiAppState extends AbstractAppState {
         rootNode.attachChild(rightEngine);
         rootNode.attachChild(leftEngine);
         
-        aboveView();
+        frontView();
+        
         System.out.println(altitude);
     }
     

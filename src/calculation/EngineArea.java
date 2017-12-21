@@ -158,4 +158,12 @@ public class EngineArea {
         return correctedFlow;
     }
     
+    public boolean getReceivingLittle(){
+        return receivingLittle;
+    }
+    
+    public boolean getReceivingMuch(){
+        return receivingMuch;
+    }
+    
 }

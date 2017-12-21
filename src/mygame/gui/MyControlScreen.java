@@ -70,15 +70,9 @@ public class MyControlScreen implements ScreenController {
         
         gui.setAltitude(fieldAltitude);
         
-        gui.submitVariables();
-        
-        
+        gui.submitAircraftVariables();      
     }
-    
-   
-
-    
-    
+  
     public void quitGame() {
         System.out.println("quit pls");
         app.stop();

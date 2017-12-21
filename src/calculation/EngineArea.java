@@ -14,6 +14,14 @@ public class EngineArea {
     private final float temperature;
     private final float pressure;
     
+    /*
+     * Engine information 
+    */
+    
+    // Diameter of the engine fan blades, meters
+    private final float engineDiameter;
+    // Air mass flow rate through the engine
+    private final float engineFlowRate;
     
     private float correctedDensity;
     private float correctedPressure;
@@ -29,9 +37,9 @@ public class EngineArea {
         this.temperature = (float) 288.15;
         this.pressure = (float) 101325;
         
-        
-    
+        this.engineDiameter = (float) 2.154;
     }
+    
     /*
      * Returns the radius of the area around the engine
      *
@@ -42,8 +50,6 @@ public class EngineArea {
     */
     public float calculateArea(float altitude, float speed, float engineSetting){
         float engineFlowRate = getCorrectedMassFlow(altitude, (float) 548.85); // kg/s - needs to be corrected
-        
-        float engineDiameter = (float) 2.154; // m
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));

@@ -48,11 +48,8 @@ public class Project extends SimpleApplication {
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
         
         
-
-        float engineRadius = calculateArea(2000, 120, 100);
-        
-        rootNode.attachChild(loader.getLeftEngineArea(engineRadius, receivingLittle, false, 0));       
-        rootNode.attachChild(loader.getRightEngineArea(engineRadius, receivingLittle, false, 0));
+        rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
+        rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
        
         // You must add a light to make the model visible 
         rootNode.addLight(loader.getSun());
@@ -86,121 +83,7 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(zaxisline);   
     }
 
-    
-     /*
-     * Returns the radius of the area around the engine
-     *
-     * @param altitude, in feet, of the aircraft
-     * @param speed, in knots, of the aircraft
-     * @param engine setting, in percentage, of the aircraft engine
-     * @return the radius, in correct jME scale, of the area around the engine
-    */
-    public float calculateArea(float altitude, float speed, float engineSetting){
-        float engineFlowRate = getCorrectedMassFlow(altitude, (float) 548.85); // kg/s - needs to be corrected
-        
-        float engineDiameter = (float) 2.154; // m
-        
-        float engineRadius = engineDiameter / 2;
-        float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
-        
-        float speedMetres = (float) (0.514444444 * speed); // convert from knots to metres
    
-        float airDensity = getCorrectedDensity(altitude);
-        
-        float engineNeeds = engineFlowRate / airDensity;
-        float engineReceives = engineArea * speedMetres;
-        
-        if (engineReceives < engineNeeds){
-            receivingLittle = true;
-            System.out.println("too little");
-        } else if(engineReceives > engineNeeds){
-            receivingMuch = true;
-            System.out.println("too much");
-        } else {
-            receivingCorrect = true;
-            System.out.println("perfect");
-        }
-        
-        
-        float engineAreaRequired = engineNeeds / speedMetres;
-        
-        float engineRadiusRequired = (float) Math.sqrt((engineAreaRequired / Math.PI));
-        
-        float correctScale = (float) (engineRadiusRequired * 12.1943);
-        
-        System.out.println("Radius = " + engineRadiusRequired );
-       return correctScale;   
-    }
-    
-    /*
-     * Returns the corrected temperature which can then be used to calculate
-     * the corrected pressure and corrected density
-     *
-     * @param altitude, in feet, of the aircraft
-     * @return the corrected temperature, in Kelvin
-    */
-    
-    public float getCorrectedTemperature(float altitude){
-        float meters = (float) (altitude / 3.2808);
-        System.out.println("meters:" + meters);
-        float correctedKelvin = (float) (288.15 - 0.0065*(meters));
-        
-        return correctedKelvin;
-    }
-    
-    /*
-     * Returns the corrected pressure which can then be used to calculate
-     * the corrected density, and therefore the corrected air mass flow
-     *
-     * @param the correct temperature, in Kelvin
-     * @return the corrected pressure, in Pascals
-    */
-    
-    public float getCorrectedPressure(float correctedTemperature){
-       
-        float correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
-        
-        return correctedPressure;
-    }
-    
-    /*
-     * Returns the corrected density which can then be used to calculate
-     *
-     * @param the altitude, in feet
-     * @return the corrected density, in kg/m^3
-    */
-    
-    public float getCorrectedDensity(float altitude){
-        
-        float correctedTemperature = getCorrectedTemperature(altitude);
-        float correctedPressure = getCorrectedPressure(correctedTemperature);
-        
-        
-        float correctedDensity = (correctedPressure/(287*correctedTemperature));
-        
-        return correctedDensity;
-    }
-    
-    /*
-     * Returns the corrected engine mass flow
-     *
-     * @param the altitude, in feet
-     * @param the mass flow, in feet
-     * @return the corrected density, in kg/m^3
-    */
-    
-    
-    public float getCorrectedMassFlow(float altitude, float massFlow){
-        float correctedTemperature = getCorrectedTemperature(altitude);
-        float correctedPressure = getCorrectedPressure(correctedTemperature);
-        
-        float theta = (float) (correctedTemperature/288.15);
-        float delta = (float) (correctedPressure/101325);
-        
-        float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
-            
-        return correctedFlow;
-    }
     
     public ResourceLoader getResourceLoader(){
         

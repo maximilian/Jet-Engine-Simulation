@@ -13,7 +13,9 @@
         <panel id="panel_bottom_left" height="100%" width="70%" valign="center" childLayout="vertical">
            <panel id="altitudeTextField" height="33.33%" width="33.33%" childLayout="horizontal">
                 <control name="label" width="40%" text="Altitude" valign="center" />
-                <control name="textfield" text="2000" width="60%" id="altitudeField" align="center" valign="center" />
+                <control name="textfield" text="2000" width="60%" id="altitudeField" align="center" valign="center">
+                    <interact onClick="enableButton()" />
+                </control>
             </panel>
             
             <panel id="speedTextField" height="33.33%" width="33.33%" childLayout="horizontal">

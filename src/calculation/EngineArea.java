@@ -47,7 +47,7 @@ public class EngineArea {
     
     
     /*
-     * Returns the radius of the area around the engine
+     * Returns the radius of the area around the engine. Note: maximum altitude 36,089 ft.
      *
      * @param altitude, in feet, of the aircraft
      * @param speed, in knots, of the aircraft

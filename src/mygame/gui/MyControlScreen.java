@@ -89,6 +89,11 @@ public class MyControlScreen implements ScreenController {
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
         submitButton.enable();
         
+        // validation
+        if(Integer.parseInt(event.getText()) < 0){
+            event.getTextFieldControl().setText("0");
+        }
+        
     }
   
     public void quitGame() {

@@ -82,18 +82,12 @@ public class MyControlScreen implements ScreenController {
         int fieldSpeed = Integer.parseInt(speedString);
         
         gui.setAltitude(fieldAltitude);
-       
         gui.submitAircraftVariables(fieldSpeed);      
     }
     
-    @NiftyEventSubscriber(id="altitudeField")
+    @NiftyEventSubscriber(pattern=".*Field")
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
-        System.out.println(event.getText());
-    }
-
-    public void enableButton(){
-        Element button = screen.findElementById("submitButton");
-        button.enable();
+        submitButton.enable();
         
     }
   

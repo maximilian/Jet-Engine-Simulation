@@ -91,20 +91,22 @@ public class MyControlScreen implements ScreenController {
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
                submitButton.enable();
         
-        // validation
+        // validation, ensure value entered is numeric
         int parsedInt;
         try{
             parsedInt = Integer.parseInt(event.getText());
             
              if(parsedInt < 0){
-                event.getTextFieldControl().setText("0");
+                event.getTextFieldControl().setText(Integer.toString(oldValue));
+             } else{
+                 oldValue = parsedInt;
              }
              
-             oldValue = parsedInt;
+             
         
         } catch(NumberFormatException e){
             
-             event.getTextFieldControl().setText("0");
+             event.getTextFieldControl().setText(Integer.toString(oldValue));
         }
         
     }

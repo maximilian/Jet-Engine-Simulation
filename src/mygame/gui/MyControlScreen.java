@@ -85,13 +85,26 @@ public class MyControlScreen implements ScreenController {
         gui.submitAircraftVariables(fieldSpeed);      
     }
     
+    int oldValue = 0;
+    
     @NiftyEventSubscriber(pattern=".*Field")
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
-        submitButton.enable();
+               submitButton.enable();
         
         // validation
-        if(Integer.parseInt(event.getText()) < 0){
-            event.getTextFieldControl().setText("0");
+        int parsedInt;
+        try{
+            parsedInt = Integer.parseInt(event.getText());
+            
+             if(parsedInt < 0){
+                event.getTextFieldControl().setText("0");
+             }
+             
+             oldValue = parsedInt;
+        
+        } catch(NumberFormatException e){
+            
+             event.getTextFieldControl().setText("0");
         }
         
     }

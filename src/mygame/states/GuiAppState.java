@@ -42,6 +42,7 @@ public class GuiAppState extends AbstractAppState {
     private Node rootNode;
     
     private int altitude;
+    private int altitudeDisplacement;
     
     
     @Override
@@ -127,9 +128,9 @@ public class GuiAppState extends AbstractAppState {
         aircraftSpatial.setLocalTranslation(0, altitude, 0);
         
         updateEngineArea();
-        
+        System.out.println("displaced +" + altitudeDisplacement);
         // updates the flycams altitude. Todo: disable submit if nothing was changed
-        flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitude,0)));
+        flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
 
     
@@ -149,6 +150,7 @@ public class GuiAppState extends AbstractAppState {
     
         
     public void setAltitude(int fieldAltitude){
+        this.altitudeDisplacement = fieldAltitude - altitude;
         this.altitude = fieldAltitude;
     }
 

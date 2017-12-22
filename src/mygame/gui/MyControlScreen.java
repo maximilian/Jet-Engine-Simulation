@@ -6,7 +6,10 @@
 package mygame.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.TextField;
+import de.lessvoid.nifty.controls.TextFieldChangedEvent;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import mygame.Project;
@@ -21,17 +24,22 @@ public class MyControlScreen implements ScreenController {
     Nifty nifty;
     Screen screen;
     private GuiAppState gui;
-    private Project app;      
-    private float altitude;
+    private Project app;    
+    
+    private Element submitButton;
     
     public MyControlScreen(GuiAppState gui){
         this.gui = gui;
+        
+        
     }
     
     @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
+        
+        submitButton = screen.findElementById("submitButton");
     }
 
     @Override
@@ -63,6 +71,7 @@ public class MyControlScreen implements ScreenController {
      }
     
     public void submit(){
+        submitButton.disable();
         
         TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);  
         String altitudeString = altitudeField.getRealText();
@@ -73,9 +82,13 @@ public class MyControlScreen implements ScreenController {
         int fieldSpeed = Integer.parseInt(speedString);
         
         gui.setAltitude(fieldAltitude);
-        
-        
         gui.submitAircraftVariables(fieldSpeed);      
+    }
+    
+    @NiftyEventSubscriber(pattern=".*Field")
+    public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
+        submitButton.enable();
+        
     }
   
     public void quitGame() {

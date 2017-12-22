@@ -8,7 +8,6 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Line;
 
 public class Project extends SimpleApplication {
@@ -23,7 +22,6 @@ public class Project extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        
         axisLines();
         
         setDisplayFps(false);
@@ -53,6 +51,8 @@ public class Project extends SimpleApplication {
        
         // You must add a light to make the model visible 
         rootNode.addLight(loader.getSun());
+        
+       
     }
     
     public void axisLines(){

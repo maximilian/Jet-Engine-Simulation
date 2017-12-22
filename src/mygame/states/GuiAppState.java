@@ -54,6 +54,7 @@ public class GuiAppState extends AbstractAppState {
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
+        frontView();
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();

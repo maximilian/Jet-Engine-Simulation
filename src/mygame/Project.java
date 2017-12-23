@@ -29,6 +29,8 @@ public class Project extends SimpleApplication {
         
         flyCam.setMoveSpeed(250);
         flyCam.setDragToRotate(true);
+        cam.setFrustumFar(5000);
+        
         
         loader = new ResourceLoader(assetManager, cam);
         rootNode.attachChild(loader.getTerrain());

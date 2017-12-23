@@ -158,7 +158,7 @@ public class ResourceLoader {
         mat_terrain.setFloat("Tex3Scale", 128f);*/
         
        
-        Texture airport = assetManager.loadTexture("Textures/staticmap.png");
+        Texture airport = assetManager.loadTexture("Textures/staticmap32.png");
         
         mat_terrain.setTexture("ColorMap", airport);
         
@@ -182,13 +182,20 @@ public class ResourceLoader {
          * 3.4) As LOD step scale we supply Vector3f(1,1,1).
          * 3.5) We supply the prepared heightmap itself.
          */
-        int patchSize = 65;
+        int patchSize = 64;
         terrain = new TerrainQuad("my terrain", patchSize, 513, null);
 
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
         terrain.setLocalTranslation(0, 0, 0);
-        terrain.setLocalScale(1f, 1f, 1f);
+        
+        /* This quaternion stores a 45 degree rotation */
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis( FastMath.PI/4 , new Vector3f(0,1,0) );
+        /* The rotation is applied: The object rolls by 180 degrees. */
+        terrain.setLocalRotation( rotation );
+        
+        terrain.setLocalScale(4f, 4f, 4f);
         
 
         /** 5. The LOD (level of detail) depends on were the camera is: */

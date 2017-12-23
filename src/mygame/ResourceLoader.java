@@ -188,7 +188,7 @@ public class ResourceLoader {
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
         terrain.setLocalTranslation(0, 0, 0);
-        terrain.setLocalScale(3f, 3f, 3f);
+        terrain.setLocalScale(1f, 1f, 1f);
         
 
         /** 5. The LOD (level of detail) depends on were the camera is: */

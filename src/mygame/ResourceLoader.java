@@ -130,32 +130,40 @@ public class ResourceLoader {
     
     /** 1. Create terrain material and load four textures into it. */
         Material mat_terrain = new Material(assetManager,
-            "Common/MatDefs/Terrain/Terrain.j3md");
+            "Common/MatDefs/Misc/Unshaded.j3md");
 
-        /** 1.1) Add ALPHA map (for red-blue-green coded splat textures) */
-        mat_terrain.setTexture("Alpha", assetManager.loadTexture(
-                "Textures/Terrain/splat/alphamap.png"));
+        /** 1.1) Add ALPHA map (for red-blue-green coded splat textures) *
+/        mat_terrain.setTexture("Alpha", assetManager.loadTexture(
+                "Textures/Terrain/splat/alphamap.png"));*/
 
-        /** 1.2) Add GRASS texture into the red layer (Tex1). */
+        /** 1.2) Add GRASS texture into the red layer (Tex1). 
         Texture grass = assetManager.loadTexture(
                 "Textures/Terrain/splat/grass.jpg");
         grass.setWrap(Texture.WrapMode.Repeat);
         mat_terrain.setTexture("Tex1", grass);
-        mat_terrain.setFloat("Tex1Scale", 64f);
+        mat_terrain.setFloat("Tex1Scale", 64f);*/
 
-        /** 1.3) Add DIRT texture into the green layer (Tex2) */
+        /** 1.3) Add DIRT texture into the green layer (Tex2) 
         Texture dirt = assetManager.loadTexture(
                 "Textures/Terrain/splat/dirt.jpg");
         dirt.setWrap(Texture.WrapMode.Repeat);
         mat_terrain.setTexture("Tex2", dirt);
-        mat_terrain.setFloat("Tex2Scale", 32f);
+        mat_terrain.setFloat("Tex2Scale", 32f);*/
 
-        /** 1.4) Add ROAD texture into the blue layer (Tex3) */
+        /** 1.4) Add ROAD texture into the blue layer (Tex3) 
         Texture rock = assetManager.loadTexture(
                 "Textures/Terrain/splat/road.jpg");
         rock.setWrap(Texture.WrapMode.Repeat);
         mat_terrain.setTexture("Tex3", rock);
-        mat_terrain.setFloat("Tex3Scale", 128f);
+        mat_terrain.setFloat("Tex3Scale", 128f);*/
+        
+       
+        Texture airport = assetManager.loadTexture("Textures/staticmap32.png");
+        
+        mat_terrain.setTexture("ColorMap", airport);
+        
+        
+            
           
             /** 2. Create the height map */
         /*     
@@ -174,13 +182,21 @@ public class ResourceLoader {
          * 3.4) As LOD step scale we supply Vector3f(1,1,1).
          * 3.5) We supply the prepared heightmap itself.
          */
-        int patchSize = 65;
+        int patchSize = 64;
         terrain = new TerrainQuad("my terrain", patchSize, 513, null);
 
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
         terrain.setLocalTranslation(0, 0, 0);
-        terrain.setLocalScale(2f, 1f, 2f);
+        
+        /* This quaternion stores a 45 degree rotation */
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis( FastMath.PI/4 , new Vector3f(0,1,0) );
+        /* The rotation is applied: The object rolls by 180 degrees. */
+        terrain.setLocalRotation( rotation );
+        
+        terrain.setLocalScale(4f, 4f, 4f);
+        
 
         /** 5. The LOD (level of detail) depends on were the camera is: */
         TerrainLodControl control = new TerrainLodControl(terrain, terrainLodCamera);

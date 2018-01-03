@@ -51,7 +51,7 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
         rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
        
-        // You must add a light to make the model visible 
+        // add a light to make the model visible 
         rootNode.addLight(loader.getSun());
         
        

@@ -158,6 +158,10 @@ public class GuiAppState extends AbstractAppState {
         this.altitudeDisplacement = fieldAltitude - altitude;
         this.altitude = fieldAltitude;
     }
+    
+    public EngineArea getEngineArea(){
+        return engineArea;
+    }
 
     
 }

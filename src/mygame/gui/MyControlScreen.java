@@ -13,6 +13,7 @@ import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
+import java.text.DecimalFormat;
 import mygame.Project;
 import mygame.states.GuiAppState;
 
@@ -91,8 +92,13 @@ public class MyControlScreen implements ScreenController {
         
     public void updateRadius(){
         Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 
+        System.out.println("brrr"+gui.getEngineArea().getEngineRadiusReal());
         
-        radiusLabel.setText("3");
+        DecimalFormat df = new DecimalFormat("##.##");
+        String roundedRadius = df.format(gui.getEngineArea().getEngineRadiusReal());
+        System.out.println("sting version"+roundedRadius);
+        radiusLabel.setText(roundedRadius + " metres");
+        
         
        
     

@@ -33,6 +33,9 @@ public class EngineArea {
     private boolean receivingMuch;
     private boolean receivingCorrect;
     
+    private float engineRadiusReal;
+    private float engineRadiusScaled;
+    
     
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
@@ -80,11 +83,12 @@ public class EngineArea {
 
         float engineAreaRequired = engineNeeds / speedMetres;
         
-        float engineRadiusRequired = (float) Math.sqrt((engineAreaRequired / Math.PI));
+        engineRadiusReal = (float) Math.sqrt((engineAreaRequired / Math.PI));
         
-        float correctScale = (float) (engineRadiusRequired * 12.1943);
         
-        System.out.println("Radius = " + engineRadiusRequired );
+        float correctScale = (float) (engineRadiusReal * 12.1943);
+        
+        System.out.println("Radius = " + engineRadiusReal );
        return correctScale;   
     }
     
@@ -164,6 +168,10 @@ public class EngineArea {
     
     public boolean getReceivingMuch(){
         return receivingMuch;
+    }
+    
+    public float getEngineRadiusReal(){
+     return engineRadiusReal;
     }
     
 }

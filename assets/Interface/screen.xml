@@ -10,7 +10,7 @@
       </panel>
 
       <panel backgroundColor="#88f8" id="panel_bottom" height="25%" width="100%" align="center" childLayout="horizontal" >
-        <panel id="panel_bottom_left" height="100%" width="50%" valign="center" childLayout="vertical">
+        <panel id="panel_bottom_left" height="100%" width="40%" valign="center" childLayout="vertical">
            <panel id="altitudeTextField" height="33.33%" width="33.33%" childLayout="horizontal">
                 <control name="label" width="40%" text="Altitude" valign="center" />
                 <control name="textfield" text="0" width="60%" id="altitudeField" align="center" valign="center" />
@@ -27,7 +27,7 @@
             </panel>
         </panel>
         
-        <panel id="panel_bottom_mid" backgroundColor="#777" height="100%" width="20%" valign="center" childLayout="vertical">
+        <panel id="panel_bottom_mid" backgroundColor="#777" height="100%" width="30%" valign="center" childLayout="vertical">
              <panel id="radiusTextLabel" height="33.33%" width="100%" childLayout="horizontal">
                 <control name="label" width="40%" text="Radius" valign="center" />
                 <control name="label" width="40%" id="radiusLabel" text="5.5m" valign="center" />

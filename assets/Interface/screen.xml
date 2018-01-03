@@ -27,27 +27,27 @@
             </panel>
         </panel>
         
-        <panel id="panel_bottom_mid" backgroundColor="#777" height="100%" width="30%" valign="center" childLayout="vertical">
+        <panel id="panel_bottom_mid" height="100%" width="30%" valign="center" childLayout="vertical">
               <control name="label" width="40%" text="Aircraft" valign="center" />
               
             <panel id="acType"  width="100%" childLayout="horizontal">
-                <control name="label" width="20%" text="Type" valign="center" />
-                <control name="label" width="80%" id="acTypeLabel" text="Boeing 757-200" valign="center" />
+                <control name="label" width="40%" text="Type" valign="center" />
+                <control name="label" width="60%" id="acTypeLabel" text="Boeing 757-200" valign="center" />
             </panel> 
             
             <panel id="engineType" width="100%" childLayout="horizontal">
-                <control name="label" width="20%" text="Engine" valign="center" />
-                <control name="label" width="80%" id="engineTypeLabel" text="PW2037" valign="center" />
+                <control name="label" width="40%" text="Engine" valign="center" />
+                <control name="label" width="60%" id="engineTypeLabel" text="PW2037" valign="center" />
             </panel> 
             
             <panel id="fanRadius" width="100%" childLayout="horizontal">
-                <control name="label" width="20%" text="Engine" valign="center" />
-                <control name="label" width="80%" id="fanRadiusLabel" text="" valign="center" />
+                <control name="label" width="40%" text="Fan Radius" valign="center" />
+                <control name="label" width="60%" id="fanRadiusLabel" text="" valign="center" />
             </panel> 
             
             <panel id="radiusText" width="100%" childLayout="horizontal">
-                <control name="label" width="20%" text="Radius" valign="center" />
-                <control name="label" width="80%" id="radiusLabel" text="0 metres" valign="center" />
+                <control name="label" width="40%" text="Area Radius" valign="center" />
+                <control name="label" width="60%" id="radiusLabel" text="0 metres" valign="center" />
             </panel>
             
         </panel>

@@ -15,11 +15,14 @@ public class Aircraft {
     private int altitude;
     private int speed;
     private int engineSetting;
+    private float engineDiameter;
     
     private Spatial aircraft;
     
     public Aircraft(Spatial aircraft){
         this.aircraft = aircraft;
+        
+        this.engineDiameter = (float) 2.154;
     }
     
     
@@ -49,5 +52,9 @@ public class Aircraft {
     
     public Spatial getSpatial(){
         return this.aircraft;
+    }
+
+    public float getEngineDiameter() {
+        return this.engineDiameter;
     }
 }

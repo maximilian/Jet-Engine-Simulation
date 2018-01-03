@@ -43,7 +43,8 @@ public class EngineArea {
         this.temperature = (float) 288.15;
         this.pressure = (float) 101325;
         
-        this.engineDiameter = (float) 2.154;
+        this.engineDiameter = aircraft.getEngineDiameter();
+        
         this.engineFlowRate = (float) 548.85;
 
     }

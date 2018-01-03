@@ -162,6 +162,9 @@ public class GuiAppState extends AbstractAppState {
     public EngineArea getEngineArea(){
         return engineArea;
     }
-
+    
+    public Aircraft getAircraft(){
+        return aircraft;
+    }
     
 }

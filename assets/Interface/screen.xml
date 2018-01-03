@@ -42,7 +42,7 @@
             
             <panel id="fanRadius" width="100%" childLayout="horizontal">
                 <control name="label" width="20%" text="Engine" valign="center" />
-                <control name="label" width="80%" id="fanRadius" text="" valign="center" />
+                <control name="label" width="80%" id="fanRadiusLabel" text="" valign="center" />
             </panel> 
             
             <panel id="radiusText" width="100%" childLayout="horizontal">

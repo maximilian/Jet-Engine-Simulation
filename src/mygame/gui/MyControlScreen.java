@@ -7,6 +7,7 @@ package mygame.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -82,7 +83,19 @@ public class MyControlScreen implements ScreenController {
         int fieldSpeed = Integer.parseInt(speedString);
         
         gui.setAltitude(fieldAltitude);
-        gui.submitAircraftVariables(fieldSpeed);      
+        gui.submitAircraftVariables(fieldSpeed);   
+        
+        updateRadius();
+    }
+    
+        
+    public void updateRadius(){
+        Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 
+        
+        radiusLabel.setText("3");
+        
+       
+    
     }
     
     int oldValue = 0;

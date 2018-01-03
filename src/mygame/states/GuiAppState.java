@@ -54,7 +54,12 @@ public class GuiAppState extends AbstractAppState {
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
+        
+        // Camera view on load
         frontView();
+        
+        // Initial Speed
+        submitAircraftVariables(160);
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
@@ -152,6 +157,7 @@ public class GuiAppState extends AbstractAppState {
     public void setAltitude(int fieldAltitude){
         this.altitudeDisplacement = fieldAltitude - altitude;
         this.altitude = fieldAltitude;
-    }  
+    }
+
     
 }

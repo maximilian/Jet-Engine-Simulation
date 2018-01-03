@@ -13,7 +13,6 @@ import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.tools.Color;
 import java.text.DecimalFormat;
 import mygame.Project;
 import mygame.states.GuiAppState;
@@ -112,7 +111,7 @@ public class MyControlScreen implements ScreenController {
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
                submitButton.enable();
         
-        // validation, ensure value entered is numeric
+        // validation, ensure value entered is numeric and valid
         int parsedInt;
         try{
             parsedInt = Integer.parseInt(event.getText());
@@ -126,7 +125,7 @@ public class MyControlScreen implements ScreenController {
              
         
         } catch(NumberFormatException e){
-            
+             
              event.getTextFieldControl().setText(Integer.toString(oldValue));
         }
         

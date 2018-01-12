@@ -36,8 +36,8 @@
               <control name="label" width="40%" text="Aircraft" valign="center" />
               
             <panel id="acType"  width="100%" childLayout="horizontal">
-                <control name="label" width="40%" text="Type" valign="center" />
-                <control name="label" width="60%" id="acTypeLabel" text="Boeing 757-200" valign="center" />
+                <control name="label" width="60%" text="Danger area" valign="center" />
+                <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
             </panel> 
             
             <panel id="engineType" width="100%" childLayout="horizontal">

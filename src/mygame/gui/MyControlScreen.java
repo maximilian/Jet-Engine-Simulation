@@ -7,6 +7,8 @@ package mygame.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.CheckBox;
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
@@ -127,9 +129,18 @@ public class MyControlScreen implements ScreenController {
         } catch(NumberFormatException e){
              
              event.getTextFieldControl().setText(Integer.toString(oldValue));
-        }
-        
+        } 
     }
+    
+    @NiftyEventSubscriber(id="forwardEngineAreaToggle")
+    public void CheckBoxStateChangedEvent(final String id, final CheckBoxStateChangedEvent event){
+        if(event.getCheckBox().isChecked()) {
+            gui.showForwardArea();
+        } else {
+            gui.hideForwardArea();
+        }
+    }
+    
   
     public void quitGame() {
         System.out.println("quit pls");

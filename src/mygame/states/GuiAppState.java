@@ -48,6 +48,8 @@ public class GuiAppState extends AbstractAppState {
     private int altitude;
     private int altitudeDisplacement;
     
+    Spatial rightForwardArea;
+    
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -142,7 +144,13 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
 
+    public void hideForwardArea(){
+        rootNode.detachChildNamed("Forward Engine Area");
+    }
     
+    public void showForwardArea(){
+        rootNode.attachChild(rightForwardArea);
+    }
     public void updateEngineArea(){
         this.engineArea = new EngineArea(aircraft);
         
@@ -162,7 +170,7 @@ public class GuiAppState extends AbstractAppState {
          
          float engineRadius = engineArea.calculateArea();
          
-         Spatial rightForwardArea = loader.getRightForwardArea(engineRadius, altitude, true);
+         rightForwardArea = loader.getRightForwardArea(engineRadius, altitude, true);
          
         rootNode.detachChildNamed("Forward Engine Area");
         rootNode.attachChild(rightForwardArea);

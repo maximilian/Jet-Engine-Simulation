@@ -86,7 +86,13 @@ public class ResourceLoader {
     }
     
     public void initRightEngineArea(float engineRadius, boolean receivingLittle, int altitude){
-        Dome rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
+        Dome rightEngine;
+        
+         if(receivingLittle){
+            rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
+        } else{
+            rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 2, 30, engineRadius, false);
+        }
         rightEngineArea = new Geometry("Right Engine", rightEngine);
         
         Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");

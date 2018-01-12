@@ -34,6 +34,9 @@ public class ResourceLoader {
     private Spatial leftEngineArea;
     private Spatial rightEngineArea;
     
+    private Spatial leftForwardArea;
+    private Spatial rightForwardArea;
+    
     private AssetManager assetManager;
     private Camera terrainLodCamera;
     
@@ -77,6 +80,14 @@ public class ResourceLoader {
             initRightEngineArea(engineRadius, receivingLittle, altitude);    
         }
         return rightEngineArea;
+    }
+    
+    public Spatial getRightForwardArea(float engineRadius, int altitude, boolean submitButton){
+        if (rightForwardArea == null || submitButton){
+            initRightForwardArea(engineRadius, altitude);
+        }
+        
+        return rightForwardArea;
     }
     
     public void initAircraft(){
@@ -134,14 +145,15 @@ public class ResourceLoader {
     }
     
     public void initRightForwardArea(float engineRadius, int altitude){
-        Cylinder cylinder = new Cylinder(100, 100, 20,200);
-        Geometry forwardShape = new Geometry("forwardArea", cylinder);
-        forwardShape.setLocalTranslation(new Vector3f(0,50,200f));
+        Cylinder cylinder = new Cylinder(100, 100, engineRadius,500);
+        rightForwardArea = new Geometry("Forward Engine Area", cylinder);
+        
+        rightForwardArea.setLocalTranslation(new Vector3f(49f,15f,300));
+        
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        
-        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
-        
-        forwardShape.setMaterial(area_mat);
+        area_mat.setColor("Color", new ColorRGBA(0,255,0,0.3f));
+        area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        rightForwardArea.setMaterial(area_mat);
 
         
     }

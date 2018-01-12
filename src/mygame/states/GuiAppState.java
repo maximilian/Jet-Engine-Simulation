@@ -137,6 +137,7 @@ public class GuiAppState extends AbstractAppState {
         aircraftSpatial.setLocalTranslation(0, altitude, 0);
         
         updateEngineArea();
+        updateForwardArea();
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
@@ -157,16 +158,14 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void updateForwardArea(){
-         Cylinder cylinder = new Cylinder(100, 100, 20,200);
-         Geometry forwardShape = new Geometry("forwardArea", cylinder);
-         forwardShape.setLocalTranslation(new Vector3f(0,50,200f));
-         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        
-        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
-        
-        forwardShape.setMaterial(area_mat);
-        
-        rootNode.attachChild(forwardShape);
+         this.engineArea = new EngineArea(aircraft);
+         
+         float engineRadius = engineArea.calculateArea();
+         
+         Spatial rightForwardArea = loader.getRightForwardArea(engineRadius, altitude, true);
+         
+        rootNode.detachChildNamed("Forward Engine Area");
+        rootNode.attachChild(rightForwardArea);
     }
     
         

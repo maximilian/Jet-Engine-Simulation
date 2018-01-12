@@ -94,11 +94,11 @@ public class MyControlScreen implements ScreenController {
         gui.setAltitude(fieldAltitude);
         gui.submitAircraftVariables(fieldSpeed);   
         
-        updateRadius();
+        updateRadiusText();
     }
     
         
-    public void updateRadius(){
+    public void updateRadiusText(){
         Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 
         DecimalFormat df = new DecimalFormat("##.##");
         String roundedRadius = df.format(gui.getEngineArea().getEngineRadiusReal());

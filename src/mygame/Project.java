@@ -8,6 +8,7 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Line;
 
 public class Project extends SimpleApplication {
@@ -66,8 +67,19 @@ public class Project extends SimpleApplication {
         
         Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
         Geometry zaxisline = new Geometry("BOOM!", zaxis);
-                
-        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        Cylinder cylinder = new Cylinder(100, 100, 20,200);
+        Geometry forwardShape = new Geometry("Left Engine", cylinder);
+        
+        forwardShape.setLocalTranslation(new Vector3f(0,0,100f));
+         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
+        
+        forwardShape.setMaterial(area_mat);
+        
+        rootNode.attachChild(forwardShape);
+        
         area_mat.setColor("Color", ColorRGBA.Red);
         
          Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");

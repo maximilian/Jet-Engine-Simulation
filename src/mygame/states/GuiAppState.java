@@ -10,13 +10,17 @@ import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Cylinder;
 import de.lessvoid.nifty.Nifty;
 import mygame.Project;
 import mygame.ResourceLoader;
@@ -150,6 +154,19 @@ public class GuiAppState extends AbstractAppState {
         
         rootNode.attachChild(rightEngine);
         rootNode.attachChild(leftEngine);
+    }
+    
+    public void updateForwardArea(){
+         Cylinder cylinder = new Cylinder(100, 100, 20,200);
+         Geometry forwardShape = new Geometry("forwardArea", cylinder);
+         forwardShape.setLocalTranslation(new Vector3f(0,50,200f));
+         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
+        
+        forwardShape.setMaterial(area_mat);
+        
+        rootNode.attachChild(forwardShape);
     }
     
         

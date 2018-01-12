@@ -16,6 +16,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
@@ -130,6 +131,19 @@ public class ResourceLoader {
         rotation.fromAngleAxis((float) (FastMath.PI/2), new Vector3f(1,0,0) );
         
         leftEngineArea.rotate(rotation);
+    }
+    
+    public void initRightForwardArea(float engineRadius, int altitude){
+        Cylinder cylinder = new Cylinder(100, 100, 20,200);
+        Geometry forwardShape = new Geometry("forwardArea", cylinder);
+        forwardShape.setLocalTranslation(new Vector3f(0,50,200f));
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
+        
+        forwardShape.setMaterial(area_mat);
+
+        
     }
     
     public void initTerrain(){

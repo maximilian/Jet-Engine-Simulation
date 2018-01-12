@@ -67,19 +67,10 @@ public class Project extends SimpleApplication {
         
         Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
         Geometry zaxisline = new Geometry("BOOM!", zaxis);
-        
-        Cylinder cylinder = new Cylinder(100, 100, 20,200);
-        Geometry forwardShape = new Geometry("Left Engine", cylinder);
-        
-        forwardShape.setLocalTranslation(new Vector3f(0,0,100f));
-         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        
-        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.5f));
-        
-        forwardShape.setMaterial(area_mat);
-        
-        rootNode.attachChild(forwardShape);
-        
+
+
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+
         area_mat.setColor("Color", ColorRGBA.Red);
         
          Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");

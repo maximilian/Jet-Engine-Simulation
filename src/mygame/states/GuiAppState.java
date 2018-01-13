@@ -49,6 +49,7 @@ public class GuiAppState extends AbstractAppState {
     private int altitudeDisplacement;
     
     Spatial rightForwardArea;
+    Spatial leftForwardArea;
     
     
     @Override
@@ -145,12 +146,16 @@ public class GuiAppState extends AbstractAppState {
     }
 
     public void hideForwardArea(){
-        rootNode.detachChildNamed("Forward Engine Area");
+        rootNode.detachChildNamed("Forward Right Engine Area");
+        rootNode.detachChildNamed("Forward Left Engine Area");
     }
     
     public void showForwardArea(){
         rootNode.attachChild(rightForwardArea);
+        rootNode.attachChild(leftForwardArea);
     }
+    
+    
     public void updateEngineArea(){
         this.engineArea = new EngineArea(aircraft);
         
@@ -171,9 +176,14 @@ public class GuiAppState extends AbstractAppState {
          float engineRadius = engineArea.calculateArea();
          
          rightForwardArea = loader.getRightForwardArea(engineRadius, altitude, true);
+         leftForwardArea = loader.getLeftForwardArea(engineRadius, altitude,true);
          
-        rootNode.detachChildNamed("Forward Engine Area");
+        
+        rootNode.detachChildNamed("Forward Right Engine Area");
+        rootNode.detachChildNamed("Forward Left Engine Area");
+        
         rootNode.attachChild(rightForwardArea);
+        rootNode.attachChild(leftForwardArea);
     }
     
         

@@ -76,6 +76,11 @@ public class GuiAppState extends AbstractAppState {
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
         
+        // initial setup
+        this.altitude = 0;
+        
+        submitAircraftVariables(160);
+        
         
     }
     

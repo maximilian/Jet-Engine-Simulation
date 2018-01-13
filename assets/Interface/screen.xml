@@ -32,17 +32,17 @@
             </panel>
         </panel>
         
-        <panel id="panel_bottom_mid" height="100%" width="30%" valign="center" childLayout="vertical">
+        <panel id="panel_bottom_mid" height="100%" width="35%" valign="center" childLayout="vertical">
               <control name="label" width="40%" text="Aircraft" valign="center" />
               
             <panel id="acType"  width="100%" childLayout="horizontal">
-                <control name="label" width="80%" text="Forward Danger Area" valign="center" />
+                <control name="label" width="70%" text="Forward Danger Area" valign="center" />
                 <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
             </panel> 
             
-            <panel id="engineType" width="100%" childLayout="horizontal">
-                <control name="label" width="40%" text="Engine" valign="center" />
-                <control name="label" width="60%" id="engineTypeLabel" text="PW2037" valign="center" />
+            <panel id="droneDistance" width="100%" childLayout="horizontal">
+                <control name="label" width="70%" text="Drone Distance" align="left" valign="center" />
+                <control name="textfield" text="0" width="20%" id="droneDistanceInput" align="left" valign="center" />
             </panel> 
             
             <panel id="fanRadius" width="100%" childLayout="horizontal">
@@ -56,7 +56,7 @@
             </panel>
             
         </panel>
-        <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="30%" valign="center" childLayout="horizontal">
+        <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
           
             
             <panel id="panel_front_camera" margin="0px,0px,0px,5px" height="100%" width="30%" align="center" childLayout="horizontal">

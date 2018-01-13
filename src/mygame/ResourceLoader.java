@@ -37,6 +37,8 @@ public class ResourceLoader {
     private Spatial leftForwardArea;
     private Spatial rightForwardArea;
     
+    private Spatial drone;
+    
     private AssetManager assetManager;
     private Camera terrainLodCamera;
     
@@ -171,10 +173,30 @@ public class ResourceLoader {
         leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+altitude,300));
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.8f));
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.4f));
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         leftForwardArea.setMaterial(area_mat);      
     }
+     
+     public void initDrone(){
+      // Load a model from test_data (OgreXML + material + texture)
+        drone = assetManager.loadModel("Models/AR_Drone.j3o");
+        drone.scale(2f, 2f, 2f);
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        //area_mat.setColor("Color", ColorRGBA.White);
+        //drone.setMaterial(area_mat);
+        drone.move(new Vector3f(49f,0,400f));
+     }
+     
+     public Spatial getDrone(){
+         if (drone == null){
+             initDrone();
+         }
+         
+        return this.drone;
+     }
     
     public void initTerrain(){
     

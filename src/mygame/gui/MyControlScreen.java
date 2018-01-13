@@ -44,12 +44,12 @@ public class MyControlScreen implements ScreenController {
         
         submitButton = screen.findElementById("submitButton");
         
-        Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
+        /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
         
         float fanRadius = gui.getAircraft().getEngineDiameter() / 2;
         DecimalFormat df = new DecimalFormat("##.##");
         String roundedRadius = df.format(fanRadius);
-        fanRadiusLabel.setText(roundedRadius + " metres"); 
+        fanRadiusLabel.setText(roundedRadius + " metres"); */
         
     }
 
@@ -95,16 +95,16 @@ public class MyControlScreen implements ScreenController {
         gui.setAltitude(fieldAltitude);
         gui.submitAircraftVariables(fieldSpeed);   
         
-        updateRadiusText();
+        //updateRadiusText();
     }
     
-        
+        /*
     public void updateRadiusText(){
         Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 
         DecimalFormat df = new DecimalFormat("##.##");
         String roundedRadius = df.format(gui.getEngineArea().getEngineRadiusReal());
         radiusLabel.setText(roundedRadius + " metres"); 
-    }
+    }*/
     
     int oldValue = 0;
     

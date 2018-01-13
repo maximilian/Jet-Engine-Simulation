@@ -7,7 +7,6 @@ package mygame.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.TextField;
@@ -31,10 +30,10 @@ public class MyControlScreen implements ScreenController {
     private Project app;    
     
     private Element submitButton;
+
     
     public MyControlScreen(GuiAppState gui){
         this.gui = gui;
-        
         
     }
     
@@ -135,9 +134,11 @@ public class MyControlScreen implements ScreenController {
     @NiftyEventSubscriber(id="forwardEngineAreaToggle")
     public void CheckBoxStateChangedEvent(final String id, final CheckBoxStateChangedEvent event){
         if(event.getCheckBox().isChecked()) {
+            gui.setShowForwardArea(true);
             gui.showForwardArea();
         } else {
             gui.hideForwardArea();
+            gui.setShowForwardArea(false);
         }
     }
     

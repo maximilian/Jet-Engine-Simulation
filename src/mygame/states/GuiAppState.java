@@ -44,6 +44,8 @@ public class GuiAppState extends AbstractAppState {
     private int altitude;
     private int altitudeDisplacement;
     
+    private boolean showForwardArea;
+    
     Spatial rightForwardArea;
     Spatial leftForwardArea;
     
@@ -136,9 +138,10 @@ public class GuiAppState extends AbstractAppState {
         
         Spatial aircraftSpatial = aircraft.getSpatial();
         aircraftSpatial.setLocalTranslation(0, altitude, 0);
-        //aircraftSpatial.move(new Vector3f(0,0,1000));
+
         updateEngineArea();
         updateForwardArea();
+        
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
@@ -149,6 +152,9 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void showForwardArea(){
+        if (rightForwardArea == null || leftForwardArea == null){
+            updateForwardArea();
+        }
         rootNode.attachChild(rightForwardArea);
         rootNode.attachChild(leftForwardArea);
     }
@@ -179,9 +185,9 @@ public class GuiAppState extends AbstractAppState {
         
         rootNode.detachChildNamed("Forward Right Engine Area");
         rootNode.detachChildNamed("Forward Left Engine Area");
-        
-        rootNode.attachChild(rightForwardArea);
-        rootNode.attachChild(leftForwardArea);
+        if (showForwardArea){
+            showForwardArea();
+        }
     }
     
         
@@ -196,6 +202,10 @@ public class GuiAppState extends AbstractAppState {
     
     public Aircraft getAircraft(){
         return aircraft;
+    }
+    
+    public void setShowForwardArea(Boolean showForwardArea){
+        this.showForwardArea = showForwardArea;
     }
     
 }

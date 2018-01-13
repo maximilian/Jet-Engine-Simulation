@@ -11,21 +11,21 @@
 
       <panel backgroundColor="#88f8" id="panel_bottom" height="25%" width="100%" align="center" childLayout="horizontal" >
         <panel id="panel_bottom_left" height="100%" width="40%" valign="center" childLayout="vertical">
-           <panel id="altitudeTextField" height="25%" width="60%" childLayout="horizontal">
-                <control name="label" width="40%" text="Altitude (Feet)" valign="center" />
-                <control name="textfield" text="0" width="60%" id="altitudeField" align="center" valign="center" />
+           <panel id="altitudeTextField" height="25%" width="85%" childLayout="horizontal">
+                <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
+                <control name="textfield" text="0" width="50%" id="altitudeField" align="center" valign="center" />
             </panel>
             
-            <panel id="speedTextField" height="25%" width="60%" childLayout="horizontal">
-                <control name="label" width="40%" text="Speed (Knots)" valign="center" />
-                <control name="textfield" text="160" width="60%" id="speedField" align="center" valign="center" />
+            <panel id="speedTextField" height="25%" width="85%" childLayout="horizontal">
+                <control name="label" width="50%" text="Speed (Knots)" valign="center" />
+                <control name="textfield" text="160" width="50%" id="speedField" align="center" valign="center" />
             </panel>
-            <panel id="engineSettingField" height="25%" width="60%" childLayout="horizontal">
-                <control name="label" width="40%" text="Engine Setting (%)" valign="center" />
-               <control id="sliderH" name="horizontalSlider" width="60%" align="center" valign="center" initial="100"/>
+            <panel id="engineSettingField" height="25%" width="85%" childLayout="horizontal">
+                <control name="label" width="50%" text="Engine Setting (%)" valign="center" />
+               <control id="sliderH" name="horizontalSlider" width="50%" align="center" valign="center" initial="100"/>
             </panel>
             
-            <panel id="submitButton" height="25%" width="60%" childLayout="center">
+            <panel id="submitButton" height="25%" width="100%" childLayout="center">
                 <control name="button" label="Submit" id="submitButton" align="center" valign="center">
                     <interact onClick="submit()"/>
                 </control>

@@ -148,15 +148,15 @@ public class ResourceLoader {
         Cylinder cylinder = new Cylinder(100, 100, engineRadius,500);
         rightForwardArea = new Geometry("Forward Engine Area", cylinder);
         
-        rightForwardArea.setLocalTranslation(new Vector3f(49f,15f,300));
+        rightForwardArea.setLocalTranslation(new Vector3f(49f,15f+altitude,300));
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", new ColorRGBA(0,255,0,0.3f));
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-        rightForwardArea.setMaterial(area_mat);
-
-        
+        rightForwardArea.setMaterial(area_mat);      
     }
+    
+    
     
     public void initTerrain(){
     

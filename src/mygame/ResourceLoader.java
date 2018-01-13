@@ -159,7 +159,7 @@ public class ResourceLoader {
         rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+altitude,300));
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", new ColorRGBA(0,255,0,0.3f));
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.8f));
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         rightForwardArea.setMaterial(area_mat);      
     }
@@ -171,7 +171,7 @@ public class ResourceLoader {
         leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+altitude,300));
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        area_mat.setColor("Color", new ColorRGBA(0,255,0,0.3f));
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.8f));
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         leftForwardArea.setMaterial(area_mat);      
     }

@@ -99,12 +99,17 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void runSimulation(){
+        gui.setRunSimulation();
+
+    }
+    
+    public void setSimulation(){
         TextField droneDistanceField = screen.findNiftyControl("droneDistanceInput", TextField.class);  
         String droneDistanceString = droneDistanceField.getRealText();
         int droneDistance = Integer.parseInt(droneDistanceString);
         
         gui.submitDroneDistance(droneDistance);
-
+    
     }
     
         /*

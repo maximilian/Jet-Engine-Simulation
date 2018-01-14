@@ -199,8 +199,7 @@ public class GuiAppState extends AbstractAppState {
         drone.setDistanceFromAircraft(distance);
         
         Spatial droneSpatial = drone.getSpatial();
-        droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());         
-        moveAircraft = true;
+        droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());
     }
 
     public void hideForwardArea(){
@@ -263,6 +262,10 @@ public class GuiAppState extends AbstractAppState {
     
     public void setShowForwardArea(Boolean showForwardArea){
         this.showForwardArea = showForwardArea;
+    }
+    
+    public void setRunSimulation(){
+        this.moveAircraft = true;
     }
     
 }

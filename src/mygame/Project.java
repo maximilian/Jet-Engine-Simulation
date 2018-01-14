@@ -98,12 +98,10 @@ public class Project extends SimpleApplication {
    
     
     public ResourceLoader getResourceLoader(){
-        
         return loader;
     }
     
     public Aircraft getAircraft(){
-        
         return aircraftObject;
     }
     

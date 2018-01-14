@@ -43,9 +43,16 @@
                         
             
             </panel> 
-            <panel id="separator" height="40%"></panel>
+            <panel id="separator" height="20%"></panel>
+            <panel id="beginSim"  width="100%" height="20%" childLayout="center">
+               
+                <control name="button" label="Set Simulation" id="setSimulation" align="center" valign="center">
+                    <interact onClick="setSimulation()"/>
+                </control>
+            </panel>
         
-           <panel id="beginSim"  width="100%" height="20%" childLayout="center">
+            <panel id="beginSim"  width="100%" height="20%" childLayout="center">
+               
                 <control name="button" label="Run Simulation" id="runSimulation" align="center" valign="center">
                     <interact onClick="runSimulation()"/>
                 </control>

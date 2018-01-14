@@ -98,10 +98,8 @@ public class MyControlScreen implements ScreenController {
         //updateRadiusText();
     }
     
-    public void runSimulation(){
-        gui.setRunSimulation();
-
-    }
+    
+    
     
     public void setSimulation(){
         TextField droneDistanceField = screen.findNiftyControl("droneDistanceInput", TextField.class);  
@@ -110,6 +108,15 @@ public class MyControlScreen implements ScreenController {
         
         gui.submitDroneDistance(droneDistance);
     
+    }
+    
+    public void runSimulation(){
+        gui.setRunSimulation();
+
+    }
+    
+    public void resetSimulation(){
+        gui.resetSimulation();
     }
     
         /*

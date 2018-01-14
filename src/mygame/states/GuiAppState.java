@@ -200,6 +200,12 @@ public class GuiAppState extends AbstractAppState {
         
         Spatial droneSpatial = drone.getSpatial();
         droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());
+        
+        Quaternion rotation = new Quaternion();
+        // rotate 5/4*pi around y axis
+        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
+        flyCam.setRotation(rotation);
+        flyCam.setLocation( new Vector3f(500f, 20, drone.getConvertedDistanceFromAircraft()));
     }
 
     public void hideForwardArea(){
@@ -266,6 +272,11 @@ public class GuiAppState extends AbstractAppState {
     
     public void setRunSimulation(){
         this.moveAircraft = true;
+    }
+    
+    public void resetSimulation(){
+        this.aircraft.getSpatial().setLocalTranslation(0, altitude, 0);
+    
     }
     
 }

@@ -44,6 +44,7 @@ public class GuiAppState extends AbstractAppState {
     private int altitude;
     private int altitudeDisplacement;
     
+    
     private boolean showForwardArea;
     
     Spatial rightForwardArea;
@@ -83,10 +84,29 @@ public class GuiAppState extends AbstractAppState {
         
         
     }
+    float interp = 0.0f;
+    float mySpeed = 1003f;
     
+    boolean moveAircraft = false;
     @Override
     public void update(float tpf) {
            Spatial aircraftSpatial = aircraft.getSpatial();
+           
+           
+        if (moveAircraft){
+        Vector3f a = new Vector3f(0,0,0);
+        Vector3f b = new Vector3f(0,0,-1219.3f);
+        System.out.println(a.distance(b));
+        
+        float distanceVectors = a.distance(b);
+        float spatialDistance = aircraftSpatial.getLocalTranslation().distance(b);
+        System.out.println(spatialDistance);
+        if ( distanceVectors >= spatialDistance ) {
+            aircraftSpatial.move(0,0,-mySpeed*tpf);
+        }
+        
+        }
+        
            //aircraftSpatial.move(new Vector3f(0,0,2f));
 
         
@@ -147,9 +167,7 @@ public class GuiAppState extends AbstractAppState {
         updateEngineArea();
         updateForwardArea();
         
-        Vector3f nextStep = aircraftSpatial.getLocalTranslation();
-        
-        //nextStep.interpolateLocal(new Vector3f(0f,0f,500f), 0.5f);
+	//aircraftSpatial.setLocalTranslation(a.add(d));
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
@@ -157,6 +175,7 @@ public class GuiAppState extends AbstractAppState {
     public void hideForwardArea(){
         rootNode.detachChildNamed("Forward Right Engine Area");
         rootNode.detachChildNamed("Forward Left Engine Area");
+        moveAircraft = true;
     }
     
     public void showForwardArea(){

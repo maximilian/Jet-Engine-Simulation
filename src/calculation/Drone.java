@@ -5,6 +5,8 @@
  */
 package calculation;
 
+import com.jme3.scene.Spatial;
+
 /**
  *
  * @author max
@@ -14,9 +16,30 @@ public class Drone {
     private int altitude;
     private int distanceFromAircraft;
     
+    private Spatial drone;
+    
+    public Drone(Spatial drone){
+        this.drone = drone;
+    }
     
     public int getDroneAltitude(){
         return this.altitude;
     }
     
+    public int getDistanceFromAircraft(){
+        return this.distanceFromAircraft;
+    }
+    
+    public void setDroneAltitude(int altitude){
+        this.altitude = altitude;
+    }
+    
+    public void setDistanceFromAircraft(int distance){
+        this.distanceFromAircraft = distance;
+    }
+    
+    public Spatial getDroneSpatial(){
+        return this.drone;
+    
+    }
 }

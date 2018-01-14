@@ -1,6 +1,7 @@
 package mygame;
 
 import calculation.Aircraft;
+import calculation.Drone;
 import mygame.states.GuiAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
@@ -16,6 +17,7 @@ public class Project extends SimpleApplication {
     private GuiAppState gui;
     
     private Aircraft aircraftObject;
+    private Drone droneObject;
      
     boolean receivingLittle = false;
     boolean receivingMuch = false;
@@ -47,8 +49,11 @@ public class Project extends SimpleApplication {
       
         rootNode.attachChild(loader.getAircraft());
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
+        droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
+        
         
         rootNode.attachChild(loader.getDrone());
+
         rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
         rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
        
@@ -98,5 +103,9 @@ public class Project extends SimpleApplication {
     public Aircraft getAircraft(){
         
         return aircraftObject;
+    }
+    
+    public Drone getDrone(){
+        return droneObject;
     }
 }

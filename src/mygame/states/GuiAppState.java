@@ -103,12 +103,11 @@ public class GuiAppState extends AbstractAppState {
 
         if (moveAircraft){
             Vector3f a = new Vector3f(0,altitude,0);
-            Vector3f b = new Vector3f(0,altitude,drone.getDistanceFromAircraft());
+            Vector3f b = new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft());
 
             float distanceVectors = a.distance(b);
             
             float spatialDistance = aircraftSpatial.getLocalTranslation().distance(b);
-            System.out.println(distanceVectors+", " + spatialDistance);
             
             if (x) {
                 init = System.currentTimeMillis();
@@ -121,7 +120,7 @@ public class GuiAppState extends AbstractAppState {
                 finaltime = System.currentTimeMillis();
             } else {
                 moveAircraft = false;
-                aircraftSpatial.setLocalTranslation( new Vector3f(0,altitude,drone.getDistanceFromAircraft()));
+                aircraftSpatial.setLocalTranslation( new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft()));
             
             }
             System.out.println(aircraftSpatial.getLocalTranslation());
@@ -200,9 +199,7 @@ public class GuiAppState extends AbstractAppState {
         drone.setDistanceFromAircraft(distance);
         
         Spatial droneSpatial = drone.getSpatial();
-        
-         droneSpatial.setLocalTranslation(49f, altitude, distance);
-         
+        droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());         
         moveAircraft = true;
     }
 

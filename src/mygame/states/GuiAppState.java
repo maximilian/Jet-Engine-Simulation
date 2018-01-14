@@ -87,7 +87,7 @@ public class GuiAppState extends AbstractAppState {
     @Override
     public void update(float tpf) {
            Spatial aircraftSpatial = aircraft.getSpatial();
-           //aircraftSpatial.move(new Vector3f(0,0,20f * tpf));
+           //aircraftSpatial.move(new Vector3f(0,0,2f));
 
         
     }
@@ -147,6 +147,9 @@ public class GuiAppState extends AbstractAppState {
         updateEngineArea();
         updateForwardArea();
         
+        Vector3f nextStep = aircraftSpatial.getLocalTranslation();
+        
+        //nextStep.interpolateLocal(new Vector3f(0f,0f,500f), 0.5f);
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }

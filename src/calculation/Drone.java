@@ -39,7 +39,6 @@ public class Drone {
     }
     
     public Spatial getSpatial(){
-        return this.drone;
-    
+        return this.drone;   
     }
 }

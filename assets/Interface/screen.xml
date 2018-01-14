@@ -37,12 +37,19 @@
             <control name="label" width="40%" height="20%" text="Drone" valign="center" />        
             
             
-            <panel id="droneDistance" width="100%" childLayout="horizontal">
+            <panel id="droneDistance" width="100%" height="20%" childLayout="horizontal">
                 <control name="label" width="70%" text="Drone Distance" align="left" valign="center" />
                 <control name="textfield" text="0" width="30%" id="droneDistanceInput" align="left" valign="center" />
-            </panel> 
+                        
             
-           
+            </panel> 
+            <panel id="separator" height="40%"></panel>
+        
+           <panel id="beginSim"  width="100%" height="20%" childLayout="center">
+                <control name="button" label="Run Simulation" id="runSimulation" align="center" valign="center">
+                    <interact onClick="runSimulation()"/>
+                </control>
+            </panel>
             
         </panel>
         <panel id="separator" width="5%"></panel>

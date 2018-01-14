@@ -98,6 +98,15 @@ public class MyControlScreen implements ScreenController {
         //updateRadiusText();
     }
     
+    public void runSimulation(){
+        TextField droneDistanceField = screen.findNiftyControl("droneDistanceInput", TextField.class);  
+        String droneDistanceString = droneDistanceField.getRealText();
+        int droneDistance = Integer.parseInt(droneDistanceString);
+        
+        
+    
+    }
+    
         /*
     public void updateRadiusText(){
         Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 

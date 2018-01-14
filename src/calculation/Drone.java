@@ -22,7 +22,7 @@ public class Drone {
         this.drone = drone;
     }
     
-    public int getDroneAltitude(){
+    public int getAltitude(){
         return this.altitude;
     }
     
@@ -30,7 +30,7 @@ public class Drone {
         return this.distanceFromAircraft;
     }
     
-    public void setDroneAltitude(int altitude){
+    public void setAltitude(int altitude){
         this.altitude = altitude;
     }
     
@@ -38,7 +38,7 @@ public class Drone {
         this.distanceFromAircraft = distance;
     }
     
-    public Spatial getDroneSpatial(){
+    public Spatial getSpatial(){
         return this.drone;
     
     }

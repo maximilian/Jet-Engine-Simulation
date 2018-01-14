@@ -6,6 +6,7 @@
 package mygame.states;
 
 import calculation.Aircraft;
+import calculation.Drone;
 import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -32,6 +33,7 @@ public class GuiAppState extends AbstractAppState {
     private Project app;
     private EngineArea engineArea;
     private Aircraft aircraft;
+    private Drone drone;
     
     private NiftyJmeDisplay niftyDisplay;
     private Nifty nifty;
@@ -60,12 +62,11 @@ public class GuiAppState extends AbstractAppState {
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
+        this.drone = this.app.getDrone();
         
         // Camera view on load
         frontView();
-        
-        
-        
+
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
         
@@ -179,6 +180,8 @@ public class GuiAppState extends AbstractAppState {
     public void submitAircraftVariables(int speed){
         
         aircraft.setAltitude(altitude);
+        drone.setAltitude(altitude);
+        
         aircraft.setSpeed(speed);
         aircraft.setEngineSetting(100);
         
@@ -191,6 +194,16 @@ public class GuiAppState extends AbstractAppState {
 	//aircraftSpatial.setLocalTranslation(a.add(d));
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
+    }
+    
+    public void submitDroneDistance(int distance){
+        drone.setDistanceFromAircraft(distance);
+        
+        Spatial droneSpatial = drone.getSpatial();
+        
+         droneSpatial.setLocalTranslation(49f, altitude, distance);
+         
+        //moveAircraft = true;
     }
 
     public void hideForwardArea(){

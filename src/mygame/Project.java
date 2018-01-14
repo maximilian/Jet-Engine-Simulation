@@ -49,10 +49,12 @@ public class Project extends SimpleApplication {
       
         rootNode.attachChild(loader.getAircraft());
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
-        droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
+        
         
         
         rootNode.attachChild(loader.getDrone());
+        droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
+
 
         rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
         rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));

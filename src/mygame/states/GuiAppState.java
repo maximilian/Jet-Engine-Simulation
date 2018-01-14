@@ -86,7 +86,7 @@ public class GuiAppState extends AbstractAppState {
         
     }
     float interp = 0.0f;
-    float mySpeed = 1003.483f;
+    float mySpeed = 2000.483f;
     
     boolean moveAircraft = false;
     float timeRequired = 1.2153f;
@@ -201,11 +201,19 @@ public class GuiAppState extends AbstractAppState {
         Spatial droneSpatial = drone.getSpatial();
         droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());
         
-        Quaternion rotation = new Quaternion();
-        // rotate 5/4*pi around y axis
-        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
+        Quaternion droneGroundView = new Quaternion();
+        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.5), new Vector3f(0,1,0) );
+        
+        float angleTowardsDrone = (float) Math.atan(altitude/500);
+        Quaternion droneAngleView = new Quaternion();
+
+        droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );
+        
+        Quaternion combo = droneGroundView.mult(droneAngleView);
+        flyCam.setRotation(combo);
+        
         flyCam.setLocation( new Vector3f(500f, 20, drone.getConvertedDistanceFromAircraft()));
+        
     }
 
     public void hideForwardArea(){

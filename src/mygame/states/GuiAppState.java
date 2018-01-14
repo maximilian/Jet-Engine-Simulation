@@ -85,28 +85,49 @@ public class GuiAppState extends AbstractAppState {
         
     }
     float interp = 0.0f;
-    float mySpeed = 1003f;
+    float mySpeed = 1003.483f;
     
     boolean moveAircraft = false;
+    float timeRequired = 1.2153f;
+
+    long init = 0;
+    long finaltime = 0;
+    
+    float zDistance = 0;
+    
+    boolean x = true;
     @Override
     public void update(float tpf) {
-           Spatial aircraftSpatial = aircraft.getSpatial();
-           
-           
+        Spatial aircraftSpatial = aircraft.getSpatial();
+
         if (moveAircraft){
-        Vector3f a = new Vector3f(0,0,0);
-        Vector3f b = new Vector3f(0,0,-1219.3f);
-        System.out.println(a.distance(b));
+            Vector3f a = new Vector3f(0,500,0);
+            Vector3f b = new Vector3f(0,500,1219.3f);
+
+            float distanceVectors = a.distance(b);
+            
+            float spatialDistance = aircraftSpatial.getLocalTranslation().distance(b);
+            System.out.println(distanceVectors+", " + spatialDistance);
+            
+            if (x) {
+                init = System.currentTimeMillis();
+                x = false;
+            }
+            
+            if ( distanceVectors >= zDistance) {
+                aircraftSpatial.move(0,0,mySpeed*tpf);
+                zDistance += (mySpeed*tpf);
+                finaltime = System.currentTimeMillis();
+            } else {
+                moveAircraft = false;
+                aircraftSpatial.setLocalTranslation( new Vector3f(0,500,1219.3f));
+            
+            }
+            System.out.println(aircraftSpatial.getLocalTranslation());
+            System.out.println("time taken: " + (finaltime - init));
         
-        float distanceVectors = a.distance(b);
-        float spatialDistance = aircraftSpatial.getLocalTranslation().distance(b);
-        System.out.println(spatialDistance);
-        if ( distanceVectors >= spatialDistance ) {
-            aircraftSpatial.move(0,0,-mySpeed*tpf);
         }
-        
-        }
-        
+
            //aircraftSpatial.move(new Vector3f(0,0,2f));
 
         

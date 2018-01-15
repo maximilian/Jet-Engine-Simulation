@@ -37,6 +37,7 @@ public class EngineArea {
     private float engineRadiusScaled;
     
     
+    
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
         

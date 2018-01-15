@@ -100,6 +100,14 @@ public class ResourceLoader {
         return leftForwardArea;
     }
     
+    public Spatial getLeftEngineArea(){
+        return leftEngineArea;
+    }
+    
+    public Spatial getRightEngineArea(){
+        return rightEngineArea;
+    }
+    
     public void initAircraft(){
          // Load a model from test_data (OgreXML + material + texture)
         aircraft = assetManager.loadModel("Models/3d-model.j3o");

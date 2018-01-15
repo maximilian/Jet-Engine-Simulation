@@ -101,6 +101,8 @@ public class GuiAppState extends AbstractAppState {
     public void update(float tpf) {
         
         Spatial aircraftSpatial = aircraft.getSpatial();
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
 
         if (moveAircraft){
             Vector3f a = new Vector3f(0,altitude,0);
@@ -117,12 +119,17 @@ public class GuiAppState extends AbstractAppState {
             
             if ( distanceVectors >= zDistance) {
                 aircraftSpatial.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
+                rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                
                 zDistance += (aircraft.getConvertedSpeed()*tpf);
                 System.out.println(aircraft.getSpeed());
                 finaltime = System.currentTimeMillis();
             } else {
                 moveAircraft = false;
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft()));
+                leftEngineArea.setLocalTranslation(new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft()));
+                rightEngineArea.setLocalTranslation(new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft()));
                 zDistance = 0;
                 x = true;
                 init = finaltime = 0;

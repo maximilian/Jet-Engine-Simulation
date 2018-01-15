@@ -110,8 +110,6 @@ public class GuiAppState extends AbstractAppState {
 
             float distanceVectors = a.distance(b);
             
-            float spatialDistance = aircraftSpatial.getLocalTranslation().distance(b);
-            
             if (x) {
                 init = System.currentTimeMillis();
                 x = false;
@@ -134,9 +132,9 @@ public class GuiAppState extends AbstractAppState {
                 x = true;
                 init = finaltime = 0;
             }
+            
             System.out.println(leftEngineArea.getLocalTranslation());
             System.out.println("time taken: " + (finaltime - init));
-        
         }
     }
     
@@ -149,7 +147,6 @@ public class GuiAppState extends AbstractAppState {
     }
 
     public void frontView() {
-        
          Quaternion rotation = new Quaternion();
         // rotate 170 degrees around y axis
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
@@ -295,7 +292,7 @@ public class GuiAppState extends AbstractAppState {
     
     public void resetSimulation(){
         this.aircraft.getSpatial().setLocalTranslation(0, altitude, 0);
-    
+  
     }
     
 }

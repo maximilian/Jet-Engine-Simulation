@@ -163,10 +163,10 @@ public class ResourceLoader {
     }
     
     public void initRightForwardArea(float engineRadius, int altitude){
-        Cylinder cylinder = new Cylinder(100, 100, engineRadius,500);
+        Cylinder cylinder = new Cylinder(100, 100, engineRadius,5000);
         rightForwardArea = new Geometry("Forward Right Engine Area", cylinder);
         
-        rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+altitude,300));
+        rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+altitude,2550));
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", new ColorRGBA(255,0,0,0.4f));
@@ -175,10 +175,10 @@ public class ResourceLoader {
     }
     
      public void initLeftForwardArea(float engineRadius, int altitude){
-        Cylinder cylinder = new Cylinder(100, 100, engineRadius,500);
+        Cylinder cylinder = new Cylinder(100, 100, engineRadius,5000);
         leftForwardArea = new Geometry("Forward Left Engine Area", cylinder);
         
-        leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+altitude,300));
+        leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+altitude,2550));
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         area_mat.setColor("Color", new ColorRGBA(255,0,0,0.4f));
@@ -287,6 +287,6 @@ public class ResourceLoader {
         sun = new DirectionalLight();
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
     }
-    
+   
     
 }

@@ -15,6 +15,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import java.text.DecimalFormat;
+
 import mygame.Project;
 import mygame.states.GuiAppState;
 
@@ -93,12 +94,20 @@ public class MyControlScreen implements ScreenController {
         int fieldSpeed = Integer.parseInt(speedString);
         
         gui.setAltitude(fieldAltitude);
+        gui.setSpeed(fieldSpeed);
         gui.submitAircraftVariables(fieldSpeed);   
         
+        updateAircraftLabels(fieldAltitude, fieldSpeed);
         //updateRadiusText();
     }
     
-    
+    public void updateAircraftLabels(int altitude, int speed){
+        Label altitudeLabel = screen.findNiftyControl("altitudeLabel", Label.class); 
+        Label speedLabel = screen.findNiftyControl("speedLabel", Label.class); 
+
+        altitudeLabel.setText(Integer.toString(altitude));
+        speedLabel.setText(Integer.toString(speed));
+    }
     
     
     public void setSimulation(){

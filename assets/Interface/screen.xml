@@ -144,12 +144,12 @@
                         <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
                         <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
                             <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
-                            <control name="textfield" text="0" width="50%" disabled="true" id="altitudeField" align="center" valign="center" />
+                            <control name="label" backgroundColor="#444" text="0" width="50%" disabled="true" id="altitudeLabel" align="center" valign="center" />
                         </panel>
 
                         <panel id="speedTextField" height="33.33%" width="85%" childLayout="horizontal">
                             <control name="label" width="50%" text="Speed (Knots)" valign="center" />
-                            <control name="textfield" text="160" width="50%" id="speedField" align="center" valign="center" />
+                            <control backgroundColor="#444" name="label" text="160" width="50%" id="speedLabel" align="center" valign="center" />
                         </panel>
 
                     </panel>

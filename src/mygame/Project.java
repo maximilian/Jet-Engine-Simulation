@@ -9,7 +9,6 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Line;
 
 public class Project extends SimpleApplication {
@@ -50,7 +49,8 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(loader.getAircraft());
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
         
-        
+        aircraftObject.setSpeed(160);
+        aircraftObject.setAltitude(0);
         
         rootNode.attachChild(loader.getDrone());
         droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));

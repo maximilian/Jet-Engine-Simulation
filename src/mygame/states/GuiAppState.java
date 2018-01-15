@@ -44,6 +44,8 @@ public class GuiAppState extends AbstractAppState {
     private Node rootNode;
     
     private int altitude;
+    private int speed;
+    
     private int altitudeDisplacement;
     
     
@@ -66,7 +68,7 @@ public class GuiAppState extends AbstractAppState {
         
         // Camera view on load
         frontView();
-
+        
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
         
@@ -80,14 +82,12 @@ public class GuiAppState extends AbstractAppState {
         
         // initial setup
         this.altitude = 0;
+        this.speed = 160;
         
         submitAircraftVariables(160);
         
         
-    }
-    float interp = 0.0f;
-    float mySpeed = 1024.483f;
-    
+    }    
     boolean moveAircraft = false;
     float timeRequired = 1.2153f;
 
@@ -99,6 +99,7 @@ public class GuiAppState extends AbstractAppState {
     boolean x = true;
     @Override
     public void update(float tpf) {
+        
         Spatial aircraftSpatial = aircraft.getSpatial();
 
         if (moveAircraft){
@@ -115,8 +116,9 @@ public class GuiAppState extends AbstractAppState {
             }
             
             if ( distanceVectors >= zDistance) {
-                aircraftSpatial.move(0,0,mySpeed*tpf);
-                zDistance += (mySpeed*tpf);
+                aircraftSpatial.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                zDistance += (aircraft.getConvertedSpeed()*tpf);
+                System.out.println(aircraft.getSpeed());
                 finaltime = System.currentTimeMillis();
             } else {
                 moveAircraft = false;
@@ -264,6 +266,10 @@ public class GuiAppState extends AbstractAppState {
     public void setAltitude(int fieldAltitude){
         this.altitudeDisplacement = fieldAltitude - altitude;
         this.altitude = fieldAltitude;
+    }
+    
+    public void setSpeed(int speed){
+        this.speed = speed;
     }
     
     public EngineArea getEngineArea(){

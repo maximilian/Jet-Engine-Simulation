@@ -140,20 +140,20 @@
             </control>
             <control id="tab_2" name="tab" caption="Simulation">
                 <panel id="tab1_panel" align="center" childLayout="horizontal">
-                    <panel id="panel_bottom_left" height="100%" width="30%" valign="center" childLayout="vertical">
+                    <panel id="panel_bottom_left" height="100%" width="25%" valign="center" childLayout="vertical">
                         <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
                         <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
                             <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
-                            <control name="label" backgroundColor="#444" text="0" width="50%" disabled="true" id="altitudeLabel" align="center" valign="center" />
+                            <control name="label" backgroundColor="#444" text="0" width="20%" disabled="true" id="altitudeLabel" align="center" valign="center" />
                         </panel>
 
                         <panel id="speedTextField" height="33.33%" width="85%" childLayout="horizontal">
                             <control name="label" width="50%" text="Speed (Knots)" valign="center" />
-                            <control backgroundColor="#444" name="label" text="160" width="50%" id="speedLabel" align="center" valign="center" />
+                            <control backgroundColor="#444" name="label" text="160" width="20%" id="speedLabel" align="center" valign="center" />
                         </panel>
 
                     </panel>
-                    <panel id="panel_bottom_mid" height="100%" width="15%" valign="center" childLayout="vertical">
+                    <panel id="panel_bottom_mid" height="100%" width="25%" valign="center" childLayout="vertical">
                         <control name="label" width="40%" height="20%" text="Drone" valign="center" />        
 
 
@@ -185,7 +185,26 @@
                             </control>
                         </panel>    
                         
-                    </panel>    
+                    </panel>   
+                    
+                     <panel id="panel_options" height="100%" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Options" valign="center" />  
+
+                        <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Forward Area" valign="center" />
+                            <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
+                        </panel> 
+
+                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Engine Area" valign="center" />
+                            <control id="engineAreaToggle" name="checkbox" valign="center" />
+                        </panel> 
+
+                        <panel id="simulationToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Simulation Mode" valign="center" />
+                            <control id="simulationToggle" name="checkbox" valign="center" />
+                        </panel> 
+                    </panel> 
                      
                 </panel>
             </control>

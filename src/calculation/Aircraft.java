@@ -57,4 +57,9 @@ public class Aircraft {
     public float getEngineDiameter() {
         return this.engineDiameter;
     }
+    
+    public float getConvertedSpeed(){
+        return (float) (this.speed  * 12.193);
+    
+    }
 }

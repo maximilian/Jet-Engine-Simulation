@@ -86,7 +86,7 @@ public class GuiAppState extends AbstractAppState {
         
     }
     float interp = 0.0f;
-    float mySpeed = 2000.483f;
+    float mySpeed = 1024.483f;
     
     boolean moveAircraft = false;
     float timeRequired = 1.2153f;

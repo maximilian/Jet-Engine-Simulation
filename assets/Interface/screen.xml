@@ -49,11 +49,7 @@
                 <control name="label" width="70%" text="Engine Area" valign="center" />
                 <control id="engineAreaToggle" name="checkbox" valign="center" />
             </panel> 
-            
-            <panel id="simulationToggle"  width="100%" childLayout="horizontal">
-                <control name="label" width="70%" text="Simulation Mode" valign="center" />
-                <control id="simulationToggle" name="checkbox" valign="center" />
-            </panel> 
+
         </panel>
         <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
           
@@ -200,10 +196,6 @@
                             <control id="engineAreaToggle" name="checkbox" valign="center" />
                         </panel> 
 
-                        <panel id="simulationToggle"  width="100%" childLayout="horizontal">
-                            <control name="label" width="70%" text="Simulation Mode" valign="center" />
-                            <control id="simulationToggle" name="checkbox" valign="center" />
-                        </panel> 
                     </panel> 
                      
                 </panel>

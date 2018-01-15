@@ -123,16 +123,14 @@ public class GuiAppState extends AbstractAppState {
             } else {
                 moveAircraft = false;
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft()));
-            
+                zDistance = 0;
+                x = true;
+                init = finaltime = 0;
             }
             System.out.println(aircraftSpatial.getLocalTranslation());
             System.out.println("time taken: " + (finaltime - init));
         
         }
-
-           //aircraftSpatial.move(new Vector3f(0,0,2f));
-
-        
     }
     
     @Override

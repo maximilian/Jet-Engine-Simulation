@@ -33,7 +33,6 @@ public class Drone {
     // returns the distance in converted units
     public float getConvertedDistanceFromAircraft(){
         return (float) (this.distanceFromAircraft * 12.193);
-    
     }
     
     public void setAltitude(int altitude){

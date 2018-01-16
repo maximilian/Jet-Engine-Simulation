@@ -286,7 +286,8 @@ public class GuiAppState extends AbstractAppState {
     
     public void resetSimulation(){
         this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
-  
+        this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
+        this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }
     
 }

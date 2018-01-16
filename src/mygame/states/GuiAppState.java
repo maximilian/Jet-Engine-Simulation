@@ -42,10 +42,7 @@ public class GuiAppState extends AbstractAppState {
     private Camera flyCam;
     private ResourceLoader loader;
     private Node rootNode;
-    
-    private int altitude;
-    private int speed;
-    
+
     private int altitudeDisplacement;
     
     
@@ -79,10 +76,7 @@ public class GuiAppState extends AbstractAppState {
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
-        
-        // initial setup
-        this.altitude = 0;
-        this.speed = 160;
+
         
         submitAircraftVariables(160);
         
@@ -105,8 +99,8 @@ public class GuiAppState extends AbstractAppState {
         Spatial rightEngineArea = loader.getRightEngineArea();
 
         if (moveAircraft){
-            Vector3f a = new Vector3f(0,altitude,0);
-            Vector3f b = new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft());
+            Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
+            Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());
 
             float distanceVectors = a.distance(b);
             
@@ -125,7 +119,7 @@ public class GuiAppState extends AbstractAppState {
                 finaltime = System.currentTimeMillis();
             } else {
                 moveAircraft = false;
-                aircraftSpatial.setLocalTranslation( new Vector3f(0,altitude,drone.getConvertedDistanceFromAircraft()));
+                aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
                 leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 zDistance = 0;
@@ -151,7 +145,7 @@ public class GuiAppState extends AbstractAppState {
         // rotate 170 degrees around y axis
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+altitude, 337.568f ) );
+        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+aircraft.getAltitude(), 337.568f ) );
 
      }
 
@@ -161,7 +155,7 @@ public class GuiAppState extends AbstractAppState {
         // rotate 90 degrees around x axis
         rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f+altitude, 79.266045f ) ); 
+        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f+aircraft.getAltitude(), 79.266045f ) ); 
      }
     
     public void rightEngineView() {
@@ -169,7 +163,7 @@ public class GuiAppState extends AbstractAppState {
         // rotate 5/4*pi around y axis
         rotation.fromAngleAxis((float) (FastMath.PI * 0.75), new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f+altitude, 249.49205f));
+        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f));
      }
     
     public void leftEngineView() {  
@@ -177,19 +171,19 @@ public class GuiAppState extends AbstractAppState {
         // rotate 5/4*pi around y axis
         rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+altitude, 249.49205f));
+        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f));
      }
     
     public void submitAircraftVariables(int speed){
         
-        aircraft.setAltitude(altitude);
-        drone.setAltitude(altitude);
+        aircraft.setAltitude(aircraft.getAltitude());
+        drone.setAltitude(aircraft.getAltitude());
         
         aircraft.setSpeed(speed);
         aircraft.setEngineSetting(100);
         
         Spatial aircraftSpatial = aircraft.getSpatial();
-        aircraftSpatial.setLocalTranslation(0, altitude, 0);
+        aircraftSpatial.setLocalTranslation(0, aircraft.getAltitude(), 0);
 
         updateEngineArea();
         updateForwardArea();
@@ -203,12 +197,12 @@ public class GuiAppState extends AbstractAppState {
         drone.setDistanceFromAircraft(distance);
         
         Spatial droneSpatial = drone.getSpatial();
-        droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());
+        droneSpatial.setLocalTranslation(49f, aircraft.getAltitude(), drone.getConvertedDistanceFromAircraft());
         
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.5), new Vector3f(0,1,0) );
         
-        float angleTowardsDrone = (float) Math.atan(altitude/500);
+        float angleTowardsDrone = (float) Math.atan(aircraft.getAltitude()/500);
         Quaternion droneAngleView = new Quaternion();
 
         droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );
@@ -238,8 +232,8 @@ public class GuiAppState extends AbstractAppState {
         this.engineArea = new EngineArea(aircraft);
         
         float engineRadius = engineArea.calculateArea();
-        Spatial leftEngine = loader.getLeftEngineArea(engineRadius, engineArea.getReceivingLittle(), true, altitude);
-        Spatial rightEngine = loader.getRightEngineArea(engineRadius, engineArea.getReceivingLittle(), true, altitude);
+        Spatial leftEngine = loader.getLeftEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());
+        Spatial rightEngine = loader.getRightEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());
         
         rootNode.detachChildNamed("Right Engine");
         rootNode.detachChildNamed("Left Engine");
@@ -253,8 +247,8 @@ public class GuiAppState extends AbstractAppState {
          
          float engineRadius = engineArea.calculateArea();
          
-         rightForwardArea = loader.getRightForwardArea(engineRadius, altitude, true);
-         leftForwardArea = loader.getLeftForwardArea(engineRadius, altitude,true);
+         rightForwardArea = loader.getRightForwardArea(engineRadius, aircraft.getAltitude(), true);
+         leftForwardArea = loader.getLeftForwardArea(engineRadius, aircraft.getAltitude(),true);
          
         
         rootNode.detachChildNamed("Forward Right Engine Area");
@@ -266,12 +260,12 @@ public class GuiAppState extends AbstractAppState {
     
         
     public void setAltitude(int fieldAltitude){
-        this.altitudeDisplacement = fieldAltitude - altitude;
-        this.altitude = fieldAltitude;
+        this.altitudeDisplacement = fieldAltitude - aircraft.getAltitude();
+        aircraft.setAltitude(fieldAltitude);
     }
     
     public void setSpeed(int speed){
-        this.speed = speed;
+        aircraft.setSpeed(speed);
     }
     
     public EngineArea getEngineArea(){
@@ -291,7 +285,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void resetSimulation(){
-        this.aircraft.getSpatial().setLocalTranslation(0, altitude, 0);
+        this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
   
     }
     

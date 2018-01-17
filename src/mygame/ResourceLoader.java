@@ -16,6 +16,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
@@ -32,6 +33,11 @@ public class ResourceLoader {
     private Spatial aircraft;
     private Spatial leftEngineArea;
     private Spatial rightEngineArea;
+    
+    private Spatial leftForwardArea;
+    private Spatial rightForwardArea;
+    
+    private Spatial drone;
     
     private AssetManager assetManager;
     private Camera terrainLodCamera;
@@ -78,6 +84,30 @@ public class ResourceLoader {
         return rightEngineArea;
     }
     
+    public Spatial getRightForwardArea(float engineRadius, int altitude, boolean submitButton){
+        if (rightForwardArea == null || submitButton){
+            initRightForwardArea(engineRadius, altitude);
+        }
+        
+        return rightForwardArea;
+    }
+    
+    public Spatial getLeftForwardArea(float engineRadius, int altitude, boolean submitButton){
+        if (leftForwardArea == null || submitButton){
+            initLeftForwardArea(engineRadius, altitude);
+        }
+        
+        return leftForwardArea;
+    }
+    
+    public Spatial getLeftEngineArea(){
+        return leftEngineArea;
+    }
+    
+    public Spatial getRightEngineArea(){
+        return rightEngineArea;
+    }
+    
     public void initAircraft(){
          // Load a model from test_data (OgreXML + material + texture)
         aircraft = assetManager.loadModel("Models/3d-model.j3o");
@@ -86,7 +116,13 @@ public class ResourceLoader {
     }
     
     public void initRightEngineArea(float engineRadius, boolean receivingLittle, int altitude){
-        Dome rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
+        Dome rightEngine;
+        
+         if(receivingLittle){
+            rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 100, 30, engineRadius, false);
+        } else{
+            rightEngine = new Dome(new Vector3f(-49f, 51f,-15.5f-altitude), 2, 30, engineRadius, false);
+        }
         rightEngineArea = new Geometry("Right Engine", rightEngine);
         
         Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -125,6 +161,50 @@ public class ResourceLoader {
         
         leftEngineArea.rotate(rotation);
     }
+    
+    public void initRightForwardArea(float engineRadius, int altitude){
+        Cylinder cylinder = new Cylinder(100, 100, engineRadius,5000);
+        rightForwardArea = new Geometry("Forward Right Engine Area", cylinder);
+        
+        rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+altitude,2550));
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.4f));
+        area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        rightForwardArea.setMaterial(area_mat);      
+    }
+    
+     public void initLeftForwardArea(float engineRadius, int altitude){
+        Cylinder cylinder = new Cylinder(100, 100, engineRadius,5000);
+        leftForwardArea = new Geometry("Forward Left Engine Area", cylinder);
+        
+        leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+altitude,2550));
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        area_mat.setColor("Color", new ColorRGBA(255,0,0,0.4f));
+        area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        leftForwardArea.setMaterial(area_mat);      
+    }
+     
+     public void initDrone(){
+      // Load a model from test_data (OgreXML + material + texture)
+        drone = assetManager.loadModel("Models/AR_Drone.j3o");
+        drone.scale(2f, 2f, 2f);
+        
+        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        //area_mat.setColor("Color", ColorRGBA.White);
+        //drone.setMaterial(area_mat);
+        drone.move(new Vector3f(49f,500f,1219.3f));
+     }
+     
+     public Spatial getDrone(){
+         if (drone == null){
+             initDrone();
+         }
+         
+        return this.drone;
+     }
     
     public void initTerrain(){
     
@@ -207,6 +287,6 @@ public class ResourceLoader {
         sun = new DirectionalLight();
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
     }
-    
+   
     
 }

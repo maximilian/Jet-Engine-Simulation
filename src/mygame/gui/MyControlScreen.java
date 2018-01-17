@@ -7,6 +7,7 @@ package mygame.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
@@ -14,6 +15,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import java.text.DecimalFormat;
+
 import mygame.Project;
 import mygame.states.GuiAppState;
 
@@ -29,10 +31,10 @@ public class MyControlScreen implements ScreenController {
     private Project app;    
     
     private Element submitButton;
+
     
     public MyControlScreen(GuiAppState gui){
         this.gui = gui;
-        
         
     }
     
@@ -43,12 +45,12 @@ public class MyControlScreen implements ScreenController {
         
         submitButton = screen.findElementById("submitButton");
         
-        Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
+        /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
         
         float fanRadius = gui.getAircraft().getEngineDiameter() / 2;
         DecimalFormat df = new DecimalFormat("##.##");
         String roundedRadius = df.format(fanRadius);
-        fanRadiusLabel.setText(roundedRadius + " metres"); 
+        fanRadiusLabel.setText(roundedRadius + " metres"); */
         
     }
 
@@ -92,18 +94,47 @@ public class MyControlScreen implements ScreenController {
         int fieldSpeed = Integer.parseInt(speedString);
         
         gui.setAltitude(fieldAltitude);
+        gui.setSpeed(fieldSpeed);
         gui.submitAircraftVariables(fieldSpeed);   
         
-        updateRadius();
+        updateAircraftLabels(fieldAltitude, fieldSpeed);
+        //updateRadiusText();
     }
     
+    public void updateAircraftLabels(int altitude, int speed){
+        Label altitudeLabel = screen.findNiftyControl("altitudeLabel", Label.class); 
+        Label speedLabel = screen.findNiftyControl("speedLabel", Label.class); 
+
+        altitudeLabel.setText(Integer.toString(altitude));
+        speedLabel.setText(Integer.toString(speed));
+    }
+    
+    
+    public void setSimulation(){
+        TextField droneDistanceField = screen.findNiftyControl("droneDistanceInput", TextField.class);  
+        String droneDistanceString = droneDistanceField.getRealText();
+        int droneDistance = Integer.parseInt(droneDistanceString);
         
-    public void updateRadius(){
+        gui.submitDroneDistance(droneDistance);
+    
+    }
+    
+    public void runSimulation(){
+        gui.setRunSimulation();
+
+    }
+    
+    public void resetSimulation(){
+        gui.resetSimulation();
+    }
+    
+        /*
+    public void updateRadiusText(){
         Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 
         DecimalFormat df = new DecimalFormat("##.##");
         String roundedRadius = df.format(gui.getEngineArea().getEngineRadiusReal());
         radiusLabel.setText(roundedRadius + " metres"); 
-    }
+    }*/
     
     int oldValue = 0;
     
@@ -127,9 +158,20 @@ public class MyControlScreen implements ScreenController {
         } catch(NumberFormatException e){
              
              event.getTextFieldControl().setText(Integer.toString(oldValue));
-        }
-        
+        } 
     }
+    
+    @NiftyEventSubscriber(id="forwardEngineAreaToggle")
+    public void CheckBoxStateChangedEvent(final String id, final CheckBoxStateChangedEvent event){
+        if(event.getCheckBox().isChecked()) {
+            gui.setShowForwardArea(true);
+            gui.showForwardArea();
+        } else {
+            gui.hideForwardArea();
+            gui.setShowForwardArea(false);
+        }
+    }
+    
   
     public void quitGame() {
         System.out.println("quit pls");

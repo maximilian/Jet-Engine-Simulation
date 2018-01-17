@@ -6,52 +6,52 @@
     <layer id="background" childLayout="center">
     </layer>
     <layer id="foreground" childLayout="vertical">
-      <panel id="panel_top" height="75%" width="100%" align="center" childLayout="center">
+      <panel id="panel_top" height="65%" width="100%" align="center" childLayout="center">
       </panel>
 
-      <panel backgroundColor="#88f8" id="panel_bottom" height="25%" width="100%" align="center" childLayout="horizontal" >
-        <panel id="panel_bottom_left" height="100%" width="40%" valign="center" childLayout="vertical">
-           <panel id="altitudeTextField" height="33.33%" width="60%" childLayout="horizontal">
-                <control name="label" width="40%" text="Altitude" valign="center" />
-                <control name="textfield" text="0" width="60%" id="altitudeField" align="center" valign="center" />
-            </panel>
+      <panel id="panel_bottom" height="35%" width="100%" align="center" childLayout="horizontal" >
+        <control id="edit_tabs" name="tabGroup" buttonHeight="50px">
+            <control id="tab_1" name="tab" caption="Model">
+                <panel id="tab1_panel" align="center" childLayout="horizontal">
+                    <panel id="panel_bottom_left" height="100%" width="35%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
+                        <panel id="altitudeTextField" height="20%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
+                            <control name="textfield" text="0" width="50%" disabled="true" id="altitudeField" align="center" valign="center" />
+                        </panel>
+
+                        <panel id="speedTextField" height="20%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Speed (Knots)" valign="center" />
+                            <control name="textfield" text="160" width="50%" id="speedField" align="center" valign="center" />
+                        </panel>
+                        <panel id="engineSettingField" height="20%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Engine Setting (%)" valign="center" />
+                           <control id="sliderH" name="horizontalSlider" width="50%" align="center" valign="center" initial="100"/>
+                        </panel>
+
+                        <panel id="submitButton" height="20%" width="100%" childLayout="center">
+                            <control name="button" label="Submit" id="submitButton" align="center" valign="center">
+                                <interact onClick="submit()"/>
+                            </control>
+                        </panel>
+                    </panel>
+                    
+                    <panel id="separator" width="20%"></panel>
+        <panel id="panel_options" height="100%" width="20%" valign="center" childLayout="vertical">
+            <control name="label" width="40%" height="20%" text="Options" valign="center" />  
             
-            <panel id="speedTextField" height="33.33%" width="60%" childLayout="horizontal">
-                <control name="label" width="40%" text="Speed" valign="center" />
-                <control name="textfield" text="160" width="60%" id="speedField" align="center" valign="center" />
-            </panel>
-            <panel id="submitButton" height="33.33%" width="60%" childLayout="center">
-                <control name="button" label="Submit" id="submitButton" align="center" valign="center">
-                    <interact onClick="submit()"/>
-                </control>
-            </panel>
+            <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
+                <control name="label" width="70%" text="Forward Area" valign="center" />
+                <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
+            </panel> 
+            
+            <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
+                <control name="label" width="70%" text="Engine Area" valign="center" />
+                <control id="engineAreaToggle" name="checkbox" valign="center" />
+            </panel> 
+
         </panel>
-        
-        <panel id="panel_bottom_mid" height="100%" width="30%" valign="center" childLayout="vertical">
-              <control name="label" width="40%" text="Aircraft" valign="center" />
-              
-            <panel id="acType"  width="100%" childLayout="horizontal">
-                <control name="label" width="40%" text="Type" valign="center" />
-                <control name="label" width="60%" id="acTypeLabel" text="Boeing 757-200" valign="center" />
-            </panel> 
-            
-            <panel id="engineType" width="100%" childLayout="horizontal">
-                <control name="label" width="40%" text="Engine" valign="center" />
-                <control name="label" width="60%" id="engineTypeLabel" text="PW2037" valign="center" />
-            </panel> 
-            
-            <panel id="fanRadius" width="100%" childLayout="horizontal">
-                <control name="label" width="40%" text="Fan Radius" valign="center" />
-                <control name="label" width="60%" id="fanRadiusLabel" text="" valign="center" />
-            </panel> 
-            
-            <panel id="radiusText" width="100%" childLayout="horizontal">
-                <control name="label" width="40%" text="Area Radius" valign="center" />
-                <control name="label" width="60%" id="radiusLabel" text="0 metres" valign="center" />
-            </panel>
-            
-        </panel>
-        <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="30%" valign="center" childLayout="horizontal">
+        <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
           
             
             <panel id="panel_front_camera" margin="0px,0px,0px,5px" height="100%" width="30%" align="center" childLayout="horizontal">
@@ -106,7 +106,7 @@
                         <interact onClick="aboveView()"/>
                     </control>
               </panel>-->
-<panel id="panel_white_space" height="3%" width="20%" align="center" childLayout="center">
+            <panel id="panel_white_space" height="3%" width="20%" align="center" childLayout="center">
             
             </panel>
                 <panel id="left_engine_button" focusable="true" backgroundColor="#f009" width="100%" height="31.33%" valign="center" align="center" childLayout="center" visibleToMouse="true">
@@ -131,9 +131,80 @@
               <panel id="panel_white_space" height="100%" width="20%" align="center" childLayout="center">
             
             </panel>
-        </panel>
-      </panel>
+        </panel> 
+                </panel>
+            </control>
+            <control id="tab_2" name="tab" caption="Simulation">
+                <panel id="tab1_panel" align="center" childLayout="horizontal">
+                    <panel id="panel_bottom_left" height="100%" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
+                        <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
+                            <control name="label" backgroundColor="#444" text="0" width="20%" disabled="true" id="altitudeLabel" align="center" valign="center" />
+                        </panel>
+
+                        <panel id="speedTextField" height="33.33%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Speed (Knots)" valign="center" />
+                            <control backgroundColor="#444" name="label" text="160" width="20%" id="speedLabel" align="center" valign="center" />
+                        </panel>
+
+                    </panel>
+                    <panel id="panel_bottom_mid" height="100%" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Drone" valign="center" />        
+
+
+                        <panel id="droneDistance" width="100%" height="20%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Distance from A/C" align="left" valign="center" />
+                            <control name="textfield" text="0" width="30%" id="droneDistanceInput" align="left" valign="center" />
+                        </panel> 
+  
+                    </panel>
+                    <panel id="panel_bottom_sim" height="100%" width="25%" valign="center" childLayout="vertical">
+                        <panel id="setSim"  width="100%" height="33.33%" childLayout="center">
+
+                            <control name="button" label="Set Simulation" id="setSimulation" align="center" valign="center">
+                                <interact onClick="setSimulation()"/>
+                            </control>
+                        </panel>
+
+                        <panel id="beginSim"  width="100%" height="33.33%" childLayout="center">
+
+                            <control name="button" label="Run Simulation" id="runSimulation" align="center" valign="center">
+                                <interact onClick="runSimulation()"/>
+                            </control>
+                        </panel>
+
+                        <panel id="resetSim"  width="100%" height="33.33%" childLayout="center">
+
+                            <control name="button" label="Reset Simulation" id="resetSimulation" align="center" valign="center">
+                                <interact onClick="resetSimulation()"/>
+                            </control>
+                        </panel>    
+                        
+                    </panel>   
+                    
+                     <panel id="panel_options" height="100%" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Options" valign="center" />  
+
+                        <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Forward Area" valign="center" />
+                            <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
+                        </panel> 
+
+                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Engine Area" valign="center" />
+                            <control id="engineAreaToggle" name="checkbox" valign="center" />
+                        </panel> 
+
+                    </panel> 
+                     
+                </panel>
+            </control>
+        </control>
+         
+        
+     </panel>
     </layer>
   </screen>
-  
+    
 </nifty>

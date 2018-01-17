@@ -1,6 +1,7 @@
 package mygame;
 
 import calculation.Aircraft;
+import calculation.Drone;
 import mygame.states.GuiAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
@@ -15,6 +16,7 @@ public class Project extends SimpleApplication {
     private GuiAppState gui;
     
     private Aircraft aircraftObject;
+    private Drone droneObject;
      
     boolean receivingLittle = false;
     boolean receivingMuch = false;
@@ -47,7 +49,13 @@ public class Project extends SimpleApplication {
         rootNode.attachChild(loader.getAircraft());
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
         
+        aircraftObject.setSpeed(160);
+        aircraftObject.setAltitude(0);
         
+        rootNode.attachChild(loader.getDrone());
+        droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
+
+
         rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
         rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
        
@@ -66,8 +74,10 @@ public class Project extends SimpleApplication {
         
         Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
         Geometry zaxisline = new Geometry("BOOM!", zaxis);
-                
+
+
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+
         area_mat.setColor("Color", ColorRGBA.Red);
         
          Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -88,12 +98,14 @@ public class Project extends SimpleApplication {
    
     
     public ResourceLoader getResourceLoader(){
-        
         return loader;
     }
     
     public Aircraft getAircraft(){
-        
         return aircraftObject;
+    }
+    
+    public Drone getDrone(){
+        return droneObject;
     }
 }

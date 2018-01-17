@@ -23,6 +23,9 @@ public class Aircraft {
         this.aircraft = aircraft;
         
         this.engineDiameter = (float) 2.154;
+        
+        this.speed = 160;
+        this.altitude = 0;
     }
     
     
@@ -56,5 +59,11 @@ public class Aircraft {
 
     public float getEngineDiameter() {
         return this.engineDiameter;
+    }
+    
+    // Converts knots to m/s, then to visualisation units
+    public float getConvertedSpeed(){
+        return (float) ((this.speed  * 0.514444) * 12.193);
+    
     }
 }

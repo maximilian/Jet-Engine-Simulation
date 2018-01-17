@@ -5,6 +5,8 @@
  */
 package mygame;
 
+import com.jme3.system.AppSettings;
+
 /**
  *
  * @author max
@@ -14,6 +16,14 @@ public class Main {
         Project app = new Project();
         app.setShowSettings(false);
         
+        AppSettings settings = new AppSettings(true);
+
+        settings.setRenderer(AppSettings.LWJGL_OPENGL2);
+        settings.setWidth(848);
+        settings.setHeight(480);
+        
+        app.setSettings(settings);
+
         app.start(); // start the game
         
     }

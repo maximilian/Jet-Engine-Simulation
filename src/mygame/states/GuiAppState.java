@@ -71,16 +71,12 @@ public class GuiAppState extends AbstractAppState {
         
         /** Read your XML and initialize your custom ScreenController */
         controlScreen = new MyControlScreen(this);
-        
-        
+
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
 
-        
-        submitAircraftVariables(160);
-        
-        
+        submitAircraftVariables(160);  
     }    
     boolean moveAircraft = false;
     float timeRequired = 1.2153f;

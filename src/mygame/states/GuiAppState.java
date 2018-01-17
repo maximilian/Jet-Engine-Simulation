@@ -87,6 +87,11 @@ public class GuiAppState extends AbstractAppState {
     float zDistance = 0;
     
     boolean x = true;
+    
+    float speed = 0;
+    float acceleration = (float) 1.604729933;
+    
+    boolean takeoff = true;
     @Override
     public void update(float tpf) {
         
@@ -125,6 +130,25 @@ public class GuiAppState extends AbstractAppState {
             
             System.out.println(leftEngineArea.getLocalTranslation());
             System.out.println("time taken: " + (finaltime - init));
+        }
+        
+        if (takeoff){
+            
+            if (x) {
+                init = System.currentTimeMillis();
+                x = false;
+            }
+            
+            if (speed < 76.53){
+            
+            speed += acceleration * tpf;
+            finaltime = System.currentTimeMillis();
+            
+            aircraftSpatial.move(0,0, (float) (speed));
+            System.out.println("speed = " + speed);
+            System.out.println("time taken: " + ((float) (finaltime - init) / 1000));
+            }
+        
         }
     }
     

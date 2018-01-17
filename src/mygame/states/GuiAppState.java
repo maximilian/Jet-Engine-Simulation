@@ -91,7 +91,7 @@ public class GuiAppState extends AbstractAppState {
     float speed = 0;
     float acceleration = (float) 1.604729933;
     
-    boolean takeoff = true;
+    boolean takeoff = false;
     @Override
     public void update(float tpf) {
         
@@ -147,8 +147,8 @@ public class GuiAppState extends AbstractAppState {
             aircraftSpatial.move(0,0, (float) (speed));
             System.out.println("speed = " + speed);
             System.out.println("time taken: " + ((float) (finaltime - init) / 1000));
-            }
         
+            }
         }
     }
     

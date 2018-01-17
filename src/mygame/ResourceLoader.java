@@ -238,7 +238,7 @@ public class ResourceLoader {
         mat_terrain.setFloat("Tex3Scale", 128f);*/
         
        
-        Texture airport = assetManager.loadTexture("Textures/staticmap32.png");
+        Texture airport = assetManager.loadTexture("Textures/staticmap.png");
         
         mat_terrain.setTexture("ColorMap", airport);
         
@@ -268,6 +268,7 @@ public class ResourceLoader {
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
         terrain.setLocalTranslation(0, 0, 0);
+
         
         /* This quaternion stores a 45 degree rotation */
         Quaternion rotation = new Quaternion();
@@ -275,7 +276,7 @@ public class ResourceLoader {
         /* The rotation is applied: The object rolls by 180 degrees. */
         terrain.setLocalRotation( rotation );
         
-        terrain.setLocalScale(4f, 4f, 4f);
+        terrain.setLocalScale(6.5f, 6.5f, 6.5f);
         
 
         /** 5. The LOD (level of detail) depends on were the camera is: */

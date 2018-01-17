@@ -139,7 +139,7 @@ public class EngineArea {
         
         
         correctedDensity = (correctedPressure/(287*correctedTemperature));
-        
+        System.out.println("corrected density:"+correctedDensity);
         return correctedDensity;
     }
     
@@ -160,7 +160,8 @@ public class EngineArea {
         float delta = (float) (correctedPressure/101325);
         
         float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
-            
+        
+        System.out.println("corrected flow:" + correctedFlow);
         return correctedFlow;
     }
     

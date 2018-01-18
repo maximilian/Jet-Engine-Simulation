@@ -12,6 +12,7 @@ import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
@@ -111,7 +112,6 @@ public class ResourceLoader {
     public void initAircraft(){
          // Load a model from test_data (OgreXML + material + texture)
         aircraft = assetManager.loadModel("Models/3d-model.j3o");
-
         aircraft.scale(0.3f, 0.3f, 0.3f); 
     }
     
@@ -236,14 +236,10 @@ public class ResourceLoader {
         rock.setWrap(Texture.WrapMode.Repeat);
         mat_terrain.setTexture("Tex3", rock);
         mat_terrain.setFloat("Tex3Scale", 128f);*/
-        
-       
+
         Texture airport = assetManager.loadTexture("Textures/staticmap.png");
         
         mat_terrain.setTexture("ColorMap", airport);
-        
-        
-            
           
             /** 2. Create the height map */
         /*     
@@ -264,11 +260,10 @@ public class ResourceLoader {
          */
         int patchSize = 64;
         terrain = new TerrainQuad("my terrain", patchSize, 513, null);
-
+        
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
-        terrain.setLocalTranslation(0, 0, 0);
-
+        terrain.setLocalTranslation(5, 0, 0);
         
         /* This quaternion stores a 45 degree rotation */
         Quaternion rotation = new Quaternion();
@@ -276,7 +271,7 @@ public class ResourceLoader {
         /* The rotation is applied: The object rolls by 180 degrees. */
         terrain.setLocalRotation( rotation );
         
-        terrain.setLocalScale(6.5f, 6.5f, 6.5f);
+        terrain.setLocalScale(7f, 7f, 7f);
         
 
         /** 5. The LOD (level of detail) depends on were the camera is: */

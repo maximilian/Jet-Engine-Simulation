@@ -185,9 +185,12 @@ public class MyControlScreen implements ScreenController {
         
         // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
         float distanceToMove = (percentage/100) * 3188;
+        
+        float speedKnots = (float) (speed * 1.94384);
+        gui.changeAircraftSpeed(speedKnots);
         gui.moveAircraft(distanceToMove);
-        gui.changeAircraftSpeed(speed);
-        System.out.println(speed);
+
+        System.out.println("aircraft speed=" + speedKnots);
     }
   
     public void quitGame() {

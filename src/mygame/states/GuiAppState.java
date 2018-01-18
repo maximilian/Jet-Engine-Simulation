@@ -295,7 +295,13 @@ public class GuiAppState extends AbstractAppState {
     
     public void moveAircraft(float distance){
         System.out.println("move=="+distance);
+        
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
+        
         this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
+        leftEngineArea.setLocalTranslation(0,0,distance);
+        rightEngineArea.setLocalTranslation(0,0,distance);
         System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
     }
     

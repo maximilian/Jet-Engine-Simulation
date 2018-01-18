@@ -9,6 +9,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.SliderChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -171,6 +172,10 @@ public class MyControlScreen implements ScreenController {
         }
     }
     
+    @NiftyEventSubscriber(id="simulationTimeControl")
+    public void SliderChangedEvent(final String id, final SliderChangedEvent event){
+        System.out.println(event.getSlider().getValue());
+    }
   
     public void quitGame() {
         System.out.println("quit pls");

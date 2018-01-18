@@ -202,7 +202,7 @@
 
                     </panel>
                     <panel id="simulationTime" height="20%" childLayout="horizontal">
-                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center"/>
+                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>
                     </panel>
                 </panel>
             </control>

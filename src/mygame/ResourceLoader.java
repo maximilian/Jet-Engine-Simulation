@@ -15,6 +15,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Cylinder;
@@ -125,12 +127,13 @@ public class ResourceLoader {
         }
         rightEngineArea = new Geometry("Right Engine", rightEngine);
         
+        
         Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         rightEngineAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
         
         // transparent hemisphere
         rightEngineAreaMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-
+        rightEngineArea.setQueueBucket(Bucket.Transparent);
         rightEngineArea.setMaterial(rightEngineAreaMat);
 
         Quaternion rotation = new Quaternion();
@@ -154,7 +157,7 @@ public class ResourceLoader {
         
         //transparent hemisphere
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-        
+        leftEngineArea.setQueueBucket(Bucket.Transparent);
         leftEngineArea.setMaterial(area_mat);
         Quaternion rotation = new Quaternion();
         rotation.fromAngleAxis((float) (FastMath.PI/2), new Vector3f(1,0,0) );

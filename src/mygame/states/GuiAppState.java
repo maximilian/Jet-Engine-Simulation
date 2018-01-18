@@ -302,7 +302,16 @@ public class GuiAppState extends AbstractAppState {
         this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
         leftEngineArea.setLocalTranslation(0,0,distance);
         rightEngineArea.setLocalTranslation(0,0,distance);
+        leftEngineView(distance);
         System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
     }
+    
+     public void leftEngineView(float distance) {  
+        Quaternion rotation = new Quaternion();
+        // rotate 5/4*pi around y axis
+        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
+        flyCam.setRotation(rotation);
+        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f + distance));
+     }
     
 }

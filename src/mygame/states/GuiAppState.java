@@ -93,7 +93,7 @@ public class GuiAppState extends AbstractAppState {
         Spatial aircraftSpatial = aircraft.getSpatial();
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
-        aircraftSpatial.setLocalTranslation(0,0,0);
+
         if (moveAircraft){
             Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
             Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());
@@ -187,6 +187,13 @@ public class GuiAppState extends AbstractAppState {
 	//aircraftSpatial.setLocalTranslation(a.add(d));
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
+    }
+    
+    public void changeAircraftSpeed(float speed){
+        aircraft.setSpeed(Math.round(speed));
+        
+        updateEngineArea();
+
     }
     
     public void submitDroneDistance(int distance){
@@ -284,6 +291,12 @@ public class GuiAppState extends AbstractAppState {
         this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
         this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
         this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
+    }
+    
+    public void moveAircraft(float distance){
+        System.out.println("move=="+distance);
+        this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
+        System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
     }
     
 }

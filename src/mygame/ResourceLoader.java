@@ -263,7 +263,7 @@ public class ResourceLoader {
         
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
-        terrain.setLocalTranslation(5, 0, 0);
+        terrain.setLocalTranslation(5, 0, 2400);
         
         /* This quaternion stores a 45 degree rotation */
         Quaternion rotation = new Quaternion();

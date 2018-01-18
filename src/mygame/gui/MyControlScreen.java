@@ -175,6 +175,19 @@ public class MyControlScreen implements ScreenController {
     @NiftyEventSubscriber(id="simulationTimeControl")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
         System.out.println(event.getSlider().getValue());
+        
+        float percentage = event.getSlider().getValue();
+        
+        // distance travelled (real life units)
+        float currDistance = (percentage/100) * 1850;
+        // speed based on real life units, using v = u + at
+        float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
+        
+        // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
+        float distanceToMove = (percentage/100) * 3188;
+        gui.moveAircraft(distanceToMove);
+        gui.changeAircraftSpeed(speed);
+        System.out.println(speed);
     }
   
     public void quitGame() {

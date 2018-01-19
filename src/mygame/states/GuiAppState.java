@@ -84,15 +84,6 @@ public class GuiAppState extends AbstractAppState {
 
         submitAircraftVariables(160);  
     }    
-    boolean moveAircraft = false;
-    float timeRequired = 1.2153f;
-
-    long init = 0;
-    long finaltime = 0;
-    
-    float zDistance = 0;
-    
-    boolean x = true;
 
     @Override
     public void update(float tpf) {
@@ -123,11 +114,7 @@ public class GuiAppState extends AbstractAppState {
         aircraftView.leftEngineView(aircraft.getAltitude());
      }
     
-    public void submitAircraftVariables(int speed){
-        aircraft.setAltitude(aircraft.getAltitude());
-        drone.setAltitude(aircraft.getAltitude());
-        
-        aircraft.setSpeed(speed);
+    public void submitAircraftVariables(int speed){       
         aircraft.setEngineSetting(100);
         
         Spatial aircraftSpatial = aircraft.getSpatial();
@@ -136,7 +123,6 @@ public class GuiAppState extends AbstractAppState {
         updateEngineArea();
         updateForwardArea();
         
-	//aircraftSpatial.setLocalTranslation(a.add(d));
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
@@ -152,6 +138,7 @@ public class GuiAppState extends AbstractAppState {
             simulation = new Simulation(aircraft, drone, app);
             stateManager.attach(simulation);
         }
+        drone.setAltitude(aircraft.getAltitude());
         simulation.setup(distance);
     }
     
@@ -196,9 +183,8 @@ public class GuiAppState extends AbstractAppState {
          
          float engineRadius = engineArea.calculateArea();
          
-         rightForwardArea = loader.getRightForwardArea(engineRadius, aircraft.getAltitude(), true);
-         leftForwardArea = loader.getLeftForwardArea(engineRadius, aircraft.getAltitude(),true);
-         
+        rightForwardArea = loader.getRightForwardArea(engineRadius, aircraft.getAltitude(), true);
+        leftForwardArea = loader.getLeftForwardArea(engineRadius, aircraft.getAltitude(),true);
         
         rootNode.detachChildNamed("Forward Right Engine Area");
         rootNode.detachChildNamed("Forward Left Engine Area");

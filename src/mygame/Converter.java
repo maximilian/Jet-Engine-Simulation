@@ -12,4 +12,13 @@ package mygame;
  */
 public class Converter {
     
+    public float convertKnotsToMetersPerSecond(int knots){
+        float metersPerSecond = (float) (knots * 0.51444444);
+        
+        return metersPerSecond;
+    }
+    
+    public float convertMetersToSystemUnits(int meters){
+        return (float) (meters * 12.193);
+    }
 }

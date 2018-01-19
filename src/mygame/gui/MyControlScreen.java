@@ -95,7 +95,7 @@ public class MyControlScreen implements ScreenController {
         
         gui.setAltitude(fieldAltitude);
         gui.setSpeed(fieldSpeed);
-        gui.submitAircraftVariables(fieldSpeed);   
+        gui.submitAircraftVariables();   
         
         updateAircraftLabels(fieldAltitude, fieldSpeed);
         //updateRadiusText();
@@ -186,8 +186,8 @@ public class MyControlScreen implements ScreenController {
         float distanceToMove = (percentage/100) * 3188;
         
         float speedKnots = (float) (speed * 1.94384);
-        gui.changeAircraftSpeed(speedKnots);
-        gui.moveAircraft(distanceToMove);
+        
+        gui.runVisualisation(speedKnots, distanceToMove);
 
         System.out.println("aircraft speed=" + speedKnots);
     }

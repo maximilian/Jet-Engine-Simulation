@@ -82,7 +82,7 @@ public class GuiAppState extends AbstractAppState {
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
 
-        submitAircraftVariables(160);  
+        submitAircraftVariables();  
     }    
 
     @Override
@@ -114,7 +114,7 @@ public class GuiAppState extends AbstractAppState {
         aircraftView.leftEngineView(aircraft.getAltitude());
      }
     
-    public void submitAircraftVariables(int speed){       
+    public void submitAircraftVariables(){       
         aircraft.setEngineSetting(100);
         
         Spatial aircraftSpatial = aircraft.getSpatial();
@@ -125,12 +125,6 @@ public class GuiAppState extends AbstractAppState {
         
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
-    }
-    
-    public void changeAircraftSpeed(float speed){
-        aircraft.setSpeed(Math.round(speed));
-        
-        updateEngineArea();
     }
     
     public void setSimulation(int distance){
@@ -211,8 +205,12 @@ public class GuiAppState extends AbstractAppState {
         this.showForwardArea = showForwardArea;
     }
     
-    public void moveAircraft(float distance){
-        System.out.println("move=="+distance);
+    public void runVisualisation(float speed, float distance){
+        aircraft.setSpeed(Math.round(speed));
+        
+        updateEngineArea();
+        
+         System.out.println("move=="+distance);
         
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
@@ -220,16 +218,12 @@ public class GuiAppState extends AbstractAppState {
         this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
         leftEngineArea.setLocalTranslation(0,0,distance);
         rightEngineArea.setLocalTranslation(0,0,distance);
-        leftEngineView(distance);
+        aircraftView.leftEngineView(distance);
+        
+        
         System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
-    }
     
-     public void leftEngineView(float distance) {  
-        Quaternion rotation = new Quaternion();
-        // rotate 5/4*pi around y axis
-        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f + distance));
-     }
+    }
+ 
     
 }

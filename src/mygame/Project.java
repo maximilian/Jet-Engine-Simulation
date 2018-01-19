@@ -1,5 +1,6 @@
 package mygame;
 
+import Camera.AircraftCamera;
 import calculation.Aircraft;
 import calculation.Drone;
 import mygame.states.GuiAppState;
@@ -17,6 +18,8 @@ public class Project extends SimpleApplication {
     
     private Aircraft aircraftObject;
     private Drone droneObject;
+    
+    private AircraftCamera airCam;
      
     boolean receivingLittle = false;
     boolean receivingMuch = false;
@@ -28,6 +31,8 @@ public class Project extends SimpleApplication {
         
         setDisplayFps(false);
         setDisplayStatView(false);
+        
+        airCam = new AircraftCamera(getCamera());
         
         flyCam.setMoveSpeed(250);
         flyCam.setDragToRotate(true);
@@ -108,5 +113,9 @@ public class Project extends SimpleApplication {
     
     public Drone getDrone(){
         return droneObject;
+    }
+    
+    public AircraftCamera getAircraftCamera(){
+        return airCam;
     }
 }

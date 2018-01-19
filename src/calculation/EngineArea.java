@@ -121,7 +121,6 @@ public class EngineArea {
     */
     
     public float getCorrectedPressure(float correctedTemperature){
-       
         correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
         
         return 101600;
@@ -135,11 +134,9 @@ public class EngineArea {
     */
     
     public float getCorrectedDensity(float altitude){
-        
         correctedTemperature = getCorrectedTemperature(altitude);
         correctedPressure = getCorrectedPressure(correctedTemperature);
-        
-        
+            
         correctedDensity = (correctedPressure/(287*correctedTemperature));
         System.out.println("corrected density:"+correctedDensity);
         return correctedDensity;
@@ -152,7 +149,6 @@ public class EngineArea {
      * @param the mass flow, in feet
      * @return the corrected density, in kg/m^3
     */
-    
     
     public float getCorrectedMassFlow(float altitude, float massFlow){
         correctedTemperature = getCorrectedTemperature(altitude);

@@ -5,6 +5,7 @@
  */
 package mygame.states;
 
+import Camera.AircraftCamera;
 import calculation.Aircraft;
 import calculation.Drone;
 import calculation.EngineArea;
@@ -42,6 +43,7 @@ public class GuiAppState extends AbstractAppState {
     
     private MyControlScreen controlScreen;
     private Camera flyCam;
+    private AircraftCamera aircraftView;
     private ResourceLoader loader;
     private Node rootNode;
 
@@ -61,6 +63,7 @@ public class GuiAppState extends AbstractAppState {
         this.app = (Project) app;
         this.stateManager = stateManager;
         this.flyCam = this.app.getCamera();
+        this.aircraftView = this.app.getAircraftCamera();
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
@@ -115,11 +118,7 @@ public class GuiAppState extends AbstractAppState {
 
     
     public void aboveView() {
-        Quaternion rotation = new Quaternion();
-        // rotate 90 degrees around x axis
-        rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f+aircraft.getAltitude(), 79.266045f ) ); 
+       aircraftView.aboveView(aircraft.getAltitude());
      }
     
     public void rightEngineView() {

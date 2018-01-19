@@ -152,8 +152,7 @@ public class MyControlScreen implements ScreenController {
              } else{
                  oldValue = parsedInt;
              }
-             
-             
+      
         
         } catch(NumberFormatException e){
              

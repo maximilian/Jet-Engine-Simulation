@@ -122,7 +122,7 @@ public class EngineArea {
        
         correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
         
-        return correctedPressure;
+        return 101600;
     }
     
     /*

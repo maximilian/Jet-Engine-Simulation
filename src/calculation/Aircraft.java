@@ -15,9 +15,9 @@ public class Aircraft {
     private int altitude;
     private int speed;
     private int engineSetting;
-    private float engineDiameter;
     
-    private Spatial aircraft;
+    private final float engineDiameter;
+    private final Spatial aircraft;
     
     public Aircraft(Spatial aircraft){
         this.aircraft = aircraft;

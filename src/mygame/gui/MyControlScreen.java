@@ -115,12 +115,12 @@ public class MyControlScreen implements ScreenController {
         String droneDistanceString = droneDistanceField.getRealText();
         int droneDistance = Integer.parseInt(droneDistanceString);
         
-        gui.submitDroneDistance(droneDistance);
+        gui.setSimulation(droneDistance);
     
     }
     
     public void runSimulation(){
-        gui.setRunSimulation();
+        gui.runSimulation();
 
     }
     

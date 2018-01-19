@@ -21,6 +21,7 @@ import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
 import mygame.Project;
 import mygame.ResourceLoader;
+import mygame.Simulation;
 import mygame.gui.MyControlScreen;
 
 /**
@@ -29,6 +30,7 @@ import mygame.gui.MyControlScreen;
  * @author max
  */
 public class GuiAppState extends AbstractAppState {
+    AppStateManager stateManager;
     
     private Project app;
     private EngineArea engineArea;
@@ -44,19 +46,20 @@ public class GuiAppState extends AbstractAppState {
     private Node rootNode;
 
     private int altitudeDisplacement;
-    
-    
+
     private boolean showForwardArea;
     
     Spatial rightForwardArea;
-    Spatial leftForwardArea;
+    Spatial leftForwardArea;   
     
+    private Simulation simulation;
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         
         this.app = (Project) app;
+        this.stateManager = stateManager;
         this.flyCam = this.app.getCamera();
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
@@ -90,42 +93,7 @@ public class GuiAppState extends AbstractAppState {
 
     @Override
     public void update(float tpf) {
-        Spatial aircraftSpatial = aircraft.getSpatial();
-        Spatial leftEngineArea = loader.getLeftEngineArea();
-        Spatial rightEngineArea = loader.getRightEngineArea();
-
-        if (moveAircraft){
-            Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
-            Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());
-
-            float distanceVectors = a.distance(b);
-            
-            if (x) {
-                init = System.currentTimeMillis();
-                x = false;
-            }
-            
-            if ( distanceVectors >= zDistance) {
-                aircraftSpatial.move(0,0,aircraft.getConvertedSpeed()*tpf);
-                leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
-                rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
-                
-                zDistance += (aircraft.getConvertedSpeed()*tpf);
-                System.out.println(aircraft.getSpeed());
-                finaltime = System.currentTimeMillis();
-            } else {
-                moveAircraft = false;
-                aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
-                leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
-                rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
-                zDistance = 0;
-                x = true;
-                init = finaltime = 0;
-            }
-
-            System.out.println("time taken: " + (finaltime - init));
-        }
-
+        
     }
     
     @Override
@@ -171,7 +139,6 @@ public class GuiAppState extends AbstractAppState {
      }
     
     public void submitAircraftVariables(int speed){
-        
         aircraft.setAltitude(aircraft.getAltitude());
         drone.setAltitude(aircraft.getAltitude());
         
@@ -193,28 +160,22 @@ public class GuiAppState extends AbstractAppState {
         aircraft.setSpeed(Math.round(speed));
         
         updateEngineArea();
-
     }
     
-    public void submitDroneDistance(int distance){
-        drone.setDistanceFromAircraft(distance);
-        
-        Spatial droneSpatial = drone.getSpatial();
-        droneSpatial.setLocalTranslation(49f, aircraft.getAltitude(), drone.getConvertedDistanceFromAircraft());
-        
-        Quaternion droneGroundView = new Quaternion();
-        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.5), new Vector3f(0,1,0) );
-        
-        float angleTowardsDrone = (float) Math.atan(aircraft.getAltitude()/500);
-        Quaternion droneAngleView = new Quaternion();
-
-        droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );
-        
-        Quaternion combo = droneGroundView.mult(droneAngleView);
-        flyCam.setRotation(combo);
-        
-        flyCam.setLocation( new Vector3f(500f, 20, drone.getConvertedDistanceFromAircraft()));
-        
+    public void setSimulation(int distance){
+        if (simulation == null){
+            simulation = new Simulation(aircraft, drone, app);
+            stateManager.attach(simulation);
+        }
+        simulation.setup(distance);
+    }
+    
+    public void runSimulation(){
+        simulation.run();
+    }
+    
+    public void resetSimulation(){
+        simulation.reset();
     }
 
     public void hideForwardArea(){
@@ -277,16 +238,6 @@ public class GuiAppState extends AbstractAppState {
 
     public void setShowForwardArea(Boolean showForwardArea){
         this.showForwardArea = showForwardArea;
-    }
-    
-    public void setRunSimulation(){
-        this.moveAircraft = true;
-    }
-    
-    public void resetSimulation(){
-        this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
-        this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
-        this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }
     
     public void moveAircraft(float distance){

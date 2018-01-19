@@ -18,7 +18,7 @@ public class Converter {
         return metersPerSecond;
     }
     
-    public float convertMetersToSystemUnits(int meters){
-        return (float) (meters * 12.193);
+    public float convertMetersToSystemUnits(float meters){
+        return (float) (meters * 12.1943);
     }
 }

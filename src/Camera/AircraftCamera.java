@@ -30,8 +30,7 @@ public class AircraftCamera {
         rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+altitude, 337.568f ) );
-
-     }
+    }
     
     public void aboveView(int altitude) {
         Quaternion rotation = new Quaternion();
@@ -39,5 +38,21 @@ public class AircraftCamera {
         rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
         flyCam.setRotation(rotation);
         flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f+altitude, 79.266045f ) ); 
+    }
+    
+    public void rightEngineView(int altitude) {
+        Quaternion rotation = new Quaternion();
+        // rotate 5/4*pi around y axis
+        rotation.fromAngleAxis((float) (FastMath.PI * 0.75), new Vector3f(0,1,0) );
+        flyCam.setRotation(rotation);
+        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f+altitude, 249.49205f));
+     }
+    
+    public void leftEngineView(int altitude) {  
+        Quaternion rotation = new Quaternion();
+        // rotate 5/4*pi around y axis
+        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
+        flyCam.setRotation(rotation);
+        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+altitude, 249.49205f));
      }
 }

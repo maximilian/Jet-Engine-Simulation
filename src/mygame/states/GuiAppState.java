@@ -108,33 +108,19 @@ public class GuiAppState extends AbstractAppState {
     }
 
     public void frontView() {
-         Quaternion rotation = new Quaternion();
-        // rotate 170 degrees around y axis
-        rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+aircraft.getAltitude(), 337.568f ) );
-
+        aircraftView.frontView(aircraft.getAltitude());
      }
-
     
     public void aboveView() {
        aircraftView.aboveView(aircraft.getAltitude());
      }
     
     public void rightEngineView() {
-        Quaternion rotation = new Quaternion();
-        // rotate 5/4*pi around y axis
-        rotation.fromAngleAxis((float) (FastMath.PI * 0.75), new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f));
+        aircraftView.rightEngineView(aircraft.getAltitude());
      }
     
     public void leftEngineView() {  
-        Quaternion rotation = new Quaternion();
-        // rotate 5/4*pi around y axis
-        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f));
+        aircraftView.leftEngineView(aircraft.getAltitude());
      }
     
     public void submitAircraftVariables(int speed){

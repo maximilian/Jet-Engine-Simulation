@@ -95,7 +95,6 @@ public class Simulation extends AbstractAppState{
         droneSpatial.setLocalTranslation(49f, aircraft.getAltitude(), drone.getConvertedDistanceFromAircraft());
         
         setCameraPosition();
-    
     }
     
     public void run(){
@@ -106,7 +105,6 @@ public class Simulation extends AbstractAppState{
         this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
         //this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
         //this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
-    
     }
     
     public void setCameraPosition(){

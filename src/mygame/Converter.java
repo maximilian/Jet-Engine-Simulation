@@ -22,11 +22,9 @@ public class Converter {
         return (float) (meters * 12.1943);
     }
     
-    public int convertHgToMillibars(float hg){
-        
+    public int convertHgToMillibars(float hg){      
         float millibars = (float) (hg / 0.029529980164712);
         return Math.round(millibars);
-    
     }
     
     public float convertHgToPascals(float hg){
@@ -37,7 +35,6 @@ public class Converter {
             return (float) (celsius + 273.15);
     }
 
-    
     /*
      * Given pressure and temperature, get density
     */

@@ -21,16 +21,11 @@ import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
 import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
 import mygame.gui.MyControlScreen;
-import org.xml.sax.SAXException;
 
 /**
  * Handles general GUI of the app.
@@ -78,6 +73,7 @@ public class GuiAppState extends AbstractAppState {
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
+        this.engineArea = new EngineArea(aircraft);
         
         this.weather = new WeatherData();
         this.converter = new Converter();
@@ -172,7 +168,7 @@ public class GuiAppState extends AbstractAppState {
     
     
     public void updateEngineArea(){
-        this.engineArea = new EngineArea(aircraft);
+
         
         float engineRadius = engineArea.calculateArea();
         Spatial leftEngine = loader.getLeftEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());

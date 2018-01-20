@@ -18,11 +18,6 @@ import org.xml.sax.SAXException;
  * @author max
  */
 public class EngineArea {
-
-    // International Standard Atmosphere variables
-    private final float temperature;
-    private final float pressure;
-    
     /*
      * Engine information 
     */
@@ -45,10 +40,7 @@ public class EngineArea {
     
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
-        
-        this.temperature = (float) 288.15;
-        this.pressure = (float) 101325;
-        
+
         this.engineDiameter = aircraft.getEngineDiameter();
         
         this.engineFlowRate = (float) 548.85;

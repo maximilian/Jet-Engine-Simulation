@@ -6,6 +6,7 @@
 package mygame.states;
 
 import Camera.AircraftCamera;
+import Weather.WeatherData;
 import calculation.Aircraft;
 import calculation.Drone;
 import calculation.EngineArea;
@@ -20,10 +21,15 @@ import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
 import mygame.gui.MyControlScreen;
+import org.xml.sax.SAXException;
 
 /**
  * Handles general GUI of the app.
@@ -56,6 +62,8 @@ public class GuiAppState extends AbstractAppState {
     
     private Simulation simulation;
     
+    private WeatherData weather;
+    
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
@@ -68,6 +76,8 @@ public class GuiAppState extends AbstractAppState {
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
+        
+        this.weather = new WeatherData();
 
         // Camera view on load
         frontView();
@@ -87,7 +97,15 @@ public class GuiAppState extends AbstractAppState {
 
     @Override
     public void update(float tpf) {
-        
+        try {
+            System.out.println("correct pressure is " + weather.getPressure());
+        } catch (IOException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override

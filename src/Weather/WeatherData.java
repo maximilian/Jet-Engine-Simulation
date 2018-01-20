@@ -25,6 +25,8 @@ import org.xml.sax.SAXException;
  */
 public class WeatherData {
     
+    private float fieldPressure;
+    
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
         String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=EGPF&hoursBeforeNow=1&mostRecent=True&fields=issue_time";   
 
@@ -35,15 +37,22 @@ public class WeatherData {
         URLConnection urlConnection = new URL(url).openConnection();
         urlConnection.addRequestProperty("Accept", "application/xml");
         Document doc = b.parse(urlConnection.getInputStream());
+        
+        //if (doc != null)
         doc.getDocumentElement().normalize();
-        System.out.println ("Root element: " +  doc.getDocumentElement().getAttributes().toString());
         NodeList nList = doc.getElementsByTagName("METAR");
         
         Node nNode = nList.item(0);
         Element eElement = (Element) nNode;
         Element cElement =  (Element) eElement.getElementsByTagName("altim_in_hg").item(0);
+        
+        fieldPressure = Float.valueOf(cElement.getTextContent());
+        
         System.out.println("Pressure in hg: " + cElement.getTextContent());
+
+    }
     
-        System.out.println("nodes: "+nList.getLength());
+    public float getPressure(){
+        return this.fieldPressure;
     }
 }

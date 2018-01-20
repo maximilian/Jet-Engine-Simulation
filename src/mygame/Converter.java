@@ -28,4 +28,14 @@ public class Converter {
         return Math.round(millibars);
     
     }
+    
+    /*
+     * Given pressure and temperature, get density
+    */
+    
+    public float getDensity(float pressure, float temperature){
+        float correctedDensity = (pressure/(287*temperature));
+
+        return correctedDensity;
+    }
 }

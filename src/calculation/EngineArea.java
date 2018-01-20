@@ -5,7 +5,13 @@
  */
 package calculation;
 
+import Weather.WeatherData;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -26,20 +32,16 @@ public class EngineArea {
     // Air mass flow rate through the engine, kg/s
     private final float engineFlowRate;
     
-    private float correctedDensity;
-    private float correctedPressure;
-    private float correctedTemperature;
-    
     private boolean receivingLittle;
     private boolean receivingMuch;
     private boolean receivingCorrect;
     
     private float engineRadiusReal;
-    private float engineRadiusScaled;
         
     private final Aircraft aircraft;
     private final Converter converter;
-    private ISA isa;
+    private final ISA isa;
+    private final WeatherData weather;
     
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
@@ -53,6 +55,7 @@ public class EngineArea {
         
         this.converter = new Converter();
         this.isa = new ISA();
+        this.weather = new WeatherData();
     }
     
     
@@ -65,14 +68,34 @@ public class EngineArea {
      * @return the radius, in correct jME scale, of the area around the engine
     */
     public float calculateArea(){
+        int aircraftAlt = aircraft.getAltitude();
+        float airDensity;
+        
         float correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate); 
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
-
-        float airDensity = isa.getCorrectedDensity(aircraft.getAltitude());
+           
+        /*
+         * TEMPERATURE MAY NEED TO BE IN KELVIN!
+        */
+        
+        if (aircraftAlt == 0){
+            try {
+                airDensity = converter.getDensity(weather.getPressure(), (float) 1.0);
+            } catch (IOException ex) {
+                airDensity = isa.getCorrectedDensity(aircraftAlt);
+            } catch (SAXException ex) {
+                airDensity = isa.getCorrectedDensity(aircraftAlt);
+            } catch (ParserConfigurationException ex) {
+                airDensity = isa.getCorrectedDensity(aircraftAlt);
+            }
+        }else {
+            airDensity = isa.getCorrectedDensity(aircraftAlt);
+        }
+        
         
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;

@@ -100,15 +100,7 @@ public class GuiAppState extends AbstractAppState {
 
     @Override
     public void update(float tpf) {
-        try {
-            System.out.println("correct pressure is " + converter.convertHgToMillibars(weather.getPressure()));
-        } catch (IOException ex) {
-            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
     
     @Override

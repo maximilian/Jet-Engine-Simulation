@@ -30,15 +30,14 @@ public class EngineArea {
     private float correctedPressure;
     private float correctedTemperature;
     
-    private Aircraft aircraft;
-    
     private boolean receivingLittle;
     private boolean receivingMuch;
     private boolean receivingCorrect;
     
     private float engineRadiusReal;
     private float engineRadiusScaled;
-    
+        
+    private final Aircraft aircraft;
     private final Converter converter;
     private ISA isa;
     
@@ -66,7 +65,7 @@ public class EngineArea {
      * @return the radius, in correct jME scale, of the area around the engine
     */
     public float calculateArea(){
-        float correctedEngineFlowRate = getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate); 
+        float correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate); 
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
@@ -97,29 +96,6 @@ public class EngineArea {
         
         System.out.println("Radius = " + engineRadiusReal );
        return correctScale;   
-    }
-    
-
-    
-    /*
-     * Returns the corrected engine mass flow
-     *
-     * @param the altitude, in feet
-     * @param the mass flow, in feet
-     * @return the corrected density, in kg/m^3
-    */
-    
-    public float getCorrectedMassFlow(float altitude, float massFlow){
-        correctedTemperature = isa.getCorrectedTemperature(altitude);
-        correctedPressure = isa.getCorrectedPressure(correctedTemperature);
-        
-        float theta = (float) (correctedTemperature/288.15);
-        float delta = (float) (correctedPressure/101325);
-        
-        float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
-        
-        System.out.println("corrected flow:" + correctedFlow);
-        return correctedFlow;
     }
     
     public boolean getReceivingLittle(){

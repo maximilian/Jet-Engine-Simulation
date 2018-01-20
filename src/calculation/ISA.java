@@ -43,7 +43,7 @@ public class ISA {
     public float getCorrectedPressure(float correctedTemperature){
         correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
         
-        return 101600;
+        return correctedPressure;
     }
     
     /*
@@ -54,11 +54,33 @@ public class ISA {
     */
     
     public float getCorrectedDensity(float altitude){
+        
         correctedTemperature = getCorrectedTemperature(altitude);
         correctedPressure = getCorrectedPressure(correctedTemperature);
             
         correctedDensity = (correctedPressure/(287*correctedTemperature));
         System.out.println("corrected density:"+correctedDensity);
         return correctedDensity;
+    }
+    
+        /*
+     * Returns the corrected engine mass flow
+     *
+     * @param the altitude, in feet
+     * @param the mass flow, in feet
+     * @return the corrected density, in kg/m^3
+    */
+    
+    public float getCorrectedMassFlow(float altitude, float massFlow){
+        correctedTemperature = getCorrectedTemperature(altitude);
+        correctedPressure = getCorrectedPressure(correctedTemperature);
+        
+        float theta = (float) (correctedTemperature/288.15);
+        float delta = (float) (correctedPressure/101325);
+        
+        float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
+        
+        System.out.println("corrected flow:" + correctedFlow);
+        return correctedFlow;
     }
 }

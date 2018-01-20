@@ -69,7 +69,7 @@ public class EngineArea {
     */
     public float calculateArea(){
         int aircraftAlt = aircraft.getAltitude();
-        float airDensity;
+
         
         float correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate); 
         
@@ -82,9 +82,23 @@ public class EngineArea {
          * TEMPERATURE MAY NEED TO BE IN KELVIN!
         */
         
+        float airDensity;
+        float airTemperature;
+        float airPressure;
+        
         if (aircraftAlt == 0){
+            
+            
             try {
-                airDensity = converter.getDensity(weather.getPressure(), (float) 1.0);
+                airTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
+                airPressure = converter.convertHgToPascals(weather.getPressure());
+                
+                System.out.println("converted temp:"+airTemperature);
+                System.out.println("converted pressure:"+airPressure);
+                
+                airDensity = converter.getDensity(airPressure, airTemperature);
+                
+                System.out.println("DENSITY IS: "+airDensity);
             } catch (IOException ex) {
                 airDensity = isa.getCorrectedDensity(aircraftAlt);
             } catch (SAXException ex) {

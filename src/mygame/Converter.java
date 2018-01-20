@@ -29,6 +29,15 @@ public class Converter {
     
     }
     
+    public float convertHgToPascals(float hg){
+        return (float) (hg / 0.00029529980164712);
+    }
+    
+    public float convertCelsiusToKelvin(float celsius){
+            return (float) (celsius + 273.15);
+    }
+
+    
     /*
      * Given pressure and temperature, get density
     */

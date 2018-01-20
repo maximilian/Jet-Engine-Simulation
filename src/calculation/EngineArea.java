@@ -38,6 +38,9 @@ public class EngineArea {
     private final ISA isa;
     private final WeatherData weather;
     
+    private float realPressure;
+    private float realTemperature;
+    
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
 
@@ -48,6 +51,21 @@ public class EngineArea {
         this.converter = new Converter();
         this.isa = new ISA();
         this.weather = new WeatherData();
+        
+        try {
+            this.realPressure = converter.convertHgToPascals(weather.getPressure());
+            this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
+        } catch (IOException ex) {
+            realPressure = 101325;
+            realTemperature = (float) 288.15;
+        } catch (SAXException ex) {
+            realPressure = 101325;
+            realTemperature = (float) 288.15;
+        } catch (ParserConfigurationException ex) {
+            realPressure = 101325;
+            realTemperature = (float) 288.15;
+        }
+
     }
     
     
@@ -78,30 +96,14 @@ public class EngineArea {
         float airTemperature;
         float airPressure;
         
+        
         if (aircraftAlt == 0){
-            
-            
-            try {
-                airTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
-                airPressure = converter.convertHgToPascals(weather.getPressure());
-                
-                System.out.println("converted temp:"+airTemperature);
-                System.out.println("converted pressure:"+airPressure);
-                
-                airDensity = converter.getDensity(airPressure, airTemperature);
-                
-                System.out.println("DENSITY IS: "+airDensity);
-            } catch (IOException ex) {
-                airDensity = isa.getCorrectedDensity(aircraftAlt);
-            } catch (SAXException ex) {
-                airDensity = isa.getCorrectedDensity(aircraftAlt);
-            } catch (ParserConfigurationException ex) {
-                airDensity = isa.getCorrectedDensity(aircraftAlt);
-            }
+            airDensity = converter.getDensity(realPressure, realTemperature);
+            System.out.println("REAL DENSITY IS:"+airDensity);
         }else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
+            System.out.println("ISA DENSITY IS:"+airDensity);
         }
-        
         
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;

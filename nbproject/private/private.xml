@@ -5,9 +5,9 @@
         <group>
             <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/states/GuiAppState.java</file>
             <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/Simulation.java</file>
-            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/calculation/Aircraft.java</file>
+            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/Camera/AircraftCamera.java</file>
             <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/gui/MyControlScreen.java</file>
-            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/calculation/EngineArea.java</file>
+            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/Project.java</file>
         </group>
     </open-files>
 </project-private>

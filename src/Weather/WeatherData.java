@@ -12,4 +12,7 @@ package Weather;
  */
 public class WeatherData {
     
+    public void collectWeather(){
+    
+    }
 }

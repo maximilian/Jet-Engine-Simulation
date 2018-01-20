@@ -21,4 +21,11 @@ public class Converter {
     public float convertMetersToSystemUnits(float meters){
         return (float) (meters * 12.1943);
     }
+    
+    public int convertHgToMillibars(float hg){
+        
+        float millibars = (float) (hg / 0.029529980164712);
+        return Math.round(millibars);
+    
+    }
 }

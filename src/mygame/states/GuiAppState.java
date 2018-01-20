@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import mygame.Converter;
 import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
@@ -63,6 +64,7 @@ public class GuiAppState extends AbstractAppState {
     private Simulation simulation;
     
     private WeatherData weather;
+    private Converter converter;
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -78,6 +80,7 @@ public class GuiAppState extends AbstractAppState {
         this.drone = this.app.getDrone();
         
         this.weather = new WeatherData();
+        this.converter = new Converter();
 
         // Camera view on load
         frontView();
@@ -98,7 +101,7 @@ public class GuiAppState extends AbstractAppState {
     @Override
     public void update(float tpf) {
         try {
-            System.out.println("correct pressure is " + weather.getPressure());
+            System.out.println("correct pressure is " + converter.convertHgToMillibars(weather.getPressure()));
         } catch (IOException ex) {
             Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {

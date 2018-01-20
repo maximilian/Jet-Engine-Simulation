@@ -12,8 +12,11 @@ import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Cylinder;
@@ -111,7 +114,6 @@ public class ResourceLoader {
     public void initAircraft(){
          // Load a model from test_data (OgreXML + material + texture)
         aircraft = assetManager.loadModel("Models/3d-model.j3o");
-
         aircraft.scale(0.3f, 0.3f, 0.3f); 
     }
     
@@ -125,12 +127,13 @@ public class ResourceLoader {
         }
         rightEngineArea = new Geometry("Right Engine", rightEngine);
         
+        
         Material rightEngineAreaMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         rightEngineAreaMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
         
         // transparent hemisphere
         rightEngineAreaMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-
+        rightEngineArea.setQueueBucket(Bucket.Transparent);
         rightEngineArea.setMaterial(rightEngineAreaMat);
 
         Quaternion rotation = new Quaternion();
@@ -154,7 +157,7 @@ public class ResourceLoader {
         
         //transparent hemisphere
         area_mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-        
+        leftEngineArea.setQueueBucket(Bucket.Transparent);
         leftEngineArea.setMaterial(area_mat);
         Quaternion rotation = new Quaternion();
         rotation.fromAngleAxis((float) (FastMath.PI/2), new Vector3f(1,0,0) );
@@ -236,14 +239,10 @@ public class ResourceLoader {
         rock.setWrap(Texture.WrapMode.Repeat);
         mat_terrain.setTexture("Tex3", rock);
         mat_terrain.setFloat("Tex3Scale", 128f);*/
-        
-       
-        Texture airport = assetManager.loadTexture("Textures/staticmap32.png");
+
+        Texture airport = assetManager.loadTexture("Textures/staticmap.png");
         
         mat_terrain.setTexture("ColorMap", airport);
-        
-        
-            
           
             /** 2. Create the height map */
         /*     
@@ -264,10 +263,10 @@ public class ResourceLoader {
          */
         int patchSize = 64;
         terrain = new TerrainQuad("my terrain", patchSize, 513, null);
-
+        
         /** 4. We give the terrain its material, position & scale it, and attach it. */
         terrain.setMaterial(mat_terrain);
-        terrain.setLocalTranslation(0, 0, 0);
+        terrain.setLocalTranslation(-50, 0, 2400);
         
         /* This quaternion stores a 45 degree rotation */
         Quaternion rotation = new Quaternion();
@@ -275,7 +274,7 @@ public class ResourceLoader {
         /* The rotation is applied: The object rolls by 180 degrees. */
         terrain.setLocalRotation( rotation );
         
-        terrain.setLocalScale(4f, 4f, 4f);
+        terrain.setLocalScale(7f, 7f, 7f);
         
 
         /** 5. The LOD (level of detail) depends on were the camera is: */

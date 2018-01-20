@@ -9,12 +9,12 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.SliderChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
-import java.text.DecimalFormat;
 
 import mygame.Project;
 import mygame.states.GuiAppState;
@@ -95,7 +95,7 @@ public class MyControlScreen implements ScreenController {
         
         gui.setAltitude(fieldAltitude);
         gui.setSpeed(fieldSpeed);
-        gui.submitAircraftVariables(fieldSpeed);   
+        gui.submitAircraftVariables();   
         
         updateAircraftLabels(fieldAltitude, fieldSpeed);
         //updateRadiusText();
@@ -115,12 +115,12 @@ public class MyControlScreen implements ScreenController {
         String droneDistanceString = droneDistanceField.getRealText();
         int droneDistance = Integer.parseInt(droneDistanceString);
         
-        gui.submitDroneDistance(droneDistance);
+        gui.setSimulation(droneDistance);
     
     }
     
     public void runSimulation(){
-        gui.setRunSimulation();
+        gui.runSimulation();
 
     }
     
@@ -152,8 +152,7 @@ public class MyControlScreen implements ScreenController {
              } else{
                  oldValue = parsedInt;
              }
-             
-             
+      
         
         } catch(NumberFormatException e){
              
@@ -172,6 +171,26 @@ public class MyControlScreen implements ScreenController {
         }
     }
     
+    @NiftyEventSubscriber(id="simulationTimeControl")
+    public void SliderChangedEvent(final String id, final SliderChangedEvent event){
+        System.out.println(event.getSlider().getValue());
+        
+        float percentage = event.getSlider().getValue();
+        
+        // distance travelled (real life units)
+        float currDistance = (percentage/100) * 1850;
+        // speed based on real life units, using v = u + at
+        float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
+        
+        // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
+        float distanceToMove = (percentage/100) * 3188;
+        
+        float speedKnots = (float) (speed * 1.94384);
+        
+        gui.runVisualisation(speedKnots, distanceToMove);
+
+        System.out.println("aircraft speed=" + speedKnots);
+    }
   
     public void quitGame() {
         System.out.println("quit pls");

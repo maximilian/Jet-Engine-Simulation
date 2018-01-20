@@ -5,6 +5,8 @@
  */
 package calculation;
 
+import mygame.Converter;
+
 /**
  *
  * @author max
@@ -36,7 +38,7 @@ public class EngineArea {
     private float engineRadiusReal;
     private float engineRadiusScaled;
     
-    
+    private final Converter converter;
     
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
@@ -47,7 +49,8 @@ public class EngineArea {
         this.engineDiameter = aircraft.getEngineDiameter();
         
         this.engineFlowRate = (float) 548.85;
-
+        
+        this.converter = new Converter();
     }
     
     
@@ -65,8 +68,8 @@ public class EngineArea {
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         
-        float speedMetres = (float) (0.514444444 * aircraft.getSpeed()); // convert from knots to metres
-   
+        float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
+
         float airDensity = getCorrectedDensity(aircraft.getAltitude());
         
         float engineNeeds = correctedEngineFlowRate / airDensity;
@@ -87,8 +90,7 @@ public class EngineArea {
         
         engineRadiusReal = (float) Math.sqrt((engineAreaRequired / Math.PI));
         
-        
-        float correctScale = (float) (engineRadiusReal * 12.1943);
+        float correctScale = converter.convertMetersToSystemUnits(engineRadiusReal);
         
         System.out.println("Radius = " + engineRadiusReal );
        return correctScale;   
@@ -119,10 +121,9 @@ public class EngineArea {
     */
     
     public float getCorrectedPressure(float correctedTemperature){
-       
         correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
         
-        return correctedPressure;
+        return 101600;
     }
     
     /*
@@ -133,13 +134,11 @@ public class EngineArea {
     */
     
     public float getCorrectedDensity(float altitude){
-        
         correctedTemperature = getCorrectedTemperature(altitude);
         correctedPressure = getCorrectedPressure(correctedTemperature);
-        
-        
+            
         correctedDensity = (correctedPressure/(287*correctedTemperature));
-        
+        System.out.println("corrected density:"+correctedDensity);
         return correctedDensity;
     }
     
@@ -151,7 +150,6 @@ public class EngineArea {
      * @return the corrected density, in kg/m^3
     */
     
-    
     public float getCorrectedMassFlow(float altitude, float massFlow){
         correctedTemperature = getCorrectedTemperature(altitude);
         correctedPressure = getCorrectedPressure(correctedTemperature);
@@ -160,7 +158,8 @@ public class EngineArea {
         float delta = (float) (correctedPressure/101325);
         
         float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
-            
+        
+        System.out.println("corrected flow:" + correctedFlow);
         return correctedFlow;
     }
     

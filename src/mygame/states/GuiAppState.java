@@ -5,6 +5,7 @@
  */
 package mygame.states;
 
+import Camera.AircraftCamera;
 import calculation.Aircraft;
 import calculation.Drone;
 import calculation.EngineArea;
@@ -21,6 +22,7 @@ import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
 import mygame.Project;
 import mygame.ResourceLoader;
+import mygame.Simulation;
 import mygame.gui.MyControlScreen;
 
 /**
@@ -29,6 +31,7 @@ import mygame.gui.MyControlScreen;
  * @author max
  */
 public class GuiAppState extends AbstractAppState {
+    AppStateManager stateManager;
     
     private Project app;
     private EngineArea engineArea;
@@ -40,29 +43,32 @@ public class GuiAppState extends AbstractAppState {
     
     private MyControlScreen controlScreen;
     private Camera flyCam;
+    private AircraftCamera aircraftView;
     private ResourceLoader loader;
     private Node rootNode;
 
     private int altitudeDisplacement;
-    
-    
+
     private boolean showForwardArea;
     
     Spatial rightForwardArea;
-    Spatial leftForwardArea;
+    Spatial leftForwardArea;   
     
+    private Simulation simulation;
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         
         this.app = (Project) app;
+        this.stateManager = stateManager;
         this.flyCam = this.app.getCamera();
+        this.aircraftView = this.app.getAircraftCamera();
         this.loader = this.app.getResourceLoader();
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
-        
+
         // Camera view on load
         frontView();
         
@@ -76,56 +82,12 @@ public class GuiAppState extends AbstractAppState {
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
 
-        submitAircraftVariables(160);  
+        submitAircraftVariables();  
     }    
-    boolean moveAircraft = false;
-    float timeRequired = 1.2153f;
 
-    long init = 0;
-    long finaltime = 0;
-    
-    float zDistance = 0;
-    
-    boolean x = true;
     @Override
     public void update(float tpf) {
         
-        Spatial aircraftSpatial = aircraft.getSpatial();
-        Spatial leftEngineArea = loader.getLeftEngineArea();
-        Spatial rightEngineArea = loader.getRightEngineArea();
-
-        if (moveAircraft){
-            Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
-            Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());
-
-            float distanceVectors = a.distance(b);
-            
-            if (x) {
-                init = System.currentTimeMillis();
-                x = false;
-            }
-            
-            if ( distanceVectors >= zDistance) {
-                aircraftSpatial.move(0,0,aircraft.getConvertedSpeed()*tpf);
-                leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
-                rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
-                
-                zDistance += (aircraft.getConvertedSpeed()*tpf);
-                System.out.println(aircraft.getSpeed());
-                finaltime = System.currentTimeMillis();
-            } else {
-                moveAircraft = false;
-                aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
-                leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
-                rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
-                zDistance = 0;
-                x = true;
-                init = finaltime = 0;
-            }
-            
-            System.out.println(leftEngineArea.getLocalTranslation());
-            System.out.println("time taken: " + (finaltime - init));
-        }
     }
     
     @Override
@@ -137,45 +99,22 @@ public class GuiAppState extends AbstractAppState {
     }
 
     public void frontView() {
-         Quaternion rotation = new Quaternion();
-        // rotate 170 degrees around y axis
-        rotation.fromAngleAxis( FastMath.PI , new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( 0.08276296f, 15.758865f+aircraft.getAltitude(), 337.568f ) );
-
+        aircraftView.frontView(aircraft.getAltitude());
      }
-
     
     public void aboveView() {
-        Quaternion rotation = new Quaternion();
-        // rotate 90 degrees around x axis
-        rotation.fromAngleAxis( FastMath.PI/2 , new Vector3f(1,0,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f( -0.42916974f, 356.08267f+aircraft.getAltitude(), 79.266045f ) ); 
+       aircraftView.aboveView(aircraft.getAltitude());
      }
     
     public void rightEngineView() {
-        Quaternion rotation = new Quaternion();
-        // rotate 5/4*pi around y axis
-        rotation.fromAngleAxis((float) (FastMath.PI * 0.75), new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(-233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f));
+        aircraftView.rightEngineView(aircraft.getAltitude());
      }
     
     public void leftEngineView() {  
-        Quaternion rotation = new Quaternion();
-        // rotate 5/4*pi around y axis
-        rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );
-        flyCam.setRotation(rotation);
-        flyCam.setLocation( new Vector3f(233.71786f, 29.250921f+aircraft.getAltitude(), 249.49205f));
+        aircraftView.leftEngineView(aircraft.getAltitude());
      }
     
-    public void submitAircraftVariables(int speed){
-        
-        aircraft.setAltitude(aircraft.getAltitude());
-        drone.setAltitude(aircraft.getAltitude());
-        
-        aircraft.setSpeed(speed);
+    public void submitAircraftVariables(){       
         aircraft.setEngineSetting(100);
         
         Spatial aircraftSpatial = aircraft.getSpatial();
@@ -184,30 +123,25 @@ public class GuiAppState extends AbstractAppState {
         updateEngineArea();
         updateForwardArea();
         
-	//aircraftSpatial.setLocalTranslation(a.add(d));
         // updates the flycams altitude. Todo: disable submit if nothing was changed
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
     
-    public void submitDroneDistance(int distance){
-        drone.setDistanceFromAircraft(distance);
-        
-        Spatial droneSpatial = drone.getSpatial();
-        droneSpatial.setLocalTranslation(49f, aircraft.getAltitude(), drone.getConvertedDistanceFromAircraft());
-        
-        Quaternion droneGroundView = new Quaternion();
-        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.5), new Vector3f(0,1,0) );
-        
-        float angleTowardsDrone = (float) Math.atan(aircraft.getAltitude()/500);
-        Quaternion droneAngleView = new Quaternion();
-
-        droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );
-        
-        Quaternion combo = droneGroundView.mult(droneAngleView);
-        flyCam.setRotation(combo);
-        
-        flyCam.setLocation( new Vector3f(500f, 20, drone.getConvertedDistanceFromAircraft()));
-        
+    public void setSimulation(int distance){
+        if (simulation == null){
+            simulation = new Simulation(aircraft, drone, app);
+            stateManager.attach(simulation);
+        }
+        drone.setAltitude(aircraft.getAltitude());
+        simulation.setup(distance);
+    }
+    
+    public void runSimulation(){
+        simulation.run();
+    }
+    
+    public void resetSimulation(){
+        simulation.reset();
     }
 
     public void hideForwardArea(){
@@ -243,9 +177,8 @@ public class GuiAppState extends AbstractAppState {
          
          float engineRadius = engineArea.calculateArea();
          
-         rightForwardArea = loader.getRightForwardArea(engineRadius, aircraft.getAltitude(), true);
-         leftForwardArea = loader.getLeftForwardArea(engineRadius, aircraft.getAltitude(),true);
-         
+        rightForwardArea = loader.getRightForwardArea(engineRadius, aircraft.getAltitude(), true);
+        leftForwardArea = loader.getLeftForwardArea(engineRadius, aircraft.getAltitude(),true);
         
         rootNode.detachChildNamed("Forward Right Engine Area");
         rootNode.detachChildNamed("Forward Left Engine Area");
@@ -267,23 +200,30 @@ public class GuiAppState extends AbstractAppState {
     public EngineArea getEngineArea(){
         return engineArea;
     }
-    
-    public Aircraft getAircraft(){
-        return aircraft;
-    }
-    
+
     public void setShowForwardArea(Boolean showForwardArea){
         this.showForwardArea = showForwardArea;
     }
     
-    public void setRunSimulation(){
-        this.moveAircraft = true;
-    }
+    public void runVisualisation(float speed, float distance){
+        aircraft.setSpeed(Math.round(speed));
+        
+        updateEngineArea();
+        
+         System.out.println("move=="+distance);
+        
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
+        
+        this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
+        leftEngineArea.setLocalTranslation(0,0,distance);
+        rightEngineArea.setLocalTranslation(0,0,distance);
+        aircraftView.leftEngineView(distance);
+        
+        
+        System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
     
-    public void resetSimulation(){
-        this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
-        this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
-        this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }
+ 
     
 }

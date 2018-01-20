@@ -1,5 +1,6 @@
 package mygame;
 
+import Camera.AircraftCamera;
 import calculation.Aircraft;
 import calculation.Drone;
 import mygame.states.GuiAppState;
@@ -10,6 +11,21 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Line;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
@@ -17,6 +33,8 @@ public class Project extends SimpleApplication {
     
     private Aircraft aircraftObject;
     private Drone droneObject;
+    
+    private AircraftCamera airCam;
      
     boolean receivingLittle = false;
     boolean receivingMuch = false;
@@ -24,10 +42,20 @@ public class Project extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        axisLines();
+        try {
+            axisLines();
+        } catch (IOException ex) {
+            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         setDisplayFps(false);
         setDisplayStatView(false);
+        
+        airCam = new AircraftCamera(getCamera());
         
         flyCam.setMoveSpeed(250);
         flyCam.setDragToRotate(true);
@@ -39,6 +67,7 @@ public class Project extends SimpleApplication {
          
         gui = new GuiAppState();
         stateManager.attach(gui);
+        
         
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
@@ -65,8 +94,9 @@ public class Project extends SimpleApplication {
        
     }
     
-    public void axisLines(){
-             Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
+    public void axisLines() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
+       
+        Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
         Geometry xaxisline = new Geometry("BOOM!", xaxis);
         
         Line yaxis = new Line(Vector3f.ZERO, new Vector3f(0, 400f, 0));
@@ -107,5 +137,9 @@ public class Project extends SimpleApplication {
     
     public Drone getDrone(){
         return droneObject;
+    }
+    
+    public AircraftCamera getAircraftCamera(){
+        return airCam;
     }
 }

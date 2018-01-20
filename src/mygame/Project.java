@@ -94,7 +94,7 @@ public class Project extends SimpleApplication {
        
     }
     
-    public void axisLines() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
+    public void axisLines() {
        
         Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
         Geometry xaxisline = new Geometry("BOOM!", xaxis);

@@ -44,4 +44,14 @@ public class Converter {
 
         return correctedDensity;
     }
+        
+    public float getCorrectedMassFlow(float temperature, float pressure, float massFlow){        
+        float theta = (float) (temperature/288.15);
+        float delta = (float) (pressure/101325);
+        
+        float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
+        
+        System.out.println("corrected flow:" + correctedFlow);
+        return correctedFlow;
+    }
 }

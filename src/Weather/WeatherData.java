@@ -77,4 +77,12 @@ public class WeatherData {
         return fieldTemperature;
     
     }
+    
+    public String getFieldName() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        if (fieldName == null){
+            collectWeather();
+        }
+        
+        return fieldName;
+    }
 }

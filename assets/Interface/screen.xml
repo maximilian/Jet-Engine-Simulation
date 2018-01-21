@@ -6,7 +6,15 @@
     <layer id="background" childLayout="center">
     </layer>
     <layer id="foreground" childLayout="vertical">
-      <panel id="panel_top" height="65%" width="100%" align="center" childLayout="center">
+      <panel id="panel_top" height="25%" backgroundColor="#0005" width="25%" align="right" childLayout="vertical">
+        <control name="label" width="50%" text="Live Weather Data" valign="center" />
+        
+        <control name="label" width="50%" text="Airport" valign="center" />
+        <control name="label" width="50%" text="Pressure" valign="center" />
+        <control name="label" width="50%" text="Temperature" valign="center" />
+
+      </panel>
+      <panel id="panel_top" height="40%" width="100%" align="center" childLayout="center">
       </panel>
 
       <panel id="panel_bottom" height="35%" width="100%" align="center" childLayout="horizontal" >

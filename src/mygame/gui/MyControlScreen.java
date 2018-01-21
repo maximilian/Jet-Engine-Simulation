@@ -105,8 +105,8 @@ public class MyControlScreen implements ScreenController {
         Window windowField = screen.findNiftyControl("window", Window.class);
         //windowField.closeWindow();
         
-        
-        System.out.println(windowField.hasFocus());
+        windowField.disable();
+
         //updateRadiusText();
     }
     
@@ -135,6 +135,10 @@ public class MyControlScreen implements ScreenController {
     
     public void resetSimulation(){
         gui.resetSimulation();
+    }
+    
+    public void showCollisionWindow(){
+    
     }
     
         /*

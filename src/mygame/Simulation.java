@@ -14,6 +14,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Spatial;
+import mygame.gui.MyControlScreen;
 
 /**
  * Simulates collision between aircraft and drone
@@ -21,6 +22,9 @@ import com.jme3.scene.Spatial;
  * @author max
  */
 public class Simulation extends AbstractAppState{
+    
+    private MyControlScreen controlScreen;
+    
     private Aircraft aircraft;
     private Drone drone;
     
@@ -35,13 +39,15 @@ public class Simulation extends AbstractAppState{
     
     private int distanceTravelled;
     
-    public Simulation(Aircraft aircraft, Drone drone, Application app){
+    public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen){
         
         this.aircraft = aircraft;
         this.drone = drone;
         
         this.app = (Project) app;
         this.flyCam = app.getCamera();
+        
+        this.controlScreen = controlScreen;
         
         // simulation is not running by default
         runSimulation = false;
@@ -83,6 +89,8 @@ public class Simulation extends AbstractAppState{
                 distanceTravelled = 0;
                 timeNotStarted = true;
                 startTime = endTime = 0;
+                
+                controlScreen.showCollisionWindow();
             }
             System.out.println("time taken: " + (endTime - startTime));
         }

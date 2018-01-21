@@ -160,10 +160,23 @@
         </panel> 
                 </panel>
             </control>
-            <control id="tab_2" name="tab" caption="Simulation">
+            <control id="tab_2" name="tab" caption="Visualisation">
                 <panel id="vertical" childLayout="vertical">
                     <panel id="tab1_panel" align="center" childLayout="horizontal">
-                        <panel id="panel_bottom_left" height="80%" width="25%" valign="center" childLayout="vertical">
+                        
+
+
+                    </panel>
+                    <panel id="simulationTime" height="20%" childLayout="horizontal">
+                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>
+                    </panel>
+                </panel>
+            </control>
+            
+                <control id="tab_3" name="tab" caption="Campaign">
+                <panel id="vertical" childLayout="vertical">
+                    <panel id="tab1_panel" align="center" childLayout="horizontal">
+                        <panel id="panel_bottom_left" width="25%" valign="center" childLayout="vertical">
                             <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
                             <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
                                 <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
@@ -226,9 +239,6 @@
                         </panel> 
 
 
-                    </panel>
-                    <panel id="simulationTime" height="20%" childLayout="horizontal">
-                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>
                     </panel>
                 </panel>
             </control>

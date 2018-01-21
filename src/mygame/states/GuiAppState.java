@@ -13,19 +13,22 @@ import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
 import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
 import mygame.gui.MyControlScreen;
+import org.xml.sax.SAXException;
 
 /**
  * Handles general GUI of the app.
@@ -92,7 +95,22 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
 
         submitAircraftVariables();  
-    }    
+        
+        updateWeatherScreen();
+        
+    } 
+    
+    public void updateWeatherScreen(){
+        try {
+            controlScreen.setWeatherInformation("Rodeo Town", weather.getPressure(), weather.getTemperature());
+        } catch (IOException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void update(float tpf) {

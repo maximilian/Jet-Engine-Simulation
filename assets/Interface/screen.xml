@@ -26,7 +26,7 @@
             
             <panel id="time-field" width="100%" childLayout="horizontal">
                 <control name="label" width="50%" text="Last Updated" valign="left" />
-                <control name="label" width="50%" text="21/01/17 13:10" valign="left" />
+                <control name="label" id="lastUpdate" width="50%" text="" valign="left" />
             </panel>
         </panel>
 

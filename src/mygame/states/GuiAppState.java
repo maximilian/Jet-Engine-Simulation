@@ -104,7 +104,7 @@ public class GuiAppState extends AbstractAppState {
         try {
             int convertedPressure = converter.convertHgToMillibars(weather.getPressure());
             
-            controlScreen.setWeatherInformation(weather.getFieldName(), convertedPressure, weather.getTemperature());
+            controlScreen.setWeatherInformation(weather.getFieldName(), convertedPressure, weather.getTemperature(), weather.getDateTime());
         } catch (IOException ex) {
             Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {

@@ -5,6 +5,12 @@
   <screen id="start" controller="mygame.gui.MyControlScreen">
     <layer id="background" childLayout="center">
     </layer>
+    
+<layer id="windows" childLayout="absolute">
+  <control id="window-3" name="window" id="window" title="Please Drag Me Too!" align="left" width="500px" height="200px" y="50px" x="100px">
+    <text id="windowText" text="I'm Another Window!" style="base-font" color="#eeef" valign="center" width="100%" />
+  </control>
+</layer>
     <layer id="foreground" childLayout="vertical">
       <panel id="panel_top" height="25%" backgroundColor="#0008" width="25%" align="right" childLayout="vertical">
         <control name="label" width="50%" text="Live Weather Data" valign="center" />

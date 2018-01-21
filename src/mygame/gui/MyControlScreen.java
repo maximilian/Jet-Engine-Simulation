@@ -137,8 +137,17 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void showCollisionWindow(){   
+        
+        String initial = "By flying your drone close to aircraft, you:"
+                + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
+                + " \n - Could face up to 5 years in prison ";
+        
+        
+        Label windowText = screen.findNiftyControl("time", Label.class);
+        windowText.setText(" You had 5 seconds to react to an aircraft approaching at 160 knots.\n\n"+initial);
+        
         collisionWindowLayer.show();
-
+        
         
     }
     

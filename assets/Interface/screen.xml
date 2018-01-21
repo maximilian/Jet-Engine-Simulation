@@ -8,7 +8,8 @@
     
 <layer id="windows" childLayout="absolute">
   <control name="window" backgroundColor="#f009" id="window" title="Conflict Alert" align="left" width="500px" height="300px" y="50px" x="100px">
-    <text id="windowText" text="I'm Another Window!" style="base-font" color="#eeef" valign="center" width="100%" />
+     <control name="label" text="Your drone was flown into conflict with a Boeing 757" valign="top" />
+     <control name="label" height="100px" width="100%" id="time" text="test" />
   <effect><onStartScreen name="hide" /><onDisabled name="hide" /><onEnabled name="show" /></effect>
 
   </control>

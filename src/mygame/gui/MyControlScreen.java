@@ -15,6 +15,8 @@ import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import mygame.Project;
 import mygame.states.GuiAppState;
@@ -190,6 +192,22 @@ public class MyControlScreen implements ScreenController {
         gui.runVisualisation(speedKnots, distanceToMove);
 
         System.out.println("aircraft speed=" + speedKnots);
+    }
+    
+    public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
+        Label airportIdLabel = screen.findNiftyControl("airportId", Label.class); 
+        Label airportPressureLabel = screen.findNiftyControl("airportPressure", Label.class); 
+        Label airportTempLabel = screen.findNiftyControl("airportTemp", Label.class); 
+        Label airportLastUpdateLabel = screen.findNiftyControl("lastUpdate", Label.class);
+        
+        airportIdLabel.setText(fieldName);
+        airportPressureLabel.setText(Integer.toString(pressure)+" mbar");
+        airportTempLabel.setText(Float.toString(temperature)+" C");
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
+        String formattedDate = datetime.format(formatter);
+       
+        airportLastUpdateLabel.setText(formattedDate);
     }
   
     public void quitGame() {

@@ -6,24 +6,29 @@
 package mygame.states;
 
 import Camera.AircraftCamera;
+import Weather.WeatherData;
 import calculation.Aircraft;
 import calculation.Drone;
 import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import mygame.Converter;
 import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
 import mygame.gui.MyControlScreen;
+import org.xml.sax.SAXException;
 
 /**
  * Handles general GUI of the app.
@@ -56,6 +61,9 @@ public class GuiAppState extends AbstractAppState {
     
     private Simulation simulation;
     
+    private WeatherData weather;
+    private Converter converter;
+    
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
@@ -68,6 +76,10 @@ public class GuiAppState extends AbstractAppState {
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
+        this.engineArea = new EngineArea(aircraft);
+        
+        this.weather = new WeatherData();
+        this.converter = new Converter();
 
         // Camera view on load
         frontView();
@@ -83,11 +95,28 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
 
         submitAircraftVariables();  
-    }    
+        
+        updateWeatherScreen();
+        
+    } 
+    
+    public void updateWeatherScreen(){
+        try {
+            int convertedPressure = converter.convertHgToMillibars(weather.getPressure());
+            
+            controlScreen.setWeatherInformation(weather.getFieldName(), convertedPressure, weather.getTemperature(), weather.getDateTime());
+        } catch (IOException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void update(float tpf) {
-        
+
     }
     
     @Override
@@ -159,7 +188,7 @@ public class GuiAppState extends AbstractAppState {
     
     
     public void updateEngineArea(){
-        this.engineArea = new EngineArea(aircraft);
+
         
         float engineRadius = engineArea.calculateArea();
         Spatial leftEngine = loader.getLeftEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());

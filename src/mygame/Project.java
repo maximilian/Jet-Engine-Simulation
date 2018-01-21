@@ -11,21 +11,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Line;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
@@ -42,15 +27,6 @@ public class Project extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        try {
-            axisLines();
-        } catch (IOException ex) {
-            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         setDisplayFps(false);
         setDisplayStatView(false);
@@ -94,7 +70,7 @@ public class Project extends SimpleApplication {
        
     }
     
-    public void axisLines() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
+    public void axisLines() {
        
         Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
         Geometry xaxisline = new Geometry("BOOM!", xaxis);

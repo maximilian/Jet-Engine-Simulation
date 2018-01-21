@@ -5,17 +5,19 @@
  */
 package calculation;
 
+import Weather.WeatherData;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
+import org.xml.sax.SAXException;
 
 /**
  *
  * @author max
  */
 public class EngineArea {
-    // International Standard Atmosphere variables
-    private final float temperature;
-    private final float pressure;
-    
     /*
      * Engine information 
     */
@@ -25,34 +27,47 @@ public class EngineArea {
     // Air mass flow rate through the engine, kg/s
     private final float engineFlowRate;
     
-    private float correctedDensity;
-    private float correctedPressure;
-    private float correctedTemperature;
-    
-    private Aircraft aircraft;
-    
     private boolean receivingLittle;
     private boolean receivingMuch;
     private boolean receivingCorrect;
     
     private float engineRadiusReal;
-    private float engineRadiusScaled;
-    
+        
+    private final Aircraft aircraft;
     private final Converter converter;
+    private final ISA isa;
+    private final WeatherData weather;
+    
+    private float realPressure;
+    private float realTemperature;
     
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
-        
-        this.temperature = (float) 288.15;
-        this.pressure = (float) 101325;
-        
         this.engineDiameter = aircraft.getEngineDiameter();
-        
         this.engineFlowRate = (float) 548.85;
         
         this.converter = new Converter();
+        this.isa = new ISA();
+        this.weather = new WeatherData();
+        
+        /* Try and download the real weather
+         * 
+         * If successful, use it. Else, use ISA values.
+        */
+        try {
+            this.realPressure = converter.convertHgToPascals(weather.getPressure());
+            this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
+        } catch (IOException ex) {
+            realPressure = 101325;
+            realTemperature = (float) 288.15;
+        } catch (SAXException ex) {
+            realPressure = 101325;
+            realTemperature = (float) 288.15;
+        } catch (ParserConfigurationException ex) {
+            realPressure = 101325;
+            realTemperature = (float) 288.15;
+        }
     }
-    
     
     /*
      * Returns the radius of the area around the engine. Note: maximum altitude 36,089 ft.
@@ -63,14 +78,34 @@ public class EngineArea {
      * @return the radius, in correct jME scale, of the area around the engine
     */
     public float calculateArea(){
-        float correctedEngineFlowRate = getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate); 
+        int aircraftAlt = aircraft.getAltitude();
+
+ 
         
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
-
-        float airDensity = getCorrectedDensity(aircraft.getAltitude());
+           
+        /*
+         * TEMPERATURE MAY NEED TO BE IN KELVIN!
+        */
+        
+        float airDensity;
+        float airTemperature;
+        float airPressure;
+                
+        float correctedEngineFlowRate;
+        if (aircraftAlt == 0){
+            airDensity = converter.getDensity(realPressure, realTemperature);
+            correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, engineFlowRate);
+            System.out.println("REAL DENSITY IS:"+airDensity);
+             System.out.println("REAL FLOW RATE IS:"+correctedEngineFlowRate);
+        }else {
+            airDensity = isa.getCorrectedDensity(aircraftAlt);
+            correctedEngineFlowRate =  isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate);
+            System.out.println("ISA FLOW RATE IS:"+correctedEngineFlowRate);
+        }
         
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
@@ -93,74 +128,7 @@ public class EngineArea {
         float correctScale = converter.convertMetersToSystemUnits(engineRadiusReal);
         
         System.out.println("Radius = " + engineRadiusReal );
-       return correctScale;   
-    }
-    
-     /*
-     * Returns the corrected temperature which can then be used to calculate
-     * the corrected pressure and corrected density
-     *
-     * @param altitude, in feet, of the aircraft
-     * @return the corrected temperature, in Kelvin
-    */
-    
-    public float getCorrectedTemperature(float altitude){
-        float meters = (float) (altitude / 3.2808);
-        System.out.println("meters:" + meters);
-        float correctedKelvin = (float) (288.15 - 0.0065*(meters));
-        
-        return correctedKelvin;
-    }
-    
-    /*
-     * Returns the corrected pressure which can then be used to calculate
-     * the corrected density, and therefore the corrected air mass flow
-     *
-     * @param the correct temperature, in Kelvin
-     * @return the corrected pressure, in Pascals
-    */
-    
-    public float getCorrectedPressure(float correctedTemperature){
-        correctedPressure = (float) (101325 * Math.pow((correctedTemperature/288.15),((9.80665/(287*0.0065)))));
-        
-        return 101600;
-    }
-    
-    /*
-     * Returns the corrected density which can then be used to calculate
-     *
-     * @param the altitude, in feet
-     * @return the corrected density, in kg/m^3
-    */
-    
-    public float getCorrectedDensity(float altitude){
-        correctedTemperature = getCorrectedTemperature(altitude);
-        correctedPressure = getCorrectedPressure(correctedTemperature);
-            
-        correctedDensity = (correctedPressure/(287*correctedTemperature));
-        System.out.println("corrected density:"+correctedDensity);
-        return correctedDensity;
-    }
-    
-    /*
-     * Returns the corrected engine mass flow
-     *
-     * @param the altitude, in feet
-     * @param the mass flow, in feet
-     * @return the corrected density, in kg/m^3
-    */
-    
-    public float getCorrectedMassFlow(float altitude, float massFlow){
-        correctedTemperature = getCorrectedTemperature(altitude);
-        correctedPressure = getCorrectedPressure(correctedTemperature);
-        
-        float theta = (float) (correctedTemperature/288.15);
-        float delta = (float) (correctedPressure/101325);
-        
-        float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
-        
-        System.out.println("corrected flow:" + correctedFlow);
-        return correctedFlow;
+        return correctScale;   
     }
     
     public boolean getReceivingLittle(){

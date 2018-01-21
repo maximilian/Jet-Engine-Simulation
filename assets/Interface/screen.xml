@@ -11,17 +11,17 @@
         <panel id="weather-data" align="left" childLayout="vertical">
             <panel id="airport-field" width="100%" childLayout="horizontal">
                 <control name="label" width="50%" text="Airport" valign="left" />
-                <control name="label" width="50%" text="EGPF" valign="left" />
+                <control name="label" id="airportId" width="50%" text="EGPF" valign="left" />
             </panel>
             
             <panel id="pressure-field" width="100%" childLayout="horizontal">
                 <control name="label" width="50%" text="Pressure" valign="left" />
-                <control name="label" width="50%" text="1013.25mb" valign="left" />
+                <control name="label" id="airportPressure" width="50%" text="1013.25mb" valign="left" />
             </panel>
             
             <panel id="temperature-field" width="100%" childLayout="horizontal">
                 <control name="label" width="50%" text="Temperature" valign="left" />
-                <control name="label" width="50%" text="15C" valign="left" />
+                <control name="label" id="airportTemp" width="50%" text="15C" valign="left" />
             </panel>
             
             <panel id="time-field" width="100%" childLayout="horizontal">

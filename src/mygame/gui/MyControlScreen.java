@@ -34,11 +34,12 @@ public class MyControlScreen implements ScreenController {
     private Project app;    
     
     private Element submitButton;
+    
+    private Element collisionWindowLayer;
 
     
     public MyControlScreen(GuiAppState gui){
         this.gui = gui;
-        
     }
     
     @Override
@@ -47,7 +48,12 @@ public class MyControlScreen implements ScreenController {
         this.screen = screen;
         
         submitButton = screen.findElementById("submitButton");
-        
+ 
+         // Hide the collision window layer by default
+         collisionWindowLayer = screen.findElementById("windows");
+         collisionWindowLayer.hide();
+         
+         
         /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
         
         float fanRadius = gui.getAircraft().getEngineDiameter() / 2;
@@ -59,6 +65,7 @@ public class MyControlScreen implements ScreenController {
 
     @Override
     public void onStartScreen() {
+
 
     }
 
@@ -101,13 +108,6 @@ public class MyControlScreen implements ScreenController {
         gui.submitAircraftVariables();   
         
         updateAircraftLabels(fieldAltitude, fieldSpeed);
-        
-        Window windowField = screen.findNiftyControl("window", Window.class);
-        //windowField.closeWindow();
-        
-        windowField.disable();
-
-        //updateRadiusText();
     }
     
     public void updateAircraftLabels(int altitude, int speed){
@@ -137,8 +137,10 @@ public class MyControlScreen implements ScreenController {
         gui.resetSimulation();
     }
     
-    public void showCollisionWindow(){
-    
+    public void showCollisionWindow(){   
+        
+
+        //updateRadiusText();
     }
     
         /*

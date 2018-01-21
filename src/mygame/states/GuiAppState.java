@@ -102,7 +102,9 @@ public class GuiAppState extends AbstractAppState {
     
     public void updateWeatherScreen(){
         try {
-            controlScreen.setWeatherInformation("Rodeo Town", weather.getPressure(), weather.getTemperature());
+            int convertedPressure = converter.convertHgToMillibars(weather.getPressure());
+            
+            controlScreen.setWeatherInformation(weather.getFieldName(), convertedPressure, weather.getTemperature());
         } catch (IOException ex) {
             Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {

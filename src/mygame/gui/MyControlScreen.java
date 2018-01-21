@@ -192,14 +192,17 @@ public class MyControlScreen implements ScreenController {
         System.out.println("aircraft speed=" + speedKnots);
     }
     
-    public void setWeatherInformation(String fieldName, float pressure, float temperature){
+    public void setWeatherInformation(String fieldName, int pressure, float temperature){
         Label airportIdLabel = screen.findNiftyControl("airportId", Label.class); 
         Label airportPressureLabel = screen.findNiftyControl("airportPressure", Label.class); 
         Label airportTempLabel = screen.findNiftyControl("airportTemp", Label.class); 
         
         airportIdLabel.setText(fieldName);
-        airportPressureLabel.setText(Float.toString(pressure));
-        airportTempLabel.setText(Float.toString(temperature));
+        airportPressureLabel.setText(Integer.toString(pressure)+" mbar");
+        airportTempLabel.setText(Float.toString(temperature)+" C");
+        
+        
+
     
     }
   

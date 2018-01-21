@@ -43,15 +43,17 @@ public class EngineArea {
     
     public EngineArea(Aircraft aircraft){
         this.aircraft = aircraft;
-
         this.engineDiameter = aircraft.getEngineDiameter();
-        
         this.engineFlowRate = (float) 548.85;
         
         this.converter = new Converter();
         this.isa = new ISA();
         this.weather = new WeatherData();
         
+        /* Try and download the real weather
+         * 
+         * If successful, use it. Else, use ISA values.
+        */
         try {
             this.realPressure = converter.convertHgToPascals(weather.getPressure());
             this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
@@ -65,9 +67,7 @@ public class EngineArea {
             realPressure = 101325;
             realTemperature = (float) 288.15;
         }
-
     }
-    
     
     /*
      * Returns the radius of the area around the engine. Note: maximum altitude 36,089 ft.
@@ -94,7 +94,6 @@ public class EngineArea {
         float airDensity;
         float airTemperature;
         float airPressure;
-        
                 
         float correctedEngineFlowRate;
         if (aircraftAlt == 0){
@@ -129,7 +128,7 @@ public class EngineArea {
         float correctScale = converter.convertMetersToSystemUnits(engineRadiusReal);
         
         System.out.println("Radius = " + engineRadiusReal );
-       return correctScale;   
+        return correctScale;   
     }
     
     public boolean getReceivingLittle(){

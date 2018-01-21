@@ -7,7 +7,7 @@
     </layer>
     
 <layer id="windows" childLayout="absolute">
-  <control name="window" id="window" title="Please Drag Me Too!" align="left" width="500px" height="200px" y="50px" x="100px">
+  <control name="window" backgroundColor="#f009" id="window" title="Conflict Alert" align="left" width="500px" height="300px" y="50px" x="100px">
     <text id="windowText" text="I'm Another Window!" style="base-font" color="#eeef" valign="center" width="100%" />
   <effect><onStartScreen name="hide" /><onDisabled name="hide" /><onEnabled name="show" /></effect>
 

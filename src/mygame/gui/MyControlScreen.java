@@ -12,7 +12,6 @@ import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.SliderChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
-import de.lessvoid.nifty.controls.Window;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
@@ -138,9 +137,9 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void showCollisionWindow(){   
-        
+        collisionWindowLayer.show();
 
-        //updateRadiusText();
+        
     }
     
         /*

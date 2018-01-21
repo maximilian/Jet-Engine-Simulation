@@ -103,7 +103,10 @@ public class MyControlScreen implements ScreenController {
         updateAircraftLabels(fieldAltitude, fieldSpeed);
         
         Window windowField = screen.findNiftyControl("window", Window.class);
+        //windowField.closeWindow();
         
+        
+        System.out.println(windowField.hasFocus());
         //updateRadiusText();
     }
     

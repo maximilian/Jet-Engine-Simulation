@@ -118,7 +118,7 @@ public class Simulation extends AbstractAppState{
     
     public void setCameraPosition(){
         Quaternion droneGroundView = new Quaternion();
-        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.5), new Vector3f(0,1,0) );
+        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         
         float angleTowardsDrone = (float) Math.atan(aircraft.getAltitude()/500);
         Quaternion droneAngleView = new Quaternion();

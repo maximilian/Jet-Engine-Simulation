@@ -165,6 +165,9 @@ public class MyControlScreen implements ScreenController {
         radiusLabel.setText(roundedRadius + " metres"); 
     }*/
     
+    /*
+     * Hides the conflict window after collision
+    */
     public void closeConflictWindow(){
 
         collisionWindowLayer.hide();

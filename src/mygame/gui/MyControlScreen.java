@@ -137,7 +137,6 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void showCollisionWindow(float time, int speed, int distance){   
-        System.out.println("showing");
         String initial = ""
                 + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
                 + " \n - Could face up to 5 years in prison "
@@ -227,6 +226,11 @@ public class MyControlScreen implements ScreenController {
         gui.runVisualisation(speedKnots, distanceToMove);
 
         System.out.println("aircraft speed=" + speedKnots);
+        
+        Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
+        Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
+        
+        speedVisLabel.setText(Float.toString(Math.round(speedKnots)));
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){

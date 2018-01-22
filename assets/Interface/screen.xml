@@ -5,6 +5,18 @@
   <screen id="start" controller="mygame.gui.MyControlScreen">
     <layer id="background" childLayout="center">
     </layer>
+    
+<layer id="windows" childLayout="absolute">
+  <control name="window" backgroundColor="#f009" id="window" hideOnClose="true" closeable="false" title="Conflict Alert" align="left" width="500px" height="300px" y="10px" x="100px">
+     <control name="label" text="Your drone was flown into conflict with a Boeing 757" valign="top" />
+     <control name="label" height="180px" width="100%" id="time" text="test" />
+     <control name="button" label="Close" id="closeConflictWindow" align="center" valign="bottom">
+        <interact onClick="closeConflictWindow()"/>
+    </control>
+  <effect><onStartScreen name="hide" /><onDisabled name="hide" /><onEnabled name="show" /></effect>
+
+  </control>
+</layer>
     <layer id="foreground" childLayout="vertical">
       <panel id="panel_top" height="25%" backgroundColor="#0008" width="25%" align="right" childLayout="vertical">
         <control name="label" width="50%" text="Live Weather Data" valign="center" />
@@ -160,10 +172,23 @@
         </panel> 
                 </panel>
             </control>
-            <control id="tab_2" name="tab" caption="Simulation">
+            <control id="tab_2" name="tab" caption="Visualisation">
                 <panel id="vertical" childLayout="vertical">
                     <panel id="tab1_panel" align="center" childLayout="horizontal">
-                        <panel id="panel_bottom_left" height="80%" width="25%" valign="center" childLayout="vertical">
+                        
+
+
+                    </panel>
+                    <panel id="simulationTime" height="20%" childLayout="horizontal">
+                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>
+                    </panel>
+                </panel>
+            </control>
+            
+                <control id="tab_3" name="tab" caption="Campaign">
+                <panel id="vertical" childLayout="vertical">
+                    <panel id="tab1_panel" align="center" childLayout="horizontal">
+                        <panel id="panel_bottom_left" width="25%" valign="center" childLayout="vertical">
                             <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
                             <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
                                 <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
@@ -226,9 +251,6 @@
                         </panel> 
 
 
-                    </panel>
-                    <panel id="simulationTime" height="20%" childLayout="horizontal">
-                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>
                     </panel>
                 </panel>
             </control>

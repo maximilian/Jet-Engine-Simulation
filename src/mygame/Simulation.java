@@ -14,6 +14,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Spatial;
+import mygame.gui.MyControlScreen;
 
 /**
  * Simulates collision between aircraft and drone
@@ -21,6 +22,9 @@ import com.jme3.scene.Spatial;
  * @author max
  */
 public class Simulation extends AbstractAppState{
+    
+    private MyControlScreen controlScreen;
+    
     private Aircraft aircraft;
     private Drone drone;
     
@@ -35,13 +39,15 @@ public class Simulation extends AbstractAppState{
     
     private int distanceTravelled;
     
-    public Simulation(Aircraft aircraft, Drone drone, Application app){
+    public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen){
         
         this.aircraft = aircraft;
         this.drone = drone;
         
         this.app = (Project) app;
         this.flyCam = app.getCamera();
+        
+        this.controlScreen = controlScreen;
         
         // simulation is not running by default
         runSimulation = false;
@@ -82,6 +88,9 @@ public class Simulation extends AbstractAppState{
                 
                 distanceTravelled = 0;
                 timeNotStarted = true;
+                
+                float totalTimeTaken = (float) (endTime - startTime) / 1000;
+                controlScreen.showCollisionWindow(totalTimeTaken, aircraft.getSpeed(), drone.getDistanceFromAircraft());
                 startTime = endTime = 0;
             }
             System.out.println("time taken: " + (endTime - startTime));
@@ -109,7 +118,7 @@ public class Simulation extends AbstractAppState{
     
     public void setCameraPosition(){
         Quaternion droneGroundView = new Quaternion();
-        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.5), new Vector3f(0,1,0) );
+        droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         
         float angleTowardsDrone = (float) Math.atan(aircraft.getAltitude()/500);
         Quaternion droneAngleView = new Quaternion();

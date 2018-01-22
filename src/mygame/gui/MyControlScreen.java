@@ -33,11 +33,12 @@ public class MyControlScreen implements ScreenController {
     private Project app;    
     
     private Element submitButton;
+    
+    private Element collisionWindowLayer;
 
     
     public MyControlScreen(GuiAppState gui){
         this.gui = gui;
-        
     }
     
     @Override
@@ -46,7 +47,12 @@ public class MyControlScreen implements ScreenController {
         this.screen = screen;
         
         submitButton = screen.findElementById("submitButton");
-        
+ 
+         // Hide the collision window layer by default
+         collisionWindowLayer = screen.findElementById("windows");
+         collisionWindowLayer.hide();
+         
+         
         /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
         
         float fanRadius = gui.getAircraft().getEngineDiameter() / 2;
@@ -58,6 +64,7 @@ public class MyControlScreen implements ScreenController {
 
     @Override
     public void onStartScreen() {
+
 
     }
 
@@ -100,7 +107,6 @@ public class MyControlScreen implements ScreenController {
         gui.submitAircraftVariables();   
         
         updateAircraftLabels(fieldAltitude, fieldSpeed);
-        //updateRadiusText();
     }
     
     public void updateAircraftLabels(int altitude, int speed){
@@ -130,6 +136,27 @@ public class MyControlScreen implements ScreenController {
         gui.resetSimulation();
     }
     
+    public void showCollisionWindow(float time, int speed, int distance){   
+        System.out.println("showing");
+        String initial = ""
+                + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
+                + " \n - Could face up to 5 years in prison "
+                + "\n\n Be Drone Safe by following the Drone Code"
+                + "\n http://dronesafe.uk";
+        
+        
+        Label windowText = screen.findNiftyControl("time", Label.class);
+        windowText.setText("Spotting the aircraft " +
+                distance +" meters away flying at " + 
+                speed + " knots" +
+                " left you with\nonly " + 
+                time +" seconds to react\n\n "+ 
+                "With little time to react, you:"+initial);
+
+        collisionWindowLayer.show();
+        
+    }
+    
         /*
     public void updateRadiusText(){
         Label radiusLabel = screen.findNiftyControl("radiusLabel", Label.class); 
@@ -137,6 +164,14 @@ public class MyControlScreen implements ScreenController {
         String roundedRadius = df.format(gui.getEngineArea().getEngineRadiusReal());
         radiusLabel.setText(roundedRadius + " metres"); 
     }*/
+    
+    /*
+     * Hides the conflict window after collision
+    */
+    public void closeConflictWindow(){
+
+        collisionWindowLayer.hide();
+    }
     
     int oldValue = 0;
     

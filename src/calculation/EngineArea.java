@@ -7,8 +7,6 @@ package calculation;
 
 import Weather.WeatherData;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
 import org.xml.sax.SAXException;

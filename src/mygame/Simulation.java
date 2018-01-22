@@ -88,9 +88,11 @@ public class Simulation extends AbstractAppState{
                 
                 distanceTravelled = 0;
                 timeNotStarted = true;
-                startTime = endTime = 0;
                 
-                controlScreen.showCollisionWindow();
+                float totalTimeTaken = (float) (endTime - startTime) / 1000;
+                System.out.println(totalTimeTaken + " seconds");
+                controlScreen.showCollisionWindow(totalTimeTaken, aircraft.getSpeed(), drone.getDistanceFromAircraft());
+                startTime = endTime = 0;
             }
             System.out.println("time taken: " + (endTime - startTime));
         }

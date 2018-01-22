@@ -136,7 +136,7 @@ public class MyControlScreen implements ScreenController {
         gui.resetSimulation();
     }
     
-    public void showCollisionWindow(){   
+    public void showCollisionWindow(float time, int speed, int distance){   
         
         String initial = ""
                 + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
@@ -146,15 +146,15 @@ public class MyControlScreen implements ScreenController {
         
         
         Label windowText = screen.findNiftyControl("time", Label.class);
-        windowText.setText("You spotted the aircraft 150 meters away flying at 160 knots,"
-                + " leaving you with \n5 seconds to react\n\n "
-                + "With no time to react, you:"+initial);
-        
-        
-        
+        windowText.setText("Spotting the aircraft " +
+                distance +" meters away flying at " + 
+                speed + " knots" +
+                " left you with\nonly " + 
+                time +" seconds to react\n\n "+ 
+                "With little time to react, you:"+initial);
+
         collisionWindowLayer.show();
-        
-        
+   
     }
     
         /*

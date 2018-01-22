@@ -137,7 +137,7 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void showCollisionWindow(float time, int speed, int distance){   
-        
+        System.out.println("showing");
         String initial = ""
                 + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
                 + " \n - Could face up to 5 years in prison "
@@ -154,7 +154,7 @@ public class MyControlScreen implements ScreenController {
                 "With little time to react, you:"+initial);
 
         collisionWindowLayer.show();
-   
+        
     }
     
         /*
@@ -164,6 +164,11 @@ public class MyControlScreen implements ScreenController {
         String roundedRadius = df.format(gui.getEngineArea().getEngineRadiusReal());
         radiusLabel.setText(roundedRadius + " metres"); 
     }*/
+    
+    public void closeConflictWindow(){
+
+        collisionWindowLayer.hide();
+    }
     
     int oldValue = 0;
     

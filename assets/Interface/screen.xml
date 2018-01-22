@@ -174,10 +174,19 @@
             </control>
             <control id="tab_2" name="tab" caption="Visualisation">
                 <panel id="vertical" childLayout="vertical">
-                    <panel id="tab1_panel" align="center" childLayout="horizontal">
-                        
-
-
+                    <panel id="tab2_panel" align="center" height="80%" childLayout="horizontal">
+                        <panel id="aircraftInfo" width="30%" childLayout="vertical">
+                            <control name="label" width="50%" text="Aircraft Information" valign="center" />          
+                            <panel id="speedVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Speed" valign="center" />
+                                <control name="label" width="50%" text="0" valign="center" />
+                            </panel>
+                            
+                            <panel id="radiusVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Radius" valign="center" />
+                                <control name="label" width="50%" text="0" valign="center" />
+                            </panel>
+                        </panel>
                     </panel>
                     <panel id="simulationTime" height="20%" childLayout="horizontal">
                             <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>

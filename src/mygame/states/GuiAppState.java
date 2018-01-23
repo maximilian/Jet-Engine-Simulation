@@ -253,6 +253,14 @@ public class GuiAppState extends AbstractAppState {
         leftEngineArea.setLocalTranslation(xDisplacement,0,distance);
         rightEngineArea.setLocalTranslation(xDisplacement,0,distance);
         aircraftView.leftEngineView(distance, xDisplacement);
+        
+        // Ensure aircraft is flat on the earth when not at Vr
+        Quaternion noRot = new Quaternion();
+        noRot.fromAngleAxis( ((0)) , new Vector3f(1,0,0) );
+        
+        aircraft.getSpatial().setLocalRotation(noRot);
+        leftEngineArea.setLocalRotation(leftEngineArea.getLocalRotation().mult(noRot));
+        rightEngineArea.setLocalRotation(rightEngineArea.getLocalRotation().mult(noRot));
     }
     
     public void rotateVisualisation(float rate){

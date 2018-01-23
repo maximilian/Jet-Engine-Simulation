@@ -213,6 +213,7 @@ public class MyControlScreen implements ScreenController {
         
         float percentage = event.getSlider().getValue();
         
+        
         // distance travelled (real life units)
         float currDistance = (percentage/100) * 1850;
         // speed based on real life units, using v = u + at
@@ -224,13 +225,18 @@ public class MyControlScreen implements ScreenController {
         float speedKnots = (float) (speed * 1.94384);
         
         gui.runVisualisation(speedKnots, distanceToMove);
-
+        
         System.out.println("aircraft speed=" + speedKnots);
         
         Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
         Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
         
         speedVisLabel.setText(Float.toString(Math.round(speedKnots)));
+        if (percentage > 100){
+         gui.rotateVisualisation(percentage);
+        
+        }
+ 
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){

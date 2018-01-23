@@ -13,6 +13,8 @@ import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
@@ -251,9 +253,16 @@ public class GuiAppState extends AbstractAppState {
         leftEngineArea.setLocalTranslation(xDisplacement,0,distance);
         rightEngineArea.setLocalTranslation(xDisplacement,0,distance);
         aircraftView.leftEngineView(distance, xDisplacement);
-        
-        
-        System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
+    }
+    
+    public void rotateVisualisation(float rate){
+         /* This quaternion stores a 45 degree rotation */
+         
+        float percentage = (rate - 100);
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis( ((-FastMath.PI/(82/percentage))) , new Vector3f(1,0,0) );
+        /* The rotation is applied: The object rolls by 180 degrees. */
+        aircraft.getSpatial().setLocalRotation( rotation );
     
     }
  

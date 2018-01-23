@@ -12,10 +12,8 @@ import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
-import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
@@ -270,7 +268,7 @@ public class ResourceLoader {
         
         /* This quaternion stores a 45 degree rotation */
         Quaternion rotation = new Quaternion();
-        rotation.fromAngleAxis( FastMath.PI/4 , new Vector3f(0,1,0) );
+        rotation.fromAngleAxis( ((FastMath.PI/4)) , new Vector3f(0,1,0) );
         /* The rotation is applied: The object rolls by 180 degrees. */
         terrain.setLocalRotation( rotation );
         

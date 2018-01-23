@@ -244,10 +244,13 @@ public class GuiAppState extends AbstractAppState {
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
         
-        this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
-        leftEngineArea.setLocalTranslation(0,0,distance);
-        rightEngineArea.setLocalTranslation(0,0,distance);
-        aircraftView.leftEngineView(distance);
+        // maintain aircraft on runway
+        float xDisplacement = - distance/40;
+        
+        this.aircraft.getSpatial().setLocalTranslation(xDisplacement,0,distance);
+        leftEngineArea.setLocalTranslation(xDisplacement,0,distance);
+        rightEngineArea.setLocalTranslation(xDisplacement,0,distance);
+        aircraftView.leftEngineView(distance, xDisplacement);
         
         
         System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());

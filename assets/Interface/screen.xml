@@ -178,8 +178,9 @@
                         <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
                             <control name="label" width="50%" text="Aircraft Information" valign="center" />          
                             <panel id="speedVisualisationField" width="85%" childLayout="horizontal">
-                                <control name="label" width="50%" text="Speed" valign="center" />
-                                <control name="label" width="50%" id="speedVisualisation" text="0" valign="center" />
+                                <control name="button" width="50%" id="speedVisualisation" label="Set Visualisation" valign="center">
+                                    <interact onClick="setVisualisation()"/>
+                                </control>
                             </panel>
                             
                             <panel id="radiusVisualisationField" width="85%" childLayout="horizontal">

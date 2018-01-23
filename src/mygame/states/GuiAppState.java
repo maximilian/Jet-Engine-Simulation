@@ -236,12 +236,23 @@ public class GuiAppState extends AbstractAppState {
         this.showForwardArea = showForwardArea;
     }
     
+    public void setVisualisation(){
+        Spatial ac = aircraft.getSpatial();
+        
+        ac.setLocalTranslation(0,0,0);
+        aircraft.setSpeed(5);
+        aircraft.setAltitude(0);
+        
+        updateEngineArea();
+    
+    }
+    
     public void runVisualisation(float speed, float distance){
         aircraft.setSpeed(Math.round(speed));
         
         updateEngineArea();
         
-         System.out.println("move=="+distance);
+        System.out.println("move=="+distance);
         
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();

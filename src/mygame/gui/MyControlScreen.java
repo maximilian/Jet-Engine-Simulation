@@ -239,6 +239,11 @@ public class MyControlScreen implements ScreenController {
  
     }
     
+    public void setVisualisation(){
+        gui.setVisualisation();
+    
+    }
+    
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
         Label airportIdLabel = screen.findNiftyControl("airportId", Label.class); 
         Label airportPressureLabel = screen.findNiftyControl("airportPressure", Label.class); 

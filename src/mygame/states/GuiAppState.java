@@ -263,6 +263,19 @@ public class GuiAppState extends AbstractAppState {
         rotation.fromAngleAxis( ((-FastMath.PI/(82/percentage))) , new Vector3f(1,0,0) );
         /* The rotation is applied: The object rolls by 180 degrees. */
         aircraft.getSpatial().setLocalRotation( rotation );
+        
+        Quaternion areaRotation = new Quaternion();
+        areaRotation.fromAngleAxis( ((-FastMath.PI/(82/percentage))) , new Vector3f(1,0,0) );
+        
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
+        
+        Quaternion currentRot = leftEngineArea.getLocalRotation();
+        
+        Quaternion combo = currentRot.mult(areaRotation);
+                
+        leftEngineArea.setLocalRotation(combo);
+        rightEngineArea.setLocalRotation(combo);
     
     }
  

@@ -177,9 +177,14 @@
                     <panel id="tab2_panel" align="center" height="80%" childLayout="horizontal">
                         <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
                             <control name="label" width="50%" text="Aircraft Information" valign="center" />          
-                            <panel id="speedVisualisationField" width="85%" childLayout="horizontal">
+                            <panel id="setVisualisationField" width="85%" childLayout="horizontal">
                                 <control name="button" width="50%" label="Set Visualisation" valign="center">
                                     <interact onClick="setVisualisation()"/>
+                                </control>
+                            </panel>
+                            <panel id="resetVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="button" width="50%" label="Reset Visualisation" valign="center">
+                                    <interact onClick="resetVisualisation()"/>
                                 </control>
                             </panel>
                             

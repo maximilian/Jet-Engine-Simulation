@@ -249,6 +249,21 @@ public class GuiAppState extends AbstractAppState {
         aircraftView.leftEngineView(0);
     }
     
+    public void resetVisualisation(){
+        Spatial ac = aircraft.getSpatial();
+        
+        Quaternion noRot = new Quaternion();
+        noRot.fromAngleAxis( ((0)) , new Vector3f(1,0,0) );
+        ac.setLocalRotation(noRot);
+        
+        ac.setLocalTranslation(0,0,0);
+        updateEngineArea();
+        
+        aircraftView.leftEngineView(0);
+        
+    
+    }
+    
     public void runVisualisation(float speed, float distance){
         aircraft.setSpeed(Math.round(speed));
         
@@ -298,6 +313,10 @@ public class GuiAppState extends AbstractAppState {
         leftEngineArea.setLocalRotation(combo);
         rightEngineArea.setLocalRotation(combo);
     
+    }
+    
+    public float getEngineRadius(){
+        return converter.convertSystemUnitsToMeters(engineArea.calculateArea());
     }
  
     

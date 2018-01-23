@@ -17,6 +17,7 @@ import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -248,17 +249,37 @@ public class MyControlScreen implements ScreenController {
         
         speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
 
+        
+        DecimalFormat df = new DecimalFormat("##.##");
+        String roundedRadius = df.format(gui.getEngineRadius());
+        radiusVisLabel.setText(roundedRadius + " meters");
 
         if (percentage > 100){
          gui.rotateVisualisation(percentage);
-        
         }
- 
     }
     
     public void setVisualisation(){
+        Element resetVis = screen.findElementById("resetVisualisationField");
+        Element setVis = screen.findElementById("setVisualisationField");
+        
+        resetVis.enable();
+        setVis.disable();
+
         visualisationSlider.enable();
         gui.setVisualisation();
+    }
+    
+    public void resetVisualisation(){
+        Element resetVis = screen.findElementById("resetVisualisationField");
+        Element setVis = screen.findElementById("setVisualisationField");
+        
+        resetVis.disable();
+        setVis.enable();
+        
+        visualisationSlider.setValue(0);
+        visualisationSlider.disable();
+        gui.resetVisualisation();
     
     }
     

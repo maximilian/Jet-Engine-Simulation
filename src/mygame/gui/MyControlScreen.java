@@ -9,7 +9,9 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.Slider;
 import de.lessvoid.nifty.controls.SliderChangedEvent;
+import de.lessvoid.nifty.controls.Tab;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -35,6 +37,8 @@ public class MyControlScreen implements ScreenController {
     private Element submitButton;
     
     private Element collisionWindowLayer;
+    
+    private Slider visualisationSlider;
 
     
     public MyControlScreen(GuiAppState gui){
@@ -51,7 +55,9 @@ public class MyControlScreen implements ScreenController {
          // Hide the collision window layer by default
          collisionWindowLayer = screen.findElementById("windows");
          collisionWindowLayer.hide();
-         
+
+         visualisationSlider = screen.findNiftyControl("simulationTimeControl", Slider.class);
+         visualisationSlider.disable();
          
         /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
         
@@ -123,7 +129,16 @@ public class MyControlScreen implements ScreenController {
         String droneDistanceString = droneDistanceField.getRealText();
         int droneDistance = Integer.parseInt(droneDistanceString);
         
-        gui.setSimulation(droneDistance);
+        TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);  
+        String altitudeString = altitudeField.getRealText();
+        int fieldAltitude = Integer.parseInt(altitudeString);
+        
+        TextField speedField = screen.findNiftyControl("speedField", TextField.class);  
+        String speedString = speedField.getRealText();
+        int fieldSpeed = Integer.parseInt(speedString);
+        
+        
+        gui.setSimulation(droneDistance, fieldAltitude, fieldSpeed);
     
     }
     
@@ -231,7 +246,9 @@ public class MyControlScreen implements ScreenController {
         Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
         Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
         
-        speedVisLabel.setText(Float.toString(Math.round(speedKnots)));
+        speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+
+
         if (percentage > 100){
          gui.rotateVisualisation(percentage);
         
@@ -240,6 +257,7 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void setVisualisation(){
+        visualisationSlider.enable();
         gui.setVisualisation();
     
     }

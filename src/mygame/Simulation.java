@@ -97,13 +97,20 @@ public class Simulation extends AbstractAppState{
         }
     }
     
-    public void setup(int distance){
+    public void setup(int distance, int altitude, int speed){
         drone.setDistanceFromAircraft(distance);
         
-        Spatial droneSpatial = drone.getSpatial();
-        droneSpatial.setLocalTranslation(49f, aircraft.getAltitude(), drone.getConvertedDistanceFromAircraft());
+        aircraft.setAltitude(altitude);
+        aircraft.setSpeed(speed);
         
-        setCameraPosition();
+        Spatial droneSpatial = drone.getSpatial();
+        droneSpatial.setLocalTranslation(49f, altitude, drone.getConvertedDistanceFromAircraft());
+        
+        Spatial aircraftSpatial = aircraft.getSpatial();
+        aircraftSpatial.setLocalTranslation(0,altitude,0);
+        
+        
+        setCameraPosition(altitude);
     }
     
     public void run(){
@@ -116,11 +123,11 @@ public class Simulation extends AbstractAppState{
         //this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }
     
-    public void setCameraPosition(){
+    public void setCameraPosition(int altitude){
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         
-        float angleTowardsDrone = (float) Math.atan(aircraft.getAltitude()/500);
+        float angleTowardsDrone = (float) Math.atan(altitude/500);
         Quaternion droneAngleView = new Quaternion();
 
         droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );

@@ -158,13 +158,14 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
     
-    public void setSimulation(int distance){
+    public void setSimulation(int distance, int altitude, int speed){
         if (simulation == null){
             simulation = new Simulation(aircraft, drone, app,controlScreen);
             stateManager.attach(simulation);
         }
         drone.setAltitude(aircraft.getAltitude());
-        simulation.setup(distance);
+        simulation.setup(distance, altitude, speed);
+
     }
     
     public void runSimulation(){
@@ -244,7 +245,8 @@ public class GuiAppState extends AbstractAppState {
         aircraft.setAltitude(0);
         
         updateEngineArea();
-    
+            
+        aircraftView.leftEngineView(0);
     }
     
     public void runVisualisation(float speed, float distance){

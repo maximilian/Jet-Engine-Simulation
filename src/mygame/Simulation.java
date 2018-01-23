@@ -23,13 +23,13 @@ import mygame.gui.MyControlScreen;
  */
 public class Simulation extends AbstractAppState{
     
-    private MyControlScreen controlScreen;
+    private final MyControlScreen controlScreen;
     
-    private Aircraft aircraft;
-    private Drone drone;
+    private final Aircraft aircraft;
+    private final Drone drone;
     
-    private Application app;
-    private Camera flyCam;
+    private final Application app;
+    private final Camera flyCam;
 
     private boolean runSimulation;
     private boolean timeNotStarted;

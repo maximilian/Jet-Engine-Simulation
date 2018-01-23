@@ -95,6 +95,7 @@ public class Project extends SimpleApplication {
         xaxisline.setMaterial(area_mat);
         yaxisline.setMaterial(yarea_mat);
         zaxisline.setMaterial(zarea_mat);
+       
         
         rootNode.attachChild(xaxisline);
         rootNode.attachChild(yaxisline);

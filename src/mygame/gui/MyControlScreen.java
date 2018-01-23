@@ -9,12 +9,15 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.Slider;
 import de.lessvoid.nifty.controls.SliderChangedEvent;
+import de.lessvoid.nifty.controls.Tab;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.screen.Screen;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -35,6 +38,8 @@ public class MyControlScreen implements ScreenController {
     private Element submitButton;
     
     private Element collisionWindowLayer;
+    
+    private Slider visualisationSlider;
 
     
     public MyControlScreen(GuiAppState gui){
@@ -51,7 +56,9 @@ public class MyControlScreen implements ScreenController {
          // Hide the collision window layer by default
          collisionWindowLayer = screen.findElementById("windows");
          collisionWindowLayer.hide();
-         
+
+         visualisationSlider = screen.findNiftyControl("simulationTimeControl", Slider.class);
+         visualisationSlider.disable();
          
         /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
         
@@ -123,7 +130,16 @@ public class MyControlScreen implements ScreenController {
         String droneDistanceString = droneDistanceField.getRealText();
         int droneDistance = Integer.parseInt(droneDistanceString);
         
-        gui.setSimulation(droneDistance);
+        TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);  
+        String altitudeString = altitudeField.getRealText();
+        int fieldAltitude = Integer.parseInt(altitudeString);
+        
+        TextField speedField = screen.findNiftyControl("speedField", TextField.class);  
+        String speedString = speedField.getRealText();
+        int fieldSpeed = Integer.parseInt(speedString);
+        
+        
+        gui.setSimulation(droneDistance, fieldAltitude, fieldSpeed);
     
     }
     
@@ -137,7 +153,6 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void showCollisionWindow(float time, int speed, int distance){   
-        System.out.println("showing");
         String initial = ""
                 + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
                 + " \n - Could face up to 5 years in prison "
@@ -214,6 +229,7 @@ public class MyControlScreen implements ScreenController {
         
         float percentage = event.getSlider().getValue();
         
+        
         // distance travelled (real life units)
         float currDistance = (percentage/100) * 1850;
         // speed based on real life units, using v = u + at
@@ -225,8 +241,46 @@ public class MyControlScreen implements ScreenController {
         float speedKnots = (float) (speed * 1.94384);
         
         gui.runVisualisation(speedKnots, distanceToMove);
-
+        
         System.out.println("aircraft speed=" + speedKnots);
+        
+        Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
+        Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
+        
+        speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+
+        
+        DecimalFormat df = new DecimalFormat("##.##");
+        String roundedRadius = df.format(gui.getEngineRadius());
+        radiusVisLabel.setText(roundedRadius + " meters");
+
+        if (percentage > 100){
+         gui.rotateVisualisation(percentage);
+        }
+    }
+    
+    public void setVisualisation(){
+        Element resetVis = screen.findElementById("resetVisualisationField");
+        Element setVis = screen.findElementById("setVisualisationField");
+        
+        resetVis.enable();
+        setVis.disable();
+
+        visualisationSlider.enable();
+        gui.setVisualisation();
+    }
+    
+    public void resetVisualisation(){
+        Element resetVis = screen.findElementById("resetVisualisationField");
+        Element setVis = screen.findElementById("setVisualisationField");
+        
+        resetVis.disable();
+        setVis.enable();
+        
+        visualisationSlider.setValue(0);
+        visualisationSlider.disable();
+        gui.resetVisualisation();
+    
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){

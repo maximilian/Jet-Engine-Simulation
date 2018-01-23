@@ -13,6 +13,8 @@ import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
@@ -156,13 +158,15 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
     
-    public void setSimulation(int distance){
+    public void setSimulation(int distance, int altitude, int speed){
         if (simulation == null){
             simulation = new Simulation(aircraft, drone, app,controlScreen);
             stateManager.attach(simulation);
         }
         drone.setAltitude(aircraft.getAltitude());
-        simulation.setup(distance);
+        simulation.setup(distance, altitude, speed);
+        updateEngineArea();
+
     }
     
     public void runSimulation(){
@@ -234,24 +238,86 @@ public class GuiAppState extends AbstractAppState {
         this.showForwardArea = showForwardArea;
     }
     
+    public void setVisualisation(){
+        Spatial ac = aircraft.getSpatial();
+        
+        ac.setLocalTranslation(0,0,0);
+        aircraft.setSpeed(5);
+        aircraft.setAltitude(0);
+        
+        updateEngineArea();
+            
+        aircraftView.leftEngineView(0);
+    }
+    
+    public void resetVisualisation(){
+        Spatial ac = aircraft.getSpatial();
+        
+        Quaternion noRot = new Quaternion();
+        noRot.fromAngleAxis( ((0)) , new Vector3f(1,0,0) );
+        ac.setLocalRotation(noRot);
+        
+        ac.setLocalTranslation(0,0,0);
+        updateEngineArea();
+        
+        aircraftView.leftEngineView(0);
+        
+    
+    }
+    
     public void runVisualisation(float speed, float distance){
         aircraft.setSpeed(Math.round(speed));
         
         updateEngineArea();
         
-         System.out.println("move=="+distance);
+        System.out.println("move=="+distance);
         
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
         
-        this.aircraft.getSpatial().setLocalTranslation(0,0,distance);
-        leftEngineArea.setLocalTranslation(0,0,distance);
-        rightEngineArea.setLocalTranslation(0,0,distance);
-        aircraftView.leftEngineView(distance);
+        // maintain aircraft on runway
+        float xDisplacement = - distance/40;
         
+        this.aircraft.getSpatial().setLocalTranslation(xDisplacement,0,distance);
+        leftEngineArea.setLocalTranslation(xDisplacement,0,distance);
+        rightEngineArea.setLocalTranslation(xDisplacement,0,distance);
+        aircraftView.leftEngineView(distance, xDisplacement);
         
-        System.out.println("aircraft:"+this.aircraft.getSpatial().getLocalTranslation());
+        // Ensure aircraft is flat on the earth when not at Vr
+        Quaternion noRot = new Quaternion();
+        noRot.fromAngleAxis( ((0)) , new Vector3f(1,0,0) );
+        
+        aircraft.getSpatial().setLocalRotation(noRot);
+        leftEngineArea.setLocalRotation(leftEngineArea.getLocalRotation().mult(noRot));
+        rightEngineArea.setLocalRotation(rightEngineArea.getLocalRotation().mult(noRot));
+    }
     
+    public void rotateVisualisation(float rate){
+         /* This quaternion stores a 45 degree rotation */
+         
+        float percentage = (rate - 100);
+        Quaternion rotation = new Quaternion();
+        rotation.fromAngleAxis( ((-FastMath.PI/(82/percentage))) , new Vector3f(1,0,0) );
+        /* The rotation is applied: The object rolls by 180 degrees. */
+        aircraft.getSpatial().setLocalRotation( rotation );
+        
+        Quaternion areaRotation = new Quaternion();
+        areaRotation.fromAngleAxis( ((-FastMath.PI/(82/percentage))) , new Vector3f(1,0,0) );
+        
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
+        
+        Quaternion currentRot = leftEngineArea.getLocalRotation();
+        
+        Quaternion combo = currentRot.mult(areaRotation);
+                
+        leftEngineArea.setLocalRotation(combo);
+        rightEngineArea.setLocalRotation(combo);
+    
+    }
+    
+    public float getEngineRadius(){
+        return converter.convertSystemUnitsToMeters(engineArea.calculateArea());
     }
  
     

@@ -174,13 +174,39 @@
             </control>
             <control id="tab_2" name="tab" caption="Visualisation">
                 <panel id="vertical" childLayout="vertical">
-                    <panel id="tab1_panel" align="center" childLayout="horizontal">
-                        
+                    <panel id="tab2_panel" align="center" height="100%" childLayout="horizontal">
+                        <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
+                            <control name="label" width="50%" text="Visualisation Options" valign="center" />          
+                            <panel id="setVisualisationField" height="50%" width="85%" childLayout="horizontal">
+                                <control name="button" width="50%" label="Set Visualisation" valign="center">
+                                    <interact onClick="setVisualisation()"/>
+                                </control>
+                            </panel>
+                            <panel id="resetVisualisationField" height="50%" width="85%" childLayout="horizontal">
+                                <control name="button" width="50%" label="Reset Visualisation" valign="center">
+                                    <interact onClick="resetVisualisation()"/>
+                                </control>
+                            </panel>
+                            
+                        </panel>
+                        <panel id="separator" width="33.33%">
 
-
+                        </panel>
+                        <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
+                            <control name="label" width="50%" text="Aircraft Information" valign="center" />          
+                            <panel id="speedVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Speed" valign="center" />
+                                <control name="label" width="50%" id="speedVisualisation" text="0 knots" valign="center" />
+                            </panel>
+                            
+                            <panel id="radiusVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Engine Radius" valign="center" />
+                                <control name="label" width="50%" id="radiusVisualisation" text="0 meters" valign="center" />
+                            </panel>
+                        </panel>
                     </panel>
                     <panel id="simulationTime" height="20%" childLayout="horizontal">
-                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1"/>
+                            <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1" max="104" />
                     </panel>
                 </panel>
             </control>

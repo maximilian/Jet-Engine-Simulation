@@ -165,6 +165,7 @@ public class GuiAppState extends AbstractAppState {
         }
         drone.setAltitude(aircraft.getAltitude());
         simulation.setup(distance, altitude, speed);
+        updateEngineArea();
 
     }
     

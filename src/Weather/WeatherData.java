@@ -37,7 +37,7 @@ public class WeatherData {
     private LocalDateTime date;
             
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
-        String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=EGPF&hoursBeforeNow=1&mostRecent=True";   
+        String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=EGPF&hoursBeforeNow=4&mostRecent=True";   
         
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setNamespaceAware(false);

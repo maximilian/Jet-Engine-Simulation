@@ -35,10 +35,8 @@ public class MyControlScreen implements ScreenController {
     private GuiAppState gui;
     private Project app;    
     
-    private Element submitButton;
-    
+    private Element submitButton;   
     private Element collisionWindowLayer;
-    
     private Slider visualisationSlider;
 
     

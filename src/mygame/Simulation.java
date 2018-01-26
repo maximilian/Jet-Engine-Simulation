@@ -74,7 +74,7 @@ public class Simulation extends AbstractAppState{
             
             if ( distanceVectors >= distanceTravelled) {
                 aircraftSpatial.move(0,0,aircraft.getConvertedSpeed()*tpf);
-                flyCam.setLocation((0,aircraft.getAltitude(),(aircraft.getConvertedSpeed()*tpf));
+                flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
                 //leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
                 //rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
                 
@@ -85,7 +85,7 @@ public class Simulation extends AbstractAppState{
                 runSimulation = false;
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
 
-//leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
+                //leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 //rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 
                 distanceTravelled = 0;

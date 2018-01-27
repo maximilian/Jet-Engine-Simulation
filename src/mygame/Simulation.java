@@ -99,7 +99,7 @@ public class Simulation extends AbstractAppState{
         }
     }
     
-    public void setup(int distance, int altitude, int speed){
+    public void setup(int distance, int altitude, int speed, boolean aircraftView){
         drone.setDistanceFromAircraft(distance);
         
         aircraft.setAltitude(altitude);
@@ -111,12 +111,15 @@ public class Simulation extends AbstractAppState{
         Spatial aircraftSpatial = aircraft.getSpatial();
         aircraftSpatial.setLocalTranslation(0,altitude,0);
         
-        Quaternion cameraRotation = new Quaternion();
-        cameraRotation.fromAngleAxis((float) (FastMath.PI * 2), new Vector3f(0,1,0) );
-        flyCam.setLocation(new Vector3f(0.13625361f, 37.367325f+altitude, 159.01654f));
-        flyCam.setRotation(cameraRotation);
-        
-        //setCameraPosition(altitude);
+        if (aircraftView){
+            Quaternion cameraRotation = new Quaternion();
+            cameraRotation.fromAngleAxis((float) (FastMath.PI * 2), new Vector3f(0,1,0) );
+            flyCam.setLocation(new Vector3f(0.13625361f, 37.367325f+altitude, 159.01654f));
+            flyCam.setRotation(cameraRotation);
+        } else {
+           setCameraPosition(altitude); 
+        }
+
     }
     
     public void run(){

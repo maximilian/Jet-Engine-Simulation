@@ -82,7 +82,8 @@ public class GuiAppState extends AbstractAppState {
         
         this.weather = new WeatherData();
         this.converter = new Converter();
-
+        
+        
         // Camera view on load
         frontView();
         
@@ -95,7 +96,8 @@ public class GuiAppState extends AbstractAppState {
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
-
+        
+        
         submitAircraftVariables();  
         
         updateWeatherScreen();
@@ -166,6 +168,12 @@ public class GuiAppState extends AbstractAppState {
         drone.setAltitude(aircraft.getAltitude());
         simulation.setup(distance, altitude, speed, aircraftView);
         updateEngineArea();
+        
+        if(aircraftView){
+            rootNode.attachChild(loader.getCockpit());
+        } else {
+            rootNode.detachChildNamed("Cockpit");
+        }
 
     }
     
@@ -175,6 +183,7 @@ public class GuiAppState extends AbstractAppState {
     
     public void resetSimulation(){
         simulation.reset();
+        frontView();
     }
 
     public void hideForwardArea(){
@@ -319,6 +328,9 @@ public class GuiAppState extends AbstractAppState {
     public float getEngineRadius(){
         return converter.convertSystemUnitsToMeters(engineArea.calculateArea());
     }
- 
+
+    public Node getRootNode(){
+        return this.rootNode;
+    }
     
 }

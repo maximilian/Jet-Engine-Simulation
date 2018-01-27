@@ -37,10 +37,9 @@ public class Project extends SimpleApplication {
         flyCam.setDragToRotate(true);
         cam.setFrustumFar(5000);
         
-        
-        loader = new ResourceLoader(assetManager, cam);
+        loader = new ResourceLoader(assetManager, cam, settings);
         rootNode.attachChild(loader.getTerrain());
-         
+        
         gui = new GuiAppState();
         stateManager.attach(gui);
         
@@ -66,6 +65,7 @@ public class Project extends SimpleApplication {
        
         // add a light to make the model visible 
         rootNode.addLight(loader.getSun());
+
         
        
     }

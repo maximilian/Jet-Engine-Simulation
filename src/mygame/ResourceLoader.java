@@ -19,9 +19,11 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
+import com.jme3.system.AppSettings;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Texture;
+import com.jme3.ui.Picture;
 
 /**
  * Class used to manage al the different resources/models.
@@ -40,12 +42,16 @@ public class ResourceLoader {
     
     private Spatial drone;
     
+    private Picture cockpit;
+    
     private AssetManager assetManager;
     private Camera terrainLodCamera;
+    private AppSettings settings;
     
-    public ResourceLoader(AssetManager assetManager, Camera terrainLodCamera) {
+    public ResourceLoader(AssetManager assetManager, Camera terrainLodCamera, AppSettings settings) {
         this.assetManager = assetManager;
         this.terrainLodCamera = terrainLodCamera;
+        this.settings = settings;
     }
     
     public DirectionalLight getSun(){
@@ -69,6 +75,14 @@ public class ResourceLoader {
             initAircraft();
         } 
         return aircraft;
+    }
+    
+    public Picture getCockpit(){
+        if(cockpit == null){
+            initCockpit();
+        }
+        
+        return cockpit;
     }
     
     public Spatial getLeftEngineArea(float engineRadius, boolean receivingLittle, boolean submitButton, int altitude){
@@ -284,6 +298,17 @@ public class ResourceLoader {
         sun = new DirectionalLight();
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
     }
+    
+    public void initCockpit(){    
+        cockpit = new Picture("HUD Picture");
+        cockpit.setImage(assetManager, "Textures/757VFR.png", true);
+        cockpit.setWidth(settings.getWidth());
+        cockpit.setHeight(settings.getHeight());
+        cockpit.setPosition(0, 80);
+
+    }
+    
+     
    
     
 }

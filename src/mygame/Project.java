@@ -61,15 +61,7 @@ public class Project extends SimpleApplication {
         
         loader = new ResourceLoader(assetManager, cam);
         rootNode.attachChild(loader.getTerrain());
-                 
-                Picture pic = new Picture("HUD Picture");
-        pic.setImage(assetManager, "Textures/757VFR.png", true);
-        pic.setWidth(settings.getWidth());
-        pic.setHeight(settings.getHeight());
-        pic.setPosition(0, 80);
-  
-
-        rootNode.attachChild(pic);
+       
         
         gui = new GuiAppState();
         stateManager.attach(gui);

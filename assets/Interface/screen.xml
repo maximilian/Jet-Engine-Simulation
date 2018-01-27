@@ -238,16 +238,16 @@
                             
                             <control id="RadioGroup-1" name="radioButtonGroup"/>
                             <panel height="60%" childLayout="horizontal">
-                              <control name="label" text="Radio Buttons" />
-                              <panel childLayout="vertical" >
+                              <control name="label" width="60%" text="Pilot View" />
+                              <panel width="40%" childLayout="vertical" >
                                 <panel childLayout="horizontal">
-                                  <control name="label" text="Option 1" with="60px" />
+                                  <control name="label" text="Aircraft" width="60px" />
                                   <control name="radioButton" id="option-1" group="RadioGroup-1" />
                                 </panel>
                                 <panel childLayout="horizontal">
-                                  <control name="label" text="Option 2" with="60px" />
+                                  <control name="label" text="Drone" width="60px" />
                                   <control name="radioButton" id="option-2" group="RadioGroup-1" />
-                                </panel>S
+                                </panel>
                               </panel>
                             </panel>
 

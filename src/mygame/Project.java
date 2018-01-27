@@ -9,8 +9,13 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Line;
+import com.jme3.scene.shape.Quad;
+import com.jme3.texture.Texture;
+import com.jme3.ui.Picture;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
@@ -37,6 +42,22 @@ public class Project extends SimpleApplication {
         flyCam.setDragToRotate(true);
         cam.setFrustumFar(5000);
         
+
+        
+        /*
+        Geometry cockpitGeom = new Geometry("cockpit", new Quad(1,1));
+        Material cockpitMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        
+        Texture cockpit = assetManager.loadTexture("Textures/757VFR.bmp");
+        cockpitMat.setTexture("ColorMap", cockpit);
+        
+        cockpitGeom.setMaterial(cockpitMat);
+        
+        //cockpitMat.setColor("Color", new ColorRGBA(0,0,255,0.5f));
+        cockpitGeom.setLocalScale(new Vector3f(200,100, 1f));
+        cockpitGeom.setLocalTranslation(0,10,250);
+        
+        rootNode.attachChild(cockpitGeom);*/
         
         loader = new ResourceLoader(assetManager, cam);
         rootNode.attachChild(loader.getTerrain());
@@ -66,6 +87,15 @@ public class Project extends SimpleApplication {
        
         // add a light to make the model visible 
         rootNode.addLight(loader.getSun());
+        
+                Picture pic = new Picture("HUD Picture");
+        pic.setImage(assetManager, "Textures/757VFR.png", true);
+        pic.setWidth(settings.getWidth());
+        pic.setHeight(settings.getHeight());
+        pic.setPosition(0, 100);
+        pic.setQueueBucket(Bucket.Opaque);
+        //pic.setPosition(settings.getWidth()/2, settings.getHeight()/4);
+        guiNode.attachChild(pic);
         
        
     }

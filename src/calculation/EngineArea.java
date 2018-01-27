@@ -78,8 +78,6 @@ public class EngineArea {
     public float calculateArea(){
         int aircraftAlt = aircraft.getAltitude();
 
- 
-        
         float engineRadius = engineDiameter / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         
@@ -101,6 +99,7 @@ public class EngineArea {
              System.out.println("REAL FLOW RATE IS:"+correctedEngineFlowRate);
         }else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
+            System.out.println("ISA DENSITY IS:"+airDensity);
             correctedEngineFlowRate =  isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate);
             System.out.println("ISA FLOW RATE IS:"+correctedEngineFlowRate);
         }

@@ -158,7 +158,7 @@ public class GuiAppState extends AbstractAppState {
         flyCam.setLocation(flyCam.getLocation().add(new Vector3f(0,altitudeDisplacement,0)));
     }
     
-    public void setSimulation(int distance, int altitude, int speed){
+    public void setSimulation(int distance, int altitude, int speed, boolean aircraftView){
         if (simulation == null){
             simulation = new Simulation(aircraft, drone, app,controlScreen);
             stateManager.attach(simulation);

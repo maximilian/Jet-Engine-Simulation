@@ -9,6 +9,8 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.RadioButton;
+import de.lessvoid.nifty.controls.RadioButtonGroup;
 import de.lessvoid.nifty.controls.Slider;
 import de.lessvoid.nifty.controls.SliderChangedEvent;
 import de.lessvoid.nifty.controls.Tab;
@@ -136,8 +138,11 @@ public class MyControlScreen implements ScreenController {
         String speedString = speedField.getRealText();
         int fieldSpeed = Integer.parseInt(speedString);
         
+                
+        RadioButton aircraftRadioButton = screen.findNiftyControl("radio-option-1", RadioButton.class);
+        Boolean aircraftView = aircraftRadioButton.isActivated();
         
-        gui.setSimulation(droneDistance, fieldAltitude, fieldSpeed);
+        gui.setSimulation(droneDistance, fieldAltitude, fieldSpeed, aircraftView);
     
     }
     

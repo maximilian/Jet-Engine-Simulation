@@ -171,6 +171,8 @@ public class GuiAppState extends AbstractAppState {
         
         if(aircraftView){
             rootNode.attachChild(loader.getCockpit());
+        } else {
+            rootNode.detachChildNamed("Cockpit");
         }
 
     }

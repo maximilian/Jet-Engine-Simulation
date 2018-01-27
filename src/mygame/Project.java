@@ -59,7 +59,7 @@ public class Project extends SimpleApplication {
         
         rootNode.attachChild(cockpitGeom);*/
         
-        loader = new ResourceLoader(assetManager, cam);
+        loader = new ResourceLoader(assetManager, cam, settings);
         rootNode.attachChild(loader.getTerrain());
        
         

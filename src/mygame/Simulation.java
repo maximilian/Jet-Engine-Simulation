@@ -89,7 +89,10 @@ public class Simulation extends AbstractAppState{
             } else {
                 runSimulation = false;
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
+                if(aircraftView){
+                    flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 
+                }
                 //leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 //rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 
@@ -118,14 +121,11 @@ public class Simulation extends AbstractAppState{
         Spatial aircraftSpatial = aircraft.getSpatial();
         aircraftSpatial.setLocalTranslation(0,altitude,0);
         
-        System.out.println("aircraft view??? "+aircraftView);
         if (aircraftView){
-            Quaternion cameraRotation = new Quaternion();
-            cameraRotation.fromAngleAxis((float) (FastMath.PI * 2), new Vector3f(0,1,0) );
-            flyCam.setLocation(new Vector3f(0.13625361f, 37.367325f+altitude, 159.01654f));
-            flyCam.setRotation(cameraRotation);
+            setCameraCockpitPosition(altitude);
+
         } else {
-           setCameraPosition(altitude); 
+           setCameraDronePosition(altitude); 
         }
 
     }
@@ -140,7 +140,14 @@ public class Simulation extends AbstractAppState{
         //this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }
     
-    public void setCameraPosition(int altitude){
+    public void setCameraCockpitPosition(int altitude){
+            Quaternion cameraRotation = new Quaternion();
+            cameraRotation.fromAngleAxis((float) (FastMath.PI * 2), new Vector3f(0,1,0) );
+            flyCam.setLocation(new Vector3f(0.13625361f, 37.367325f+altitude, 159.01654f));
+            flyCam.setRotation(cameraRotation);
+    }
+    
+    public void setCameraDronePosition(int altitude){
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         

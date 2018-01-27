@@ -300,7 +300,7 @@ public class ResourceLoader {
     }
     
     public void initCockpit(){    
-        cockpit = new Picture("HUD Picture");
+        cockpit = new Picture("Cockpit");
         cockpit.setImage(assetManager, "Textures/757VFR.png", true);
         cockpit.setWidth(settings.getWidth());
         cockpit.setHeight(settings.getHeight());

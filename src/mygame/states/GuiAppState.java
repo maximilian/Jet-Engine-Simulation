@@ -82,7 +82,8 @@ public class GuiAppState extends AbstractAppState {
         
         this.weather = new WeatherData();
         this.converter = new Converter();
-
+        
+        
         // Camera view on load
         frontView();
         
@@ -95,7 +96,8 @@ public class GuiAppState extends AbstractAppState {
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
-
+        
+        
         submitAircraftVariables();  
         
         updateWeatherScreen();

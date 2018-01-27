@@ -181,6 +181,7 @@ public class GuiAppState extends AbstractAppState {
     
     public void resetSimulation(){
         simulation.reset();
+        frontView();
     }
 
     public void hideForwardArea(){
@@ -325,6 +326,9 @@ public class GuiAppState extends AbstractAppState {
     public float getEngineRadius(){
         return converter.convertSystemUnitsToMeters(engineArea.calculateArea());
     }
- 
+
+    public Node getRootNode(){
+        return this.rootNode;
+    }
     
 }

@@ -10,10 +10,8 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.RadioButton;
-import de.lessvoid.nifty.controls.RadioButtonGroup;
 import de.lessvoid.nifty.controls.Slider;
 import de.lessvoid.nifty.controls.SliderChangedEvent;
-import de.lessvoid.nifty.controls.Tab;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -189,6 +187,9 @@ public class MyControlScreen implements ScreenController {
     public void closeConflictWindow(){
 
         collisionWindowLayer.hide();
+        gui.getRootNode().detachChildNamed("Cockpit");
+        
+        gui.resetSimulation();
     }
     
     int oldValue = 0;

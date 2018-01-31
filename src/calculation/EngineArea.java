@@ -99,8 +99,8 @@ public class EngineArea {
              System.out.println("REAL FLOW RATE IS:"+correctedEngineFlowRate);
         }else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
-            System.out.println("ISA DENSITY IS:"+airDensity);
             correctedEngineFlowRate =  isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate);
+            System.out.println("ISA DENSITY IS:"+airDensity);
             System.out.println("ISA FLOW RATE IS:"+correctedEngineFlowRate);
         }
         

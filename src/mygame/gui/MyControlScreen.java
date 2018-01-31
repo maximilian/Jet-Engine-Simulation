@@ -153,21 +153,29 @@ public class MyControlScreen implements ScreenController {
         gui.resetSimulation();
     }
     
-    public void showCollisionWindow(float time, int speed, int distance){   
+    public void showCollisionWindow(float time, int speed, int distance, boolean aircraftView){   
         String initial = ""
                 + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
-                + " \n - Could face up to 5 years in prison "
+                + " \n - Could face up to 5 years in prison."
                 + "\n\n Be Drone Safe by following the Drone Code"
                 + "\n http://dronesafe.uk";
         
-        
         Label windowText = screen.findNiftyControl("time", Label.class);
-        windowText.setText("Spotting the aircraft " +
+        
+        if(aircraftView){
+            windowText.setText("The aircraft pilot spotted a drone " +
+                distance +" meters away and was left you with\nonly " + 
+                time +" seconds to react\n\n "+ 
+                "With little time to react, the drone pilot:"+initial);
+        } else {
+            windowText.setText("Spotting the aircraft " +
                 distance +" meters away flying at " + 
                 speed + " knots" +
                 " left you with\nonly " + 
                 time +" seconds to react\n\n "+ 
                 "With little time to react, you:"+initial);
+        }
+
 
         collisionWindowLayer.show();
         

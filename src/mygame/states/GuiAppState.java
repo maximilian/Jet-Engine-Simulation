@@ -174,7 +174,6 @@ public class GuiAppState extends AbstractAppState {
         } else {
             rootNode.detachChildNamed("Cockpit");
         }
-
     }
     
     public void runSimulation(){

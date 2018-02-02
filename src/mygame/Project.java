@@ -11,6 +11,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Line;
+import mygame.states.OptionsAppState;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
@@ -43,7 +44,7 @@ public class Project extends SimpleApplication {
         gui = new GuiAppState();
         stateManager.attach(gui);
         
-        
+        //stateManager.attach(new OptionsAppState());
         viewPort.setBackgroundColor(new ColorRGBA(0.7f, 0.8f, 1f, 1f));
 
         // need this in any game involving physics

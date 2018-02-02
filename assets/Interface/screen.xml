@@ -133,11 +133,6 @@
 
                             </panel>              
 
-                          <!--<panel id="camera_panel_mid" height="33.33%" width="100%" childLayout="center">
-                                <control name="button" label="Above" id="MidCamButton" visibleToMouse="true">
-                                    <interact onClick="aboveView()"/>
-                                </control>
-                          </panel>-->
                         <panel id="panel_white_space" height="3%" width="20%" align="center" childLayout="center">
 
                         </panel>

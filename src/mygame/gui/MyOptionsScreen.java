@@ -108,7 +108,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     public void onTextFieldChange(final String id, final TextFieldChangedEvent event){
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
-        System.out.println("aye pal");
+
         if(event.getTextFieldControl().getId().equals("customDiameterField")){
             fanDiameter.setText(event.getText());
         }

@@ -11,12 +11,12 @@
           <control name="label" text="Options Menu" />
         </panel>
         
-        <panel id="choose_engine" height="90%" width="100%" childLayout="vertical">
+        <panel id="choose_engine" backgroundColor="#0809" height="40%" width="100%" childLayout="vertical">
             <control name="label" text="Engine Type" />
             <control id="RadioGroup-1" name="radioButtonGroup"/>
-            <panel childLayout="horizontal" align="center" backgroundColor="#800">
+            <panel childLayout="horizontal" align="center">
 
-              <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="65%">
+              <panel backgroundColor="#8006" childLayout="vertical" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="65%">
                 <effect>
                   <onActive name="border" color="#0008" />
                 </effect>
@@ -57,7 +57,44 @@
             </panel>
             
         </panel>
+        <panel id="choose_weather" backgroundColor="#0089" height="40%" width="100%" childLayout="vertical">
+            <control name="label" text="Weather Data" />
+            <control id="RadioGroup-2" name="radioButtonGroup"/>
+            <panel childLayout="horizontal" align="center">
+
+              <panel backgroundColor="#8006" childLayout="vertical" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="65%">
+                <effect>
+                  <onActive name="border" color="#0008" />
+                </effect>
+                <panel childLayout="horizontal">
+                  <control name="label" text="Live Weather" width="100px" />
+                  <control name="radioButton" id="live_wx" group="RadioGroup-2" />
+                </panel>
+                <panel childLayout="horizontal">
+                  <control name="label" text="ISA" width="100px" />
+                  <control name="radioButton" id="ISA_wx" group="RadioGroup-2" />
+                </panel>
+                <panel childLayout="horizontal">
+                  <control name="label" text="Custom" width="100px" />
+                  <control name="radioButton" id="custom_wx" group="RadioGroup-2" />
+                </panel>
+              </panel>
+                <panel id="desc" childLayout="vertical" width="35%">
+                    <panel width="100%" childLayout="horizontal">
+                        <control name="label" width="60%" text="Temperature (C)"/>
+                        <control name="label" id="temp_wx" width="40%" text="15"/>
+                    </panel>
+                    <panel width="100%" childLayout="horizontal">
+                        <control name="label" width="60%" text="Pressure (mbar)"/>
+                        <control name="label" id="pressure_wx" width="40%" text="432"/>
+                    </panel>
+                </panel>
+              
+            </panel>
+            
+        </panel>
       </panel>
+      
     </layer>
   </screen>
     

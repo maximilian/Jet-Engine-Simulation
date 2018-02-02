@@ -11,10 +11,10 @@
           <control name="label" text="Options Menu" />
         </panel>
         
-        <panel id="choose_engine" height="90%" width="50%" childLayout="vertical">
+        <panel id="choose_engine" height="90%" width="100%" childLayout="vertical">
             <control name="label" text="Engine Type" />
             <control id="RadioGroup-1" name="radioButtonGroup"/>
-            <panel childLayout="vertical" align="center" backgroundColor="#800">
+            <panel childLayout="horizontal" align="center" backgroundColor="#800">
 
               <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="50%">
                 <effect>
@@ -33,17 +33,19 @@
                   <control name="radioButton" id="RB211" group="RadioGroup-1" />
                 </panel>
               </panel>
-            </panel>
-            <panel id="desc" childLayout="vertical">
-                <panel id="fan-diameter" childLayout="horizontal">
-                    <control name="label" text="Fan Diameter (m)"/>
-                    <control name="label" text="5.43"/>
+                <panel id="desc" childLayout="vertical">
+                    <panel id="fan-diameter" childLayout="horizontal">
+                        <control name="label" text="Fan Diameter (m)"/>
+                        <control name="label" text="5.43"/>
+                    </panel>
+                    <panel id="massflow" childLayout="horizontal">
+                        <control name="label" text="Mass Flow Rate (kg)"/>
+                        <control name="label" text="432"/>
+                    </panel>
                 </panel>
-                <panel id="massflow" childLayout="horizontal">
-                    <control name="label" text="Mass Flow Rate (kg)"/>
-                    <control name="label" text="432"/>
-                </panel>
+              
             </panel>
+            
         </panel>
       </panel>
     </layer>

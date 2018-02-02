@@ -39,7 +39,7 @@
                         <control name="label" id="fan_diameter" width="50%" text="5.43"/>
                     </panel>
                     <panel id="massflow" width="100%" childLayout="horizontal">
-                        <control name="label" width="50%" text="Mass Flow Rate (kg)"/>
+                        <control name="label" width="50%" text="Mass Flow Rate (kg/s)"/>
                         <control name="label" id="mass_flow" width="50%" text="432"/>
                     </panel>
                 </panel>

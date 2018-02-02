@@ -5,33 +5,8 @@
   
   <screen id="options" controller="mygame.gui.MyOptionsScreen">
     <layer id="foreground" childLayout="vertical">
-      <panel id="panel_top" height="25%" backgroundColor="#0008" width="25%" align="right" childLayout="vertical">
-        <control name="label" width="50%" text="Live Weather Data" valign="center" />
-        <panel id="weather-data" align="left" childLayout="vertical">
-            <panel id="airport-field" width="100%" childLayout="horizontal">
-                <control name="label" width="50%" text="Airport" valign="left" />
-                <control name="label" id="airportId" width="50%" text="EGPF" valign="left" />
-            </panel>
-            
-            <panel id="pressure-field" width="100%" childLayout="horizontal">
-                <control name="label" width="50%" text="Pressure" valign="left" />
-                <control name="label" id="airportPressure" width="50%" text="1013.25mb" valign="left" />
-            </panel>
-            
-            <panel id="temperature-field" width="100%" childLayout="horizontal">
-                <control name="label" width="50%" text="Temperature" valign="left" />
-                <control name="label" id="airportTemp" width="50%" text="15C" valign="left" />
-            </panel>
-            
-            <panel id="time-field" width="100%" childLayout="horizontal">
-                <control name="label" width="50%" text="Last Updated" valign="left" />
-                <control name="label" id="lastUpdate" width="50%" text="" valign="left" />
-            </panel>
-        </panel>
-
-
-      </panel>
-      <panel id="panel_top" height="40%" width="100%" align="center" childLayout="center">
+      <panel id="separator" height="10%" />
+      <panel id="panel_top" backgroundColor="#336" height="80%" width="75%" align="center" valign="center" childLayout="center">
       </panel>
 
     </layer>

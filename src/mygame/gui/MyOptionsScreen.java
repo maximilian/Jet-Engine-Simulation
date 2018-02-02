@@ -73,13 +73,20 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     public void onRadioGroup1Changed(final String id, final RadioButtonGroupStateChangedEvent event) {
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
-
-        if(event.getSelectedId().equals("PW2037")){
+        
+        String selected = event.getSelectedId();
+        
+        if(selected.equals("PW2037")){
             fanDiameter.setText("2.154");
             massFlow.setText("548.85");
-        } 
+        } else if (selected.equals("PW2040")){
+            fanDiameter.setText("2.146");
+            massFlow.setText("573.34");
+        } else if (selected.equals("RB211")){
+            fanDiameter.setText("1.");
+            massFlow.setText("522.08");
+        }
         
-        System.out.println("RadioButton [" + event.getSelectedId() + "] is now selected. The old selection was [" + event.getPreviousSelectedId() + "]");
     }
     
 }

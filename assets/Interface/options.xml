@@ -14,7 +14,7 @@
         <panel id="choose_engine" height="90%" width="50%" childLayout="vertical">
             <control name="label" text="Engine Type" />
             <control id="RadioGroup-1" name="radioButtonGroup"/>
-            <panel childLayout="horizontal" align="center">
+            <panel childLayout="vertical" align="center" backgroundColor="#800">
 
               <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="50%">
                 <effect>
@@ -22,20 +22,27 @@
                 </effect>
                 <panel childLayout="horizontal">
                   <control name="label" text="PW2037" width="100px" />
-                  <control name="radioButton" id="option-1" group="RadioGroup-1" />
+                  <control name="radioButton" id="PW2037" group="RadioGroup-1" />
                 </panel>
                 <panel childLayout="horizontal">
                   <control name="label" text="PW2040" width="100px" />
-                  <control name="radioButton" id="option-2" group="RadioGroup-1" />
+                  <control name="radioButton" id="PW2040" group="RadioGroup-1" />
                 </panel>
                 <panel childLayout="horizontal">
                   <control name="label" text="RB211-535E4B" width="100px" />
-                  <control name="radioButton" id="option-3" group="RadioGroup-1" />
+                  <control name="radioButton" id="RB211" group="RadioGroup-1" />
                 </panel>
               </panel>
             </panel>
-            <panel id="PW2037" height="33.33%" childLayout="horizontal">
-                <control name="label" text="PW2037" />
+            <panel id="desc" childLayout="vertical">
+                <panel id="fan-diameter" childLayout="horizontal">
+                    <control name="label" text="Fan Diameter (m)"/>
+                    <control name="label" text="5.43"/>
+                </panel>
+                <panel id="massflow" childLayout="horizontal">
+                    <control name="label" text="Mass Flow Rate (kg)"/>
+                    <control name="label" text="432"/>
+                </panel>
             </panel>
         </panel>
       </panel>

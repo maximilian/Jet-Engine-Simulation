@@ -57,6 +57,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
+        
+        TextField fanDiameterField = screen.findNiftyControl("customDiameterField", TextField.class); 
+        TextField massFlowField = screen.findNiftyControl("customMassFlowField", TextField.class); 
 
     }
 
@@ -83,7 +86,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
             fanDiameter.setText("2.146");
             massFlow.setText("573.34");
         } else if (selected.equals("RB211")){
-            fanDiameter.setText("1.");
+            fanDiameter.setText("1.882");
             massFlow.setText("522.08");
         }
         

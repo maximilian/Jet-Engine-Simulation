@@ -16,7 +16,7 @@
             <control id="RadioGroup-1" name="radioButtonGroup"/>
             <panel childLayout="horizontal" align="center" backgroundColor="#800">
 
-              <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="50%">
+              <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="65%">
                 <effect>
                   <onActive name="border" color="#0008" />
                 </effect>
@@ -32,15 +32,25 @@
                   <control name="label" text="RB211-535E4B" width="100px" />
                   <control name="radioButton" id="RB211" group="RadioGroup-1" />
                 </panel>
+                <panel childLayout="horizontal">
+                  <control name="label" text="Custom" width="100px" />
+                  <control name="radioButton" id="custom" group="RadioGroup-1" />
+                  <panel childLayout="horizontal" width="100%">
+                    <control name="label" width="25%" text="Fan Diam (m)" />
+                    <control name="textfield" text="0" width="10%" id="customDiameterField" />
+                    <control name="label" width="25%" text="Mass Flow (kg/s)" />
+                    <control name="textfield" text="0" width="10%" id="customMassFlow" />
+                  </panel>
+                </panel>
               </panel>
-                <panel id="desc" childLayout="vertical">
+                <panel id="desc" childLayout="vertical" width="35%">
                     <panel id="fan-diameter" width="100%" childLayout="horizontal">
-                        <control name="label" width="50%" text="Fan Diameter (m)"/>
-                        <control name="label" id="fan_diameter" width="50%" text="5.43"/>
+                        <control name="label" width="60%" text="Fan Diameter (m)"/>
+                        <control name="label" id="fan_diameter" width="40%" text="5.43"/>
                     </panel>
                     <panel id="massflow" width="100%" childLayout="horizontal">
-                        <control name="label" width="50%" text="Mass Flow Rate (kg/s)"/>
-                        <control name="label" id="mass_flow" width="50%" text="432"/>
+                        <control name="label" width="60%" text="Mass Flow Rate (kg/s)"/>
+                        <control name="label" id="mass_flow" width="40%" text="432"/>
                     </panel>
                 </panel>
               

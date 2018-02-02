@@ -99,6 +99,9 @@
             </panel>
             
         </panel>
+        <panel height="10%" width="20%" backgroundColor="#fff" childLayout="horizontal" align="center">
+            <control name="button" label="Submit" id="airportCheck" />
+        </panel>
       </panel>
       
     </layer>

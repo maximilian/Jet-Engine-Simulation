@@ -285,7 +285,6 @@ public class ResourceLoader {
         rotation.fromAngleAxis( ((FastMath.PI/4)) , new Vector3f(0,1,0) );
         /* The rotation is applied: The object rolls by 180 degrees. */
         terrain.setLocalRotation( rotation );
-        
         terrain.setLocalScale(7f, 7f, 7f);
         
 

@@ -208,7 +208,7 @@ public class GuiAppState extends AbstractAppState {
         
         rootNode.detachChildNamed("Right Engine");
         rootNode.detachChildNamed("Left Engine");
-        
+
         rootNode.attachChild(rightEngine);
         rootNode.attachChild(leftEngine);
     }

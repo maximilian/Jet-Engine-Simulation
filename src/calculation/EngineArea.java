@@ -95,13 +95,9 @@ public class EngineArea {
         if (aircraftAlt == 0){
             airDensity = converter.getDensity(realPressure, realTemperature);
             correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, engineFlowRate);
-            System.out.println("REAL DENSITY IS:"+airDensity);
-             System.out.println("REAL FLOW RATE IS:"+correctedEngineFlowRate);
         }else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
             correctedEngineFlowRate =  isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate);
-            System.out.println("ISA DENSITY IS:"+airDensity);
-            System.out.println("ISA FLOW RATE IS:"+correctedEngineFlowRate);
         }
         
         float engineNeeds = correctedEngineFlowRate / airDensity;

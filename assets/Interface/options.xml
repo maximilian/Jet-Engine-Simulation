@@ -39,7 +39,7 @@
                     <control name="label" width="25%" text="Fan Diam (m)" />
                     <control name="textfield" text="0" width="10%" id="customDiameterField" />
                     <control name="label" width="25%" text="Mass Flow (kg/s)" />
-                    <control name="textfield" text="0" width="10%" id="customMassFlow" />
+                    <control name="textfield" text="0" width="10%" id="customMassFlowField" />
                   </panel>
                 </panel>
               </panel>

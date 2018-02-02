@@ -26,7 +26,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     private OptionsAppState gui;
     private Nifty nifty;
     private Screen screen;
-        
+    private TextField customFanDiameterField;
+    private TextField customMassFlowField;
+    
     public MyOptionsScreen(OptionsAppState gui){
         this.gui = gui;
     }
@@ -58,8 +60,11 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         this.nifty = nifty;
         this.screen = screen;
         
-        TextField fanDiameterField = screen.findNiftyControl("customDiameterField", TextField.class); 
-        TextField massFlowField = screen.findNiftyControl("customMassFlowField", TextField.class); 
+        customFanDiameterField = screen.findNiftyControl("customDiameterField", TextField.class); 
+        customMassFlowField = screen.findNiftyControl("customMassFlowField", TextField.class); 
+        
+        customFanDiameterField.disable();
+        customMassFlowField.disable();
 
     }
 
@@ -78,7 +83,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
         
         String selected = event.getSelectedId();
-        
+        customFanDiameterField.disable();
+        customMassFlowField.disable();
+            
         if(selected.equals("PW2037")){
             fanDiameter.setText("2.154");
             massFlow.setText("548.85");
@@ -88,6 +95,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         } else if (selected.equals("RB211")){
             fanDiameter.setText("1.882");
             massFlow.setText("522.08");
+        } else if (selected.equals("custom")){
+            customFanDiameterField.enable();
+            customMassFlowField.enable();
         }
         
     }

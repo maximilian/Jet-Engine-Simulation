@@ -72,6 +72,8 @@
                   <panel childLayout="horizontal" width="100%">
                     <control name="label" width="25%" text="Airport ICAO" />
                     <control name="textfield" text="EGPF" width="10%" id="airportEntry" />
+                    <panel id="separator" width="5%" />
+                    <control name="button" label="Check" width="25%" id="airportCheck" />
                   </panel>
                 </panel>
                 <panel childLayout="horizontal">

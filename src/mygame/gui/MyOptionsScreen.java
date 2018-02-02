@@ -9,6 +9,10 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
+import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import mygame.states.GuiAppState;
@@ -20,6 +24,8 @@ import mygame.states.OptionsAppState;
  */
 public class MyOptionsScreen extends AbstractAppState implements ScreenController {
     private OptionsAppState gui;
+    private Nifty nifty;
+    private Screen screen;
         
     public MyOptionsScreen(OptionsAppState gui){
         this.gui = gui;
@@ -49,6 +55,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
+        this.nifty = nifty;
+        this.screen = screen;
+
     }
 
     @Override
@@ -58,6 +67,18 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     @Override
     public void onEndScreen() {
         
+    }
+    
+    @NiftyEventSubscriber(id="RadioGroup-1")
+    public void onRadioGroup1Changed(final String id, final RadioButtonGroupStateChangedEvent event) {
+        Label fanDiam = screen.findNiftyControl("fan_diameter", Label.class); 
+        Label speedLabel = screen.findNiftyControl("mass_flow", Label.class); 
+
+        if(event.getSelectedId().equals("PW2037")){
+            fanDiam.setText("ayy");
+        } 
+        
+        System.out.println("RadioButton [" + event.getSelectedId() + "] is now selected. The old selection was [" + event.getPreviousSelectedId() + "]");
     }
     
 }

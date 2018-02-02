@@ -34,13 +34,13 @@
                 </panel>
               </panel>
                 <panel id="desc" childLayout="vertical">
-                    <panel id="fan-diameter" childLayout="horizontal">
-                        <control name="label" text="Fan Diameter (m)"/>
-                        <control name="label" text="5.43"/>
+                    <panel id="fan-diameter" width="100%" childLayout="horizontal">
+                        <control name="label" width="50%" text="Fan Diameter (m)"/>
+                        <control name="label" id="fan_diameter" width="50%" text="5.43"/>
                     </panel>
-                    <panel id="massflow" childLayout="horizontal">
-                        <control name="label" text="Mass Flow Rate (kg)"/>
-                        <control name="label" text="432"/>
+                    <panel id="massflow" width="100%" childLayout="horizontal">
+                        <control name="label" width="50%" text="Mass Flow Rate (kg)"/>
+                        <control name="label" id="mass_flow" width="50%" text="432"/>
                     </panel>
                 </panel>
               

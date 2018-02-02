@@ -62,8 +62,8 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         this.nifty = nifty;
         this.screen = screen;
         
-        customFanDiameterField = screen.findNiftyControl("customDiameterField", TextField.class); 
-        customMassFlowField = screen.findNiftyControl("customMassFlowField", TextField.class); 
+        customFanDiameterField = screen.findNiftyControl("engine-customDiameter", TextField.class); 
+        customMassFlowField = screen.findNiftyControl("engine-customMass", TextField.class); 
         
         customFanDiameterField.disable();
         customMassFlowField.disable();
@@ -104,16 +104,16 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
     
-    @NiftyEventSubscriber(pattern=".*Field")
+    @NiftyEventSubscriber(pattern="engine-.*")
     public void onTextFieldChange(final String id, final TextFieldChangedEvent event){
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
 
-        if(event.getTextFieldControl().getId().equals("customDiameterField")){
+        if(event.getTextFieldControl().getId().equals("engine-customDiameter")){
             fanDiameter.setText(event.getText());
         }
         
-        if(event.getTextFieldControl().getId().equals("customMassFlowField")){
+        if(event.getTextFieldControl().getId().equals("engine-customMass")){
             massFlow.setText(event.getText());
         }
     }

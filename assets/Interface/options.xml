@@ -37,9 +37,9 @@
                   <control name="radioButton" id="custom" group="RadioGroup-1" />
                   <panel childLayout="horizontal" width="100%">
                     <control name="label" width="25%" text="Fan Diam (m)" />
-                    <control name="textfield" text="0" width="10%" id="customDiameterField" />
+                    <control name="textfield" text="0" width="10%" id="engine-customDiameter" />
                     <control name="label" width="25%" text="Mass Flow (kg/s)" />
-                    <control name="textfield" text="0" width="10%" id="customMassFlowField" />
+                    <control name="textfield" text="0" width="10%" id="engine-customMass" />
                   </panel>
                 </panel>
               </panel>
@@ -69,6 +69,10 @@
                 <panel childLayout="horizontal">
                   <control name="label" text="Live Weather" width="100px" />
                   <control name="radioButton" id="live_wx" group="RadioGroup-2" />
+                  <panel childLayout="horizontal" width="100%">
+                    <control name="label" width="25%" text="Airport ICAO" />
+                    <control name="textfield" text="EGPF" width="10%" id="airportEntry" />
+                  </panel>
                 </panel>
                 <panel childLayout="horizontal">
                   <control name="label" text="ISA" width="100px" />

@@ -117,6 +117,32 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
             massFlow.setText(event.getText());
         }
     }
+    
+    @NiftyEventSubscriber(id="RadioGroup-2")
+    public void onRadioGroup2Changed(final String id, final RadioButtonGroupStateChangedEvent event) {
+        Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
+        Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
+        
+        String selected = event.getSelectedId();
+        
+        customFanDiameterField.disable();
+        customMassFlowField.disable();
+            
+        if(selected.equals("live_wx")){
+            temp_wx.setText("TEMP");
+            pressure_wx.setText("TEMP");
+        } else if (selected.equals("ISA_wx")){
+            temp_wx.setText("15");
+            pressure_wx.setText("1013.25");
+        } else if (selected.equals("custom_wx")){
+            temp_wx.setText("TEMP");
+            pressure_wx.setText("TEMP");
+        } else if (selected.equals("custom")){
+            customFanDiameterField.enable();
+            customMassFlowField.enable();
+        }
+        
+    }
 
     
 }

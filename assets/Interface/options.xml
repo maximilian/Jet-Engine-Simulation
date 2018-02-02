@@ -6,9 +6,39 @@
   <screen id="options" controller="mygame.gui.MyOptionsScreen">
     <layer id="foreground" childLayout="vertical">
       <panel id="separator" height="10%" />
-      <panel id="panel_top" backgroundColor="#336" height="80%" width="75%" align="center" valign="center" childLayout="center">
-      </panel>
+      <panel id="panel_top" backgroundColor="#336" height="80%" width="75%" align="center" valign="center" childLayout="vertical">
+        <panel id="title" height="10%" width="50%" align="center" childLayout="center">
+          <control name="label" text="Options Menu" />
+        </panel>
+        
+        <panel id="choose_engine" height="90%" width="50%" childLayout="vertical">
+            <control name="label" text="Engine Type" />
+            <control id="RadioGroup-1" name="radioButtonGroup"/>
+            <panel childLayout="horizontal" align="center">
 
+              <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px" width="50%">
+                <effect>
+                  <onActive name="border" color="#0008" />
+                </effect>
+                <panel childLayout="horizontal">
+                  <control name="label" text="PW2037" width="100px" />
+                  <control name="radioButton" id="option-1" group="RadioGroup-1" />
+                </panel>
+                <panel childLayout="horizontal">
+                  <control name="label" text="PW2040" width="100px" />
+                  <control name="radioButton" id="option-2" group="RadioGroup-1" />
+                </panel>
+                <panel childLayout="horizontal">
+                  <control name="label" text="RB211-535E4B" width="100px" />
+                  <control name="radioButton" id="option-3" group="RadioGroup-1" />
+                </panel>
+              </panel>
+            </panel>
+            <panel id="PW2037" height="33.33%" childLayout="horizontal">
+                <control name="label" text="PW2037" />
+            </panel>
+        </panel>
+      </panel>
     </layer>
   </screen>
     

@@ -18,6 +18,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -92,6 +93,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
 
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
         Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class);
+        Label time_wx = screen.findNiftyControl("time_wx", Label.class);
         
         TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
         String airportIdentifier = airportIdentifierField.getRealText();
@@ -100,14 +102,16 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
         
         try {
-            
             temp_wx.setText(Float.toString(gui.getWeather().getTemperature()));
             
             int convertedPressure = converter.convertHgToMillibars(gui.getWeather().getPressure());
             pressure_wx.setText(Float.toString(convertedPressure));
             
-            LocalDateTime dateTime = gui.getWeather().getDateTime();
-            
+            LocalDateTime datetime = gui.getWeather().getDateTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
+            String formattedDate = datetime.format(formatter);
+       
+            time_wx.setText(formattedDate);
 
         } catch (IOException ex) {
             Logger.getLogger(MyOptionsScreen.class.getName()).log(Level.SEVERE, null, ex);

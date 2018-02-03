@@ -15,36 +15,36 @@
                     <panel id="" childLayout="horizontal" align="center">
                         <panel id="GPanel5" childLayout="vertical" backgroundColor="#8006" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
                             <panel id="GPanel6" childLayout="horizontal">
-<control name="label" id="GLabel2" width="100px" text="PW2037"/>
-<control name="radioButton" id="PW2037" group="RadioGroup-1"/>
+                                <control name="label" id="GLabel2" width="100px" text="PW2037"/>
+                                <control name="radioButton" id="PW2037" group="RadioGroup-1"/>
                             </panel>
                             <panel id="GPanel7" childLayout="horizontal">
-<control name="label" id="GLabel3" width="100px" text="PW2040"/>
-<control name="radioButton" id="PW2040" group="RadioGroup-1"/>
+                                <control name="label" id="GLabel3" width="100px" text="PW2040"/>
+                                <control name="radioButton" id="PW2040" group="RadioGroup-1"/>
                             </panel>
                             <panel id="GPanel8" childLayout="horizontal">
-<control name="label" id="GLabel4" width="100px" text="RB211-535E4B"/>
-<control name="radioButton" id="RB211" group="RadioGroup-1"/>
+                                <control name="label" id="GLabel4" width="100px" text="RB211-535E4B"/>
+                                <control name="radioButton" id="RB211" group="RadioGroup-1"/>
                             </panel>
                             <panel id="GPanel9" childLayout="horizontal">
-<control name="label" id="GLabel5" width="100px" text="Custom"/>
-<control name="radioButton" id="custom" group="RadioGroup-1"/>
-<panel id="GPanel10" childLayout="horizontal" width="100%">
-    <control name="label" id="GLabel6" width="25%" text="Fan Diam (m)"/>
-    <control name="textfield" id="engine-customDiameter" width="10%" text="0"/>
-    <control name="label" id="GLabel7" width="25%" text="Mass Flow (kg/s)"/>
-    <control name="textfield" id="engine-customMass" width="10%" text="0"/>
-</panel>
+                                <control name="label" id="GLabel5" width="100px" text="Custom"/>
+                                <control name="radioButton" id="custom" group="RadioGroup-1"/>
+                                <panel id="GPanel10" childLayout="horizontal" width="100%">
+                                    <control name="label" id="GLabel6" width="25%" text="Fan Diam (m)"/>
+                                    <control name="textfield" id="engine-customDiameter" width="10%" text="0"/>
+                                    <control name="label" id="GLabel7" width="25%" text="Mass Flow (kg/s)"/>
+                                    <control name="textfield" id="engine-customMass" width="10%" text="0"/>
+                                </panel>
                             </panel>
                         </panel>
                         <panel id="desc" childLayout="vertical" width="35%">
                             <panel id="fan-diameter" childLayout="horizontal" width="100%">
-<control name="label" id="GLabel8" width="60%" text="Fan Diameter (m)"/>
-<control name="label" id="fan_diameter" width="40%" text="5.43"/>
+                                <control name="label" id="GLabel8" width="60%" text="Fan Diameter (m)"/>
+                                <control name="label" id="fan_diameter" width="40%" text="5.43"/>
                             </panel>
                             <panel id="massflow" childLayout="horizontal" width="100%">
-<control name="label" id="GLabel10" width="60%" text="Mass Flow Rate (kg/s)"/>
-<control name="label" id="mass_flow" width="40%" text="432"/>
+                                <control name="label" id="GLabel10" width="60%" text="Mass Flow Rate (kg/s)"/>
+                                <control name="label" id="mass_flow" width="40%" text="432"/>
                             </panel>
                         </panel>
                     </panel>
@@ -55,35 +55,37 @@
                     <panel id="GPanel15" childLayout="horizontal" align="center">
                         <panel id="GPanel16" childLayout="vertical" backgroundColor="#8006" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
                             <panel id="GPanel17" childLayout="horizontal">
-<control name="label" id="GLabel13" width="100px" text="Live Weather"/>
-<control name="radioButton" id="live_wx" group="RadioGroup-2"/>
-<panel id="GPanel18" childLayout="horizontal" width="100%">
-    <control name="label" id="GLabel14" width="25%" text="Airport ICAO"/>
-    <control name="textfield" id="airportIdentifier" width="10%" text="EGPF"/>
-    <control name="button" id="airportCheck" width="20%" label="Check"/>
-</panel>
+                                <control name="label" id="GLabel13" width="100px" text="Live Weather"/>
+                                <control name="radioButton" id="live_wx" group="RadioGroup-2"/>
+                                <panel id="GPanel18" childLayout="horizontal" width="100%">
+                                    <control name="label" id="GLabel14" width="25%" text="Airport ICAO"/>
+                                    <control name="textfield" id="airportIdentifier" width="10%" text="EGPF"/>
+                                    <control name="button" id="airportCheck" width="20%" label="Check">
+                                        <interact onClick="getAirportData()"/>
+                                    </control>
+                                </panel>
                             </panel>
                             <panel id="GPanel19" childLayout="horizontal">
-<control name="label" id="GLabel15" width="100px" text="ISA"/>
-<control name="radioButton" id="ISA_wx" group="RadioGroup-2"/>
+                                <control name="label" id="GLabel15" width="100px" text="ISA"/>
+                                <control name="radioButton" id="ISA_wx" group="RadioGroup-2"/>
                             </panel>
                             <panel id="GPanel20" childLayout="horizontal">
-<control name="label" id="GLabel16" width="100px" text="Custom"/>
-<control name="radioButton" id="custom_wx" group="RadioGroup-2"/>
+                                <control name="label" id="GLabel16" width="100px" text="Custom"/>
+                                <control name="radioButton" id="custom_wx" group="RadioGroup-2"/>
                             </panel>
                         </panel>
                         <panel id="GPanel21" childLayout="vertical" width="35%">
                             <panel id="GPanel22" childLayout="horizontal" width="100%">
-<control name="label" id="GLabel17" width="60%" text="Temperature (C)"/>
-<control name="label" id="temp_wx" width="40%" text="15"/>
+                                <control name="label" id="GLabel17" width="50%" text="Temperature (C)"/>
+                                <control name="label" id="temp_wx" width="50%" text="15"/>
                             </panel>
                             <panel id="GPanel23" childLayout="horizontal" width="100%">
-<control name="label" id="GLabel19" width="60%" text="Pressure (mbar)"/>
-<control name="label" id="pressure_wx" width="40%" text="432"/>
+                                <control name="label" id="GLabel19" width="50%" text="Pressure (mbar)"/>
+                                <control name="label" id="pressure_wx" width="50%" text="432"/>
                             </panel>
                             <panel id="GPanel24" childLayout="horizontal" width="100%">
-<control name="label" id="GLabel21" width="60%" text="Last Updated"/>
-<control name="label" id="time_wx" width="40%" text="99/99/99"/>
+                                <control name="label" id="GLabel21" width="50%" text="Last Updated"/>
+                                <control name="label" id="time_wx" width="50%" text="99/99/99"/>
                             </panel>
                         </panel>
                     </panel>

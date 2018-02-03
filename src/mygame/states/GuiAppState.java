@@ -94,9 +94,9 @@ public class GuiAppState extends AbstractAppState {
         nifty = niftyDisplay.getNifty();
         
         /** Read your XML and initialize your custom ScreenController */
-        optionScreen = new MyOptionsScreen(this);
+        controlScreen = new MyControlScreen(this);
         
-        nifty.fromXml("Interface/options.xml", "options", optionScreen);
+        nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
    
@@ -335,7 +335,19 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void openSettings(){
+        app.getGuiViewPort().removeProcessor(niftyDisplay);
+        
+        niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
+        nifty = niftyDisplay.getNifty();
+        
+        /** Read your XML and initialize your custom ScreenController */
+        optionScreen = new MyOptionsScreen(this);
+        
         nifty.fromXml("Interface/options.xml", "options", optionScreen);
+        // attach the Nifty display to the gui view port as a processor
+        app.getGuiViewPort().addProcessor(niftyDisplay);
+
+
     }
     
     public void submitSettings(){

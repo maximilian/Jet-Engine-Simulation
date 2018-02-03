@@ -103,7 +103,7 @@ public class GuiAppState extends AbstractAppState {
         submitAircraftVariables();  
         
  
-        
+        updateWeatherScreen();
     } 
     
     public void updateWeatherScreen(){

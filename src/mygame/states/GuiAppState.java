@@ -355,7 +355,9 @@ public class GuiAppState extends AbstractAppState {
     }
     
     
-    
+    /*
+     * Settings page methods
+    */
     public void setWeather(String identifier){
         this.weather = new WeatherData(identifier);
     }

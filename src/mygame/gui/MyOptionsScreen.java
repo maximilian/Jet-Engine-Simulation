@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
 import mygame.states.GuiAppState;
-import mygame.states.OptionsAppState;
 import org.xml.sax.SAXException;
 
 /**

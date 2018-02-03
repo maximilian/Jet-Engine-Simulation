@@ -11,7 +11,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Line;
-import mygame.states.OptionsAppState;
 
 public class Project extends SimpleApplication {
     private ResourceLoader loader;

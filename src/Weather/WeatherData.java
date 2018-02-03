@@ -47,7 +47,7 @@ public class WeatherData {
         urlConnection.addRequestProperty("Accept", "application/xml");
         Document doc = b.parse(urlConnection.getInputStream());
         System.out.println("plsss");
-        //if (doc != null)
+
         doc.getDocumentElement().normalize();
         NodeList nList = doc.getElementsByTagName("METAR");
         

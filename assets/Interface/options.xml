@@ -73,7 +73,9 @@
                     <control name="label" width="25%" text="Airport ICAO" />
                     <control name="textfield" text="EGPF" width="10%" id="airportEntry" />
 
-                    <control name="button" label="Check" width="20%" id="airportCheck" />
+                    <control name="button" label="Check" width="20%" id="airportCheck" >
+                       <interact onClick="getAirportData()"/>
+                    </control>
                   </panel>
                 </panel>
                 <panel childLayout="horizontal">
@@ -99,7 +101,7 @@
             </panel>
             
         </panel>
-        <panel height="10%" width="20%" backgroundColor="#fff" childLayout="horizontal" align="center">
+        <panel height="10%" width="20%" childLayout="horizontal" align="center">
             <control name="button" label="Submit" id="airportCheck" />
         </panel>
       </panel>

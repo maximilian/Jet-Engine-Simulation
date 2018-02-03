@@ -5,6 +5,7 @@
  */
 package mygame.states;
 
+import Weather.WeatherData;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
@@ -17,9 +18,11 @@ import mygame.gui.MyOptionsScreen;
  * @author max
  */
 public class OptionsAppState extends AbstractAppState {
-        private NiftyJmeDisplay niftyDisplay;
+    private NiftyJmeDisplay niftyDisplay;
     private Nifty nifty;
     private MyOptionsScreen optionsScreen;
+    
+    private WeatherData weather;
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -36,6 +39,8 @@ public class OptionsAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
         //TODO: initialize your AppState, e.g. attach spatials to rootNode
         //this is called on the OpenGL thread after the AppState has been attached
+        
+        this.weather = new WeatherData();
     }
     
     @Override

@@ -79,6 +79,10 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
     
+    public void retrieveAirportData(){
+        System.out.println("yes");
+    }
+    
     @NiftyEventSubscriber(id="RadioGroup-1")
     public void onRadioGroup1Changed(final String id, final RadioButtonGroupStateChangedEvent event) {
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 

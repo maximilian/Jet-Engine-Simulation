@@ -78,9 +78,10 @@ public class GuiAppState extends AbstractAppState {
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
-        this.engineArea = new EngineArea(aircraft);
-        
+                
         this.weather = new WeatherData();
+        this.engineArea = new EngineArea(aircraft, weather);
+
         this.converter = new Converter();
         
         
@@ -214,7 +215,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void updateForwardArea(){
-         this.engineArea = new EngineArea(aircraft);
+         this.engineArea = new EngineArea(aircraft, weather);
          
          float engineRadius = engineArea.calculateArea();
          

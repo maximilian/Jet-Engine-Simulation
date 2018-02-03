@@ -39,22 +39,23 @@ public class EngineArea {
     private float realPressure;
     private float realTemperature;
     
-    public EngineArea(Aircraft aircraft){
+    public EngineArea(Aircraft aircraft, WeatherData weather){
         this.aircraft = aircraft;
         this.engineDiameter = aircraft.getEngineDiameter();
         this.engineFlowRate = (float) 548.85;
         
         this.converter = new Converter();
         this.isa = new ISA();
-        this.weather = new WeatherData();
+        this.weather = weather;
         
         /* Try and download the real weather
          * 
          * If successful, use it. Else, use ISA values.
         */
         try {
-            this.realPressure = converter.convertHgToPascals(weather.getPressure());
-            this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
+            weather.getPressure();
+            //this.realPressure = converter.convertHgToPascals(weather.getPressure());
+            //this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
         } catch (IOException ex) {
             realPressure = 101325;
             realTemperature = (float) 288.15;

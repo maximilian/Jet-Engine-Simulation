@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-import java.time.temporal.TemporalAccessor;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -77,7 +76,9 @@ public class WeatherData {
     
     public float getPressure() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
         if (fieldPressure == 0.0f){
+                       
             collectWeather();
+
         }
         
         return fieldPressure;

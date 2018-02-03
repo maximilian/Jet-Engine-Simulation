@@ -17,6 +17,7 @@ import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -104,6 +105,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
             
             int convertedPressure = converter.convertHgToMillibars(gui.getWeather().getPressure());
             pressure_wx.setText(Float.toString(convertedPressure));
+            
+            LocalDateTime dateTime = gui.getWeather().getDateTime();
+            
 
         } catch (IOException ex) {
             Logger.getLogger(MyOptionsScreen.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,6 +10,7 @@ import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
@@ -156,7 +157,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         if(event.getTextFieldControl().getId().equals("engine-customDiameter")){
             fanDiameter.setText(event.getText());
         }
-        
+
         if(event.getTextFieldControl().getId().equals("engine-customMass")){
             massFlow.setText(event.getText());
         }
@@ -167,14 +168,20 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
         Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
         
+        TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
+        Button airportIdentifierButton = screen.findNiftyControl("airportCheck", Button.class);
+        
         String selected = event.getSelectedId();
         
-        customFanDiameterField.disable();
-        customMassFlowField.disable();
-            
-        if(selected.equals("live_wx")){
+        airportIdentifierField.disable();
+        airportIdentifierButton.disable();
+        
+        if(selected.equals("live_wx")){     
             temp_wx.setText("TEMP");
             pressure_wx.setText("TEMP");
+            
+            airportIdentifierField.enable();
+            airportIdentifierButton.enable();
         } else if (selected.equals("ISA_wx")){
             temp_wx.setText("15");
             pressure_wx.setText("1013.25");

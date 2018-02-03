@@ -30,6 +30,7 @@ import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
 import mygame.gui.MyControlScreen;
+import mygame.gui.MyOptionsScreen;
 import org.xml.sax.SAXException;
 
 /**
@@ -48,6 +49,7 @@ public class GuiAppState extends AbstractAppState {
     private NiftyJmeDisplay niftyDisplay;
     private Nifty nifty;
     
+    private MyOptionsScreen optionScreen;
     private MyControlScreen controlScreen;
     private Camera flyCam;
     private AircraftCamera aircraftView;
@@ -92,16 +94,15 @@ public class GuiAppState extends AbstractAppState {
         nifty = niftyDisplay.getNifty();
         
         /** Read your XML and initialize your custom ScreenController */
-        controlScreen = new MyControlScreen(this);
-
-        nifty.fromXml("Interface/screen.xml", "start", controlScreen);
+        optionScreen = new MyOptionsScreen(this);
+        
+        nifty.fromXml("Interface/options.xml", "options", optionScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
-        
-        
+   
         submitAircraftVariables();  
         
-        updateWeatherScreen();
+ 
         
     } 
     
@@ -331,6 +332,36 @@ public class GuiAppState extends AbstractAppState {
 
     public Node getRootNode(){
         return this.rootNode;
+    }
+    
+    public void openSettings(){
+        nifty.fromXml("Interface/options.xml", "options", optionScreen);
+    }
+    
+    public void submitSettings(){
+        app.getGuiViewPort().removeProcessor(niftyDisplay);
+        
+        niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
+        nifty = niftyDisplay.getNifty();
+        
+        /** Read your XML and initialize your custom ScreenController */
+        controlScreen = new MyControlScreen(this);
+        
+        nifty.fromXml("Interface/screen.xml", "start", controlScreen);
+        // attach the Nifty display to the gui view port as a processor
+        app.getGuiViewPort().addProcessor(niftyDisplay);
+        
+        updateWeatherScreen();
+    }
+    
+    
+    
+    public void setWeather(String identifier){
+        this.weather = new WeatherData(identifier);
+    }
+    
+    public WeatherData getWeather(){
+        return this.weather;
     }
     
 }

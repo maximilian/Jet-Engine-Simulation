@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
  * @author max
  */
 public class MyOptionsScreen extends AbstractAppState implements ScreenController {
-    private OptionsAppState gui;
+    private GuiAppState gui;
     private Nifty nifty;
     private Screen screen;
     private Converter converter;
@@ -41,7 +41,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     private TextField customFanDiameterField;
     private TextField customMassFlowField;
     
-    public MyOptionsScreen(OptionsAppState gui){
+    public MyOptionsScreen(GuiAppState gui){
         this.gui = gui;
         this.converter = new Converter();
     }
@@ -195,5 +195,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
 
-    
+    public void submitSettings(){
+        gui.submitSettings();
+    }
 }

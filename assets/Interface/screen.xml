@@ -87,7 +87,9 @@
                             <control name="label" width="70%" text="Engine Area" valign="center" />
                             <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
                         </panel> 
-                        <control name="button" id="settings" width="70%" label="Settings" />
+                        <control name="button" id="settings" width="70%" label="Settings" >
+                            <interact onClick="openSettings()" />
+                        </control>
                     </panel>
                     <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
 
@@ -285,5 +287,5 @@
      </panel>
     </layer>
   </screen>
-    
+  
 </nifty>

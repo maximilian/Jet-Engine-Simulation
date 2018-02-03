@@ -32,7 +32,7 @@ public class OptionsAppState extends AbstractAppState {
         nifty = niftyDisplay.getNifty();
         
         /** Read your XML and initialize your custom ScreenController */
-        optionsScreen = new MyOptionsScreen(this);
+        //optionsScreen = new MyOptionsScreen(this);
 
         nifty.fromXml("Interface/options.xml", "options", optionsScreen);
         // attach the Nifty display to the gui view port as a processor

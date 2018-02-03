@@ -2,7 +2,7 @@
 <nifty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
     <useControls filename="nifty-default-controls.xml"/>
     <useStyles filename="nifty-default-styles.xml"/>
-    <screen id="options" controller="mygame.gui.MyOptionsScreen">
+<screen id="options" controller="mygame.gui.MyOptionsScreen">
         <layer id="foreground" childLayout="vertical">
             <panel id="separator" height="10%"/>
             <panel id="panel_top" childLayout="vertical" backgroundColor="#336" width="75%" valign="center" align="center" height="80%">
@@ -91,7 +91,9 @@
                     </panel>
                 </panel>
                 <panel id="GPanel25" childLayout="horizontal" width="20%" align="center" height="10%">
-                    <control name="button" id="GButton1" label="Submit"/>
+                    <control name="button" id="GButton1" label="Submit">
+                        <interact onClick="submitSettings()" />
+                    </control>
                 </panel>
             </panel>
         </layer>

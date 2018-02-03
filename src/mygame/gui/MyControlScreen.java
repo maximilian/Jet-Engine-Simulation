@@ -315,6 +315,12 @@ public class MyControlScreen implements ScreenController {
         System.out.println("quit pls");
         app.stop();
     }
+    
+    public void openSettings(){
+        gui.openSettings();
+    }
+    
+ 
 
 
 }

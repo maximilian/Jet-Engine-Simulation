@@ -53,9 +53,8 @@ public class EngineArea {
          * If successful, use it. Else, use ISA values.
         */
         try {
-            weather.getPressure();
-            //this.realPressure = converter.convertHgToPascals(weather.getPressure());
-            //this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
+            this.realPressure = converter.convertHgToPascals(weather.getPressure());
+            this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
         } catch (IOException ex) {
             realPressure = 101325;
             realTemperature = (float) 288.15;

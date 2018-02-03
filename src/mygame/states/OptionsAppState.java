@@ -40,7 +40,7 @@ public class OptionsAppState extends AbstractAppState {
         //TODO: initialize your AppState, e.g. attach spatials to rootNode
         //this is called on the OpenGL thread after the AppState has been attached
         
-        this.weather = new WeatherData();
+        
     }
     
     @Override
@@ -55,5 +55,15 @@ public class OptionsAppState extends AbstractAppState {
         //e.g. remove all spatials from rootNode
         //this is called on the OpenGL thread after the AppState has been detached
     }
+    
+    public void setWeather(String identifier){
+        this.weather = new WeatherData(identifier);
+    }
+    
+    public WeatherData getWeather(){
+        return this.weather;
+    }
+    
+    
     
 }

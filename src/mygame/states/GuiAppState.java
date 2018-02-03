@@ -79,7 +79,7 @@ public class GuiAppState extends AbstractAppState {
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
                 
-        this.weather = new WeatherData();
+        this.weather = new WeatherData("EGPF");
         this.engineArea = new EngineArea(aircraft, weather);
 
         this.converter = new Converter();

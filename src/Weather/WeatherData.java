@@ -28,15 +28,20 @@ import org.xml.sax.SAXException;
  * @author max
  */
 public class WeatherData {
+    private String fieldIdentifier;
     
     private float fieldPressure;
     private float fieldTemperature;
     private String fieldName;
     
     private LocalDateTime date;
+    
+    public WeatherData(String fieldIdentifier){
+        this.fieldIdentifier = fieldIdentifier;
+    }
             
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
-        String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=EGPF&hoursBeforeNow=4&mostRecent=True";   
+        String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" + fieldIdentifier + "&hoursBeforeNow=4&mostRecent=True";   
         
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setNamespaceAware(false);

@@ -16,8 +16,14 @@ import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import mygame.Converter;
 import mygame.states.GuiAppState;
 import mygame.states.OptionsAppState;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -27,12 +33,14 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     private OptionsAppState gui;
     private Nifty nifty;
     private Screen screen;
+    private Converter converter;
     
     private TextField customFanDiameterField;
     private TextField customMassFlowField;
     
     public MyOptionsScreen(OptionsAppState gui){
         this.gui = gui;
+        this.converter = new Converter();
     }
     
 
@@ -79,8 +87,32 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
     
-    public void retrieveAirportData(){
-        System.out.println("yes");
+    public void getAirportData(){
+
+        Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
+        Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class);
+        
+        TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
+        String airportIdentifier = airportIdentifierField.getRealText();
+        
+        gui.setWeather(airportIdentifier);
+        
+        
+        try {
+            
+            temp_wx.setText(Float.toString(gui.getWeather().getTemperature()));
+            
+            int convertedPressure = converter.convertHgToMillibars(gui.getWeather().getPressure());
+            pressure_wx.setText(Float.toString(convertedPressure));
+
+        } catch (IOException ex) {
+            Logger.getLogger(MyOptionsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(MyOptionsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(MyOptionsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     @NiftyEventSubscriber(id="RadioGroup-1")

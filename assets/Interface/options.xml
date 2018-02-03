@@ -71,7 +71,7 @@
                   <control name="radioButton" id="live_wx" group="RadioGroup-2" />
                   <panel childLayout="horizontal" width="100%">
                     <control name="label" width="25%" text="Airport ICAO" />
-                    <control name="textfield" text="EGPF" width="10%" id="airportEntry" />
+                    <control name="textfield" text="EGPF" width="10%" id="airportIdentifier" />
 
                     <control name="button" label="Check" width="20%" id="airportCheck" >
                        <interact onClick="getAirportData()"/>

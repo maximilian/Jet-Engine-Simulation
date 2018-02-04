@@ -105,13 +105,10 @@ public class EngineArea {
         
         if (engineReceives < engineNeeds){
             receivingLittle = true;
-            System.out.println("too little");
         } else if(engineReceives > engineNeeds){
             receivingMuch = true;
-            System.out.println("too much");
         } else {
             receivingCorrect = true;
-            System.out.println("perfect");
         }
 
         float engineAreaRequired = engineNeeds / speedMetres;

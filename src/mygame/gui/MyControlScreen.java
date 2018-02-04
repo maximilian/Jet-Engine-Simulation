@@ -38,7 +38,8 @@ public class MyControlScreen implements ScreenController {
     private Element submitAircraftDetailsButton;   
     private Element collisionWindowLayer;
     private Slider visualisationSlider;
-
+    
+    /* flag for visualisation slider */
     private boolean visualisationSet;
     
     public MyControlScreen(GuiAppState gui){

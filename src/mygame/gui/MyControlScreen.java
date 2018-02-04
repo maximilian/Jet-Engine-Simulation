@@ -301,9 +301,6 @@ public class MyControlScreen implements ScreenController {
         visualisationSet = false;
         
         gui.resetVisualisation();
-        
-
-    
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
@@ -320,11 +317,6 @@ public class MyControlScreen implements ScreenController {
         String formattedDate = datetime.format(formatter);
        
         airportLastUpdateLabel.setText(formattedDate);
-    }
-  
-    public void quitGame() {
-        System.out.println("quit pls");
-        app.stop();
     }
     
     public void openSettings(){

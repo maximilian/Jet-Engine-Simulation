@@ -59,7 +59,7 @@ public class AircraftCamera {
      /*
       * Used for the visualisation
     */
-     public void leftEngineView(float distance, float xDisplacement) {  
+     public void leftEngineView(float distance, float xDisplacement) { 
         Quaternion rotation = new Quaternion();
         // rotate 5/4*pi around y axis
         rotation.fromAngleAxis((float) (FastMath.PI * 1.25), new Vector3f(0,1,0) );

@@ -35,7 +35,7 @@ public class MyControlScreen implements ScreenController {
     private GuiAppState gui;
     private Project app;    
     
-    private Element submitButton;   
+    private Element submitAircraftDetailsButton;   
     private Element collisionWindowLayer;
     private Slider visualisationSlider;
 
@@ -49,7 +49,7 @@ public class MyControlScreen implements ScreenController {
         this.nifty = nifty;
         this.screen = screen;
         
-        submitButton = screen.findElementById("submitButton");
+        submitAircraftDetailsButton = screen.findElementById("submitButton");
  
          // Hide the collision window layer by default
          collisionWindowLayer = screen.findElementById("windows");
@@ -97,7 +97,7 @@ public class MyControlScreen implements ScreenController {
      }
     
     public void submit(){
-        submitButton.disable();
+        submitAircraftDetailsButton.disable();
         
         TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);  
         String altitudeString = altitudeField.getRealText();
@@ -204,7 +204,7 @@ public class MyControlScreen implements ScreenController {
     
     @NiftyEventSubscriber(pattern=".*Field")
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
-               submitButton.enable();
+               submitAircraftDetailsButton.enable();
         
         // validation, ensure value entered is numeric and valid
         int parsedInt;

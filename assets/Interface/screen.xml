@@ -44,7 +44,7 @@
 
 
       </panel>
-      <panel id="panel_top" height="40%" width="100%" align="center" childLayout="center">
+      <panel height="40%" width="100%" align="center" childLayout="center">
       </panel>
 
       <panel id="panel_bottom" height="35%" width="100%" align="center" childLayout="horizontal" >

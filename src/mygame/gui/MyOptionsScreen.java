@@ -195,6 +195,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     }
 
     public void submitSettings(){
-        gui.submitSettings();
+        TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
+
+        String ident = airportIdentifierField.getRealText();
+        gui.submitSettings(ident);
     }
 }

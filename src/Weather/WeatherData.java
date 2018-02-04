@@ -42,7 +42,7 @@ public class WeatherData {
             
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
         String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" + fieldIdentifier + "&hoursBeforeNow=4&mostRecent=True";   
-        
+        System.out.println("downloading weather for"+fieldIdentifier);
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setNamespaceAware(false);
         f.setValidating(false);
@@ -50,7 +50,6 @@ public class WeatherData {
         URLConnection urlConnection = new URL(url).openConnection();
         urlConnection.addRequestProperty("Accept", "application/xml");
         Document doc = b.parse(urlConnection.getInputStream());
-        System.out.println("plsss");
 
         doc.getDocumentElement().normalize();
         NodeList nList = doc.getElementsByTagName("METAR");
@@ -80,16 +79,16 @@ public class WeatherData {
     }
     
     public float getPressure() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
-        if (fieldPressure == 0.0f){
-                       
-            collectWeather();
 
+        if (fieldPressure == 0.0f){
+            collectWeather();
         }
         
         return fieldPressure;
     }
     
     public float getTemperature() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        System.out.println("temperature is"+fieldTemperature);
         if (fieldTemperature == 0.0f){
             collectWeather();
         }
@@ -112,5 +111,9 @@ public class WeatherData {
         }
         
         return date;
+    }
+    
+    public void setIdent(String ident){
+        this.fieldIdentifier = ident;
     }
 }

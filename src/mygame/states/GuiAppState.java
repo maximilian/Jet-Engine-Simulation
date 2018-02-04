@@ -82,7 +82,7 @@ public class GuiAppState extends AbstractAppState {
         this.drone = this.app.getDrone();
                 
         this.weather = new WeatherData("EGPF");
-        this.engineArea = new EngineArea(aircraft, weather);
+        this.engineArea = new EngineArea(aircraft, this);
 
         this.converter = new Converter();
         
@@ -215,7 +215,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void updateForwardArea(){
-         this.engineArea = new EngineArea(aircraft, weather);
+         this.engineArea = new EngineArea(aircraft, this);
          
          float engineRadius = engineArea.calculateArea();
          
@@ -343,11 +343,11 @@ public class GuiAppState extends AbstractAppState {
         nifty.fromXml("Interface/options.xml", "options", optionScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
-
-
-    }
+    } 
     
-    public void submitSettings(){
+    public void submitSettings(String ident){
+        this.weather = new WeatherData(ident);
+        
         app.getGuiViewPort().removeProcessor(niftyDisplay);
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());

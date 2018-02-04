@@ -22,10 +22,6 @@ public class EngineArea {
      * Engine information 
      */
 
-    // Diameter of the engine fan blades, meters
-    private final float engineDiameter;
-    // Air mass flow rate through the engine, kg/s
-    private final float engineFlowRate;
 
     private boolean receivingLittle;
     private boolean receivingMuch;
@@ -45,8 +41,7 @@ public class EngineArea {
     public EngineArea(Aircraft aircraft, GuiAppState gui) {
         this.gui = gui;
         this.aircraft = aircraft;
-        this.engineDiameter = aircraft.getEngineDiameter();
-        this.engineFlowRate = (float) 548.85;
+
 
         this.converter = new Converter();
         this.isa = new ISA();
@@ -88,7 +83,7 @@ public class EngineArea {
         
         int aircraftAlt = aircraft.getAltitude();
 
-        float engineRadius = engineDiameter / 2;
+        float engineRadius = aircraft.getEngineDiameter() / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
 
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
@@ -103,10 +98,10 @@ public class EngineArea {
         float correctedEngineFlowRate;
         if (aircraftAlt == 0) {
             airDensity = converter.getDensity(realPressure, realTemperature);
-            correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, engineFlowRate);
+            correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, aircraft.getEngineMassFlowRate());
         } else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
-            correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate);
+            correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), aircraft.getEngineMassFlowRate());
         }
        
         float engineNeeds = correctedEngineFlowRate / airDensity;

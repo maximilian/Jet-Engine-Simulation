@@ -39,8 +39,10 @@ public class MyControlScreen implements ScreenController {
     private Element collisionWindowLayer;
     private Slider visualisationSlider;
 
+    private boolean visualisationSet;
     
     public MyControlScreen(GuiAppState gui){
+        visualisationSet = false;
         this.gui = gui;
     }
     
@@ -237,37 +239,38 @@ public class MyControlScreen implements ScreenController {
     
     @NiftyEventSubscriber(id="simulationTimeControl")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
-        System.out.println(event.getSlider().getValue());
-        
-        float percentage = event.getSlider().getValue();
-        
-        
-        // distance travelled (real life units)
-        float currDistance = (percentage/100) * 1850;
-        // speed based on real life units, using v = u + at
-        float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
-        
-        // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
-        float distanceToMove = (percentage/100) * 3188;
-        
-        float speedKnots = (float) (speed * 1.94384);
-        
-        gui.runVisualisation(speedKnots, distanceToMove);
-        
-        System.out.println("aircraft speed=" + speedKnots);
-        
-        Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
-        Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
-        
-        speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+        System.out.println("visualisation is set?"+visualisationSet);
+        if (visualisationSet){
+            float percentage = event.getSlider().getValue();
 
-        
-        DecimalFormat df = new DecimalFormat("##.##");
-        String roundedRadius = df.format(gui.getEngineRadius());
-        radiusVisLabel.setText(roundedRadius + " meters");
 
-        if (percentage > 100){
-         gui.rotateVisualisation(percentage);
+            // distance travelled (real life units)
+            float currDistance = (percentage/100) * 1850;
+            // speed based on real life units, using v = u + at
+            float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
+
+            // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
+            float distanceToMove = (percentage/100) * 3188;
+
+            float speedKnots = (float) (speed * 1.94384);
+
+            gui.runVisualisation(speedKnots, distanceToMove);
+
+            System.out.println("aircraft speed=" + speedKnots);
+
+            Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
+            Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
+
+            speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+
+
+            DecimalFormat df = new DecimalFormat("##.##");
+            String roundedRadius = df.format(gui.getEngineRadius());
+            radiusVisLabel.setText(roundedRadius + " meters");
+
+            if (percentage > 100){
+             gui.rotateVisualisation(percentage);
+            }
         }
     }
     
@@ -279,7 +282,10 @@ public class MyControlScreen implements ScreenController {
         setVis.disable();
 
         visualisationSlider.enable();
+        visualisationSet = true;
         gui.setVisualisation();
+        
+
     }
     
     public void resetVisualisation(){
@@ -291,7 +297,11 @@ public class MyControlScreen implements ScreenController {
         
         visualisationSlider.setValue(0);
         visualisationSlider.disable();
+        visualisationSet = false;
+        
         gui.resetVisualisation();
+        
+
     
     }
     

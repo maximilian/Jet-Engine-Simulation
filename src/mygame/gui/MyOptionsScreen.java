@@ -12,6 +12,8 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.RadioButton;
+import de.lessvoid.nifty.controls.RadioButtonGroup;
 import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
@@ -198,6 +200,28 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
 
         String ident = airportIdentifierField.getRealText();
-        gui.submitSettings(ident);
+
+        
+        Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
+        Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
+        
+        RadioButton PW2037Radio = screen.findNiftyControl("PW2037", RadioButton.class);
+        RadioButton PW2040Radio = screen.findNiftyControl("PW2040", RadioButton.class);
+        RadioButton RB211Radio = screen.findNiftyControl("RB211", RadioButton.class);
+        
+        String engineSelected;
+        
+        if (PW2037Radio.isActivated()){
+            engineSelected = PW2037Radio.getId();
+        } else if (PW2040Radio.isActivated()){
+            engineSelected = PW2040Radio.getId();
+        } else {
+            engineSelected = RB211Radio.getId();
+        }
+        gui.submitSettings(ident, engineSelected);
+        customFanDiameterField.disable();
+        customMassFlowField.disable();
+            
+
     }
 }

@@ -88,9 +88,6 @@ public class EngineArea {
 
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
 
-        /*
-         * TEMPERATURE MAY NEED TO BE IN KELVIN!
-         */
         float airDensity;
         float airTemperature;
         float airPressure;
@@ -103,6 +100,8 @@ public class EngineArea {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
             correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), aircraft.getEngineMassFlowRate());
         }
+
+        System.out.println("Engine diameter = "+aircraft.getEngineDiameter()+"\n Mass flow: "+aircraft.getEngineMassFlowRate());
        
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;

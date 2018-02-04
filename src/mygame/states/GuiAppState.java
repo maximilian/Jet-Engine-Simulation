@@ -345,18 +345,12 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
     } 
     
-    public void submitSettings(String ident, String engineSelected){
+    public void submitSettings(String ident, float engineDiameter, float engineFlow){
         this.weather = new WeatherData(ident);
-        if(engineSelected.equals("PW2037")){
-            aircraft.setEngineDiameter((float) 2.154);
-            aircraft.setEngineMassFlow((float) 548.85);
-        } else if (engineSelected.equals("PW2040")){
-            aircraft.setEngineDiameter((float) 2.146);
-            aircraft.setEngineMassFlow((float) 573.34);
-        } else {
-            aircraft.setEngineDiameter((float) 1.882);
-            aircraft.setEngineMassFlow((float) 522.08);
-        }
+        
+        aircraft.setEngineDiameter(engineDiameter);
+        aircraft.setEngineMassFlow(engineFlow);
+
         
         app.getGuiViewPort().removeProcessor(niftyDisplay);
         

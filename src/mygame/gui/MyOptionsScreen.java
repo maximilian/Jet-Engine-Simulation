@@ -208,17 +208,11 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         RadioButton PW2037Radio = screen.findNiftyControl("PW2037", RadioButton.class);
         RadioButton PW2040Radio = screen.findNiftyControl("PW2040", RadioButton.class);
         RadioButton RB211Radio = screen.findNiftyControl("RB211", RadioButton.class);
+        RadioButton customRadio = screen.findNiftyControl("custom", RadioButton.class);
         
-        String engineSelected;
+       
         
-        if (PW2037Radio.isActivated()){
-            engineSelected = PW2037Radio.getId();
-        } else if (PW2040Radio.isActivated()){
-            engineSelected = PW2040Radio.getId();
-        } else {
-            engineSelected = RB211Radio.getId();
-        }
-        gui.submitSettings(ident, engineSelected);
+        gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()));
         customFanDiameterField.disable();
         customMassFlowField.disable();
             

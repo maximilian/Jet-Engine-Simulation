@@ -197,7 +197,7 @@
             
                 <control id="tab_3" name="tab" caption="Campaign">
                 <panel id="vertical" childLayout="vertical">
-                    <panel id="tab1_panel" align="center" childLayout="horizontal">
+                    <panel id="tab3_panel" align="center" childLayout="horizontal">
                         <panel id="panel_bottom_left" width="25%" valign="center" childLayout="vertical">
                             <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
                             <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">

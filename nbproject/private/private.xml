@@ -4,11 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/max/Documents/level4/Dissertation/jME/project/assets/Interface/options.xml</file>
+            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/states/GuiAppState.java</file>
+            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/gui/MyControlScreen.java</file>
             <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/gui/MyOptionsScreen.java</file>
-            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/Converter.java</file>
             <file>file:/home/max/Documents/level4/Dissertation/jME/project/assets/Interface/screen.xml</file>
-            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/Weather/WeatherData.java</file>
-            <file>file:/home/max/Documents/level4/Dissertation/jME/project/src/mygame/states/OptionsAppState.java</file>
         </group>
     </open-files>
 </project-private>

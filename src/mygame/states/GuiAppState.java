@@ -101,8 +101,7 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
    
         submitAircraftVariables();  
-        
- 
+
         updateWeatherScreen();
     } 
     
@@ -271,8 +270,6 @@ public class GuiAppState extends AbstractAppState {
         updateEngineArea();
         
         aircraftView.leftEngineView(0);
-        
-    
     }
     
     public void runVisualisation(float speed, float distance){
@@ -364,6 +361,7 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
         
         updateWeatherScreen();
+        
     }
     
     

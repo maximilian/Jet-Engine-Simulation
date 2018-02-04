@@ -274,7 +274,7 @@ public class MyControlScreen implements ScreenController {
     public void setVisualisation(){
         Element resetVis = screen.findElementById("resetVisualisationField");
         Element setVis = screen.findElementById("setVisualisationField");
-        
+
         resetVis.enable();
         setVis.disable();
 

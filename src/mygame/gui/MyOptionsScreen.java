@@ -154,13 +154,24 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     public void onTextFieldChange(final String id, final TextFieldChangedEvent event){
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
-
+        
+        Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
+        Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
+        
         if(event.getTextFieldControl().getId().equals("engine-customDiameter")){
             fanDiameter.setText(event.getText());
         }
 
         if(event.getTextFieldControl().getId().equals("engine-customMass")){
             massFlow.setText(event.getText());
+        }
+        
+        if(event.getTextFieldControl().getId().equals("engine-wx-customTemp")){
+            temp_wx.setText(event.getText());
+        }
+        
+        if(event.getTextFieldControl().getId().equals("engine-wx-customPressure")){
+            pressure_wx.setText(event.getText());
         }
     }
     
@@ -201,16 +212,16 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
 
         String ident = airportIdentifierField.getRealText();
 
-        
+       
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
-        
-        RadioButton PW2037Radio = screen.findNiftyControl("PW2037", RadioButton.class);
-        RadioButton PW2040Radio = screen.findNiftyControl("PW2040", RadioButton.class);
-        RadioButton RB211Radio = screen.findNiftyControl("RB211", RadioButton.class);
-        RadioButton customRadio = screen.findNiftyControl("custom", RadioButton.class);
 
-        gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()));
+        Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
+        Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
+        
+        gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()), Float.parseFloat(temp_wx.getText()), Float.parseFloat(pressure_wx.getText()));
+        
+        
         customFanDiameterField.disable();
         customMassFlowField.disable();
             

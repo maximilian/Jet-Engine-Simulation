@@ -345,7 +345,7 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
     } 
     
-    public void submitSettings(String ident, float engineDiameter, float engineFlow){
+    public void submitSettings(String ident, float engineDiameter, float engineFlow, float temperature, float pressure){
         this.weather = new WeatherData(ident);
         
         aircraft.setEngineDiameter(engineDiameter);

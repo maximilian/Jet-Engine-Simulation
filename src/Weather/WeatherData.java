@@ -45,14 +45,13 @@ public class WeatherData {
     public WeatherData(String fieldIdentifier, float temp, float pressure){
         this.fieldIdentifier = fieldIdentifier;
         
-        this.fieldName = "n/a";
+        this.fieldName = fieldIdentifier;
         
         this.fieldPressure = pressure;
         this.fieldTemperature = temp;
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
         .withZone(ZoneId.of("UTC"));
         date = LocalDateTime.parse("2018-02-05T10:50:00Z", formatter);
-
     }
 
             

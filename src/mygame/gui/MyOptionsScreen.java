@@ -189,8 +189,8 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         airportIdentifierButton.disable();
         
         if(selected.equals("live_wx")){     
-            temp_wx.setText("TEMP");
-            pressure_wx.setText("TEMP");
+            temp_wx.setText("-");
+            pressure_wx.setText("-");
             
             airportIdentifierField.enable();
             airportIdentifierButton.enable();
@@ -209,10 +209,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
 
     public void submitSettings(){
         TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
-
+        
         String ident = airportIdentifierField.getRealText();
 
-       
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
         Label massFlow = screen.findNiftyControl("mass_flow", Label.class); 
 
@@ -221,10 +220,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
         gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()), Float.parseFloat(temp_wx.getText()), Float.parseFloat(pressure_wx.getText()));
         
-        
         customFanDiameterField.disable();
         customMassFlowField.disable();
-            
-
     }
 }

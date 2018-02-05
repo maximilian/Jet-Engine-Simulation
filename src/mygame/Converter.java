@@ -31,6 +31,11 @@ public class Converter {
         return Math.round(millibars);
     }
     
+    public float convertMillibarsToHg(int millibars){      
+        float Hg = (float) (millibars * 0.029529980164712);
+        return Hg;
+    }
+    
     public float convertHgToPascals(float hg){
         return (float) (hg / 0.00029529980164712);
     }

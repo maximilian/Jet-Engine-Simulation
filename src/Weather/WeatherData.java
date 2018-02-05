@@ -36,9 +36,25 @@ public class WeatherData {
     
     private LocalDateTime date;
     
+    private boolean liveWeather;
+        
     public WeatherData(String fieldIdentifier){
         this.fieldIdentifier = fieldIdentifier;
     }
+    
+    public WeatherData(String fieldIdentifier, float temp, float pressure){
+        this.fieldIdentifier = fieldIdentifier;
+        
+        this.fieldName = "n/a";
+        
+        this.fieldPressure = pressure;
+        this.fieldTemperature = temp;
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        .withZone(ZoneId.of("UTC"));
+        date = LocalDateTime.parse("2018-02-05T10:50:00Z", formatter);
+
+    }
+
             
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
         String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" + fieldIdentifier + "&hoursBeforeNow=4&mostRecent=True";   
@@ -98,6 +114,7 @@ public class WeatherData {
     }
     
     public String getFieldName() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        System.out.println("field name is"+fieldName);
         if (fieldName == null){
             collectWeather();
         }
@@ -106,6 +123,7 @@ public class WeatherData {
     }
     
     public LocalDateTime getDateTime() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        System.out.println("date is"+date);
         if (date == null){
             collectWeather();
         }
@@ -116,4 +134,6 @@ public class WeatherData {
     public void setIdent(String ident){
         this.fieldIdentifier = ident;
     }
+    
+    
 }

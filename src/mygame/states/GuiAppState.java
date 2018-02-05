@@ -108,7 +108,8 @@ public class GuiAppState extends AbstractAppState {
     public void updateWeatherScreen(){
         try {
             int convertedPressure = converter.convertHgToMillibars(weather.getPressure());
-            
+
+
             controlScreen.setWeatherInformation(weather.getFieldName(), convertedPressure, weather.getTemperature(), weather.getDateTime());
         } catch (IOException ex) {
             Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
@@ -346,7 +347,8 @@ public class GuiAppState extends AbstractAppState {
     } 
     
     public void submitSettings(String ident, float engineDiameter, float engineFlow, float temperature, float pressure){
-        this.weather = new WeatherData(ident);
+
+        this.weather = new WeatherData(ident, temperature, converter.convertMillibarsToHg((int) pressure));
         
         aircraft.setEngineDiameter(engineDiameter);
         aircraft.setEngineMassFlow(engineFlow);
@@ -373,7 +375,7 @@ public class GuiAppState extends AbstractAppState {
      * Settings page methods
     */
     public void setWeather(String identifier){
-        this.weather = new WeatherData(identifier);
+        this.weather = new WeatherData(identifier, 0.0f, 0.0f);
     }
     
     public WeatherData getWeather(){

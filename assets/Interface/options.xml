@@ -13,7 +13,7 @@
                     <control name="label" id="GLabel1" text="Engine Type"/>
                     <control name="radioButtonGroup" id="RadioGroup-1"/>
                     <panel childLayout="horizontal" align="center">
-                        <panel id="GPanel5" childLayout="vertical" backgroundColor="#8006" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
+                        <panel id="GPanel5" childLayout="vertical" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
                             <panel id="GPanel6" childLayout="horizontal">
                                 <control name="label" id="GLabel2" width="100px" text="PW2037"/>
                                 <control name="radioButton" id="PW2037" group="RadioGroup-1"/>
@@ -53,7 +53,7 @@
                     <control name="label" id="GLabel12" text="Weather Data"/>
                     <control name="radioButtonGroup" id="RadioGroup-2"/>
                     <panel id="GPanel15" childLayout="horizontal" align="center">
-                        <panel id="GPanel16" childLayout="vertical" backgroundColor="#8006" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
+                        <panel id="GPanel16" childLayout="vertical" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
                             <panel id="GPanel17" childLayout="horizontal">
                                 <control name="label" id="GLabel13" width="100px" text="Live Weather"/>
                                 <control name="radioButton" id="live_wx" group="RadioGroup-2"/>

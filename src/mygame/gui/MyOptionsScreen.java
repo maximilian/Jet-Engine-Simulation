@@ -209,9 +209,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         RadioButton PW2040Radio = screen.findNiftyControl("PW2040", RadioButton.class);
         RadioButton RB211Radio = screen.findNiftyControl("RB211", RadioButton.class);
         RadioButton customRadio = screen.findNiftyControl("custom", RadioButton.class);
-        
-       
-        
+
         gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()));
         customFanDiameterField.disable();
         customMassFlowField.disable();

@@ -12,7 +12,7 @@
                 <panel id="choose_engine" childLayout="vertical" backgroundColor="#0809" width="100%" height="40%">
                     <control name="label" id="GLabel1" text="Engine Type"/>
                     <control name="radioButtonGroup" id="RadioGroup-1"/>
-                    <panel id="" childLayout="horizontal" align="center">
+                    <panel childLayout="horizontal" align="center">
                         <panel id="GPanel5" childLayout="vertical" backgroundColor="#8006" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
                             <panel id="GPanel6" childLayout="horizontal">
                                 <control name="label" id="GLabel2" width="100px" text="PW2037"/>
@@ -72,6 +72,12 @@
                             <panel id="GPanel20" childLayout="horizontal">
                                 <control name="label" id="GLabel16" width="100px" text="Custom"/>
                                 <control name="radioButton" id="custom_wx" group="RadioGroup-2"/>
+                                <panel childLayout="horizontal" width="100%">
+                                    <control name="label" width="25%" text="Temperature (C)"/>
+                                    <control name="textfield" id="wx-customTemp" width="10%" text="0"/>
+                                    <control name="label" id="GLabel7" width="25%" text="Pressure (mbar)"/>
+                                    <control name="textfield" id="wx-customPressure" width="10%" text="0"/>
+                                </panel>
                             </panel>
                         </panel>
                         <panel id="GPanel21" childLayout="vertical" width="35%">

@@ -10,10 +10,13 @@
                     <control name="label" id="" text="Options Menu"/>
                 </panel>
                 <panel id="choose_engine" childLayout="vertical" backgroundColor="#0809" width="100%" height="40%">
-                    <control name="label" id="GLabel1" text="Engine Type"/>
+
                     <control name="radioButtonGroup" id="RadioGroup-1"/>
+        
                     <panel childLayout="horizontal" align="center">
                         <panel id="GPanel5" childLayout="vertical" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
+                                <control name="label" id="GLabel1" text="Engine Type"/>                              
+
                             <panel id="GPanel6" childLayout="horizontal">
                                 <control name="label" id="GLabel2" width="100px" text="PW2037"/>
                                 <control name="radioButton" id="PW2037" group="RadioGroup-1"/>
@@ -37,7 +40,8 @@
                                 </panel>
                             </panel>
                         </panel>
-                        <panel id="desc" childLayout="vertical" width="35%">
+                        <panel id="desc" childLayout="vertical" paddingTop="4px" width="35%">
+                            <control name="label" id="GLabel1" text="Engine Details"/>
                             <panel id="fan-diameter" childLayout="horizontal" width="100%">
                                 <control name="label" id="GLabel8" width="60%" text="Fan Diameter (m)"/>
                                 <control name="label" id="fan_diameter" width="40%" text="2.154"/>
@@ -50,19 +54,22 @@
                     </panel>
                 </panel>
                 <panel id="choose_weather" childLayout="vertical" backgroundColor="#0089" width="100%" height="40%">
-                    <control name="label" id="GLabel12" text="Weather Data"/>
                     <control name="radioButtonGroup" id="RadioGroup-2"/>
                     <panel id="GPanel15" childLayout="horizontal" align="center">
                         <panel id="GPanel16" childLayout="vertical" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
+                            <control name="label" id="GLabel12" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px" text="Weather Source" />                           
                             <panel id="GPanel17" childLayout="horizontal">
                                 <control name="label" id="GLabel13" width="100px" text="Live Weather"/>
                                 <control name="radioButton" id="live_wx" group="RadioGroup-2"/>
                                 <panel id="GPanel18" childLayout="horizontal" width="100%">
                                     <control name="label" id="GLabel14" width="25%" text="Airport ICAO"/>
                                     <control name="textfield" id="airportIdentifier" width="10%" text="EGPF"/>
-                                    <control name="button" id="airportCheck" width="20%" label="Check">
-                                        <interact onClick="getAirportData()"/>
-                                    </control>
+                                    <panel childLayout="horizontal" paddingLeft="7px">
+                                        <control name="button" id="airportCheck" width="20%" label="Check">
+                                    
+                                            <interact onClick="getAirportData()"/>
+                                        </control>
+                                    </panel>
                                 </panel>
                             </panel>
                             <panel id="GPanel19" childLayout="horizontal">
@@ -81,6 +88,7 @@
                             </panel>
                         </panel>
                         <panel id="GPanel21" childLayout="vertical" width="35%">
+                            <control name="label" id="GLabel12" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px" text="Weather Details" />                           
                             <panel id="GPanel22" childLayout="horizontal" width="100%">
                                 <control name="label" id="GLabel17" width="50%" text="Temperature (C)"/>
                                 <control name="label" id="temp_wx" width="50%" text="-"/>

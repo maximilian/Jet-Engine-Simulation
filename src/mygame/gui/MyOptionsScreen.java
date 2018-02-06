@@ -42,6 +42,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     private TextField customFanDiameterField;
     private TextField customMassFlowField;
     
+    private TextField customTempField;
+    private TextField customPressureField;
+        
     public MyOptionsScreen(GuiAppState gui){
         this.gui = gui;
         this.converter = new Converter();
@@ -77,9 +80,14 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         customFanDiameterField = screen.findNiftyControl("engine-customDiameter", TextField.class); 
         customMassFlowField = screen.findNiftyControl("engine-customMass", TextField.class); 
         
+        customTempField = screen.findNiftyControl("engine-wx-customTemp", TextField.class);
+        customPressureField = screen.findNiftyControl("engine-wx-customPressure", TextField.class);
+        
         customFanDiameterField.disable();
         customMassFlowField.disable();
 
+        customTempField.disable();
+        customPressureField.disable();
     }
 
     @Override
@@ -183,10 +191,15 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
         Button airportIdentifierButton = screen.findNiftyControl("airportCheck", Button.class);
         
+
+        
         String selected = event.getSelectedId();
         
         airportIdentifierField.disable();
         airportIdentifierButton.disable();
+        
+        customTempField.disable();
+        customPressureField.disable();
         
         if(selected.equals("live_wx")){     
             temp_wx.setText("-");
@@ -197,13 +210,13 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         } else if (selected.equals("ISA_wx")){
             temp_wx.setText("15");
             pressure_wx.setText("1013.25");
-        } else if (selected.equals("custom_wx")){
-            temp_wx.setText("TEMP");
-            pressure_wx.setText("TEMP");
-        } else if (selected.equals("custom")){
-            customFanDiameterField.enable();
-            customMassFlowField.enable();
-        }
+        } else {
+            temp_wx.setText("-");
+            pressure_wx.setText("-");
+            
+            customTempField.enable();
+            customPressureField.enable();
+        } 
         
     }
 

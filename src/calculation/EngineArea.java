@@ -9,6 +9,7 @@ import Weather.WeatherData;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;
+import mygame.states.GuiAppState;
 import org.xml.sax.SAXException;
 
 /**
@@ -16,45 +17,47 @@ import org.xml.sax.SAXException;
  * @author max
  */
 public class EngineArea {
+
     /*
      * Engine information 
-    */
-    
-    // Diameter of the engine fan blades, meters
-    private final float engineDiameter;
-    // Air mass flow rate through the engine, kg/s
-    private final float engineFlowRate;
-    
+     */
+
+
     private boolean receivingLittle;
     private boolean receivingMuch;
     private boolean receivingCorrect;
-    
+
     private float engineRadiusReal;
-        
+
+    private final GuiAppState gui;
     private final Aircraft aircraft;
     private final Converter converter;
     private final ISA isa;
-    private final WeatherData weather;
-    
+
+
     private float realPressure;
     private float realTemperature;
-    
-    public EngineArea(Aircraft aircraft){
+
+    public EngineArea(Aircraft aircraft, GuiAppState gui) {
+        this.gui = gui;
         this.aircraft = aircraft;
-        this.engineDiameter = aircraft.getEngineDiameter();
-        this.engineFlowRate = (float) 548.85;
-        
+
+
         this.converter = new Converter();
         this.isa = new ISA();
-        this.weather = new WeatherData();
-        
+    
+
+    }
+
+    public void downloadWeather() {
+
         /* Try and download the real weather
          * 
          * If successful, use it. Else, use ISA values.
-        */
+         */
         try {
-            this.realPressure = converter.convertHgToPascals(weather.getPressure());
-            this.realTemperature = converter.convertCelsiusToKelvin(weather.getTemperature());
+            this.realPressure = converter.convertHgToPascals(gui.getWeather().getPressure());
+            this.realTemperature = converter.convertCelsiusToKelvin(gui.getWeather().getTemperature());
         } catch (IOException ex) {
             realPressure = 101325;
             realTemperature = (float) 288.15;
@@ -66,7 +69,7 @@ public class EngineArea {
             realTemperature = (float) 288.15;
         }
     }
-    
+
     /*
      * Returns the radius of the area around the engine. Note: maximum altitude 36,089 ft.
      *
@@ -74,71 +77,63 @@ public class EngineArea {
      * @param speed, in knots, of the aircraft
      * @param engine setting, in percentage, of the aircraft engine
      * @return the radius, in correct jME scale, of the area around the engine
-    */
-    public float calculateArea(){
+     */
+    public float calculateArea() {
+        downloadWeather();
+        
         int aircraftAlt = aircraft.getAltitude();
 
- 
-        
-        float engineRadius = engineDiameter / 2;
+        float engineRadius = aircraft.getEngineDiameter() / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
-        
+
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
-           
-        /*
-         * TEMPERATURE MAY NEED TO BE IN KELVIN!
-        */
-        
+
         float airDensity;
         float airTemperature;
         float airPressure;
-                
+
         float correctedEngineFlowRate;
-        if (aircraftAlt == 0){
+        if (aircraftAlt == 0) {
             airDensity = converter.getDensity(realPressure, realTemperature);
-            correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, engineFlowRate);
-            System.out.println("REAL DENSITY IS:"+airDensity);
-             System.out.println("REAL FLOW RATE IS:"+correctedEngineFlowRate);
-        }else {
+            correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, aircraft.getEngineMassFlowRate());
+        } else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
-            correctedEngineFlowRate =  isa.getCorrectedMassFlow(aircraft.getAltitude(), engineFlowRate);
-            System.out.println("ISA FLOW RATE IS:"+correctedEngineFlowRate);
+            correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), aircraft.getEngineMassFlowRate());
         }
-        
+
+        System.out.println("Engine diameter = "+aircraft.getEngineDiameter()+"\n Mass flow: "+aircraft.getEngineMassFlowRate());
+       
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
-        
-        if (engineReceives < engineNeeds){
+
+        if (engineReceives < engineNeeds) {
             receivingLittle = true;
-            System.out.println("too little");
-        } else if(engineReceives > engineNeeds){
+        } else if (engineReceives > engineNeeds) {
             receivingMuch = true;
-            System.out.println("too much");
         } else {
             receivingCorrect = true;
-            System.out.println("perfect");
         }
 
         float engineAreaRequired = engineNeeds / speedMetres;
-        
+
         engineRadiusReal = (float) Math.sqrt((engineAreaRequired / Math.PI));
-        
+
         float correctScale = converter.convertMetersToSystemUnits(engineRadiusReal);
-        
-        System.out.println("Radius = " + engineRadiusReal );
-        return correctScale;   
+
+        System.out.println("Radius = " + engineRadiusReal);
+        return correctScale;
     }
-    
-    public boolean getReceivingLittle(){
+
+    public boolean getReceivingLittle() {
         return receivingLittle;
     }
-    
-    public boolean getReceivingMuch(){
+
+    public boolean getReceivingMuch() {
         return receivingMuch;
     }
-    
-    public float getEngineRadiusReal(){
-     return engineRadiusReal;
+
+    public float getEngineRadiusReal() {
+        return engineRadiusReal;
     }
-    
+
 }

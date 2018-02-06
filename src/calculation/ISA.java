@@ -80,8 +80,7 @@ public class ISA {
         float delta = (float) (correctedPressure/101325);
         
         float correctedFlow = (float) (massFlow / ((Math.sqrt(theta)) / delta));
-        
-        System.out.println("corrected flow:" + correctedFlow);
+
         return correctedFlow;
     }
 }

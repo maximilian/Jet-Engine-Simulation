@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+<screen id="options" controller="mygame.gui.MyOptionsScreen">
+        <layer id="foreground" childLayout="vertical">
+            <panel id="separator" height="10%"/>
+            <panel id="panel_top" childLayout="vertical" backgroundColor="#336" width="75%" valign="center" align="center" height="80%">
+                <panel id="title" childLayout="center" width="50%" align="center" height="10%">
+                    <control name="label" id="" text="Options Menu"/>
+                </panel>
+                <panel id="choose_engine" childLayout="vertical"  width="100%" height="40%">
+
+                    <control name="radioButtonGroup" id="RadioGroup-1"/>
+        
+                    <panel childLayout="horizontal" align="center">
+                        <panel id="GPanel5" childLayout="vertical" backgroundColor="#fff2" height="100%" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
+                            <effect>
+                                <onActive name="border" color="#0008" />
+                            </effect> 
+                            <control name="label" id="GLabel1" text="Engine Type"/>                              
+
+                            <panel id="GPanel6" childLayout="horizontal">
+                                <control name="label" id="GLabel2" width="100px" text="PW2037"/>
+                                <control name="radioButton" id="PW2037" group="RadioGroup-1"/>
+                            </panel>
+                            <panel id="GPanel7" childLayout="horizontal">
+                                <control name="label" id="GLabel3" width="100px" text="PW2040"/>
+                                <control name="radioButton" id="PW2040" group="RadioGroup-1"/>
+                            </panel>
+                            <panel id="GPanel8" childLayout="horizontal">
+                                <control name="label" id="GLabel4" width="100px" text="RB211-535E4B"/>
+                                <control name="radioButton" id="RB211" group="RadioGroup-1"/>
+                            </panel>
+                            <panel id="GPanel9" childLayout="horizontal">
+                                <control name="label" id="GLabel5" width="100px" text="Custom"/>
+                                <control name="radioButton" id="custom" group="RadioGroup-1"/>
+                                <panel id="GPanel10" childLayout="horizontal" width="100%">
+                                    <control name="label" id="GLabel6" width="25%" text="Fan Diam (m)"/>
+                                    <control name="textfield" id="engine-customDiameter" width="10%" text="0"/>
+                                    <control name="label" id="GLabel7" width="25%" text="Mass Flow (kg/s)"/>
+                                    <control name="textfield" id="engine-customMass" width="10%" text="0"/>
+                                </panel>
+                            </panel>
+                        </panel>
+                        <panel id="desc" backgroundColor="#fff3" childLayout="vertical" paddingTop="4px" height="100%" width="35%">
+                            <effect>
+                                <onActive name="border" color="#0008" />
+                            </effect> 
+                            <control name="label" id="GLabel1" text="Engine Details"/>
+                            <panel id="fan-diameter" childLayout="horizontal" width="100%">
+                                <control name="label" id="GLabel8" width="60%" text="Fan Diameter (m)"/>
+                                <control name="label" id="fan_diameter" width="40%" text="2.154"/>
+                            </panel>
+                            <panel id="massflow" childLayout="horizontal" width="100%">
+                                <control name="label" id="GLabel10" width="60%" text="Mass Flow Rate (kg/s)"/>
+                                <control name="label" id="mass_flow" width="40%" text="548.85"/>
+                            </panel>
+                        </panel>
+                    </panel>
+                </panel>
+                <panel id="choose_weather" childLayout="vertical" width="100%" height="35%">
+                    <control name="radioButtonGroup" id="RadioGroup-2"/>
+                    <panel id="GPanel15" childLayout="horizontal" align="center">
+                        <panel id="GPanel16" backgroundColor="#fff2" childLayout="vertical" paddingBottom="4px" height="100%" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px">
+                            <effect>
+                                <onActive name="border" color="#0008" />
+                            </effect>                           
+                            <control name="label" id="GLabel12" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px" text="Weather Source" />                           
+                            <panel id="GPanel17" childLayout="horizontal">
+                                <control name="label" id="GLabel13" width="100px" text="Live Weather"/>
+                                <control name="radioButton" id="live_wx" group="RadioGroup-2"/>
+                                <panel id="GPanel18" childLayout="horizontal" width="100%">
+                                    <control name="label" id="GLabel14" width="25%" text="Airport ICAO"/>
+                                    <control name="textfield" id="airportIdentifier" width="10%" text="EGPF"/>
+                                    <panel childLayout="horizontal" paddingLeft="7px">
+                                        <control name="button" id="airportCheck" width="20%" label="Check">
+                                    
+                                            <interact onClick="getAirportData()"/>
+                                        </control>
+                                    </panel>
+                                </panel>
+                            </panel>
+                            <panel id="GPanel19" childLayout="horizontal">
+                                <control name="label" id="GLabel15" width="100px" text="ISA"/>
+                                <control name="radioButton" id="ISA_wx" group="RadioGroup-2"/>
+                            </panel>
+                            <panel id="GPanel20" childLayout="horizontal">
+                                <control name="label" id="GLabel16" width="100px" text="Custom"/>
+                                <control name="radioButton" id="custom_wx" group="RadioGroup-2"/>
+                                <panel childLayout="horizontal" width="100%">
+                                    <control name="label" width="25%" text="Temperature (C)"/>
+                                    <control name="textfield" id="engine-wx-customTemp" width="10%" text="0"/>
+                                    <control name="label" id="GLabel7" width="25%" text="Pressure (mbar)"/>
+                                    <control name="textfield" id="engine-wx-customPressure" width="10%" text="0"/>
+                                </panel>
+                            </panel>
+                        </panel>
+                        <panel id="GPanel21" backgroundColor="#fff3" childLayout="vertical" height="100%" width="35%">
+                            <effect>
+                                <onActive name="border" color="#0008" />
+                            </effect>   
+                            <control name="label" id="GLabel12" paddingBottom="4px" paddingRight="7px" width="65%" paddingTop="4px" paddingLeft="7px" text="Weather Details" />                           
+                            <panel id="GPanel22" childLayout="horizontal" width="100%">
+                                <control name="label" id="GLabel17" width="50%" text="Temperature (C)"/>
+                                <control name="label" id="temp_wx" width="50%" text="-"/>
+                            </panel>
+                            <panel id="GPanel23" childLayout="horizontal" width="100%">
+                                <control name="label" id="GLabel19" width="50%" text="Pressure (mbar)"/>
+                                <control name="label" id="pressure_wx" width="50%" text="-"/>
+                            </panel>
+                            <panel id="GPanel24" childLayout="horizontal" width="100%">
+                                <control name="label" id="GLabel21" width="50%" text="Last Updated"/>
+                                <control name="label" id="time_wx" width="50%" text="--/--/-- --:--"/>
+                            </panel>
+                        </panel>
+                    </panel>
+                </panel>
+                <panel height="5%" />
+                <panel id="GPanel25" childLayout="horizontal" width="20%" align="center" height="10%">
+                    <control name="button" id="GButton1" label="Submit">
+                        <interact onClick="submitSettings()" />
+                    </control>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

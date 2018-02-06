@@ -35,12 +35,15 @@ public class MyControlScreen implements ScreenController {
     private GuiAppState gui;
     private Project app;    
     
-    private Element submitButton;   
+    private Element submitAircraftDetailsButton;   
     private Element collisionWindowLayer;
     private Slider visualisationSlider;
-
+    
+    /* flag for visualisation slider */
+    private boolean visualisationSet;
     
     public MyControlScreen(GuiAppState gui){
+        visualisationSet = false;
         this.gui = gui;
     }
     
@@ -49,7 +52,7 @@ public class MyControlScreen implements ScreenController {
         this.nifty = nifty;
         this.screen = screen;
         
-        submitButton = screen.findElementById("submitButton");
+        submitAircraftDetailsButton = screen.findElementById("submitButton");
  
          // Hide the collision window layer by default
          collisionWindowLayer = screen.findElementById("windows");
@@ -97,7 +100,7 @@ public class MyControlScreen implements ScreenController {
      }
     
     public void submit(){
-        submitButton.disable();
+        submitAircraftDetailsButton.disable();
         
         TextField altitudeField = screen.findNiftyControl("altitudeField", TextField.class);  
         String altitudeString = altitudeField.getRealText();
@@ -153,21 +156,29 @@ public class MyControlScreen implements ScreenController {
         gui.resetSimulation();
     }
     
-    public void showCollisionWindow(float time, int speed, int distance){   
+    public void showCollisionWindow(float time, int speed, int distance, boolean aircraftView){   
         String initial = ""
                 + " \n - Endangered the safety of an aircraft, putting over 200 lives at risk."
-                + " \n - Could face up to 5 years in prison "
+                + " \n - Could face up to 5 years in prison."
                 + "\n\n Be Drone Safe by following the Drone Code"
                 + "\n http://dronesafe.uk";
         
-        
         Label windowText = screen.findNiftyControl("time", Label.class);
-        windowText.setText("Spotting the aircraft " +
+        
+        if(aircraftView){
+            windowText.setText("The aircraft pilot spotted a drone " +
+                distance +" meters away and was left you with\nonly " + 
+                time +" seconds to react\n\n "+ 
+                "With little time to react, the drone pilot:"+initial);
+        } else {
+            windowText.setText("Spotting the aircraft " +
                 distance +" meters away flying at " + 
                 speed + " knots" +
                 " left you with\nonly " + 
                 time +" seconds to react\n\n "+ 
                 "With little time to react, you:"+initial);
+        }
+
 
         collisionWindowLayer.show();
         
@@ -196,7 +207,7 @@ public class MyControlScreen implements ScreenController {
     
     @NiftyEventSubscriber(pattern=".*Field")
     public void onTextfieldChange(final String id, final TextFieldChangedEvent event) {
-               submitButton.enable();
+               submitAircraftDetailsButton.enable();
         
         // validation, ensure value entered is numeric and valid
         int parsedInt;
@@ -229,49 +240,53 @@ public class MyControlScreen implements ScreenController {
     
     @NiftyEventSubscriber(id="simulationTimeControl")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
-        System.out.println(event.getSlider().getValue());
-        
-        float percentage = event.getSlider().getValue();
-        
-        
-        // distance travelled (real life units)
-        float currDistance = (percentage/100) * 1850;
-        // speed based on real life units, using v = u + at
-        float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
-        
-        // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
-        float distanceToMove = (percentage/100) * 3188;
-        
-        float speedKnots = (float) (speed * 1.94384);
-        
-        gui.runVisualisation(speedKnots, distanceToMove);
-        
-        System.out.println("aircraft speed=" + speedKnots);
-        
-        Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
-        Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
-        
-        speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+        System.out.println("visualisation is set?"+visualisationSet);
+        if (visualisationSet){
+            float percentage = event.getSlider().getValue();
 
-        
-        DecimalFormat df = new DecimalFormat("##.##");
-        String roundedRadius = df.format(gui.getEngineRadius());
-        radiusVisLabel.setText(roundedRadius + " meters");
 
-        if (percentage > 100){
-         gui.rotateVisualisation(percentage);
+            // distance travelled (real life units)
+            float currDistance = (percentage/100) * 1850;
+            // speed based on real life units, using v = u + at
+            float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
+
+            // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
+            float distanceToMove = (percentage/100) * 3188;
+
+            float speedKnots = (float) (speed * 1.94384);
+
+            gui.runVisualisation(speedKnots, distanceToMove);
+
+            System.out.println("aircraft speed=" + speedKnots);
+
+            Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
+            Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
+
+            speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+
+
+            DecimalFormat df = new DecimalFormat("##.##");
+            String roundedRadius = df.format(gui.getEngineRadius());
+            radiusVisLabel.setText(roundedRadius + " meters");
+
+            if (percentage > 100){
+             gui.rotateVisualisation(percentage);
+            }
         }
     }
     
     public void setVisualisation(){
         Element resetVis = screen.findElementById("resetVisualisationField");
         Element setVis = screen.findElementById("setVisualisationField");
-        
+
         resetVis.enable();
         setVis.disable();
 
         visualisationSlider.enable();
+        visualisationSet = true;
         gui.setVisualisation();
+        
+
     }
     
     public void resetVisualisation(){
@@ -283,8 +298,9 @@ public class MyControlScreen implements ScreenController {
         
         visualisationSlider.setValue(0);
         visualisationSlider.disable();
+        visualisationSet = false;
+        
         gui.resetVisualisation();
-    
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
@@ -302,11 +318,12 @@ public class MyControlScreen implements ScreenController {
        
         airportLastUpdateLabel.setText(formattedDate);
     }
-  
-    public void quitGame() {
-        System.out.println("quit pls");
-        app.stop();
+    
+    public void openSettings(){
+        gui.openSettings();
     }
+    
+ 
 
 
 }

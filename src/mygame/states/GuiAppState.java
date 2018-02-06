@@ -30,6 +30,7 @@ import mygame.Project;
 import mygame.ResourceLoader;
 import mygame.Simulation;
 import mygame.gui.MyControlScreen;
+import mygame.gui.MyOptionsScreen;
 import org.xml.sax.SAXException;
 
 /**
@@ -48,6 +49,7 @@ public class GuiAppState extends AbstractAppState {
     private NiftyJmeDisplay niftyDisplay;
     private Nifty nifty;
     
+    private MyOptionsScreen optionScreen;
     private MyControlScreen controlScreen;
     private Camera flyCam;
     private AircraftCamera aircraftView;
@@ -78,9 +80,10 @@ public class GuiAppState extends AbstractAppState {
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
-        this.engineArea = new EngineArea(aircraft);
-        
-        this.weather = new WeatherData();
+                
+        this.weather = new WeatherData("EGPF");
+        this.engineArea = new EngineArea(aircraft, this);
+
         this.converter = new Converter();
         
         
@@ -92,22 +95,21 @@ public class GuiAppState extends AbstractAppState {
         
         /** Read your XML and initialize your custom ScreenController */
         controlScreen = new MyControlScreen(this);
-
+        
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
-        
-        
+   
         submitAircraftVariables();  
-        
+
         updateWeatherScreen();
-        
     } 
     
     public void updateWeatherScreen(){
         try {
             int convertedPressure = converter.convertHgToMillibars(weather.getPressure());
-            
+
+
             controlScreen.setWeatherInformation(weather.getFieldName(), convertedPressure, weather.getTemperature(), weather.getDateTime());
         } catch (IOException ex) {
             Logger.getLogger(GuiAppState.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,7 +176,6 @@ public class GuiAppState extends AbstractAppState {
         } else {
             rootNode.detachChildNamed("Cockpit");
         }
-
     }
     
     public void runSimulation(){
@@ -209,13 +210,13 @@ public class GuiAppState extends AbstractAppState {
         
         rootNode.detachChildNamed("Right Engine");
         rootNode.detachChildNamed("Left Engine");
-        
+
         rootNode.attachChild(rightEngine);
         rootNode.attachChild(leftEngine);
     }
     
     public void updateForwardArea(){
-         this.engineArea = new EngineArea(aircraft);
+         this.engineArea = new EngineArea(aircraft, this);
          
          float engineRadius = engineArea.calculateArea();
          
@@ -270,8 +271,6 @@ public class GuiAppState extends AbstractAppState {
         updateEngineArea();
         
         aircraftView.leftEngineView(0);
-        
-    
     }
     
     public void runVisualisation(float speed, float distance){
@@ -331,6 +330,56 @@ public class GuiAppState extends AbstractAppState {
 
     public Node getRootNode(){
         return this.rootNode;
+    }
+    
+    public void openSettings(){
+        app.getGuiViewPort().removeProcessor(niftyDisplay);
+        
+        niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
+        nifty = niftyDisplay.getNifty();
+        
+        /** Read your XML and initialize your custom ScreenController */
+        optionScreen = new MyOptionsScreen(this);
+        
+        nifty.fromXml("Interface/options.xml", "options", optionScreen);
+        // attach the Nifty display to the gui view port as a processor
+        app.getGuiViewPort().addProcessor(niftyDisplay);
+    } 
+    
+    public void submitSettings(String ident, float engineDiameter, float engineFlow, float temperature, float pressure){
+
+        this.weather = new WeatherData(ident, temperature, converter.convertMillibarsToHg((int) pressure));
+        
+        aircraft.setEngineDiameter(engineDiameter);
+        aircraft.setEngineMassFlow(engineFlow);
+
+        
+        app.getGuiViewPort().removeProcessor(niftyDisplay);
+        
+        niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
+        nifty = niftyDisplay.getNifty();
+        
+        /** Read your XML and initialize your custom ScreenController */
+        controlScreen = new MyControlScreen(this);
+        
+        nifty.fromXml("Interface/screen.xml", "start", controlScreen);
+        // attach the Nifty display to the gui view port as a processor
+        app.getGuiViewPort().addProcessor(niftyDisplay);
+        
+        updateWeatherScreen();
+        
+    }
+    
+    
+    /*
+     * Settings page methods
+    */
+    public void setWeather(String identifier){
+        this.weather = new WeatherData(identifier, 0.0f, 0.0f);
+    }
+    
+    public WeatherData getWeather(){
+        return this.weather;
     }
     
 }

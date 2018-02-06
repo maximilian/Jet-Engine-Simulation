@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-import java.time.temporal.TemporalAccessor;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,16 +28,36 @@ import org.xml.sax.SAXException;
  * @author max
  */
 public class WeatherData {
+    private String fieldIdentifier;
     
     private float fieldPressure;
     private float fieldTemperature;
     private String fieldName;
     
     private LocalDateTime date;
+    
+    private boolean liveWeather;
+        
+    public WeatherData(String fieldIdentifier){
+        this.fieldIdentifier = fieldIdentifier;
+    }
+    
+    public WeatherData(String fieldIdentifier, float temp, float pressure){
+        this.fieldIdentifier = fieldIdentifier;
+        
+        this.fieldName = fieldIdentifier;
+        
+        this.fieldPressure = pressure;
+        this.fieldTemperature = temp;
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        .withZone(ZoneId.of("UTC"));
+        date = LocalDateTime.parse("2018-02-05T10:50:00Z", formatter);
+    }
+
             
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
-        String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=EGPF&hoursBeforeNow=4&mostRecent=True";   
-        
+        String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" + fieldIdentifier + "&hoursBeforeNow=4&mostRecent=True";   
+        System.out.println("downloading weather for"+fieldIdentifier);
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setNamespaceAware(false);
         f.setValidating(false);
@@ -46,8 +65,7 @@ public class WeatherData {
         URLConnection urlConnection = new URL(url).openConnection();
         urlConnection.addRequestProperty("Accept", "application/xml");
         Document doc = b.parse(urlConnection.getInputStream());
-        System.out.println("plsss");
-        //if (doc != null)
+
         doc.getDocumentElement().normalize();
         NodeList nList = doc.getElementsByTagName("METAR");
         
@@ -76,6 +94,7 @@ public class WeatherData {
     }
     
     public float getPressure() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+
         if (fieldPressure == 0.0f){
             collectWeather();
         }
@@ -84,6 +103,7 @@ public class WeatherData {
     }
     
     public float getTemperature() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        System.out.println("temperature is"+fieldTemperature);
         if (fieldTemperature == 0.0f){
             collectWeather();
         }
@@ -93,6 +113,7 @@ public class WeatherData {
     }
     
     public String getFieldName() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        System.out.println("field name is"+fieldName);
         if (fieldName == null){
             collectWeather();
         }
@@ -101,10 +122,17 @@ public class WeatherData {
     }
     
     public LocalDateTime getDateTime() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
+        System.out.println("date is"+date);
         if (date == null){
             collectWeather();
         }
         
         return date;
     }
+    
+    public void setIdent(String ident){
+        this.fieldIdentifier = ident;
+    }
+    
+    
 }

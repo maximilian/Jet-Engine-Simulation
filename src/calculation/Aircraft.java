@@ -16,13 +16,16 @@ public class Aircraft {
     private int speed;
     private int engineSetting;
     
-    private final float engineDiameter;
+    private float engineDiameter;
+    private float engineMassFlowRate;
+    
     private final Spatial aircraft;
     
     public Aircraft(Spatial aircraft){
         this.aircraft = aircraft;
         
         this.engineDiameter = (float) 2.154;
+        this.engineMassFlowRate = (float) 548.85;
         
         this.speed = 160;
         this.altitude = 0;
@@ -40,6 +43,7 @@ public class Aircraft {
     public int getEngineSetting(){
         return this.engineSetting;
     }
+
     
     public void setSpeed(int speed){
         this.speed = speed;
@@ -59,6 +63,18 @@ public class Aircraft {
 
     public float getEngineDiameter() {
         return this.engineDiameter;
+    }
+    
+    public float getEngineMassFlowRate(){
+        return this.engineMassFlowRate;
+    }
+
+    public void setEngineDiameter(float engineDiameter){
+        this.engineDiameter = engineDiameter;
+    }
+    
+    public void setEngineMassFlow(float engineMassFlow){
+        this.engineMassFlowRate = engineMassFlow;
     }
     
     // Converts knots to m/s, then to visualisation units

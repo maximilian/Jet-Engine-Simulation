@@ -240,7 +240,6 @@ public class MyControlScreen implements ScreenController {
     
     @NiftyEventSubscriber(id="simulationTimeControl")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
-        System.out.println("visualisation is set?"+visualisationSet);
         if (visualisationSet){
             float percentage = event.getSlider().getValue();
 

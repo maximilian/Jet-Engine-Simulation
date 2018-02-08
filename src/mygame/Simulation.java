@@ -88,7 +88,11 @@ public class Simulation extends AbstractAppState{
                 endTime = System.currentTimeMillis();
             } else {
                 runSimulation = false;
+                System.out.println("aircraft alt is"+aircraft.getAltitude());
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
+                leftEngineArea.setLocalTranslation(new Vector3f(0, 0, 0));
+                rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
+
                 if(aircraftView){
                     flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 

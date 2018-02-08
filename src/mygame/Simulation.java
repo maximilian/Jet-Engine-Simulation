@@ -62,7 +62,10 @@ public class Simulation extends AbstractAppState{
         Spatial aircraftSpatial = aircraft.getSpatial();
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
-
+        
+        Spatial rightForwardArea = loader.getRightForwardArea();
+        Spatial leftForwardArea = loader.getLeftForwardArea();
+        
         if (runSimulation){
             Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
             Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());
@@ -83,6 +86,9 @@ public class Simulation extends AbstractAppState{
                 leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
                 rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
                 
+                rightForwardArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                leftForwardArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                
                 distanceTravelled += (aircraft.getConvertedSpeed()*tpf);
                 System.out.println(aircraft.getSpeed());
                 endTime = System.currentTimeMillis();
@@ -90,9 +96,11 @@ public class Simulation extends AbstractAppState{
                 runSimulation = false;
                 System.out.println("aircraft alt is"+aircraft.getAltitude());
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
-                leftEngineArea.setLocalTranslation(new Vector3f(0, 0, 0));
+                leftEngineArea.setLocalTranslation(new Vector3f(0,0,0));
                 rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
-
+                
+                rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550));
+                leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550));                
                 if(aircraftView){
                     flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 

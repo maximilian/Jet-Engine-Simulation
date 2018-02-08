@@ -201,9 +201,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     
-    public void updateEngineArea(){
-
-        
+    public void updateEngineArea(){ 
         float engineRadius = engineArea.calculateArea();
         Spatial leftEngine = loader.getLeftEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());
         Spatial rightEngine = loader.getRightEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());

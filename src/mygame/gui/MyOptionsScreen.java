@@ -12,8 +12,6 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.Label;
-import de.lessvoid.nifty.controls.RadioButton;
-import de.lessvoid.nifty.controls.RadioButtonGroup;
 import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
@@ -109,8 +107,7 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         String airportIdentifier = airportIdentifierField.getRealText();
         
         gui.setWeather(airportIdentifier);
-        
-        
+
         try {
             temp_wx.setText(Float.toString(gui.getWeather().getTemperature()));
             

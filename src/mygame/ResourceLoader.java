@@ -107,6 +107,18 @@ public class ResourceLoader {
         return rightForwardArea;
     }
     
+    /*
+     * Used by simulation
+    */
+    
+    public Spatial getRightForwardArea(){
+        return rightForwardArea;
+    }
+    
+    public Spatial getLeftForwardArea(){
+        return leftForwardArea;
+    }
+    
     public Spatial getLeftForwardArea(float engineRadius, int altitude, boolean submitButton){
         if (leftForwardArea == null || submitButton){
             initLeftForwardArea(engineRadius, altitude);

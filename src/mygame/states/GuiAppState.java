@@ -164,7 +164,7 @@ public class GuiAppState extends AbstractAppState {
     
     public void setSimulation(int distance, int altitude, int speed, boolean aircraftView){
         if (simulation == null){
-            simulation = new Simulation(aircraft, drone, app,controlScreen);
+            simulation = new Simulation(aircraft, drone, app,controlScreen, loader);
             stateManager.attach(simulation);
         }
         drone.setAltitude(aircraft.getAltitude());
@@ -201,9 +201,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     
-    public void updateEngineArea(){
-
-        
+    public void updateEngineArea(){ 
         float engineRadius = engineArea.calculateArea();
         Spatial leftEngine = loader.getLeftEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());
         Spatial rightEngine = loader.getRightEngineArea(engineRadius, engineArea.getReceivingLittle(), true, aircraft.getAltitude());

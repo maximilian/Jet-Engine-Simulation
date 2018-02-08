@@ -24,7 +24,7 @@ import mygame.gui.MyControlScreen;
 public class Simulation extends AbstractAppState{
     
     private final MyControlScreen controlScreen;
-    
+    private final ResourceLoader loader;
     private final Aircraft aircraft;
     private final Drone drone;
     
@@ -41,8 +41,8 @@ public class Simulation extends AbstractAppState{
     
     private int distanceTravelled;
     
-    public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen){
-        
+    public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen, ResourceLoader loader){
+        this.loader = loader;
         this.aircraft = aircraft;
         this.drone = drone;
         
@@ -60,9 +60,12 @@ public class Simulation extends AbstractAppState{
     @Override
     public void update(float tpf) {
         Spatial aircraftSpatial = aircraft.getSpatial();
-        //Spatial leftEngineArea = loader.getLeftEngineArea();
-        //Spatial rightEngineArea = loader.getRightEngineArea();
-
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
+        
+        Spatial rightForwardArea = loader.getRightForwardArea();
+        Spatial leftForwardArea = loader.getLeftForwardArea();
+        
         if (runSimulation){
             Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
             Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());
@@ -80,15 +83,25 @@ public class Simulation extends AbstractAppState{
                     flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 
                 }
-                //leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
-                //rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
+                rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                
+                rightForwardArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                leftForwardArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
                 
                 distanceTravelled += (aircraft.getConvertedSpeed()*tpf);
                 System.out.println(aircraft.getSpeed());
                 endTime = System.currentTimeMillis();
             } else {
                 runSimulation = false;
+
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
+                leftEngineArea.setLocalTranslation(new Vector3f(0,0,0));
+                rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
+                
+                rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550+aircraftSpatial.getLocalTranslation().getZ()));
+                leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550+aircraftSpatial.getLocalTranslation().getZ()));
+                
                 if(aircraftView){
                     flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 
@@ -123,7 +136,6 @@ public class Simulation extends AbstractAppState{
         
         if (aircraftView){
             setCameraCockpitPosition(altitude);
-
         } else {
            setCameraDronePosition(altitude); 
         }
@@ -136,6 +148,11 @@ public class Simulation extends AbstractAppState{
     
     public void reset(){
         this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
+        Spatial rightForwardArea = loader.getRightForwardArea();
+        Spatial leftForwardArea = loader.getLeftForwardArea();
+        
+        rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550));
+        leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550));
         //this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
         //this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }

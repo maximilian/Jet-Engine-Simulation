@@ -24,7 +24,7 @@ import mygame.gui.MyControlScreen;
 public class Simulation extends AbstractAppState{
     
     private final MyControlScreen controlScreen;
-    
+    private final ResourceLoader loader;
     private final Aircraft aircraft;
     private final Drone drone;
     
@@ -41,8 +41,8 @@ public class Simulation extends AbstractAppState{
     
     private int distanceTravelled;
     
-    public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen){
-        
+    public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen, ResourceLoader loader){
+        this.loader = loader;
         this.aircraft = aircraft;
         this.drone = drone;
         
@@ -60,8 +60,8 @@ public class Simulation extends AbstractAppState{
     @Override
     public void update(float tpf) {
         Spatial aircraftSpatial = aircraft.getSpatial();
-        //Spatial leftEngineArea = loader.getLeftEngineArea();
-        //Spatial rightEngineArea = loader.getRightEngineArea();
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
 
         if (runSimulation){
             Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
@@ -80,8 +80,8 @@ public class Simulation extends AbstractAppState{
                     flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 
                 }
-                //leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
-                //rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
+                leftEngineArea.move(0,0, aircraft.getConvertedSpeed()*tpf);
+                rightEngineArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
                 
                 distanceTravelled += (aircraft.getConvertedSpeed()*tpf);
                 System.out.println(aircraft.getSpeed());

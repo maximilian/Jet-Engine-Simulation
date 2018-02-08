@@ -5,7 +5,6 @@
  */
 package calculation;
 
-import Weather.WeatherData;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;

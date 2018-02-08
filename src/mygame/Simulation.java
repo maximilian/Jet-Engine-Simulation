@@ -136,7 +136,6 @@ public class Simulation extends AbstractAppState{
         
         if (aircraftView){
             setCameraCockpitPosition(altitude);
-
         } else {
            setCameraDronePosition(altitude); 
         }
@@ -149,6 +148,11 @@ public class Simulation extends AbstractAppState{
     
     public void reset(){
         this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
+        Spatial rightForwardArea = loader.getRightForwardArea();
+        Spatial leftForwardArea = loader.getLeftForwardArea();
+        
+        rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550));
+        leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550));
         //this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
         //this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
     }

@@ -10,6 +10,7 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.shape.Line;
 
 public class Project extends SimpleApplication {
@@ -50,8 +51,13 @@ public class Project extends SimpleApplication {
         // need this in any game involving physics
         BulletAppState bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);
-      
-        rootNode.attachChild(loader.getAircraft());
+           
+        Node aircraftNode = new Node("aircraft");
+        aircraftNode.attachChild(loader.getAircraft());
+        
+        rootNode.attachChild(aircraftNode);
+   
+        
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
         
         aircraftObject.setSpeed(160);
@@ -61,9 +67,9 @@ public class Project extends SimpleApplication {
         droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
 
 
-        rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
-        rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
-       
+        aircraftNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
+        aircraftNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
+
         // add a light to make the model visible 
         rootNode.addLight(loader.getSun());
 

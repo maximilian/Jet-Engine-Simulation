@@ -56,7 +56,8 @@ public class Project extends SimpleApplication {
         aircraftNode.attachChild(loader.getAircraft());
         
         rootNode.attachChild(aircraftNode);
-        System.out.println(rootNode.getChildren());
+   
+        
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
         
         aircraftObject.setSpeed(160);
@@ -66,9 +67,9 @@ public class Project extends SimpleApplication {
         droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
 
 
-        rootNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
-        rootNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
-       
+        aircraftNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       
+        aircraftNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
+
         // add a light to make the model visible 
         rootNode.addLight(loader.getSun());
 

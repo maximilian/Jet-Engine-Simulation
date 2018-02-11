@@ -242,24 +242,7 @@ public class ResourceLoader {
         Texture airport = assetManager.loadTexture("Textures/staticmap.png");
         
         mat_terrain.setTexture("ColorMap", airport);
-          
-            /** 2. Create the height map */
-        /*     
-       AbstractHeightMap heightmap = null;
-        Texture heightMapImage = assetManager.loadTexture(
-                "Textures/Terrain/splat/mountains512.png");
-        heightmap = new ImageBasedHeightMap(heightMapImage.getImage());
-        heightmap.load();
-        */
 
-        /** 3. We have prepared material and heightmap.
-         * Now we create the actual terrain:
-         * 3.1) Create a TerrainQuad and name it "my terrain".
-         * 3.2) A good value for terrain tiles is 64x64 -- so we supply 64+1=65.
-         * 3.3) We prepared a heightmap of size 512x512 -- so we supply 512+1=513.
-         * 3.4) As LOD step scale we supply Vector3f(1,1,1).
-         * 3.5) We supply the prepared heightmap itself.
-         */
         int patchSize = 64;
         terrain = new TerrainQuad("my terrain", patchSize, 513, null);
         

@@ -168,13 +168,13 @@ public class Simulation extends AbstractAppState{
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         
-        float angleTowardsDrone = (float) Math.atan(altitude/500);
-        Quaternion droneAngleView = new Quaternion();
+        float angleTowardsDrone = (float) Math.atan((float) altitude/500);
 
+        Quaternion droneAngleView = new Quaternion();
         droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );
         
-        Quaternion combo = droneGroundView.mult(droneAngleView);
-        flyCam.setRotation(combo);
+        Quaternion combQuaternion = droneGroundView.mult(droneAngleView);
+        flyCam.setRotation(combQuaternion);
         
         flyCam.setLocation( new Vector3f(500f, 20, drone.getConvertedDistanceFromAircraft()));
     

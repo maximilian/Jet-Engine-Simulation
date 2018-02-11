@@ -239,31 +239,6 @@ public class ResourceLoader {
         Material mat_terrain = new Material(assetManager,
             "Common/MatDefs/Misc/Unshaded.j3md");
 
-        /** 1.1) Add ALPHA map (for red-blue-green coded splat textures) *
-/        mat_terrain.setTexture("Alpha", assetManager.loadTexture(
-                "Textures/Terrain/splat/alphamap.png"));*/
-
-        /** 1.2) Add GRASS texture into the red layer (Tex1). 
-        Texture grass = assetManager.loadTexture(
-                "Textures/Terrain/splat/grass.jpg");
-        grass.setWrap(Texture.WrapMode.Repeat);
-        mat_terrain.setTexture("Tex1", grass);
-        mat_terrain.setFloat("Tex1Scale", 64f);*/
-
-        /** 1.3) Add DIRT texture into the green layer (Tex2) 
-        Texture dirt = assetManager.loadTexture(
-                "Textures/Terrain/splat/dirt.jpg");
-        dirt.setWrap(Texture.WrapMode.Repeat);
-        mat_terrain.setTexture("Tex2", dirt);
-        mat_terrain.setFloat("Tex2Scale", 32f);*/
-
-        /** 1.4) Add ROAD texture into the blue layer (Tex3) 
-        Texture rock = assetManager.loadTexture(
-                "Textures/Terrain/splat/road.jpg");
-        rock.setWrap(Texture.WrapMode.Repeat);
-        mat_terrain.setTexture("Tex3", rock);
-        mat_terrain.setFloat("Tex3Scale", 128f);*/
-
         Texture airport = assetManager.loadTexture("Textures/staticmap.png");
         
         mat_terrain.setTexture("ColorMap", airport);

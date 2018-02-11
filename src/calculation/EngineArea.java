@@ -21,7 +21,6 @@ public class EngineArea {
      * Engine information 
      */
 
-
     private boolean receivingLittle;
     private boolean receivingMuch;
     private boolean receivingCorrect;
@@ -33,7 +32,6 @@ public class EngineArea {
     private final Converter converter;
     private final ISA isa;
 
-
     private float realPressure;
     private float realTemperature;
 
@@ -41,16 +39,12 @@ public class EngineArea {
         this.gui = gui;
         this.aircraft = aircraft;
 
-
         this.converter = new Converter();
         this.isa = new ISA();
-    
-
     }
 
-    public void downloadWeather() {
-
-        /* Try and download the real weather
+    public void getWeather() {
+        /* Get weather information
          * 
          * If successful, use it. Else, use ISA values.
          */
@@ -78,18 +72,14 @@ public class EngineArea {
      * @return the radius, in correct jME scale, of the area around the engine
      */
     public float calculateArea() {
-        downloadWeather();
+        getWeather();
         
         int aircraftAlt = aircraft.getAltitude();
-
         float engineRadius = aircraft.getEngineDiameter() / 2;
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
-
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
 
         float airDensity;
-        float airTemperature;
-        float airPressure;
 
         float correctedEngineFlowRate;
         if (aircraftAlt == 0) {
@@ -100,18 +90,10 @@ public class EngineArea {
             correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), aircraft.getEngineMassFlowRate());
         }
 
-        System.out.println("Engine diameter = "+aircraft.getEngineDiameter()+"\n Mass flow: "+aircraft.getEngineMassFlowRate());
-       
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
-
-        if (engineReceives < engineNeeds) {
-            receivingLittle = true;
-        } else if (engineReceives > engineNeeds) {
-            receivingMuch = true;
-        } else {
-            receivingCorrect = true;
-        }
+        
+        setEngineState(engineReceives, engineNeeds);
 
         float engineAreaRequired = engineNeeds / speedMetres;
 
@@ -133,6 +115,16 @@ public class EngineArea {
 
     public float getEngineRadiusReal() {
         return engineRadiusReal;
+    }
+    
+    public void setEngineState(float engineReceives, float engineNeeds){
+        if (engineReceives < engineNeeds) {
+            receivingLittle = true;
+        } else if (engineReceives > engineNeeds) {
+            receivingMuch = true;
+        } else {
+            receivingCorrect = true;
+        }
     }
 
 }

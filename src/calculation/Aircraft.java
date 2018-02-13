@@ -26,6 +26,7 @@ public class Aircraft {
         
         this.engineDiameter = (float) 2.154;
         this.engineMassFlowRate = (float) 548.85;
+        this.engineSetting = 100;
         
         this.speed = 160;
         this.altitude = 0;
@@ -66,7 +67,8 @@ public class Aircraft {
     }
     
     public float getEngineMassFlowRate(){
-        return this.engineMassFlowRate;
+        System.out.println(engineSetting);
+        return this.engineMassFlowRate * (engineSetting/100);
     }
 
     public void setEngineDiameter(float engineDiameter){

@@ -67,17 +67,30 @@ public class Aircraft {
     }
     
     public float getEngineMassFlowRate(){
-        int correspondingMassFlow;
+        int correspondingMassFlow = 0;
         switch(engineSetting){
             // max engine setting
-            case 100: correspondingMassFlow = 100;
-            case 75: correspondingMassFlow = 87;
-            case 50: correspondingMassFlow = 71;
-            case 25: correspondingMassFlow = 51;
+            case 100:
+                correspondingMassFlow = 100;
+                break;
+            case 75:
+                correspondingMassFlow = 87;
+                break;
+            case 50:
+                correspondingMassFlow = 71;
+                break;
+            case 25:
+                correspondingMassFlow = 51;
+                break;
             // idle setting
-            case 0: correspondingMassFlow = 30;
-            default: correspondingMassFlow = 100;
+            case 0: 
+                correspondingMassFlow = 30;
+                break;
+            default: break;
+            
         }
+        
+        System.out.println("corresponding flow:"+correspondingMassFlow);
         return this.engineMassFlowRate * ((float) correspondingMassFlow/100);
     }
 

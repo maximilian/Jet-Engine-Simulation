@@ -119,11 +119,15 @@ public class EngineArea {
     }
     
     public void setEngineState(float engineReceives, float engineNeeds){
-        System.out.println("engine receives:"+engineReceives+"\nengine needs:"+engineNeeds);
+        
         if (engineReceives < engineNeeds) {
             receivingLittle = true;
+            receivingMuch = false;
+
         } else if (engineReceives > engineNeeds) {
             receivingMuch = true;
+            receivingLittle = false;
+           
         } else {
             receivingCorrect = true;
         }

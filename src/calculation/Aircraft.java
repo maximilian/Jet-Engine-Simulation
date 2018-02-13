@@ -66,6 +66,10 @@ public class Aircraft {
         return this.engineDiameter;
     }
     
+    /*
+     * Refer to net thrust vs mass flow rate chart
+    */
+    
     public float getEngineMassFlowRate(){
         int correspondingMassFlow = 0;
         switch(engineSetting){
@@ -89,8 +93,7 @@ public class Aircraft {
             default: break;
             
         }
-        
-        System.out.println("corresponding flow:"+correspondingMassFlow);
+
         return this.engineMassFlowRate * ((float) correspondingMassFlow/100);
     }
 

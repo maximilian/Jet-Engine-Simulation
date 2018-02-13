@@ -150,7 +150,7 @@ public class GuiAppState extends AbstractAppState {
      }
     
     public void submitAircraftVariables(){       
-        aircraft.setEngineSetting(100);
+        //aircraft.setEngineSetting(100);
         
         Spatial aircraftSpatial = aircraft.getSpatial();
         aircraftSpatial.setLocalTranslation(0, aircraft.getAltitude(), 0);
@@ -236,6 +236,10 @@ public class GuiAppState extends AbstractAppState {
     
     public void setSpeed(int speed){
         aircraft.setSpeed(speed);
+    }
+    
+    public void setEngineSetting(float setting){
+        aircraft.setEngineSetting((int) setting);
     }
     
     public EngineArea getEngineArea(){

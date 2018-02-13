@@ -111,10 +111,13 @@ public class MyControlScreen implements ScreenController {
         int fieldSpeed = Integer.parseInt(speedString);
         
         Slider sliderField = screen.findNiftyControl("sliderH", Slider.class);
-        System.out.print("slider value is"+sliderField.getValue()+"\n");
+        float fieldEngineSetting = sliderField.getValue();
         
         gui.setAltitude(fieldAltitude);
         gui.setSpeed(fieldSpeed);
+        gui.setEngineSetting(fieldEngineSetting);
+        
+        
         gui.submitAircraftVariables();   
         
         updateAircraftLabels(fieldAltitude, fieldSpeed);

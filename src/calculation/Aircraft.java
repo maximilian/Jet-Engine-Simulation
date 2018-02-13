@@ -76,8 +76,9 @@ public class Aircraft {
             case 25: correspondingMassFlow = 51;
             // idle setting
             case 0: correspondingMassFlow = 30;
+            default: correspondingMassFlow = 100;
         }
-        return this.engineMassFlowRate * ((float) engineSetting/100);
+        return this.engineMassFlowRate * ((float) correspondingMassFlow/100);
     }
 
     public void setEngineDiameter(float engineDiameter){

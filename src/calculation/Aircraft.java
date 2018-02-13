@@ -67,8 +67,17 @@ public class Aircraft {
     }
     
     public float getEngineMassFlowRate(){
-        System.out.println(engineSetting);
-        return this.engineMassFlowRate * (engineSetting/100);
+        int correspondingMassFlow;
+        switch(engineSetting){
+            // max engine setting
+            case 100: correspondingMassFlow = 100;
+            case 75: correspondingMassFlow = 87;
+            case 50: correspondingMassFlow = 71;
+            case 25: correspondingMassFlow = 51;
+            // idle setting
+            case 0: correspondingMassFlow = 30;
+        }
+        return this.engineMassFlowRate * ((float) engineSetting/100);
     }
 
     public void setEngineDiameter(float engineDiameter){

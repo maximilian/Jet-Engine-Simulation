@@ -115,6 +115,9 @@ public class MyControlScreen implements ScreenController {
         
         gui.setAltitude(fieldAltitude);
         gui.setSpeed(fieldSpeed);
+        gui.setEngineSetting(fieldEngineSetting);
+        
+        
         gui.submitAircraftVariables();   
         
         updateAircraftLabels(fieldAltitude, fieldSpeed);

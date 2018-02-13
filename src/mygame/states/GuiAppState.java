@@ -239,6 +239,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void setEngineSetting(float setting){
+        System.out.println("setting a value of "+setting);
         aircraft.setEngineSetting((int) setting);
     }
     

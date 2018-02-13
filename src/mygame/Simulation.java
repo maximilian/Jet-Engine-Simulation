@@ -177,6 +177,5 @@ public class Simulation extends AbstractAppState{
         flyCam.setRotation(combQuaternion);
         
         flyCam.setLocation( new Vector3f(500f, 20, drone.getConvertedDistanceFromAircraft()));
-    
     }
 }

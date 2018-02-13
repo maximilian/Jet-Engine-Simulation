@@ -76,6 +76,7 @@ public class EngineArea {
         
         int aircraftAlt = aircraft.getAltitude();
         float engineRadius = aircraft.getEngineDiameter() / 2;
+        
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
 
@@ -118,6 +119,7 @@ public class EngineArea {
     }
     
     public void setEngineState(float engineReceives, float engineNeeds){
+        System.out.println("engine receives:"+engineReceives+"\nengine needs:"+engineNeeds);
         if (engineReceives < engineNeeds) {
             receivingLittle = true;
         } else if (engineReceives > engineNeeds) {

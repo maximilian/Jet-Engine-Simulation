@@ -59,7 +59,7 @@ public class ISA {
         correctedPressure = getCorrectedPressure(correctedTemperature);
             
         correctedDensity = (correctedPressure/(287*correctedTemperature));
-        System.out.println("corrected density:"+correctedDensity);
+        
         return correctedDensity;
     }
     

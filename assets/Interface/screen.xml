@@ -163,17 +163,21 @@
                     <panel height="80%" childLayout="horizontal">
                         <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
                             <control name="label" width="80%" text="Takeoff Visualisation Options" valign="center" />          
-                            <panel id="setVisualisationField" height="50%" width="85%" childLayout="horizontal">
+                            <panel id="setVisualisationField" height="33.33%" width="85%" childLayout="horizontal">
                                 <control name="button" width="50%" label="Set Visualisation" valign="center">
                                     <interact onClick="setVisualisation()"/>
                                 </control>
                             </panel>
-                            <panel id="resetVisualisationField" height="50%" width="85%" childLayout="horizontal">
+                            <panel id="resetVisualisationField" height="33.33%" width="85%" childLayout="horizontal">
                                 <control name="button" width="50%" label="Reset Visualisation" valign="center">
                                     <interact onClick="resetVisualisation()"/>
                                 </control>
                             </panel>
-
+                            <panel id="exitVisualisaitonField" height="33.33%" width="85%" childLayout="horizontal">
+                                <control name="button" width="50%" label="Exit Visualisation" valign="center">
+                                        <interact onClick="exitTOVisualisation()"/>
+                                </control>
+                            </panel>
                         </panel>
                         <panel id="separator" width="33.33%">
 
@@ -189,6 +193,7 @@
                                 <control name="label" width="50%" text="Engine Radius" valign="center" />
                                 <control name="label" width="50%" id="radiusVisualisation" text="0 meters" valign="center" />
                             </panel>
+
                         </panel>
                     </panel>
                     <panel id="simulationTime" height="20%" childLayout="horizontal">

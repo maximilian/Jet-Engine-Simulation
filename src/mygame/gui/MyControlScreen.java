@@ -136,6 +136,11 @@ public class MyControlScreen implements ScreenController {
         screen.findElementById("tab2_panel").show();
     }
     
+    public void exitTOVisualisation(){
+        screen.findElementById("tab2_panel").hide();
+        screen.findElementById("tab1_panel").show();
+    }
+    
     
     public void setSimulation(){
         TextField droneDistanceField = screen.findNiftyControl("droneDistanceInput", TextField.class);  

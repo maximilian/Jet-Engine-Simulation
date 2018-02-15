@@ -90,6 +90,9 @@ public class MyControlScreen implements ScreenController {
     public void exitTOVisualisation(){
         screen.findElementById("tab2_panel").hide();
         screen.findElementById("tab1_panel").show();
+        gui.frontView();
+        gui.setSpeed(160);
+        gui.submitAircraftVariables();
     }
     
     public void startCampaign(){

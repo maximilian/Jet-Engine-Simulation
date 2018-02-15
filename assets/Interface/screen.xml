@@ -161,7 +161,7 @@
                     </panel> 
                 </panel>
 
-                <panel id="tab2_panel" align="center" height="100%" childLayout="vertical">
+                <panel id="tab2_panel" padding="10px,10px,10px,10px" align="center" height="100%" childLayout="vertical">
                     <panel height="80%" childLayout="horizontal">
                         <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
                             <control name="label" width="80%" text="Takeoff Visualisation Options" valign="center" />          
@@ -203,96 +203,95 @@
                     </panel>
                 </panel>
 
-      
-                <panel id="vertical" childLayout="vertical">
-                    <panel id="tab3_panel" align="center" childLayout="horizontal">
-                        <panel id="panel_bottom_left" width="25%" valign="center" childLayout="vertical">
-                            <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
-                            <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
-                                <control name="label" backgroundColor="#444" text="0" width="20%" disabled="true" id="altitudeLabel" align="center" valign="center" />
-                            </panel>
 
-                            <panel id="speedTextField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="label" width="50%" text="Speed (Knots)" valign="center" />
-                                <control backgroundColor="#444" name="label" text="160" width="20%" id="speedLabel" align="center" valign="center" />
-                            </panel>
-
+                <panel id="tab3_panel" padding="10px,10px,10px,10px" align="center" childLayout="horizontal">
+                    <panel id="panel_bottom_left" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
+                        <panel id="altitudeTextField" height="33.33%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Altitude (Feet)" valign="center" />
+                            <control name="label" backgroundColor="#444" text="0" width="20%" disabled="true" id="altitudeLabel" align="center" valign="center" />
                         </panel>
-                        <panel id="panel_bottom_mid" width="25%" valign="center" childLayout="vertical">
-                            <control name="label" width="40%" height="20%" text="Drone" valign="center" />        
 
-
-                            <panel id="droneDistance" width="100%" height="15%" childLayout="horizontal">
-                                <control name="label" width="70%" text="Aircraft distance (m)" align="left" valign="center" />
-                                <control name="textfield" text="0" width="30%" id="droneDistanceInput" align="left" valign="center" />
-                            </panel> 
-                            
-                            <panel id="separator" height="10%" />
-                            
-                            <control id="RadioGroup-1" name="radioButtonGroup"/>
-                            <panel height="55%" childLayout="horizontal">
-                              <control name="label" width="60%" text="View" />
-                              <panel width="40%" childLayout="vertical" >
-                                <panel childLayout="horizontal">
-                                  <control name="label" text="Aircraft" width="60px" />
-                                  <control name="radioButton" id="radio-option-1" group="RadioGroup-1" />
-                                </panel>
-                                <panel childLayout="horizontal">
-                                  <control name="label" text="Drone" width="60px" />
-                                  <control name="radioButton" id="option-2" group="RadioGroup-1" />
-                                </panel>
-                              </panel>
-                            </panel>
-
+                        <panel id="speedTextField" height="33.33%" width="85%" childLayout="horizontal">
+                            <control name="label" width="50%" text="Speed (Knots)" valign="center" />
+                            <control backgroundColor="#444" name="label" text="160" width="20%" id="speedLabel" align="center" valign="center" />
                         </panel>
-                        <panel id="panel_bottom_sim" height="80%" width="25%" valign="center" childLayout="vertical">
-                            <panel id="setSim"  width="100%" height="25%" childLayout="center">
-
-                                <control name="button" label="Set Simulation" id="setSimulation" align="center" valign="center">
-                                    <interact onClick="setSimulation()"/>
-                                </control>
-                            </panel>
-
-                            <panel id="beginSim"  width="100%" height="25%" childLayout="center">
-
-                                <control name="button" label="Run Simulation" id="runSimulation" align="center" valign="center">
-                                    <interact onClick="runSimulation()"/>
-                                </control>
-                            </panel>
-
-                            <panel id="resetSim"  width="100%" height="25%" childLayout="center">
-
-                                <control name="button" label="Reset Simulation" id="resetSimulation" align="center" valign="center">
-                                    <interact onClick="resetSimulation()"/>
-                                </control>
-                            </panel>    
-                            <panel id="exitSim"  width="100%" height="25%" childLayout="center">
-
-                                <control name="button" label="Exit Simulation" id="exitSimulation" align="center" valign="center">
-                                    <interact onClick="exitCampaign()"/>
-                                </control>
-                            </panel>    
-                        </panel>   
-
-                        <panel id="panel_options" height="80%" width="25%" valign="center" childLayout="vertical">
-                            <control name="label" width="40%" height="20%" text="Options" valign="center" />  
-
-                            <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
-                                <control name="label" width="70%" text="Forward Area" valign="center" />
-                                <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
-                            </panel> 
-
-                            <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
-                                <control name="label" width="70%" text="Engine Area" valign="center" />
-                                <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
-                            </panel> 
-
-                        </panel> 
-
 
                     </panel>
-                </panel>       
+                    <panel id="panel_bottom_mid" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Drone" valign="center" />        
+
+
+                        <panel id="droneDistance" width="100%" height="15%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Aircraft distance (m)" align="left" valign="center" />
+                            <control name="textfield" text="0" width="30%" id="droneDistanceInput" align="left" valign="center" />
+                        </panel> 
+
+                        <panel id="separator" height="10%" />
+
+                        <control id="RadioGroup-1" name="radioButtonGroup"/>
+                        <panel height="55%" childLayout="horizontal">
+                          <control name="label" width="60%" text="View" />
+                          <panel width="40%" childLayout="vertical" >
+                            <panel childLayout="horizontal">
+                              <control name="label" text="Aircraft" width="60px" />
+                              <control name="radioButton" id="radio-option-1" group="RadioGroup-1" />
+                            </panel>
+                            <panel childLayout="horizontal">
+                              <control name="label" text="Drone" width="60px" />
+                              <control name="radioButton" id="option-2" group="RadioGroup-1" />
+                            </panel>
+                          </panel>
+                        </panel>
+
+                    </panel>
+                    <panel id="panel_bottom_sim" height="80%" width="25%" valign="center" childLayout="vertical">
+                        <panel id="setSim"  width="100%" height="25%" childLayout="center">
+
+                            <control name="button" label="Set Simulation" id="setSimulation" align="center" valign="center">
+                                <interact onClick="setSimulation()"/>
+                            </control>
+                        </panel>
+
+                        <panel id="beginSim"  width="100%" height="25%" childLayout="center">
+
+                            <control name="button" label="Run Simulation" id="runSimulation" align="center" valign="center">
+                                <interact onClick="runSimulation()"/>
+                            </control>
+                        </panel>
+
+                        <panel id="resetSim"  width="100%" height="25%" childLayout="center">
+
+                            <control name="button" label="Reset Simulation" id="resetSimulation" align="center" valign="center">
+                                <interact onClick="resetSimulation()"/>
+                            </control>
+                        </panel>    
+                        <panel id="exitSim"  width="100%" height="25%" childLayout="center">
+
+                            <control name="button" label="Exit Simulation" id="exitSimulation" align="center" valign="center">
+                                <interact onClick="exitCampaign()"/>
+                            </control>
+                        </panel>    
+                    </panel>   
+
+                    <panel id="panel_options" height="80%" width="25%" valign="center" childLayout="vertical">
+                        <control name="label" width="40%" height="20%" text="Options" valign="center" />  
+
+                        <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Forward Area" valign="center" />
+                            <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
+                        </panel> 
+
+                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
+                            <control name="label" width="70%" text="Engine Area" valign="center" />
+                            <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
+                        </panel> 
+
+                    </panel> 
+
+
+                </panel>
+     
         
      </panel>
     </layer>

@@ -153,8 +153,7 @@ public class Simulation extends AbstractAppState{
         
         rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550));
         leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550));
-        //this.loader.getLeftEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
-        //this.loader.getRightEngineArea().setLocalTranslation(0, aircraft.getAltitude(),0);
+
     }
     
     public void setCameraCockpitPosition(int altitude){

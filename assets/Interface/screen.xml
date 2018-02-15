@@ -89,9 +89,11 @@
                         <control name="button" id="settings" width="70%" label="Settings" >
                             <interact onClick="openSettings()" />
                         </control>
-                        <control name="button" id="takeoffVis" width="70%" label="Take-off Vis">
-                                    
-                            <interact onClick="takeoffVis()"/>
+                        <control name="button" id="takeoffVis" width="70%" label="Take-off Vis">     
+                            <interact onClick="startTOVisualisation()"/>
+                        </control>
+                        <control name="button" id="campaign" width="70%" label="Campaign">     
+                            <interact onClick="startCampaign()"/>
                         </control>
                     </panel>
                     <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
@@ -245,27 +247,32 @@
 
                         </panel>
                         <panel id="panel_bottom_sim" height="80%" width="25%" valign="center" childLayout="vertical">
-                            <panel id="setSim"  width="100%" height="33.33%" childLayout="center">
+                            <panel id="setSim"  width="100%" height="25%" childLayout="center">
 
                                 <control name="button" label="Set Simulation" id="setSimulation" align="center" valign="center">
                                     <interact onClick="setSimulation()"/>
                                 </control>
                             </panel>
 
-                            <panel id="beginSim"  width="100%" height="33.33%" childLayout="center">
+                            <panel id="beginSim"  width="100%" height="25%" childLayout="center">
 
                                 <control name="button" label="Run Simulation" id="runSimulation" align="center" valign="center">
                                     <interact onClick="runSimulation()"/>
                                 </control>
                             </panel>
 
-                            <panel id="resetSim"  width="100%" height="33.33%" childLayout="center">
+                            <panel id="resetSim"  width="100%" height="25%" childLayout="center">
 
                                 <control name="button" label="Reset Simulation" id="resetSimulation" align="center" valign="center">
                                     <interact onClick="resetSimulation()"/>
                                 </control>
                             </panel>    
+                            <panel id="exitSim"  width="100%" height="25%" childLayout="center">
 
+                                <control name="button" label="Exit Simulation" id="exitSimulation" align="center" valign="center">
+                                    <interact onClick="exitCampaign()"/>
+                                </control>
+                            </panel>    
                         </panel>   
 
                         <panel id="panel_options" height="80%" width="25%" valign="center" childLayout="vertical">

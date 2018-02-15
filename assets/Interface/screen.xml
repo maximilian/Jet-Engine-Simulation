@@ -49,7 +49,7 @@
 
       <panel id="panel_bottom" style="nifty-panel-no-shadow" height="35%" width="100%" align="center" childLayout="overlay" >
 
-                <panel id="tab1_panel" align="center" childLayout="horizontal">
+                <panel id="tab1_panel" padding="10px,10px,10px,10px" align="center" childLayout="horizontal">
                     <panel id="panel_bottom_left" height="100%" width="35%" valign="center" childLayout="vertical">
                         <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
                         <panel id="altitudeTextField" height="20%" width="85%" childLayout="horizontal">
@@ -96,7 +96,7 @@
                             <interact onClick="startCampaign()"/>
                         </control>
                     </panel>
-                    <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
+                    <panel id="panel_camera" backgroundColor="#ff03" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
 
             
                         <panel id="panel_front_camera" margin="0px,0px,0px,5px" height="100%" width="30%" align="center" childLayout="horizontal">

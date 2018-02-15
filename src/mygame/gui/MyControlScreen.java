@@ -81,6 +81,26 @@ public class MyControlScreen implements ScreenController {
         
     }
   
+        
+    public void startTOVisualisation(){
+        screen.findElementById("tab1_panel").hide();
+        screen.findElementById("tab2_panel").show();
+    }
+    
+    public void exitTOVisualisation(){
+        screen.findElementById("tab2_panel").hide();
+        screen.findElementById("tab1_panel").show();
+    }
+    
+    public void startCampaign(){
+        screen.findElementById("tab1_panel").hide();
+        screen.findElementById("tab3_panel").show();
+    }
+    
+    public void exitCampaign(){
+        screen.findElementById("tab3_panel").hide();
+        screen.findElementById("tab1_panel").show();
+    }
     
     public void frontView() {
         gui.frontView();
@@ -130,26 +150,7 @@ public class MyControlScreen implements ScreenController {
         altitudeLabel.setText(Integer.toString(altitude));
         speedLabel.setText(Integer.toString(speed));
     }
-    
-    public void startTOVisualisation(){
-        screen.findElementById("tab1_panel").hide();
-        screen.findElementById("tab2_panel").show();
-    }
-    
-    public void exitTOVisualisation(){
-        screen.findElementById("tab2_panel").hide();
-        screen.findElementById("tab1_panel").show();
-    }
-    
-    public void startCampaign(){
-        screen.findElementById("tab1_panel").hide();
-        screen.findElementById("tab3_panel").show();
-    }
-    
-    public void exitCampaign(){
-        screen.findElementById("tab3_panel").hide();
-        screen.findElementById("tab1_panel").show();
-    }
+
     
     
     public void setSimulation(){

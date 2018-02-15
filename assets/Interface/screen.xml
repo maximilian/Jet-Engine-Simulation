@@ -23,7 +23,7 @@
         <panel id="settings-section" width="15%" childLayout="vertical">
             <interact onClick="openSettings()"/>
             <panel height="40%" width="40%" backgroundColor="#0009" childLayout="vertical" >
-                <panel backgroundImage="Interface/download.png" />
+                <panel backgroundImage="Interface/settings.png" />
             </panel>
         </panel>
         

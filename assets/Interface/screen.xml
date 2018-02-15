@@ -47,7 +47,7 @@
       <panel height="40%" width="100%" align="center" childLayout="center">
       </panel>
 
-      <panel id="panel_bottom" height="35%" width="100%" align="center" childLayout="overlay" >
+      <panel id="panel_bottom" style="nifty-panel-no-shadow" height="35%" width="100%" align="center" childLayout="overlay" >
 
                 <panel id="tab1_panel" align="center" childLayout="horizontal">
                     <panel id="panel_bottom_left" height="100%" width="35%" valign="center" childLayout="vertical">

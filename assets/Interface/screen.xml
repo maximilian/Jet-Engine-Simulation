@@ -47,9 +47,8 @@
       <panel height="40%" width="100%" align="center" childLayout="center">
       </panel>
 
-      <panel id="panel_bottom" height="35%" width="100%" align="center" childLayout="horizontal" >
-        <control id="edit_tabs" name="tabGroup" buttonHeight="50px">
-            <control id="tab_1" name="tab" caption="Model">
+      <panel id="panel_bottom" height="35%" width="100%" align="center" childLayout="overlay" >
+
                 <panel id="tab1_panel" align="center" childLayout="horizontal">
                     <panel id="panel_bottom_left" height="100%" width="35%" valign="center" childLayout="vertical">
                         <control name="label" width="40%" height="20%" text="Aircraft" valign="center" />          
@@ -89,6 +88,10 @@
                         </panel> 
                         <control name="button" id="settings" width="70%" label="Settings" >
                             <interact onClick="openSettings()" />
+                        </control>
+                        <control name="button" id="takeoffVis" width="70%" label="Take-off Vis">
+                                    
+                            <interact onClick="takeoffVis()"/>
                         </control>
                     </panel>
                     <panel id="panel_camera" backgroundImage="Interface/cropped_plane.png" height="100%" width="25%" valign="center" childLayout="horizontal">
@@ -155,8 +158,7 @@
                         </panel>
                     </panel> 
                 </panel>
-            </control>
-            <control id="tab_2" name="tab" caption="Visualisation">
+
                 <panel id="vertical" childLayout="vertical">
                     <panel id="tab2_panel" align="center" height="100%" childLayout="horizontal">
                         <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
@@ -193,9 +195,7 @@
                             <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1" max="104" />
                     </panel>
                 </panel>
-            </control>
-            
-                <control id="tab_3" name="tab" caption="Campaign">
+      
                 <panel id="vertical" childLayout="vertical">
                     <panel id="tab3_panel" align="center" childLayout="horizontal">
                         <panel id="panel_bottom_left" width="25%" valign="center" childLayout="vertical">
@@ -279,10 +279,7 @@
 
 
                     </panel>
-                </panel>
-            </control>
-        </control>
-         
+                </panel>       
         
      </panel>
     </layer>

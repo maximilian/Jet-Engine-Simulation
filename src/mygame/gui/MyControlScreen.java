@@ -72,8 +72,8 @@ public class MyControlScreen implements ScreenController {
 
     @Override
     public void onStartScreen() {
-
-
+        screen.findElementById("tab2_panel").hide();
+        screen.findElementById("tab3_panel").hide();
     }
 
     @Override
@@ -129,6 +129,10 @@ public class MyControlScreen implements ScreenController {
 
         altitudeLabel.setText(Integer.toString(altitude));
         speedLabel.setText(Integer.toString(speed));
+    }
+    
+    public void takeoffVis(){
+        
     }
     
     

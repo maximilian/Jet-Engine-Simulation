@@ -132,7 +132,8 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void takeoffVis(){
-        
+        screen.findElementById("tab1_panel").hide();
+        screen.findElementById("tab2_panel").show();
     }
     
     

@@ -159,8 +159,8 @@
                     </panel> 
                 </panel>
 
-                <panel id="vertical" childLayout="vertical">
-                    <panel id="tab2_panel" align="center" height="100%" childLayout="horizontal">
+                <panel id="tab2_panel" align="center" height="100%" childLayout="vertical">
+                    <panel height="80%" childLayout="horizontal">
                         <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
                             <control name="label" width="80%" text="Takeoff Visualisation Options" valign="center" />          
                             <panel id="setVisualisationField" height="50%" width="85%" childLayout="horizontal">
@@ -173,7 +173,7 @@
                                     <interact onClick="resetVisualisation()"/>
                                 </control>
                             </panel>
-                            
+
                         </panel>
                         <panel id="separator" width="33.33%">
 
@@ -184,7 +184,7 @@
                                 <control name="label" width="50%" text="Speed" valign="center" />
                                 <control name="label" width="50%" id="speedVisualisation" text="0 knots" valign="center" />
                             </panel>
-                            
+
                             <panel id="radiusVisualisationField" width="85%" childLayout="horizontal">
                                 <control name="label" width="50%" text="Engine Radius" valign="center" />
                                 <control name="label" width="50%" id="radiusVisualisation" text="0 meters" valign="center" />
@@ -195,6 +195,7 @@
                             <control id="simulationTimeControl" name="horizontalSlider" align="center" valign="center" stepSize="0.1" min="0.1" max="104" />
                     </panel>
                 </panel>
+
       
                 <panel id="vertical" childLayout="vertical">
                     <panel id="tab3_panel" align="center" childLayout="horizontal">

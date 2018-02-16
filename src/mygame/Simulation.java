@@ -14,6 +14,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Spatial;
+import java.util.Random;
 import mygame.gui.MyControlScreen;
 
 /**
@@ -41,6 +42,7 @@ public class Simulation extends AbstractAppState{
     
     private int distanceTravelled;
     
+    private Random rand;
     public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen, ResourceLoader loader){
         this.loader = loader;
         this.aircraft = aircraft;
@@ -55,10 +57,19 @@ public class Simulation extends AbstractAppState{
         runSimulation = false;
         timeNotStarted = true;
         distanceTravelled = 0;
+        
+        rand = new Random();
     }
     
+    private float diameter = (float) 30.0;
+    private boolean positive = true;
+    
+    private float displacement = 0;
+    private float distanceMove = 0;
+
     @Override
     public void update(float tpf) {
+        
         Spatial aircraftSpatial = aircraft.getSpatial();
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
@@ -66,6 +77,31 @@ public class Simulation extends AbstractAppState{
         Spatial rightForwardArea = loader.getRightForwardArea();
         Spatial leftForwardArea = loader.getLeftForwardArea();
         
+        
+        
+        if(positive) {
+            if (displacement > diameter/2){
+                positive = false;
+            } else {
+                distanceMove = 0 + rand.nextFloat() * (diameter - 0);
+                displacement += distanceMove;
+                drone.getSpatial().move(distanceMove*tpf,distanceMove*tpf,0);
+               
+            }
+
+        } else {
+            if (displacement < diameter/2){
+                positive = true;
+            } else {
+                distanceMove = 0 + rand.nextFloat() * (diameter - 0);
+                displacement -= distanceMove;
+                drone.getSpatial().move(-distanceMove*tpf,-distanceMove*tpf,0);
+               
+            }
+
+        }
+
+
         if (runSimulation){
             Vector3f a = new Vector3f(0,aircraft.getAltitude(),0);
             Vector3f b = new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft());

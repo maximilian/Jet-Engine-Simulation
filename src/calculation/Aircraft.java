@@ -122,6 +122,8 @@ public class Aircraft {
     }
 
     public int getPercentageWeight(int percentage){
-        return 1;
+        int difference = this.MTOW - this.OEW;
+        
+        return (this.OEW + ((percentage/100) * difference));
     }
 }

@@ -306,15 +306,21 @@ public class MyControlScreen implements ScreenController {
         Element resetVis = screen.findElementById("resetVisualisationField");
         Element setVis = screen.findElementById("setVisualisationField");
         TextField aircraftWeightField = screen.findNiftyControl("weightField", TextField.class); 
-        
+        Label aircraftWeightLabel = screen.findNiftyControl("weightVisualisation", Label.class); 
+            
         aircraftWeightField.disable();
         resetVis.enable();
         setVis.disable();
    
 
         String weightPercent = aircraftWeightField.getRealText();
+        aircraftWeightLabel.setText(weightPercent);
         int percentage = Integer.parseInt(weightPercent);
+  
+        int weight = gui.getAircraft().getPercentageWeight(percentage);
         
+        
+        aircraftWeightLabel.setText(Integer.toString(weight) + " kg");
         
         
         visualisationSlider.enable();

@@ -384,4 +384,8 @@ public class GuiAppState extends AbstractAppState {
         return this.weather;
     }
     
+    public Aircraft getAircraft(){
+        return this.aircraft;
+    }
+    
 }

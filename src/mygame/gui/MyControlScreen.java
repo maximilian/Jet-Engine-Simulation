@@ -308,7 +308,13 @@ public class MyControlScreen implements ScreenController {
 
         resetVis.enable();
         setVis.disable();
-
+   
+        TextField aircraftWeightField = screen.findNiftyControl("weightField", TextField.class); 
+        String weightPercent = aircraftWeightField.getRealText();
+        int percentage = Integer.parseInt(weightPercent);
+        
+        
+        
         visualisationSlider.enable();
         visualisationSet = true;
         gui.setVisualisation();

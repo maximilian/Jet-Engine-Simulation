@@ -16,6 +16,9 @@ public class Aircraft {
     private int speed;
     private int engineSetting;
     
+    // Aircraft weight, in kg. 
+    private int weight;
+    
     private float engineDiameter;
     private float engineMassFlowRate;
     
@@ -28,8 +31,12 @@ public class Aircraft {
         this.engineMassFlowRate = (float) 548.85;
         this.engineSetting = 100;
         
+        // MTOW
+        this.weight = 99790;
+        
         this.speed = 160;
         this.altitude = 0;
+       
     }
     
     
@@ -109,5 +116,13 @@ public class Aircraft {
     public float getConvertedSpeed(){
         return (float) ((this.speed  * 0.514444) * 12.193);
     
+    }
+    
+    public void setWeight(int weight){
+        this.weight = weight;
+    }
+    
+    public int getWeight(){
+        return this.weight;
     }
 }

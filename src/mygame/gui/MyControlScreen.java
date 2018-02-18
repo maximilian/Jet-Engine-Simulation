@@ -271,8 +271,10 @@ public class MyControlScreen implements ScreenController {
     @NiftyEventSubscriber(id="simulationTimeControl")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
         if (visualisationSet){
+            Label aircraftWeightLabel = screen.findNiftyControl("weightVisualisation", Label.class); 
+            
             float percentage = event.getSlider().getValue();
-
+               
             // distance travelled (real life units)
             float currDistance = (percentage/100) * 1850;
             // speed based on real life units, using v = u + at

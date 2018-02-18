@@ -170,7 +170,9 @@
                     <panel height="80%" childLayout="horizontal">
                         <panel id="separator" width="33.33%" childLayout="vertical">
                             <control name="label" align="center" text="Aircraft Parameters" valign="center" />          
-
+                            <panel id="altitudeTextField" height="20%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Weight (%)" valign="center" />
+                                <control name="textfield" text="100" width="15%" id="weightField" valign="center" />                            </panel>
                         </panel>
                         <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
                             <control name="label" align="center" text="Takeoff Visualisation Options" valign="center" />          

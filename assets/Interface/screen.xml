@@ -96,11 +96,12 @@
                             <control name="label" width="70%" text="Engine Area" valign="center" />
                             <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
                         </panel> 
-     
-                        <control name="button" id="takeoffVis" width="70%" label="Take-off Phase">     
+                        <panel height="5%" />
+                        <control name="button" id="takeoffVis" align="center" width="70%" label="Take-off Phase">     
                             <interact onClick="startTOVisualisation()"/>
                         </control>
-                        <control name="button" id="campaign" width="70%" label="Campaign">     
+                        <panel height="5%" />
+                        <control name="button" id="campaign" align="center" width="70%" label="Campaign">     
                             <interact onClick="startCampaign()"/>
                         </control>
                     </panel>

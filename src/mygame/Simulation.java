@@ -44,7 +44,8 @@ public class Simulation extends AbstractAppState{
     
     private final float diameter;
     private boolean positiveDirection;
-    private Random rand;
+    private final Random rand;
+    
     public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen, ResourceLoader loader){
         this.loader = loader;
         this.aircraft = aircraft;

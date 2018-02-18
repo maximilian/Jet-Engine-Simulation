@@ -97,7 +97,7 @@
                             <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
                         </panel> 
      
-                        <control name="button" id="takeoffVis" width="70%" label="Take-off Vis">     
+                        <control name="button" id="takeoffVis" width="70%" label="Take-off Phase">     
                             <interact onClick="startTOVisualisation()"/>
                         </control>
                         <control name="button" id="campaign" width="70%" label="Campaign">     

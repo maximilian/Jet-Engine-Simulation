@@ -172,20 +172,20 @@
 
                 <panel id="tab2_panel" padding="10px,10px,10px,10px" align="center" height="100%" childLayout="vertical">
                     <panel height="80%" childLayout="horizontal">
-                        <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
-                            <control name="label" width="80%" text="Takeoff Visualisation Options" valign="center" />          
-                            <panel id="setVisualisationField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="button" width="50%" label="Set Visualisation" valign="center">
+                        <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
+                            <control name="label" align="center" text="Takeoff Visualisation Options" valign="center" />          
+                            <panel id="setVisualisationField" height="25%"  childLayout="center">
+                                <control name="button" width="50%" align="center" label="Set Visualisation" valign="center">
                                     <interact onClick="setVisualisation()"/>
                                 </control>
                             </panel>
-                            <panel id="resetVisualisationField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="button" width="50%" label="Reset Visualisation" valign="center">
+                            <panel id="resetVisualisationField" height="25%" childLayout="center">
+                                <control name="button" width="50%" align="center" label="Reset Visualisation" valign="center">
                                     <interact onClick="resetVisualisation()"/>
                                 </control>
                             </panel>
-                            <panel id="exitVisualisaitonField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="button" width="50%" label="Exit Visualisation" valign="center">
+                            <panel id="exitVisualisaitonField" height="25%" childLayout="center">
+                                <control name="button" width="50%" label="Exit Visualisation" >
                                         <interact onClick="exitTOVisualisation()"/>
                                 </control>
                             </panel>

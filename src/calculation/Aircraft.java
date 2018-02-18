@@ -16,8 +16,10 @@ public class Aircraft {
     private int speed;
     private int engineSetting;
     
-    // Aircraft weight, in kg. 
-    private int weight;
+    // Aircraft maximum take-off weight, in kg. 
+    private final int MTOW;
+    // Aircraft operating empty weight, in kg.
+    private final int OEW;
     
     private float engineDiameter;
     private float engineMassFlowRate;
@@ -32,7 +34,8 @@ public class Aircraft {
         this.engineSetting = 100;
         
         // MTOW
-        this.weight = 99790;
+        this.MTOW = 99790;
+        this.OEW = 59160;
         
         this.speed = 160;
         this.altitude = 0;
@@ -117,12 +120,8 @@ public class Aircraft {
         return (float) ((this.speed  * 0.514444) * 12.193);
     
     }
-    
-    public void setWeight(int weight){
-        this.weight = weight;
-    }
-    
-    public int getWeight(){
-        return this.weight;
+
+    public int getPercentageWeight(int percentage){
+        return 1;
     }
 }

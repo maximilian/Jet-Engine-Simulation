@@ -168,6 +168,10 @@
 
                 <panel id="tab2_panel" padding="10px,10px,10px,10px" align="center" height="100%" childLayout="vertical">
                     <panel height="80%" childLayout="horizontal">
+                        <panel id="separator" width="33.33%" childLayout="vertical">
+                            <control name="label" align="center" text="Aircraft Parameters" valign="center" />          
+
+                        </panel>
                         <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
                             <control name="label" align="center" text="Takeoff Visualisation Options" valign="center" />          
                             <panel id="setVisualisationField" height="25%"  childLayout="center">
@@ -186,9 +190,7 @@
                                 </control>
                             </panel>
                         </panel>
-                        <panel id="separator" width="33.33%">
-
-                        </panel>
+ 
                         <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
                             <control name="label" width="50%" text="Aircraft Information" valign="center" />          
                             <panel id="speedVisualisationField" width="85%" childLayout="horizontal">

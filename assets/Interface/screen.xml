@@ -204,7 +204,10 @@
                                 <control name="label" width="50%" text="Engine Radius" valign="center" />
                                 <control name="label" width="50%" id="radiusVisualisation" text="0 meters" valign="center" />
                             </panel>
-
+                            <panel id="weightVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Weight" valign="center" />
+                                <control name="label" width="50%" id="weightVisualisation" text="99790 kg" valign="center" />
+                            </panel>
                         </panel>
                     </panel>
                     <panel id="simulationTime" height="20%" childLayout="horizontal">

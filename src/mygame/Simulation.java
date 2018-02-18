@@ -85,8 +85,7 @@ public class Simulation extends AbstractAppState{
             } else {
                 distanceMove = 0 + rand.nextFloat() * (diameter - 0);
                 displacement += distanceMove;
-                drone.getSpatial().move(distanceMove*tpf,distanceMove*tpf,0);
-               
+                drone.getSpatial().move(distanceMove*tpf,distanceMove*tpf,0);   
             }
 
         } else {
@@ -95,10 +94,8 @@ public class Simulation extends AbstractAppState{
             } else {
                 distanceMove = 0 + rand.nextFloat() * (diameter - 0);
                 displacement -= distanceMove;
-                drone.getSpatial().move(-distanceMove*tpf,-distanceMove*tpf,0);
-               
+                drone.getSpatial().move(-distanceMove*tpf,-distanceMove*tpf,0);            
             }
-
         }
 
 

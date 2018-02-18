@@ -92,10 +92,6 @@
                             <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
                         </panel> 
 
-                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
-                            <control name="label" width="70%" text="Engine Area" valign="center" />
-                            <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
-                        </panel> 
                         <panel height="5%" />
                         <control name="button" id="takeoffVis" align="center" width="70%" label="Take-off Phase">     
                             <interact onClick="startTOVisualisation()"/>
@@ -289,11 +285,6 @@
                         <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
                             <control name="label" width="70%" text="Forward Area" valign="center" />
                             <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
-                        </panel> 
-
-                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
-                            <control name="label" width="70%" text="Engine Area" valign="center" />
-                            <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
                         </panel> 
 
                     </panel> 

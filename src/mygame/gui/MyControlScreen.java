@@ -273,7 +273,6 @@ public class MyControlScreen implements ScreenController {
         if (visualisationSet){
             float percentage = event.getSlider().getValue();
 
-
             // distance travelled (real life units)
             float currDistance = (percentage/100) * 1850;
             // speed based on real life units, using v = u + at
@@ -292,7 +291,6 @@ public class MyControlScreen implements ScreenController {
             Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
 
             speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
-
 
             DecimalFormat df = new DecimalFormat("##.##");
             String roundedRadius = df.format(gui.getEngineRadius());

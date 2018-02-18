@@ -42,6 +42,8 @@ public class Simulation extends AbstractAppState{
     
     private int distanceTravelled;
     
+    private final float diameter;
+    private boolean positiveDirection;
     private Random rand;
     public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen, ResourceLoader loader){
         this.loader = loader;
@@ -58,11 +60,13 @@ public class Simulation extends AbstractAppState{
         timeNotStarted = true;
         distanceTravelled = 0;
         
+        /* drone hover variables */
         rand = new Random();
+        diameter = (float) 30.0;
+        positiveDirection = true;
     }
     
-    private float diameter = (float) 30.0;
-    private boolean positive = true;
+
     
     private float displacement = 0;
     private float distanceMove = 0;
@@ -78,10 +82,11 @@ public class Simulation extends AbstractAppState{
         Spatial leftForwardArea = loader.getLeftForwardArea();
         
         
+        /* hover drone around area */
         
-        if(positive) {
+        if(positiveDirection) {
             if (displacement > diameter/2){
-                positive = false;
+                positiveDirection = false;
             } else {
                 distanceMove = 0 + rand.nextFloat() * (diameter - 0);
                 displacement += distanceMove;
@@ -90,7 +95,7 @@ public class Simulation extends AbstractAppState{
 
         } else {
             if (displacement < diameter/2){
-                positive = true;
+                positiveDirection = true;
             } else {
                 distanceMove = 0 + rand.nextFloat() * (diameter - 0);
                 displacement -= distanceMove;

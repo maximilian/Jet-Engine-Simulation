@@ -92,15 +92,12 @@
                             <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
                         </panel> 
 
-                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
-                            <control name="label" width="70%" text="Engine Area" valign="center" />
-                            <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
-                        </panel> 
-     
-                        <control name="button" id="takeoffVis" width="70%" label="Take-off Vis">     
+                        <panel height="5%" />
+                        <control name="button" id="takeoffVis" align="center" width="70%" label="Take-off Phase">     
                             <interact onClick="startTOVisualisation()"/>
                         </control>
-                        <control name="button" id="campaign" width="70%" label="Campaign">     
+                        <panel height="5%" />
+                        <control name="button" id="campaign" align="center" width="70%" label="Campaign">     
                             <interact onClick="startCampaign()"/>
                         </control>
                     </panel>
@@ -171,27 +168,31 @@
 
                 <panel id="tab2_panel" padding="10px,10px,10px,10px" align="center" height="100%" childLayout="vertical">
                     <panel height="80%" childLayout="horizontal">
-                        <panel id="aircraftInfo" width="33.33%" height="60%" childLayout="vertical">
-                            <control name="label" width="80%" text="Takeoff Visualisation Options" valign="center" />          
-                            <panel id="setVisualisationField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="button" width="50%" label="Set Visualisation" valign="center">
+                        <panel id="separator" width="33.33%" childLayout="vertical">
+                            <control name="label" align="center" text="Aircraft Parameters" valign="center" />          
+                            <panel id="altitudeTextField" height="20%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Weight (%)" valign="center" />
+                                <control name="textfield" text="100" width="15%" id="weightField" valign="center" />                            </panel>
+                        </panel>
+                        <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
+                            <control name="label" align="center" text="Takeoff Visualisation Options" valign="center" />          
+                            <panel id="setVisualisationField" height="25%"  childLayout="center">
+                                <control name="button" width="50%" align="center" label="Set Visualisation" valign="center">
                                     <interact onClick="setVisualisation()"/>
                                 </control>
                             </panel>
-                            <panel id="resetVisualisationField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="button" width="50%" label="Reset Visualisation" valign="center">
+                            <panel id="resetVisualisationField" height="25%" childLayout="center">
+                                <control name="button" width="50%" align="center" label="Reset Visualisation" valign="center">
                                     <interact onClick="resetVisualisation()"/>
                                 </control>
                             </panel>
-                            <panel id="exitVisualisaitonField" height="33.33%" width="85%" childLayout="horizontal">
-                                <control name="button" width="50%" label="Exit Visualisation" valign="center">
+                            <panel id="exitVisualisaitonField" height="25%" childLayout="center">
+                                <control name="button" width="50%" label="Exit Visualisation" >
                                         <interact onClick="exitTOVisualisation()"/>
                                 </control>
                             </panel>
                         </panel>
-                        <panel id="separator" width="33.33%">
-
-                        </panel>
+ 
                         <panel id="aircraftInfo" width="33.33%" childLayout="vertical">
                             <control name="label" width="50%" text="Aircraft Information" valign="center" />          
                             <panel id="speedVisualisationField" width="85%" childLayout="horizontal">
@@ -203,7 +204,10 @@
                                 <control name="label" width="50%" text="Engine Radius" valign="center" />
                                 <control name="label" width="50%" id="radiusVisualisation" text="0 meters" valign="center" />
                             </panel>
-
+                            <panel id="weightVisualisationField" width="85%" childLayout="horizontal">
+                                <control name="label" width="50%" text="Weight" valign="center" />
+                                <control name="label" width="50%" id="weightVisualisation" text="99790 kg" valign="center" />
+                            </panel>
                         </panel>
                     </panel>
                     <panel id="simulationTime" height="20%" childLayout="horizontal">
@@ -288,11 +292,6 @@
                         <panel id="forwardAreaToggle"  width="100%" childLayout="horizontal">
                             <control name="label" width="70%" text="Forward Area" valign="center" />
                             <control id="forwardEngineAreaToggle" name="checkbox" valign="center" />
-                        </panel> 
-
-                        <panel id="aroundEngineToggle"  width="100%" childLayout="horizontal">
-                            <control name="label" width="70%" text="Engine Area" valign="center" />
-                            <control id="engineAreaToggle" name="checkbox" checked="true" valign="center" />
                         </panel> 
 
                     </panel> 

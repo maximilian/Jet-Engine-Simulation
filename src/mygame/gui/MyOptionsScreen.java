@@ -228,6 +228,11 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
         Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
         
+        // if airport not checked before submission then get airport data first
+        if(temp_wx.getText().equals("-")){
+            getAirportData();
+        }
+        
         gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()), Float.parseFloat(temp_wx.getText()), Float.parseFloat(pressure_wx.getText()));
         
         customFanDiameterField.disable();

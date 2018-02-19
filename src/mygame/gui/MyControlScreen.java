@@ -42,8 +42,13 @@ public class MyControlScreen implements ScreenController {
     /* flag for visualisation slider */
     private boolean visualisationSet;
     
-    public MyControlScreen(GuiAppState gui){
+    // Either live, ISA or custom
+    private String weatherType;
+    
+    public MyControlScreen(GuiAppState gui, String weatherType){
         visualisationSet = false;
+        this.weatherType = weatherType;
+        
         this.gui = gui;
     }
     
@@ -58,7 +63,7 @@ public class MyControlScreen implements ScreenController {
          collisionWindowLayer = screen.findElementById("windows");
          collisionWindowLayer.hide();
 
-         visualisationSlider = screen.findNiftyControl("simulationTimeControl", Slider.class);
+         visualisationSlider = screen.findNiftyControl("simulationTimeControlSlider", Slider.class);
          visualisationSlider.disable();
          
         /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
@@ -133,7 +138,7 @@ public class MyControlScreen implements ScreenController {
         String speedString = speedField.getRealText();
         int fieldSpeed = Integer.parseInt(speedString);
         
-        Slider sliderField = screen.findNiftyControl("sliderH", Slider.class);
+        Slider sliderField = screen.findNiftyControl("engineSettingSlider", Slider.class);
         float fieldEngineSetting = sliderField.getValue();
         
         gui.setAltitude(fieldAltitude);
@@ -257,6 +262,7 @@ public class MyControlScreen implements ScreenController {
         } 
     }
     
+    
     @NiftyEventSubscriber(id="forwardEngineAreaToggle")
     public void CheckBoxStateChangedEvent(final String id, final CheckBoxStateChangedEvent event){
         if(event.getCheckBox().isChecked()) {
@@ -268,40 +274,46 @@ public class MyControlScreen implements ScreenController {
         }
     }
     
-    @NiftyEventSubscriber(id="simulationTimeControl")
+    @NiftyEventSubscriber(pattern=".*Slider")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
-        if (visualisationSet){
-            float percentage = event.getSlider().getValue();
+        
+        if (id.equals("simulationTimeControlSlider")){
+            if (visualisationSet){
+                float percentage = event.getSlider().getValue();
 
 
-            // distance travelled (real life units)
-            float currDistance = (percentage/100) * 1850;
-            // speed based on real life units, using v = u + at
-            float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
+                // distance travelled (real life units)
+                float currDistance = (percentage/100) * 1850;
+                // speed based on real life units, using v = u + at
+                float speed = (float) Math.sqrt(2 * 1.605 * currDistance);
 
-            // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
-            float distanceToMove = (percentage/100) * 3188;
+                // distance that aircraft will move. Based on 0 - 3188 scale, where 3188 is 68% of total Gla runway
+                float distanceToMove = (percentage/100) * 3188;
 
-            float speedKnots = (float) (speed * 1.94384);
+                float speedKnots = (float) (speed * 1.94384);
 
-            gui.runVisualisation(speedKnots, distanceToMove);
+                gui.runVisualisation(speedKnots, distanceToMove);
 
-            System.out.println("aircraft speed=" + speedKnots);
+                System.out.println("aircraft speed=" + speedKnots);
 
-            Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
-            Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
+                Label speedVisLabel = screen.findNiftyControl("speedVisualisation", Label.class); 
+                Label radiusVisLabel = screen.findNiftyControl("radiusVisualisation", Label.class); 
 
-            speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
+                speedVisLabel.setText(Integer.toString(Math.round(speedKnots)) + " knots");
 
 
-            DecimalFormat df = new DecimalFormat("##.##");
-            String roundedRadius = df.format(gui.getEngineRadius());
-            radiusVisLabel.setText(roundedRadius + " meters");
+                DecimalFormat df = new DecimalFormat("##.##");
+                String roundedRadius = df.format(gui.getEngineRadius());
+                radiusVisLabel.setText(roundedRadius + " meters");
 
-            if (percentage > 100){
-             gui.rotateVisualisation(percentage);
+                if (percentage > 100){
+                 gui.rotateVisualisation(percentage);
+                }
             }
+        } else if (id.equals("engineSettingSlider")){
+            submitAircraftDetailsButton.enable();
         }
+
     }
     
     public void setVisualisation(){
@@ -333,12 +345,24 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
+        Label weatherHeader = screen.findNiftyControl("weather-data-header", Label.class);
         Label airportIdLabel = screen.findNiftyControl("airportId", Label.class); 
+
         Label airportPressureLabel = screen.findNiftyControl("airportPressure", Label.class); 
         Label airportTempLabel = screen.findNiftyControl("airportTemp", Label.class); 
         Label airportLastUpdateLabel = screen.findNiftyControl("lastUpdate", Label.class);
         
-        airportIdLabel.setText(fieldName);
+        if(weatherType.equals("live")){
+            weatherHeader.setText("Live Weather");
+            airportIdLabel.setText(fieldName);
+        } else if(weatherType.equals("ISA")){
+            weatherHeader.setText("ISA Weather");
+            airportIdLabel.setText("n/a");
+        } else {
+            weatherHeader.setText("Custom Weather");
+            airportIdLabel.setText("n/a");
+        }
+
         airportPressureLabel.setText(Integer.toString(pressure)+" mbar");
         airportTempLabel.setText(Float.toString(temperature)+" C");
         

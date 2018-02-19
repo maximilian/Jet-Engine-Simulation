@@ -94,7 +94,7 @@ public class GuiAppState extends AbstractAppState {
         nifty = niftyDisplay.getNifty();
         
         /** Read your XML and initialize your custom ScreenController */
-        controlScreen = new MyControlScreen(this);
+        controlScreen = new MyControlScreen(this, "live");
         
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor
@@ -280,7 +280,6 @@ public class GuiAppState extends AbstractAppState {
         
         updateEngineArea();
         
-        System.out.println("move=="+distance);
         
         Spatial leftEngineArea = loader.getLeftEngineArea();
         Spatial rightEngineArea = loader.getRightEngineArea();
@@ -348,13 +347,14 @@ public class GuiAppState extends AbstractAppState {
         app.getGuiViewPort().addProcessor(niftyDisplay);
     } 
     
-    public void submitSettings(String ident, float engineDiameter, float engineFlow, float temperature, float pressure){
+    public void submitSettings(String ident, float engineDiameter, float engineFlow, float temperature, float pressure, String weatherType){
 
         this.weather = new WeatherData(ident, temperature, converter.convertMillibarsToHg((int) pressure));
         
         aircraft.setEngineDiameter(engineDiameter);
         aircraft.setEngineMassFlow(engineFlow);
-
+        
+        
         
         app.getGuiViewPort().removeProcessor(niftyDisplay);
         
@@ -362,7 +362,7 @@ public class GuiAppState extends AbstractAppState {
         nifty = niftyDisplay.getNifty();
         
         /** Read your XML and initialize your custom ScreenController */
-        controlScreen = new MyControlScreen(this);
+        controlScreen = new MyControlScreen(this, weatherType);
         
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
         // attach the Nifty display to the gui view port as a processor

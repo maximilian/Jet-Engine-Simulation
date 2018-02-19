@@ -90,9 +90,9 @@
                                 <control name="radioButton" id="custom_wx" group="RadioGroup-2"/>
                                 <panel childLayout="horizontal" width="100%">
                                     <control name="label" width="25%" text="Temperature (C)"/>
-                                    <control name="textfield" id="engine-wx-customTemp" width="10%" text="0"/>
+                                    <control name="textfield" id="engine-wx-customTemp" width="10%" text="15"/>
                                     <control name="label" id="GLabel7" width="25%" text="Pressure (mbar)"/>
-                                    <control name="textfield" id="engine-wx-customPressure" width="10%" text="0"/>
+                                    <control name="textfield" id="engine-wx-customPressure" width="10%" text="1013.25"/>
                                 </panel>
                             </panel>
                         </panel>

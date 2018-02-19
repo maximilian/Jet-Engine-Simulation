@@ -51,7 +51,7 @@ public class WeatherData {
         this.fieldTemperature = temp;
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
         .withZone(ZoneId.of("UTC"));
-        date = LocalDateTime.parse("2018-02-05T10:50:00Z", formatter);
+
     }
 
             
@@ -122,7 +122,7 @@ public class WeatherData {
     }
     
     public LocalDateTime getDateTime() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
-        System.out.println("date is"+date);
+
         if (date == null){
             collectWeather();
         }

@@ -12,6 +12,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.RadioButtonGroup;
 import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
@@ -42,10 +43,15 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     
     private TextField customTempField;
     private TextField customPressureField;
+    
+    // used for updating weather panel in ControlScreen
+    private String selectedWeatherType;
         
     public MyOptionsScreen(GuiAppState gui){
         this.gui = gui;
         this.converter = new Converter();
+        
+        this.selectedWeatherType = "live";
     }
     
 
@@ -198,18 +204,21 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         customTempField.disable();
         customPressureField.disable();
         
-        if(selected.equals("live_wx")){     
+        if(selected.equals("live_wx")){ 
+            selectedWeatherType = "live";
             temp_wx.setText("-");
             pressure_wx.setText("-");
             
             airportIdentifierField.enable();
             airportIdentifierButton.enable();
         } else if (selected.equals("ISA_wx")){
+            selectedWeatherType = "ISA";
             temp_wx.setText("15");
             pressure_wx.setText("1013.25");
         } else {
-            temp_wx.setText("-");
-            pressure_wx.setText("-");
+            selectedWeatherType = "custom";
+            temp_wx.setText("15");
+            pressure_wx.setText("1013.25");
             
             customTempField.enable();
             customPressureField.enable();
@@ -228,7 +237,12 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
         Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
         
-        gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()), Float.parseFloat(temp_wx.getText()), Float.parseFloat(pressure_wx.getText()));
+        // if airport not checked before submission then get airport data first
+        if(temp_wx.getText().equals("-")){
+            getAirportData();
+        }
+  
+        gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()), Float.parseFloat(temp_wx.getText()), Float.parseFloat(pressure_wx.getText()), selectedWeatherType);
         
         customFanDiameterField.disable();
         customMassFlowField.disable();

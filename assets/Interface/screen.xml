@@ -30,7 +30,7 @@
         <panel width="60%" />
           
         <panel id="right-section" backgroundColor="#0008" childLayout="vertical">
-            <control name="label" id="weather-data-header" width="50%" text="Live Weather Data" valign="center" />
+            <control name="label" id="weather-data-header" text="Live Weather" width="100%" valign="center" />
             <panel id="weather-data" align="left" childLayout="vertical">
                 <panel id="airport-field" width="100%" childLayout="horizontal">
                     <control name="label" width="50%" text="Airport" valign="left" />

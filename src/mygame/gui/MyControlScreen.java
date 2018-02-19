@@ -348,11 +348,11 @@ public class MyControlScreen implements ScreenController {
         Label weatherHeader = screen.findNiftyControl("weather-data-header", Label.class);
         
         if(weatherType.equals("live")){
-            weatherHeader.setText("Live Weather Data");
+            weatherHeader.setText("Live Weather");
         } else if(weatherType.equals("ISA")){
-            weatherHeader.setText("ISA Weather Data");
+            weatherHeader.setText("ISA Weather");
         } else {
-            weatherHeader.setText("Custom Weather Data");
+            weatherHeader.setText("Custom Weather");
         }
    
         

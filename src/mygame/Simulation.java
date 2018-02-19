@@ -137,8 +137,6 @@ public class Simulation extends AbstractAppState{
                 runSimulation = false;
 
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
-                //leftEngineArea.setLocalTranslation(new Vector3f(0,0,0));
-                //rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
                 
                 rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550+aircraftSpatial.getLocalTranslation().getZ()));
                 leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550+aircraftSpatial.getLocalTranslation().getZ()));
@@ -193,9 +191,14 @@ public class Simulation extends AbstractAppState{
         Spatial rightForwardArea = loader.getRightForwardArea();
         Spatial leftForwardArea = loader.getLeftForwardArea();
         
+        Spatial leftEngineArea = loader.getLeftEngineArea();
+        Spatial rightEngineArea = loader.getRightEngineArea();
+        
         rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550));
         leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550));
-
+       
+        leftEngineArea.setLocalTranslation(new Vector3f(0,0,0));
+        rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
     }
     
     public void setCameraCockpitPosition(int altitude){

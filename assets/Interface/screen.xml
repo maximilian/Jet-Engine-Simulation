@@ -73,7 +73,7 @@
                         </panel>
                         <panel id="engineSettingField" height="20%" width="85%" childLayout="horizontal">
                             <control name="label" width="50%" text="Engine Setting (%)" valign="center" />
-                           <control id="sliderH" name="horizontalSlider" width="50%" align="center" valign="center" stepSize="25" initial="100"/>
+                           <control id="engineSettingSlider" name="horizontalSlider" width="50%" align="center" valign="center" stepSize="25" initial="100"/>
                         </panel>
 
                         <panel id="submitButton" height="20%" width="100%" childLayout="center">

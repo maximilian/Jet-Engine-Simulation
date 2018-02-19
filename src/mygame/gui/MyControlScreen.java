@@ -346,22 +346,23 @@ public class MyControlScreen implements ScreenController {
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
         Label weatherHeader = screen.findNiftyControl("weather-data-header", Label.class);
-        
-        if(weatherType.equals("live")){
-            weatherHeader.setText("Live Weather");
-        } else if(weatherType.equals("ISA")){
-            weatherHeader.setText("ISA Weather");
-        } else {
-            weatherHeader.setText("Custom Weather");
-        }
-   
-        
         Label airportIdLabel = screen.findNiftyControl("airportId", Label.class); 
+
         Label airportPressureLabel = screen.findNiftyControl("airportPressure", Label.class); 
         Label airportTempLabel = screen.findNiftyControl("airportTemp", Label.class); 
         Label airportLastUpdateLabel = screen.findNiftyControl("lastUpdate", Label.class);
         
-        airportIdLabel.setText(fieldName);
+        if(weatherType.equals("live")){
+            weatherHeader.setText("Live Weather");
+            airportIdLabel.setText(fieldName);
+        } else if(weatherType.equals("ISA")){
+            weatherHeader.setText("ISA Weather");
+            airportIdLabel.setText("n/a");
+        } else {
+            weatherHeader.setText("Custom Weather");
+            airportIdLabel.setText("n/a");
+        }
+
         airportPressureLabel.setText(Integer.toString(pressure)+" mbar");
         airportTempLabel.setText(Float.toString(temperature)+" C");
         

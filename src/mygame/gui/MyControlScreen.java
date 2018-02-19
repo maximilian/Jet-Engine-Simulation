@@ -58,7 +58,7 @@ public class MyControlScreen implements ScreenController {
          collisionWindowLayer = screen.findElementById("windows");
          collisionWindowLayer.hide();
 
-         visualisationSlider = screen.findNiftyControl("simulationTimeControl", Slider.class);
+         visualisationSlider = screen.findNiftyControl("simulationTimeControlSlider", Slider.class);
          visualisationSlider.disable();
          
         /*Label fanRadiusLabel = screen.findNiftyControl("fanRadiusLabel", Label.class);
@@ -257,6 +257,7 @@ public class MyControlScreen implements ScreenController {
         } 
     }
     
+    
     @NiftyEventSubscriber(id="forwardEngineAreaToggle")
     public void CheckBoxStateChangedEvent(final String id, final CheckBoxStateChangedEvent event){
         if(event.getCheckBox().isChecked()) {
@@ -268,7 +269,7 @@ public class MyControlScreen implements ScreenController {
         }
     }
     
-    @NiftyEventSubscriber(id="simulationTimeControl")
+    @NiftyEventSubscriber(pattern=".*Slider")
     public void SliderChangedEvent(final String id, final SliderChangedEvent event){
         if (visualisationSet){
             float percentage = event.getSlider().getValue();

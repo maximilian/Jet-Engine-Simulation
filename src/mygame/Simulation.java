@@ -137,8 +137,8 @@ public class Simulation extends AbstractAppState{
                 runSimulation = false;
 
                 aircraftSpatial.setLocalTranslation( new Vector3f(0,aircraft.getAltitude(),drone.getConvertedDistanceFromAircraft()));
-                leftEngineArea.setLocalTranslation(new Vector3f(0,0,0));
-                rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
+                //leftEngineArea.setLocalTranslation(new Vector3f(0,0,0));
+                //rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
                 
                 rightForwardArea.setLocalTranslation(new Vector3f(-49f,15f+aircraft.getAltitude(),2550+aircraftSpatial.getLocalTranslation().getZ()));
                 leftForwardArea.setLocalTranslation(new Vector3f(49f,15f+aircraft.getAltitude(),2550+aircraftSpatial.getLocalTranslation().getZ()));
@@ -147,8 +147,8 @@ public class Simulation extends AbstractAppState{
                     flyCam.setLocation(aircraftSpatial.getLocalTranslation().add(0.13625361f, 37.367325f, 159.01654f));
 
                 }
-                //leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
-                //rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
+                leftEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
+                rightEngineArea.setLocalTranslation(new Vector3f(0,0,drone.getConvertedDistanceFromAircraft()));
                 
                 distanceTravelled = 0;
                 timeNotStarted = true;

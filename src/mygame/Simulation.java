@@ -13,9 +13,11 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import java.util.Random;
 import mygame.gui.MyControlScreen;
+import mygame.states.GuiAppState;
 
 /**
  * Simulates collision between aircraft and drone
@@ -24,6 +26,7 @@ import mygame.gui.MyControlScreen;
  */
 public class Simulation extends AbstractAppState{
     
+ 
     private final MyControlScreen controlScreen;
     private final ResourceLoader loader;
     private final Aircraft aircraft;
@@ -159,6 +162,7 @@ public class Simulation extends AbstractAppState{
     }
     
     public void setup(int distance, int altitude, int speed, boolean aircraftView){
+        
         drone.setDistanceFromAircraft(distance);
         
         aircraft.setAltitude(altitude);

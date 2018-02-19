@@ -176,6 +176,8 @@ public class GuiAppState extends AbstractAppState {
         } else {
             rootNode.detachChildNamed("Cockpit");
         }
+        
+        rootNode.attachChild(loader.getDrone());
     }
     
     public void runSimulation(){
@@ -183,6 +185,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void resetSimulation(){
+        rootNode.detachChildNamed("AR_Drone-geom-0");
         simulation.reset();
         frontView();
     }
@@ -384,4 +387,5 @@ public class GuiAppState extends AbstractAppState {
         return this.weather;
     }
     
+
 }

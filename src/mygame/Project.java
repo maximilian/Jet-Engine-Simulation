@@ -63,8 +63,7 @@ public class Project extends SimpleApplication {
         aircraftObject.setSpeed(160);
         aircraftObject.setAltitude(0);
         
-        rootNode.attachChild(loader.getDrone());
-        droneObject = new Drone(rootNode.getChild("AR_Drone-geom-0"));
+        droneObject = new Drone(loader.getDrone());
 
 
         aircraftNode.attachChild(loader.getLeftEngineArea(0, receivingLittle, false, 0));       

@@ -208,8 +208,8 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
             temp_wx.setText("15");
             pressure_wx.setText("1013.25");
         } else {
-            temp_wx.setText("-");
-            pressure_wx.setText("-");
+            temp_wx.setText("15");
+            pressure_wx.setText("1013.25");
             
             customTempField.enable();
             customPressureField.enable();

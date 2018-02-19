@@ -42,8 +42,13 @@ public class MyControlScreen implements ScreenController {
     /* flag for visualisation slider */
     private boolean visualisationSet;
     
-    public MyControlScreen(GuiAppState gui){
+    // Either live, ISA or custom
+    private String weatherType;
+    
+    public MyControlScreen(GuiAppState gui, String weatherType){
         visualisationSet = false;
+        this.weatherType = weatherType;
+        
         this.gui = gui;
     }
     
@@ -340,6 +345,17 @@ public class MyControlScreen implements ScreenController {
     }
     
     public void setWeatherInformation(String fieldName, int pressure, float temperature, LocalDateTime datetime){
+        Label weatherHeader = screen.findNiftyControl("weather-data-header", Label.class);
+        
+        if(weatherType.equals("live")){
+            weatherHeader.setText("Live Weather Data");
+        } else if(weatherType.equals("ISA")){
+            weatherHeader.setText("ISA Weather Data");
+        } else {
+            weatherHeader.setText("Custom Weather Data");
+        }
+   
+        
         Label airportIdLabel = screen.findNiftyControl("airportId", Label.class); 
         Label airportPressureLabel = screen.findNiftyControl("airportPressure", Label.class); 
         Label airportTempLabel = screen.findNiftyControl("airportTemp", Label.class); 

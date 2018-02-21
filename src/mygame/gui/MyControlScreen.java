@@ -89,6 +89,7 @@ public class MyControlScreen implements ScreenController {
         
     public void startTOVisualisation(){
         screen.findElementById("tab1_panel").hide();
+        gui.hideForwardArea();
         screen.findElementById("tab2_panel").show();
     }
     

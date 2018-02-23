@@ -90,6 +90,7 @@ public class MyControlScreen implements ScreenController {
     public void startTOVisualisation(){
         screen.findElementById("tab1_panel").hide();
         gui.hideForwardArea();
+        gui.setEngineSetting(100);
         screen.findElementById("tab2_panel").show();
     }
     
@@ -246,7 +247,7 @@ public class MyControlScreen implements ScreenController {
                submitAircraftDetailsButton.enable();
         
         // validation, ensure value entered is numeric and valid
-        int parsedInt;
+       /* int parsedInt;
         try{
             parsedInt = Integer.parseInt(event.getText());
             
@@ -260,7 +261,7 @@ public class MyControlScreen implements ScreenController {
         } catch(NumberFormatException e){
              
              event.getTextFieldControl().setText(Integer.toString(oldValue));
-        } 
+        } */
     }
     
     

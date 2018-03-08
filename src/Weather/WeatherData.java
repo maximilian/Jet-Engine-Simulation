@@ -35,8 +35,6 @@ public class WeatherData {
     private String fieldName;
     
     private LocalDateTime date;
-    
-    private boolean liveWeather;
         
     public WeatherData(String fieldIdentifier){
         this.fieldIdentifier = fieldIdentifier;
@@ -49,9 +47,7 @@ public class WeatherData {
         
         this.fieldPressure = pressure;
         this.fieldTemperature = temp;
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        .withZone(ZoneId.of("UTC"));
-
+        this.date = LocalDateTime.now();
     }
 
             
@@ -103,7 +99,7 @@ public class WeatherData {
     }
     
     public float getTemperature() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
-        System.out.println("temperature is"+fieldTemperature);
+        
         if (fieldTemperature == 0.0f){
             collectWeather();
         }
@@ -113,7 +109,6 @@ public class WeatherData {
     }
     
     public String getFieldName() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
-        System.out.println("field name is"+fieldName);
         if (fieldName == null){
             collectWeather();
         }
@@ -122,7 +117,6 @@ public class WeatherData {
     }
     
     public LocalDateTime getDateTime() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
-
         if (date == null){
             collectWeather();
         }

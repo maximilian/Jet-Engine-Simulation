@@ -204,7 +204,7 @@ public class MyControlScreen implements ScreenController {
         
         if(aircraftView){
             windowText.setText("The aircraft pilot spotted a drone " +
-                distance +" meters away and was left you with\nonly " + 
+                distance +" meters away and was left with\nonly " + 
                 time +" seconds to react\n\n "+ 
                 "With little time to react, the drone pilot:"+initial);
         } else {
@@ -357,21 +357,25 @@ public class MyControlScreen implements ScreenController {
         if(weatherType.equals("live")){
             weatherHeader.setText("Live Weather");
             airportIdLabel.setText(fieldName);
+                    
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
+            String formattedDate = datetime.format(formatter);
+
+            airportLastUpdateLabel.setText(formattedDate);
         } else if(weatherType.equals("ISA")){
             weatherHeader.setText("ISA Weather");
             airportIdLabel.setText("n/a");
+            airportLastUpdateLabel.setText("n/a");
+
         } else {
             weatherHeader.setText("Custom Weather");
             airportIdLabel.setText("n/a");
+            airportLastUpdateLabel.setText("n/a");
         }
 
         airportPressureLabel.setText(Integer.toString(pressure)+" mbar");
         airportTempLabel.setText(Float.toString(temperature)+" C");
-        
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
-        String formattedDate = datetime.format(formatter);
-       
-        airportLastUpdateLabel.setText(formattedDate);
+
     }
     
     public void openSettings(){

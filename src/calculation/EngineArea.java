@@ -34,13 +34,20 @@ public class EngineArea {
 
     private float realPressure;
     private float realTemperature;
-
-    public EngineArea(Aircraft aircraft, GuiAppState gui) {
+   
+    private boolean isaEnabled;
+    public EngineArea(Aircraft aircraft, String weatherType, GuiAppState gui) {
         this.gui = gui;
         this.aircraft = aircraft;
 
         this.converter = new Converter();
         this.isa = new ISA();
+        
+        if(weatherType.equals("ISA")){
+            isaEnabled = true;
+        } else {
+            isaEnabled = false;
+        }
     }
 
     public void getWeather() {
@@ -51,6 +58,7 @@ public class EngineArea {
         try {
             this.realPressure = converter.convertHgToPascals(gui.getWeather().getPressure());
             this.realTemperature = converter.convertCelsiusToKelvin(gui.getWeather().getTemperature());
+            
         } catch (IOException ex) {
             realPressure = 101325;
             realTemperature = (float) 288.15;
@@ -83,13 +91,15 @@ public class EngineArea {
         float airDensity;
 
         float correctedEngineFlowRate;
-        if (aircraftAlt == 0) {
+        if (aircraftAlt == 0 && !isaEnabled) {
             airDensity = converter.getDensity(realPressure, realTemperature);
             correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, aircraft.getEngineMassFlowRate());
         } else {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
             correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), aircraft.getEngineMassFlowRate());
         }
+
+        System.out.println("air density:" + airDensity);
 
         float engineNeeds = correctedEngineFlowRate / airDensity;
         float engineReceives = engineArea * speedMetres;
@@ -99,10 +109,9 @@ public class EngineArea {
         float engineAreaRequired = engineNeeds / speedMetres;
 
         engineRadiusReal = (float) Math.sqrt((engineAreaRequired / Math.PI));
-
+        
         float correctScale = converter.convertMetersToSystemUnits(engineRadiusReal);
-
-        System.out.println("Radius = " + engineRadiusReal);
+        System.out.println("radius:"+engineRadiusReal);
         return correctScale;
     }
 

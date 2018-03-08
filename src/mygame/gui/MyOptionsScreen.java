@@ -12,7 +12,6 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.Label;
-import de.lessvoid.nifty.controls.RadioButtonGroup;
 import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
@@ -195,7 +194,6 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         Button airportIdentifierButton = screen.findNiftyControl("airportCheck", Button.class);
         
 
-        
         String selected = event.getSelectedId();
         
         airportIdentifierField.disable();
@@ -247,4 +245,5 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         customFanDiameterField.disable();
         customMassFlowField.disable();
     }
+    
 }

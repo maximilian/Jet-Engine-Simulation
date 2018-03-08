@@ -68,6 +68,8 @@ public class GuiAppState extends AbstractAppState {
     private WeatherData weather;
     private Converter converter;
     
+    private String weatherType;
+    
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
@@ -80,9 +82,9 @@ public class GuiAppState extends AbstractAppState {
         this.rootNode = this.app.getRootNode();
         this.aircraft = this.app.getAircraft();
         this.drone = this.app.getDrone();
-                
+        this.weatherType = "live";
         this.weather = new WeatherData("EGPF");
-        this.engineArea = new EngineArea(aircraft, this);
+        this.engineArea = new EngineArea(aircraft, weatherType, this);
 
         this.converter = new Converter();
         
@@ -100,7 +102,7 @@ public class GuiAppState extends AbstractAppState {
         // attach the Nifty display to the gui view port as a processor
         app.getGuiViewPort().addProcessor(niftyDisplay);
    
-        submitAircraftVariables();  
+        //submitAircraftVariables();  
 
         updateWeatherScreen();
     } 
@@ -217,7 +219,7 @@ public class GuiAppState extends AbstractAppState {
     }
     
     public void updateForwardArea(){
-         this.engineArea = new EngineArea(aircraft, this);
+         this.engineArea = new EngineArea(aircraft, weatherType, this);
          
          float engineRadius = engineArea.calculateArea();
          
@@ -353,18 +355,15 @@ public class GuiAppState extends AbstractAppState {
     public void submitSettings(String ident, float engineDiameter, float engineFlow, float temperature, float pressure, String weatherType){
 
         this.weather = new WeatherData(ident, temperature, converter.convertMillibarsToHg((int) pressure));
-        
+        this.weatherType = weatherType;
         aircraft.setEngineDiameter(engineDiameter);
         aircraft.setEngineMassFlow(engineFlow);
-        
-        
-        
+        System.out.println("new temp is"+temperature);
         app.getGuiViewPort().removeProcessor(niftyDisplay);
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
         
-        /** Read your XML and initialize your custom ScreenController */
         controlScreen = new MyControlScreen(this, weatherType);
         
         nifty.fromXml("Interface/screen.xml", "start", controlScreen);
@@ -374,7 +373,7 @@ public class GuiAppState extends AbstractAppState {
         updateWeatherScreen();
         
     }
-    
+ 
     
     /*
      * Settings page methods

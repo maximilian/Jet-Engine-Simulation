@@ -66,10 +66,12 @@ public class Aircraft {
         return this.engineDiameter;
     }
     
-    /*
-     * Refer to net thrust vs mass flow rate chart
-    */
-    
+    /**
+     * Returns the engine mass flow rate based on the current
+     * engine setting (using relationship between mass flow and net thrust).
+     * 
+     * @return Mass flow rate, kg/s
+     */
     public float getEngineMassFlowRate(){
         int correspondingMassFlow = 0;
         switch(engineSetting){
@@ -96,16 +98,32 @@ public class Aircraft {
 
         return this.engineMassFlowRate * ((float) correspondingMassFlow/100);
     }
-
+    
+    /**
+     * Sets the diameter of the engine fan, meters
+     * 
+     * @param engineDiameter fan diameter, m
+     */
+    
     public void setEngineDiameter(float engineDiameter){
         this.engineDiameter = engineDiameter;
     }
+    
+    /**
+     * Sets the mass flow rate of the engine, kg/s
+     * 
+     * @param engineMassFlow mass flow rate of the engine, kg/s
+     */
     
     public void setEngineMassFlow(float engineMassFlow){
         this.engineMassFlowRate = engineMassFlow;
     }
     
-    // Converts knots to m/s, then to visualisation units
+    /**
+     * Returns the aircraft speed converted to the system's units
+     * 
+     * @return aircraft speed in system's units
+     */
     public float getConvertedSpeed(){
         return (float) ((this.speed  * 0.514444) * 12.193);
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Weather;
 
 import java.io.IOException;
@@ -23,7 +18,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * Collects weather data from AviationWeather's API
+ * Object for the system's weather
  * 
  * @author max
  */
@@ -36,10 +31,22 @@ public class WeatherData {
     
     private LocalDateTime date;
         
+    /**
+     * Constructor for live weather
+     * 
+     * @param fieldIdentifier airport ICAO code
+     */
     public WeatherData(String fieldIdentifier){
         this.fieldIdentifier = fieldIdentifier;
     }
     
+    /**
+     * Constructor for ISA or custom weather
+     * 
+     * @param fieldIdentifier airport ICAO code
+     * @param temp specified temperature, Celsius
+     * @param pressure specified pressure, Pascals
+     */
     public WeatherData(String fieldIdentifier, float temp, float pressure){
         this.fieldIdentifier = fieldIdentifier;
         
@@ -50,7 +57,15 @@ public class WeatherData {
        
     }
 
-            
+    /**
+     * Produces an API call to AviationWeather in order
+     * to get a decoded version of the specified METAR report
+     * 
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws SAXException
+     * @throws ParserConfigurationException 
+     */
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
         String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" + fieldIdentifier + "&hoursBeforeNow=4&mostRecent=True";   
         System.out.println("downloading weather for"+fieldIdentifier);
@@ -89,6 +104,15 @@ public class WeatherData {
 
     }
     
+    /**
+     * Get the airport pressure, Pascals
+     * 
+     * @return fieldPressure airport pressure, Pascals
+     * @throws IOException
+     * @throws MalformedURLException
+     * @throws SAXException
+     * @throws ParserConfigurationException 
+     */
     public float getPressure() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
 
         if (fieldPressure == 0.0f){
@@ -97,6 +121,16 @@ public class WeatherData {
         
         return fieldPressure;
     }
+    
+    /**
+     * Get the airport temperature, Celsius
+     * 
+     * @return fieldTemperature temperature at specified airport, Celsius
+     * @throws IOException
+     * @throws MalformedURLException
+     * @throws SAXException
+     * @throws ParserConfigurationException 
+     */
     
     public float getTemperature() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
         
@@ -108,6 +142,16 @@ public class WeatherData {
     
     }
     
+    /**
+     * Get airport identifier
+     * 
+     * @return fieldName airport ICAO code
+     * 
+     * @throws IOException
+     * @throws MalformedURLException
+     * @throws SAXException
+     * @throws ParserConfigurationException 
+     */
     public String getFieldName() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
         if (fieldName == null){
             collectWeather();
@@ -116,6 +160,16 @@ public class WeatherData {
         return fieldName;
     }
     
+    /**
+     * Get the date and time the METAR report was issued
+     * 
+     * @return date Date and time of issue
+     * 
+     * @throws IOException
+     * @throws MalformedURLException
+     * @throws SAXException
+     * @throws ParserConfigurationException 
+     */
     public LocalDateTime getDateTime() throws IOException, MalformedURLException, SAXException, ParserConfigurationException{
         if (date == null){
             collectWeather();
@@ -124,6 +178,11 @@ public class WeatherData {
         return date;
     }
     
+    /**
+     * Set the airport identifier
+     * 
+     * @param ident airport ICAO identifier
+     */
     public void setIdent(String ident){
         this.fieldIdentifier = ident;
     }

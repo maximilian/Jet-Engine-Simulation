@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package calculation;
 
 import java.io.IOException;
@@ -11,7 +6,7 @@ import mygame.Converter;
 import mygame.states.GuiAppState;
 import org.xml.sax.SAXException;
 
-/**
+/** Represents the area around the engine
  *
  * @author max
  */
@@ -36,6 +31,13 @@ public class EngineArea {
     private float realTemperature;
    
     private boolean isaEnabled;
+    
+    /** Create the engine area object
+     * 
+     * @param aircraft the aircraft which the area belongs to
+     * @param weatherType the source of the weather (live, ISA or custom)
+     * @param gui the app state for the gui
+     */
     public EngineArea(Aircraft aircraft, String weatherType, GuiAppState gui) {
         this.gui = gui;
         this.aircraft = aircraft;
@@ -50,11 +52,12 @@ public class EngineArea {
         }
     }
 
+    /**
+     * Try and get the weather information.
+     * 
+     * If it's successful, use it. If not, use the ISA model
+     */
     public void getWeather() {
-        /* Get weather information
-         * 
-         * If successful, use it. Else, use ISA values.
-         */
         try {
             this.realPressure = converter.convertHgToPascals(gui.getWeather().getPressure());
             this.realTemperature = converter.convertCelsiusToKelvin(gui.getWeather().getTemperature());
@@ -71,13 +74,9 @@ public class EngineArea {
         }
     }
 
-    /*
+    /**
      * Returns the radius of the area around the engine. Note: maximum altitude 36,089 ft.
      *
-     * @param altitude, in feet, of the aircraft
-     * @param speed, in knots, of the aircraft
-     * @param engine setting, in percentage, of the aircraft engine
-     * @return the radius, in correct jME scale, of the area around the engine
      */
     public float calculateArea() {
 	// Fetches the weather - this could be live weather or custom weather
@@ -120,18 +119,41 @@ public class EngineArea {
         return correctScale;
     }
 
+    /**
+     * Check whether the engine is receiving too little air
+     * 
+     * @return boolean
+     */
+    
     public boolean getReceivingLittle() {
         return receivingLittle;
     }
-
+    
+    /**
+     * Check whether the engine is receiving too much air
+     * 
+     * @return boolean
+     */
     public boolean getReceivingMuch() {
         return receivingMuch;
     }
 
+    /**
+     * Get the radius of the area around the engine, meters
+     * 
+     * @return radius of area around the engine, meters
+     */
     public float getEngineRadiusReal() {
         return engineRadiusReal;
     }
     
+    /**
+     * Set the state of the engine. It can be in one of three states:
+     * receiving too little, receiving too much or receiving the correct amount
+     * 
+     * @param engineReceives amount of air the engine is receiving
+     * @param engineNeeds amount of air the engine actually needs
+     */
     public void setEngineState(float engineReceives, float engineNeeds){
         
         if (engineReceives < engineNeeds) {

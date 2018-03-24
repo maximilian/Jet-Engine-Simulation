@@ -7,7 +7,7 @@ package calculation;
 
 import com.jme3.scene.Spatial;
 
-/**
+/** Represents an aircraft object
  *
  * @author max
  */
@@ -21,6 +21,11 @@ public class Aircraft {
     
     private final Spatial aircraft;
     
+    /**
+     * Create an aircraft object based on the aircraft spatial
+     * 
+     * @param aircraft aircraft spatial used in scene graph
+     */
     public Aircraft(Spatial aircraft){
         this.aircraft = aircraft;
         
@@ -32,36 +37,79 @@ public class Aircraft {
         this.altitude = 0;
     }
     
+    /**
+     * Get the speed of the aircraft, knots
+     * 
+     * @return speed of the aircraft, knots
+     */
     
     public int getSpeed(){
         return this.speed;
     }
     
+    /**
+     * Get the altitude of the aircraft, feet
+     * 
+     * @return aircraft altitude, feet
+     */
     public int getAltitude(){
         return this.altitude;
     }
     
+    /**
+     * Gets the engine setting
+     * 
+     * @return engine setting, percentage
+     */
+    
     public int getEngineSetting(){
         return this.engineSetting;
     }
-
+    
+    /**
+     * Sets the speed of the aircraft
+     * 
+     * @param speed aircraft speed
+     */
     
     public void setSpeed(int speed){
         this.speed = speed;
     }
     
+    /**
+     * Sets the altitude of the aircraft
+     * 
+     * @param altitude altitude of the aircraft
+     */
     public void setAltitude(int altitude){
         this.altitude = altitude;
     }
+    
+    /**
+     * Sets the engine setting, percentage
+     * 
+     * @param engineSetting, percentage 
+     */
     
     public void setEngineSetting(int engineSetting){
         this.engineSetting = engineSetting;
     }
     
+    /**
+     * Returns the spatial of the aircraft
+     * 
+     * @return aircraft spatial
+     */
+    
     public Spatial getSpatial(){
         return this.aircraft;
     }
-
+    /**
+     * Returns the diameter of the engine, meters
+     * 
+     * @return engine diameter, meters
+     */
+    
     public float getEngineDiameter() {
         return this.engineDiameter;
     }

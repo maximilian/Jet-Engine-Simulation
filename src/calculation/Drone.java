@@ -4,7 +4,7 @@ import com.jme3.scene.Spatial;
 
 /** Represents a drone object
  *
- * @author max
+ * @author Maximilian Morell
  */
 
 public class Drone {

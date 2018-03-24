@@ -5,10 +5,10 @@
  */
 package calculation;
 
-/**
- * Get ISA value for given altitude
+/** Represents the ISA model
  * 
- * @author max
+ * 
+ * @author Maximilian Morell
  */
 public class ISA {
     
@@ -16,12 +16,12 @@ public class ISA {
     private float correctedTemperature;
     private float correctedDensity;
     
-         /*
+    /**
      * Returns the corrected temperature which can then be used to calculate
      * the corrected pressure and corrected density
      *
-     * @param altitude, in feet, of the aircraft
-     * @return the corrected temperature, in Kelvin
+     * @param altitude altitude of aircraft, feet
+     * @return corrected temperature, Kelvin
     */
     
     public float getCorrectedTemperature(float altitude){
@@ -32,12 +32,12 @@ public class ISA {
         return correctedKelvin;
     }
     
-    /*
+    /**
      * Returns the corrected pressure which can then be used to calculate
      * the corrected density, and therefore the corrected air mass flow
      *
-     * @param the correct temperature, in Kelvin
-     * @return the corrected pressure, in Pascals
+     * @param correctedTemperature the corrected temperature, Kelvin
+     * @return correctedPressure the corrected pressure, Pascals
     */
     
     public float getCorrectedPressure(float correctedTemperature){
@@ -46,11 +46,12 @@ public class ISA {
         return correctedPressure;
     }
     
-    /*
-     * Returns the corrected density which can then be used to calculate
+    /**
+     * Returns the corrected density based on the temperature
+     * and pressure
      *
-     * @param the altitude, in feet
-     * @return the corrected density, in kg/m^3
+     * @param altitude the altitude which the model is focused on, feet
+     * @return correctedDensity the corrected density, kg/m^3
     */
     
     public float getCorrectedDensity(float altitude){
@@ -63,13 +64,12 @@ public class ISA {
         return correctedDensity;
     }
     
-    
-        /*
+    /**
      * Returns the corrected engine mass flow
      *
-     * @param the altitude, in feet
-     * @param the mass flow, in feet
-     * @return the corrected density, in kg/m^3
+     * @param altitude the specified altitude, feet
+     * @param massFlow mass flow rate at sea level, kg/s
+     * @return correctedFlow corrected mass flow rate due to altitude
     */
     
     public float getCorrectedMassFlow(float altitude, float massFlow){

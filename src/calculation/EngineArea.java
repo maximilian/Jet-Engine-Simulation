@@ -8,7 +8,7 @@ import org.xml.sax.SAXException;
 
 /** Represents the area around the engine
  *
- * @author max
+ * @author Maximilian Morell
  */
 public class EngineArea {
 

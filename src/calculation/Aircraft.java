@@ -9,7 +9,7 @@ import com.jme3.scene.Spatial;
 
 /** Represents an aircraft object
  *
- * @author max
+ * @author Maximilian Morell
  */
 public class Aircraft {
     private int altitude;

@@ -47,7 +47,7 @@ public class WeatherData {
         
         this.fieldPressure = pressure;
         this.fieldTemperature = temp;
-        this.date = LocalDateTime.now();
+       
     }
 
             

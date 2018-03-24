@@ -13,11 +13,9 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import java.util.Random;
 import mygame.gui.MyControlScreen;
-import mygame.states.GuiAppState;
 
 /**
  * Simulates collision between aircraft and drone
@@ -91,7 +89,7 @@ public class Simulation extends AbstractAppState{
             if (displacement > diameter/2){
                 positiveDirection = false;
             } else {
-                distanceMove = 0 + rand.nextFloat() * (diameter - 0);
+                distanceMove = rand.nextFloat() * (diameter);
                 displacement += distanceMove;
                 drone.getSpatial().move(distanceMove*tpf,distanceMove*tpf,0);   
             }
@@ -212,7 +210,7 @@ public class Simulation extends AbstractAppState{
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         
-        float angleTowardsDrone = (float) Math.atan((float) altitude/500);
+        float angleTowardsDrone = (float) Math.atan((float) (altitude-200)/500);
 
         Quaternion droneAngleView = new Quaternion();
         droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );

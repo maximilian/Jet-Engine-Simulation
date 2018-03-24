@@ -43,6 +43,10 @@ public class Drone {
         this.distanceFromAircraft = distance;
     }
     
+    /**
+     * Return the Drone spatial for the drone
+     * @return 
+     */
     public Spatial getSpatial(){
         return this.drone;   
     }

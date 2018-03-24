@@ -80,17 +80,20 @@ public class EngineArea {
      * @return the radius, in correct jME scale, of the area around the engine
      */
     public float calculateArea() {
+	// Fetches the weather - this could be live weather or custom weather
         getWeather();
         
         int aircraftAlt = aircraft.getAltitude();
         float engineRadius = aircraft.getEngineDiameter() / 2;
         
+        // The area of the fan diameter
         float engineArea = (float) (Math.PI * (Math.pow(engineRadius, 2)));
         float speedMetres = converter.convertKnotsToMetersPerSecond(aircraft.getSpeed());
 
         float airDensity;
-
         float correctedEngineFlowRate;
+        
+        // if the engine is above sea level then use the ISA model for predicting high altitude conditions
         if (aircraftAlt == 0 && !isaEnabled) {
             airDensity = converter.getDensity(realPressure, realTemperature);
             correctedEngineFlowRate = converter.getCorrectedMassFlow(realTemperature, realPressure, aircraft.getEngineMassFlowRate());
@@ -98,20 +101,22 @@ public class EngineArea {
             airDensity = isa.getCorrectedDensity(aircraftAlt);
             correctedEngineFlowRate = isa.getCorrectedMassFlow(aircraft.getAltitude(), aircraft.getEngineMassFlowRate());
         }
-
-        System.out.println("air density:" + airDensity);
-
+        
+        // volumetric flow rate of air that the engine needs to generate thrust
         float engineNeeds = correctedEngineFlowRate / airDensity;
+        
+        // volumetric flow rate of air that the engine actually receives
         float engineReceives = engineArea * speedMetres;
         
+        // set the engine state by comparing what the engine receives vs what it needs
         setEngineState(engineReceives, engineNeeds);
 
+        // area around the engine required to get the air it needs
         float engineAreaRequired = engineNeeds / speedMetres;
 
         engineRadiusReal = (float) Math.sqrt((engineAreaRequired / Math.PI));
-        
         float correctScale = converter.convertMetersToSystemUnits(engineRadiusReal);
-        System.out.println("radius:"+engineRadiusReal);
+        
         return correctScale;
     }
 

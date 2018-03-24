@@ -31,7 +31,7 @@ public class Drone {
     /**
      * Gets the altitude of the drone, in feet.
      *
-     * @return altitude of drone.
+     * @return altitude of drone, feet
      */
     
     public int getAltitude(){
@@ -41,7 +41,7 @@ public class Drone {
     /**
      * Gets the distance, in meters, that the drone is from the aircraft
      * 
-     * @return the distance in meters
+     * @return the distance, meters
      */
     public int getDistanceFromAircraft(){
         return this.distanceFromAircraft;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mygame.gui;
 
 import com.jme3.app.Application;
@@ -28,8 +23,9 @@ import mygame.states.GuiAppState;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author max
+ * Communicates with the GUI app state. This is the settings GUI panel.
+ * 
+ * @author Maximilian Morell
  */
 public class MyOptionsScreen extends AbstractAppState implements ScreenController {
     private GuiAppState gui;
@@ -45,36 +41,38 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
     
     // used for updating weather panel in ControlScreen
     private String selectedWeatherType;
-        
+    
+    /**
+     * Constructor for the options/settings window GUI screen
+     * 
+     * @param gui the GUI app state
+     */
     public MyOptionsScreen(GuiAppState gui){
         this.gui = gui;
         this.converter = new Converter();
         
         this.selectedWeatherType = "live";
     }
-    
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-
-        //TODO: initialize your AppState, e.g. attach spatials to rootNode
-        //this is called on the OpenGL thread after the AppState has been attached
     }
     
     @Override
     public void update(float tpf) {
-        //TODO: implement behavior during runtime
     }
     
     @Override
     public void cleanup() {
         super.cleanup();
-        //TODO: clean up what you initialized in the initialize method,
-        //e.g. remove all spatials from rootNode
-        //this is called on the OpenGL thread after the AppState has been detached
     }
 
+    /**
+     * ScreenController method - supplies the screen and nifty object.
+     * @param nifty
+     * @param screen 
+     */
     @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
@@ -102,6 +100,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
     
+    /**
+     * Attempts to get the airport weather data (to be displayed to user) upon being submitted by the user
+     */
     public void getAirportData(){
 
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
@@ -135,6 +136,12 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
     
+    /**
+     * Checks for a change in the engine type radio group for the engine information
+     * 
+     * @param id id of the radio button group
+     * @param event event that occurred
+     */
     @NiftyEventSubscriber(id="RadioGroup-1")
     public void onRadioGroup1Changed(final String id, final RadioButtonGroupStateChangedEvent event) {
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
@@ -160,6 +167,13 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
     }
     
+    /**
+     * Checks for a change in the custom engine data/weather information text fields
+     * and displays the text in the gui
+     * 
+     * @param id the textfield that changed
+     * @param event the event that occurred
+     */
     @NiftyEventSubscriber(pattern="engine-.*")
     public void onTextFieldChange(final String id, final TextFieldChangedEvent event){
         Label fanDiameter = screen.findNiftyControl("fan_diameter", Label.class); 
@@ -185,6 +199,12 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         }
     }
     
+    /**
+     * Checks for a change in the weather radio group
+     * 
+     * @param id the id of the radio button group
+     * @param event the event that occurred
+     */
     @NiftyEventSubscriber(id="RadioGroup-2")
     public void onRadioGroup2Changed(final String id, final RadioButtonGroupStateChangedEvent event) {
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
@@ -192,7 +212,6 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         
         TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
         Button airportIdentifierButton = screen.findNiftyControl("airportCheck", Button.class);
-        
 
         String selected = event.getSelectedId();
         
@@ -202,6 +221,9 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         customTempField.disable();
         customPressureField.disable();
         
+        /**
+         * Checks whether the weather is chosen to be live, ISA or custom
+         */
         if(selected.equals("live_wx")){ 
             selectedWeatherType = "live";
             temp_wx.setText("-");
@@ -223,7 +245,10 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         } 
         
     }
-
+    
+    /**
+     * Submit the changes in the settings GUI
+     */
     public void submitSettings(){
         TextField airportIdentifierField = screen.findNiftyControl("airportIdentifier", TextField.class);
         
@@ -235,11 +260,12 @@ public class MyOptionsScreen extends AbstractAppState implements ScreenControlle
         Label temp_wx = screen.findNiftyControl("temp_wx", Label.class); 
         Label pressure_wx = screen.findNiftyControl("pressure_wx", Label.class); 
         
-        // if airport not checked before submission then get airport data first
+        // if airport not checked before submitting then get airport data first
         if(temp_wx.getText().equals("-")){
             getAirportData();
         }
-  
+        
+        // Submits all the data to be used by the gui app state
         gui.submitSettings(ident, Float.parseFloat(fanDiameter.getText()), Float.parseFloat(massFlow.getText()), Float.parseFloat(temp_wx.getText()), Float.parseFloat(pressure_wx.getText()), selectedWeatherType);
         
         customFanDiameterField.disable();

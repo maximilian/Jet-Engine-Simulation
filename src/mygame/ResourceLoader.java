@@ -321,9 +321,7 @@ public class ResourceLoader {
         drone.scale(2f, 2f, 2f);
         
         Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        
-        //area_mat.setColor("Color", ColorRGBA.White);
-        //drone.setMaterial(area_mat);
+
         drone.move(new Vector3f(49f,500f,1219.3f));
      }
      

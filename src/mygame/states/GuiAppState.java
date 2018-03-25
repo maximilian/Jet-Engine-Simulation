@@ -4,7 +4,7 @@ import Camera.AircraftCamera;
 import Weather.WeatherData;
 import mygame.Aircraft;
 import mygame.Drone;
-import calculation.EngineArea;
+import Model.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;

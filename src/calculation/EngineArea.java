@@ -1,5 +1,7 @@
 package calculation;
 
+import Weather.ISA;
+import mygame.Aircraft;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import mygame.Converter;

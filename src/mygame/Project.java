@@ -1,8 +1,6 @@
 package mygame;
 
 import Camera.AircraftCamera;
-import calculation.Aircraft;
-import calculation.Drone;
 import mygame.states.GuiAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;

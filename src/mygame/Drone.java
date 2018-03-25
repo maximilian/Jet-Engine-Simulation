@@ -1,4 +1,4 @@
-package calculation;
+package mygame;
 
 import com.jme3.scene.Spatial;
 

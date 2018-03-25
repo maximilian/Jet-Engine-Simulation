@@ -1,7 +1,5 @@
 package mygame;
 
-import calculation.Aircraft;
-import calculation.Drone;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.math.FastMath;

@@ -2,8 +2,8 @@ package mygame.states;
 
 import Camera.AircraftCamera;
 import Weather.WeatherData;
-import calculation.Aircraft;
-import calculation.Drone;
+import mygame.Aircraft;
+import mygame.Drone;
 import calculation.EngineArea;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;

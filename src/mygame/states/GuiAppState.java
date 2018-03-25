@@ -92,6 +92,7 @@ public class GuiAppState extends AbstractAppState {
         
         // Camera view on load
         frontView();
+        submitAircraftVariables();
         
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();

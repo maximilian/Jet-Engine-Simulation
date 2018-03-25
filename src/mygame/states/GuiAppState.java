@@ -89,7 +89,6 @@ public class GuiAppState extends AbstractAppState {
 
         this.converter = new Converter();
         
-        
         // Camera view on load
         frontView();
         submitAircraftVariables();

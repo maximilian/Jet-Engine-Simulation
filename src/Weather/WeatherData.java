@@ -68,7 +68,7 @@ public class WeatherData {
      */
     public void collectWeather() throws MalformedURLException, IOException, SAXException, ParserConfigurationException{
         String url = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" + fieldIdentifier + "&hoursBeforeNow=4&mostRecent=True";   
-        System.out.println("downloading weather for"+fieldIdentifier);
+
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setNamespaceAware(false);
         f.setValidating(false);
@@ -93,10 +93,7 @@ public class WeatherData {
         fieldName = stationElement.getTextContent();
         
         String fieldTime = timeElement.getTextContent();
-        
-        System.out.println("Station id is: "+fieldName);
-        System.out.println("Pressure in hg: " + cElement.getTextContent());
-        System.out.println("Temperature in c: " + tempElement.getTextContent());
+
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
         .withZone(ZoneId.of("UTC"));

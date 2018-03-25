@@ -135,7 +135,6 @@ public class Simulation extends AbstractAppState{
                 leftForwardArea.move(0,0,aircraft.getConvertedSpeed()*tpf);
                 
                 distanceTravelled += (aircraft.getConvertedSpeed()*tpf);
-                System.out.println(aircraft.getSpeed());
                 endTime = System.currentTimeMillis();
             } else {
                 runSimulation = false;
@@ -239,7 +238,7 @@ public class Simulation extends AbstractAppState{
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );
         
-        float angleTowardsDrone = (float) Math.atan((float) (altitude-200)/500);
+        float angleTowardsDrone = (float) Math.atan((float) altitude/500);
 
         Quaternion droneAngleView = new Quaternion();
         droneAngleView.fromAngleAxis((float) (-angleTowardsDrone), new Vector3f(1,0,0) );

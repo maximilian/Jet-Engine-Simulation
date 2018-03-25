@@ -28,7 +28,6 @@ public class ISA {
         float meters = (float) (altitude / 3.2808);
 
         float correctedKelvin = (float) (288.15 - 0.0065*(meters));
-                System.out.println("temperature is"+correctedKelvin);
         return correctedKelvin;
     }
     

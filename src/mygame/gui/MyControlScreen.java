@@ -153,7 +153,7 @@ public class MyControlScreen implements ScreenController {
      }
     
     /**
-     * Submit button for the aircraft variables submitted by the user
+     * Submit button for the aircraft parameters submitted by the user
      */
     public void submit(){
         submitAircraftDetailsButton.disable();

@@ -6,13 +6,14 @@ import calculation.Drone;
 import mygame.states.GuiAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
-import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.shape.Line;
 
+/**
+ * Manages 3D scene graph - core component of the system
+ * 
+ * @author Maximilian Morell
+ */
 public class Project extends SimpleApplication {
     private ResourceLoader loader;
     private GuiAppState gui;
@@ -57,7 +58,6 @@ public class Project extends SimpleApplication {
         
         rootNode.attachChild(aircraftNode);
    
-        
         aircraftObject = new Aircraft(rootNode.getChild("3d-model-objnode"));
         
         aircraftObject.setSpeed(160);
@@ -70,58 +70,41 @@ public class Project extends SimpleApplication {
         aircraftNode.attachChild(loader.getRightEngineArea(0, receivingLittle, false, 0));
 
         // add a light to make the model visible 
-        rootNode.addLight(loader.getSun());
-
-        
-       
+        rootNode.addLight(loader.getSun());   
     }
-    
-    public void axisLines() {
-       
-        Line xaxis = new Line(Vector3f.ZERO, new Vector3f(400f, 0, 0));
-        Geometry xaxisline = new Geometry("BOOM!", xaxis);
-        
-        Line yaxis = new Line(Vector3f.ZERO, new Vector3f(0, 400f, 0));
-        Geometry yaxisline = new Geometry("BOOM!", yaxis);
-        
-        Line zaxis = new Line(Vector3f.ZERO, new Vector3f(0, 0, 400f));
-        Geometry zaxisline = new Geometry("BOOM!", zaxis);
-
-
-        Material area_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-
-        area_mat.setColor("Color", ColorRGBA.Red);
-        
-         Material yarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        yarea_mat.setColor("Color", ColorRGBA.Green);
-        
-        Material zarea_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        zarea_mat.setColor("Color", ColorRGBA.Blue);
-              
-        xaxisline.setMaterial(area_mat);
-        yaxisline.setMaterial(yarea_mat);
-        zaxisline.setMaterial(zarea_mat);
-       
-        
-        rootNode.attachChild(xaxisline);
-        rootNode.attachChild(yaxisline);
-        rootNode.attachChild(zaxisline);   
-    }
-
-   
-    
+     
+    /**
+     * Gets the resource loader
+     * 
+     * @return loader 
+     */
     public ResourceLoader getResourceLoader(){
         return loader;
     }
     
+    /**
+     * Gets the aircraft object
+     * 
+     * @return aircraftObject
+     */
     public Aircraft getAircraft(){
         return aircraftObject;
     }
     
+    /**
+     * Gets the drone object
+     * 
+     * @return droneObject
+     */
     public Drone getDrone(){
         return droneObject;
     }
     
+    /**
+     * Gets the aircraft camera object
+     * 
+     * @return airCam 
+     */
     public AircraftCamera getAircraftCamera(){
         return airCam;
     }

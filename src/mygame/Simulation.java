@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mygame;
 
 import calculation.Aircraft;
@@ -18,9 +13,9 @@ import java.util.Random;
 import mygame.gui.MyControlScreen;
 
 /**
- * Simulates collision between aircraft and drone
+ * Simulates the collision between an aircraft and a drone
  * 
- * @author max
+ * @author Maximilian Morell
  */
 public class Simulation extends AbstractAppState{
     
@@ -46,6 +41,16 @@ public class Simulation extends AbstractAppState{
     private final float diameter;
     private boolean positiveDirection;
     private Random rand;
+    
+    /**
+     * Constructor for creating the simulation
+     * 
+     * @param aircraft the aircraft object
+     * @param drone the drone object
+     * @param app the main app with core system methods
+     * @param controlScreen the GUI control screen
+     * @param loader the resource loader
+     */
     public Simulation(Aircraft aircraft, Drone drone, Application app, MyControlScreen controlScreen, ResourceLoader loader){
         this.loader = loader;
         this.aircraft = aircraft;
@@ -66,12 +71,15 @@ public class Simulation extends AbstractAppState{
         diameter = (float) 30.0;
         positiveDirection = true;
     }
-    
 
-    
     private float displacement = 0;
     private float distanceMove = 0;
 
+    /**
+     * The simulation update loop. This method is run every game "tick".
+     * 
+     * @param tpf Unique for the machine it's being run on.
+     */
     @Override
     public void update(float tpf) {
         
@@ -157,6 +165,13 @@ public class Simulation extends AbstractAppState{
         }
     }
     
+    /**
+     * Sets up the simulation
+     * @param distance horizontal distance of the drone from the aircraft
+     * @param altitude altitude of the aircraft (and drone)
+     * @param speed speed of the aircraft
+     * @param aircraftView boolean - whether the view is of the aircraft or drone
+     */
     public void setup(int distance, int altitude, int speed, boolean aircraftView){
         
         drone.setDistanceFromAircraft(distance);
@@ -180,10 +195,16 @@ public class Simulation extends AbstractAppState{
 
     }
     
+    /**
+     * Run the simulation
+     */
     public void run(){
         runSimulation = true;   
     }
     
+    /**
+     * Reset the simulation
+     */
     public void reset(){
         this.aircraft.getSpatial().setLocalTranslation(0, aircraft.getAltitude(), 0);
         Spatial rightForwardArea = loader.getRightForwardArea();
@@ -199,6 +220,11 @@ public class Simulation extends AbstractAppState{
         rightEngineArea.setLocalTranslation(new Vector3f(0,0,0));
     }
     
+    /**
+     * Set the camera to be in the view of the aircraft cockpit
+     * 
+     * @param altitude altitude of the aircraft
+     */
     public void setCameraCockpitPosition(int altitude){
             Quaternion cameraRotation = new Quaternion();
             cameraRotation.fromAngleAxis((float) (FastMath.PI * 2), new Vector3f(0,1,0) );
@@ -206,6 +232,11 @@ public class Simulation extends AbstractAppState{
             flyCam.setRotation(cameraRotation);
     }
     
+    /**
+     * Set the camera to be in the view of the drone operator
+     * 
+     * @param altitude altitude of the drone
+     */
     public void setCameraDronePosition(int altitude){
         Quaternion droneGroundView = new Quaternion();
         droneGroundView.fromAngleAxis((float) (FastMath.PI * 1.33333), new Vector3f(0,1,0) );

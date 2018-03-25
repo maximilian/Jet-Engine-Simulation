@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
 /**
  * Object for the system's weather
  * 
- * @author max
+ * @author Maximilian Morell
  */
 public class WeatherData {
     private String fieldIdentifier;

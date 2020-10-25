@@ -1,4 +1,5 @@
-#Level 4 project
+# Final Year University Project
+## Simulating the Risk of Ingestion when Flying a Drone Close to a Jet Engine
 
 Run instructions:
 

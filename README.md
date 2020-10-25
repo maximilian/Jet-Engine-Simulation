@@ -7,19 +7,19 @@ Run instructions:
 
 https://github.com/jMonkeyEngine/sdk/releases/tag/3.1-stable-FINAL
 
-2. Import the project
+2. Clone and import the project
 
-3. After importing the project, right click on the project -> properties and make sure the following libraries are added:
+3. Right click on the project -> properties and make sure the following libraries are added:
 
-⋅⋅* jm3-jogg
-⋅⋅* jm3-networking
-⋅⋅* jm3-plugins
-⋅⋅* jm3-core
-⋅⋅* jm3-desktop
-⋅⋅* jm3-lwjgl
-⋅⋅* jm3-effects
-⋅⋅* jm3-terrain
-⋅⋅* jm3-bullet
-⋅⋅* jm3-bullet-native
-⋅⋅* jm3-test-data
-⋅⋅* jm3-niftygui
+* jm3-jogg
+* jm3-networking
+* jm3-plugins
+* jm3-core
+* jm3-desktop
+* jm3-lwjgl
+* jm3-effects
+* jm3-terrain
+* jm3-bullet
+* jm3-bullet-native
+* jm3-test-data
+* jm3-niftygui
